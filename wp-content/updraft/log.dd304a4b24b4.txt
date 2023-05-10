@@ -1,0 +1,13 @@
+0000.000 (0) Opened log file at time: Wed, 10 May 2023 14:06:23 +0000 on http://kosmos.test
+0000.104 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.23.3 WP: 6.2 PHP: 8.1.10 (apache2handler, Windows NT DESKTOP-H1JCFFE 10.0 build 22000 (Windows 11) AMD64) MySQL: 8.0.30 (max packet size=536870912) WPLANG: es_ES Server: Apache/2.4.54 (Win64) OpenSSL/1.1.1q PHP/8.1.10 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 64.2M | 66M) multisite: N openssl: OpenSSL 1.1.1q  5 Jul 2022 mcrypt: N LANG:  ZipArchive::addFile: Y
+0000.164 (0) Free space on disk containing Updraft's temporary directory: 790329.1 MB
+0000.221 (0) Tasks: Backup files: 1 (schedule: every4hours) Backup DB:  (schedule: every4hours)
+0000.450 (0) Processed schedules. Combining jobs from identical schedules. Tasks now: Backup files: 1 Backup DB: 1
+0000.596 (0) Requesting semaphore lock (fd) (apparently via scheduler: last_scheduled_action_called_at=1683656198, seconds_ago=71385)
+0000.928 (0) Set semaphore last lock (fd) time to 2023-05-10 14:06:24
+0000.992 (0) Semaphore lock (fd) complete
+0001.288 (0) Backup run: resumption=0, nonce=dd304a4b24b4, file_nonce=dd304a4b24b4 begun at=1683727583 (1s ago), job type=backup
+0001.529 (0) Scheduling a resumption (1) after 300 seconds (1683727884) in case this run gets aborted
+0001.885 (0) Checking if we have a zip executable available
+0002.103 (0) Creation of backups of directories: beginning
+0002.375 (0) Beginning creation of dump of plugins (split every: 400 MB)
