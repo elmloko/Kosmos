@@ -1,0 +1,369 @@
+0000.001 (0) Opened log file at time: Wed, 10 May 2023 22:48:28 +0000 on http://kosmos.test
+0000.014 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.23.3 WP: 6.2 PHP: 8.1.10 (apache2handler, Windows NT DESKTOP-H1JCFFE 10.0 build 22000 (Windows 11) AMD64) MySQL: 8.0.30 (max packet size=536870912) WPLANG: es_ES Server: Apache/2.4.54 (Win64) OpenSSL/1.1.1q PHP/8.1.10 safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 72.5M | 74M) multisite: N openssl: OpenSSL 1.1.1q  5 Jul 2022 mcrypt: N LANG:  ZipArchive::addFile: Y
+0000.033 (0) Free space on disk containing Updraft's temporary directory: 775151.1 MB
+0000.048 (0) Tasks: Backup files: 1 (schedule: every4hours) Backup DB:  (schedule: every4hours)
+0000.085 (0) Processed schedules. Combining jobs from identical schedules. Tasks now: Backup files: 1 Backup DB: 1
+0000.281 (0) Requesting semaphore lock (fd) (apparently via scheduler: last_scheduled_action_called_at=1683744490, seconds_ago=14418)
+0000.367 (0) Set semaphore last lock (fd) time to 2023-05-10 22:48:29
+0000.381 (0) Semaphore lock (fd) complete
+0000.433 (0) Backup run: resumption=0, nonce=0c4a7abb2c97, file_nonce=0c4a7abb2c97 begun at=1683758908 (1s ago), job type=backup
+0000.466 (0) Scheduling a resumption (1) after 300 seconds (1683759209) in case this run gets aborted
+0000.572 (0) Checking if we have a zip executable available
+0000.609 (0) Creation of backups of directories: beginning
+0000.674 (0) Beginning creation of dump of plugins (split every: 400 MB)
+0002.985 (0) Total entities for the zip file: 1360 directories, 5497 files (0 skipped as non-modified), 105.9 MB
+0003.092 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 100 files added (on-disk size: 0 KB)
+0003.203 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 200 files added (on-disk size: 0 KB)
+0003.278 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 300 files added (on-disk size: 0 KB)
+0003.344 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 400 files added (on-disk size: 0 KB)
+0003.409 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 2.0 seconds have passed since the last write (3.2 MB, 401 (401) files added so far); re-opening (prior size: 0 KB)
+0014.109 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 500 files added (on-disk size: 1020.7 KB)
+0014.251 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 600 files added (on-disk size: 1020.7 KB)
+0014.336 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 700 files added (on-disk size: 1020.7 KB)
+0014.446 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 800 files added (on-disk size: 1020.7 KB)
+0014.527 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 900 files added (on-disk size: 1020.7 KB)
+0014.657 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1000 files added (on-disk size: 1020.7 KB)
+0014.856 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1100 files added (on-disk size: 1020.7 KB)
+0015.098 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1200 files added (on-disk size: 1020.7 KB)
+0015.226 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1300 files added (on-disk size: 1020.7 KB)
+0015.362 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1400 files added (on-disk size: 1020.7 KB)
+0015.436 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (16 MB, 5497 files batched, 1001 (1402) added so far); re-opening (prior size: 1020.7 KB)
+0028.276 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1500 files added (on-disk size: 5384.2 KB)
+0028.332 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1600 files added (on-disk size: 5384.2 KB)
+0028.383 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1700 files added (on-disk size: 5384.2 KB)
+0028.432 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1800 files added (on-disk size: 5384.2 KB)
+0028.483 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 1900 files added (on-disk size: 5384.2 KB)
+0028.507 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 25 MB added on this batch (25.2 MB, 5497 files batched, 511 (1913) added so far); re-opening (prior size: 5384.2 KB)
+0043.554 (0) A useful amount of data was added after this amount of zip processing: 16.2 s (normalised: 16.1 s, rate: 1590.1 KB/s)
+0043.649 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2000 files added (on-disk size: 12492.9 KB)
+0043.813 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2100 files added (on-disk size: 12492.9 KB)
+0043.910 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2200 files added (on-disk size: 12492.9 KB)
+0043.968 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2300 files added (on-disk size: 12492.9 KB)
+0044.018 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2400 files added (on-disk size: 12492.9 KB)
+0044.068 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2500 files added (on-disk size: 12492.9 KB)
+0044.117 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2600 files added (on-disk size: 12492.9 KB)
+0044.168 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2700 files added (on-disk size: 12492.9 KB)
+0044.219 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2800 files added (on-disk size: 12492.9 KB)
+0044.269 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 2900 files added (on-disk size: 12492.9 KB)
+0044.300 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (16 MB, 5497 files batched, 1001 (2914) added so far); re-opening (prior size: 12492.9 KB)
+0057.985 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3000 files added (on-disk size: 15682.9 KB)
+0058.237 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3100 files added (on-disk size: 15682.9 KB)
+0058.483 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3200 files added (on-disk size: 15682.9 KB)
+0058.553 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3300 files added (on-disk size: 15682.9 KB)
+0058.654 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3400 files added (on-disk size: 15682.9 KB)
+0058.712 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3500 files added (on-disk size: 15682.9 KB)
+0058.880 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3600 files added (on-disk size: 15682.9 KB)
+0059.024 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3700 files added (on-disk size: 15682.9 KB)
+0059.085 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3800 files added (on-disk size: 15682.9 KB)
+0059.135 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 3900 files added (on-disk size: 15682.9 KB)
+0059.161 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (23.4 MB, 5497 files batched, 1001 (3915) added so far); re-opening (prior size: 15682.9 KB)
+0076.799 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4000 files added (on-disk size: 22382.9 KB)
+0076.975 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4100 files added (on-disk size: 22382.9 KB)
+0077.106 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4200 files added (on-disk size: 22382.9 KB)
+0077.224 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4300 files added (on-disk size: 22382.9 KB)
+0077.271 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4400 files added (on-disk size: 22382.9 KB)
+0077.329 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4500 files added (on-disk size: 22382.9 KB)
+0077.404 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4600 files added (on-disk size: 22382.9 KB)
+0077.462 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4700 files added (on-disk size: 22382.9 KB)
+0077.520 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4800 files added (on-disk size: 22382.9 KB)
+0077.570 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 4900 files added (on-disk size: 22382.9 KB)
+0077.603 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 1000 files added on this batch (17.5 MB, 5497 files batched, 1001 (4916) added so far); re-opening (prior size: 22382.9 KB)
+0100.660 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 5000 files added (on-disk size: 29164.6 KB)
+0100.709 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 5100 files added (on-disk size: 29164.6 KB)
+0100.760 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 5200 files added (on-disk size: 29164.6 KB)
+0100.827 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 5300 files added (on-disk size: 29164.6 KB)
+0100.882 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.tmp: 5400 files added (on-disk size: 29164.6 KB)
+0114.346 (0) Creating zip file manifest (backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.list-temp.tmp)
+0114.378 (0) Successfully created zip file manifest (size: 457792)
+0114.702 (0) Created plugins zip (0) - 30633.7 KB in 114 s (268.8 KB/s) (sha1: a60dabe6d7c6c2183e285642b0a5bd957d62e80c, sha256: b7c43c2ec1500bb2ef67b30fea4222f7d3af77af570756eb8affc748d52e174e)
+0114.760 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0114.777 (0) No remote despatch: user chose no remote backup service
+0114.793 (0) Recording as successfully uploaded: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip
+0114.826 (0) Deleting zip manifest (backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip.list.tmp)
+0114.860 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0114.876 (0) Number of backup sets in history: 2; groups (db): 1
+0114.893 (0) Examining (for databases) backup set with group_id=0, nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0114.940 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0115.001 (0) Examining (for databases) backup set with group_id=0, nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0115.001 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0115.002 (0) Number of backup sets in history: 2; groups (files): 1
+0115.064 (0) Examining (for files) backup set with nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0115.064 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0115.093 (0) Examining (for files) backup set with nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0115.093 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0115.094 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0115.396 (0) Beginning creation of dump of themes (split every: 400 MB)
+0115.819 (0) Total entities for the zip file: 310 directories, 740 files (0 skipped as non-modified), 25.6 MB
+0115.931 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip.tmp: 100 files added (on-disk size: 0 KB)
+0116.040 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip.tmp: 200 files added (on-disk size: 0 KB)
+0116.239 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip.tmp: 300 files added (on-disk size: 0 KB)
+0116.369 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip.tmp: 400 files added (on-disk size: 0 KB)
+0116.479 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip.tmp: 500 files added (on-disk size: 0 KB)
+0116.557 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip.tmp: 600 files added (on-disk size: 0 KB)
+0116.749 (0) Adding batch to zip file (UpdraftPlus_ZipArchive): over 25 MB added on this batch (25.2 MB, 740 files batched, 697 (697) added so far); re-opening (prior size: 0 KB)
+0128.996 (0) A useful amount of data was added after this amount of zip processing: 13.6 s (normalised: 13.5 s, rate: 1892 KB/s)
+0129.045 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip.tmp: 700 files added (on-disk size: 7419 KB)
+0129.501 (0) Creating zip file manifest (backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip.list-temp.tmp)
+0129.532 (0) Successfully created zip file manifest (size: 64432)
+0129.703 (0) Created themes zip (0) - 7806.8 KB in 14.2 s (549.9 KB/s) (sha1: f5fca253f3f5b6d3154ecfb1f4c052915a457062, sha256: f24994526e34e47ba274a942df1e639b838c0792ba850f80fc89332d82b73a1e)
+0129.762 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0129.776 (0) No remote despatch: user chose no remote backup service
+0129.795 (0) Recording as successfully uploaded: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip
+0129.828 (0) Deleting zip manifest (backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip.list.tmp)
+0129.886 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0129.903 (0) Number of backup sets in history: 2; groups (db): 1
+0129.920 (0) Examining (for databases) backup set with group_id=0, nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0129.936 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0129.953 (0) Examining (for databases) backup set with group_id=0, nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0129.953 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0129.953 (0) Number of backup sets in history: 2; groups (files): 1
+0129.969 (0) Examining (for files) backup set with nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0129.969 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0129.987 (0) Examining (for files) backup set with nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0129.987 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0129.987 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0130.051 (0) Exclusion option setting (uploads): backup*,*backups,backwpup*,wp-clone,snapshots
+0130.097 (0) Looking for candidates to backup in: C:\laragon\www\Kosmos/wp-content/uploads
+0130.143 (0) finding files: 2021: adding to list (1)
+0130.193 (0) finding files: 2022: adding to list (2)
+0130.297 (0) finding files: 2023: adding to list (3)
+0130.320 (0) finding files: astra: adding to list (4)
+0130.367 (0) finding files: astra-addon: adding to list (5)
+0130.461 (0) finding files: astra-sites: adding to list (6)
+0130.508 (0) finding files: elementor: adding to list (7)
+0130.584 (0) finding files: wpforms: adding to list (8)
+0130.635 (0) Beginning creation of dump of uploads (split every: 400 MB)
+0131.039 (0) Total entities for the zip file: 13 directories, 194 files (0 skipped as non-modified), 21.5 MB
+0131.298 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-uploads.zip.tmp: 100 files added (on-disk size: 0 KB)
+0134.807 (0) Creating zip file manifest (backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-uploads.zip.list-temp.tmp)
+0134.950 (0) Successfully created zip file manifest (size: 10074)
+0135.480 (0) Created uploads zip (0) - 20329.6 KB in 4.7 s (4369.5 KB/s) (sha1: 7699e78c7cc8ebb98fac1d78b4fd73412001dac8, sha256: 73b127c56a7a3b04464ee3414580db7c647ef32b06f21263fd7bb0e4f284672b)
+0135.929 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0136.055 (0) No remote despatch: user chose no remote backup service
+0136.147 (0) Recording as successfully uploaded: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-uploads.zip
+0136.513 (0) Deleting zip manifest (backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-uploads.zip.list.tmp)
+0136.930 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0137.019 (0) Number of backup sets in history: 2; groups (db): 1
+0137.054 (0) Examining (for databases) backup set with group_id=0, nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0137.101 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0137.163 (0) Examining (for databases) backup set with group_id=0, nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0137.163 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0137.164 (0) Number of backup sets in history: 2; groups (files): 1
+0137.217 (0) Examining (for files) backup set with nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0137.218 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0137.260 (0) Examining (for files) backup set with nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0137.261 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0137.261 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0137.623 (0) Beginning backup of other directories found in the content directory (index: 0)
+0137.663 (0) Exclusion option setting (others): upgrade,cache,updraft,backup*,*backups,mysql.sql,debug.log
+0137.677 (0) Looking for candidates to backup in: C:\laragon\www\Kosmos/wp-content
+0137.696 (0) finding files: index.php: adding to list (1)
+0137.712 (0) finding files: languages: adding to list (2)
+0137.754 (0) finding files: plugins: skipping: this is the plugins directory
+0137.796 (0) finding files: themes: skipping: this is the themes directory
+0137.810 (0) finding files: updraft: skipping: this is the updraft directory
+0137.829 (0) finding files: upgrade: skipping: excluded by options
+0137.846 (0) finding files: uploads: skipping: this is the uploads directory
+0137.925 (0) Total entities for the zip file: 3 directories, 125 files (0 skipped as non-modified), 4.8 MB
+0138.034 (0) Zip: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-others.zip.tmp: 100 files added (on-disk size: 0 KB)
+0139.719 (0) Creating zip file manifest (backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-others.zip.list-temp.tmp)
+0139.748 (0) Successfully created zip file manifest (size: 8402)
+0139.958 (0) Created others zip (0) - 1358.5 KB in 2.1 s (657.6 KB/s) (sha1: a082e431543e9a064e803e6c0885132b950ac9cb, sha256: 6612084504db619dc6be126e51148567a454d4ebe4ee815e81f02f6041767dc8)
+0140.096 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0140.125 (0) No remote despatch: user chose no remote backup service
+0140.146 (0) Recording as successfully uploaded: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-others.zip
+0140.205 (0) Deleting zip manifest (backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-others.zip.list.tmp)
+0140.263 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0140.292 (0) Number of backup sets in history: 2; groups (db): 1
+0140.313 (0) Examining (for databases) backup set with group_id=0, nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0140.313 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0140.342 (0) Examining (for databases) backup set with group_id=0, nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0140.342 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0140.342 (0) Number of backup sets in history: 2; groups (files): 1
+0140.371 (0) Examining (for files) backup set with nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0140.400 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0140.421 (0) Examining (for files) backup set with nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0140.421 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0140.422 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0140.613 (0) Saving backup status to database (elements: 8)
+0140.671 (0) Beginning creation of database dump (WordPress DB)
+0140.700 (0) SQL compatibility mode is: NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+0140.760 (0) Testing potential mysqldump binary: C:\Program Files\MySQL\MySQL Workbench 8.0 CE\mysqldump.exe
+0141.221 (0) Output: /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\nDROP TABLE IF EXISTS `wp_options`;\n/*!40101 SET @saved_cs_client     = @@character_set_client */;\n/*!50503 SET character_set_client = utf8mb4 */;\n (truncated - 1534 bytes total)
+0141.321 (0) Working binary mysqldump found: "C:\Program Files\MySQL\MySQL Workbench 8.0 CE\mysqldump.exe"
+0141.654 (0) Table wp_options: Total expected rows (via COUNT): 408
+0141.684 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0141.975 (0) Table wp_options: Rows added in this batch (next record: 2034): 403 (uncompressed bytes in this segment=8968624) in 0.55 seconds
+0142.130 (0) Table wp_options: finishing file(s) (2, 958 KB)
+0142.210 (0) Table wp_users: Total expected rows (via COUNT): 1
+0142.237 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0142.289 (0) Table wp_users: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1368) in 0.09 seconds
+0142.414 (0) Table wp_users: finishing file(s) (2, 0.6 KB)
+0142.503 (0) Table wp_usermeta: Total expected rows (via COUNT): 24
+0142.530 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0142.557 (0) Table wp_usermeta: Rows added in this batch (next record: 24): 24 (uncompressed bytes in this segment=2245) in 0.09 seconds
+0142.780 (0) Table wp_usermeta: finishing file(s) (2, 1.1 KB)
+0142.872 (0) Table wp_actionscheduler_actions: Total expected rows (via COUNT): 15
+0142.895 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0142.925 (0) Table wp_actionscheduler_actions: Rows added in this batch (next record: 53): 15 (uncompressed bytes in this segment=7093) in 0.09 seconds
+0143.055 (0) Table wp_actionscheduler_actions: finishing file(s) (2, 1.2 KB)
+0143.114 (0) Table wp_actionscheduler_claims: Total expected rows (via COUNT): 0
+0143.196 (0) Table wp_actionscheduler_claims: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=621) in 0.09 seconds
+0143.298 (0) Table wp_actionscheduler_claims: finishing file(s) (2, 0.4 KB)
+0143.331 (0) Table wp_actionscheduler_groups: Total expected rows (via COUNT): 2
+0143.346 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0143.372 (0) Table wp_actionscheduler_groups: Rows added in this batch (next record: 2): 2 (uncompressed bytes in this segment=702) in 0.05 seconds
+0143.438 (0) Table wp_actionscheduler_groups: finishing file(s) (2, 0.4 KB)
+0143.485 (0) Table wp_actionscheduler_logs: Total expected rows (via COUNT): 41
+0143.504 (0) Table is relatively small; fetch_rows will thus be: 50 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0143.532 (0) Table wp_actionscheduler_logs: Rows added in this batch (next record: 41): 41 (uncompressed bytes in this segment=4279) in 0.07 seconds
+0143.581 (0) Table wp_actionscheduler_logs: finishing file(s) (2, 0.9 KB)
+0143.646 (0) Table wp_commentmeta: Total expected rows (via COUNT): 0
+0143.672 (0) Table wp_commentmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=677) in 0.06 seconds
+0143.722 (0) Table wp_commentmeta: finishing file(s) (2, 0.4 KB)
+0143.769 (0) Table wp_comments: Total expected rows (via COUNT): 1
+0143.788 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0143.815 (0) Table wp_comments: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=2157) in 0.07 seconds
+0143.891 (0) Table wp_comments: finishing file(s) (2, 0.8 KB)
+0143.946 (0) Table wp_links: Total expected rows (via COUNT): 0
+0143.980 (0) Table wp_links: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1298) in 0.06 seconds
+0144.030 (0) Table wp_links: finishing file(s) (2, 0.5 KB)
+0144.421 (0) Table wp_postmeta: Total expected rows (approximate): 2031
+0144.683 (0) Table wp_postmeta: Rows added in this batch (next record: 3370): 2670 (uncompressed bytes in this segment=11578659) in 0.63 seconds
+0144.746 (0) Table wp_postmeta: finishing file(s) (2, 1153.8 KB)
+0144.907 (0) Table wp_posts: Total expected rows (via COUNT): 342
+0144.916 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0144.972 (0) Table wp_posts: Rows added in this batch (next record: 792): 342 (uncompressed bytes in this segment=2434622) in 0.19 seconds
+0145.040 (0) Table wp_posts: finishing file(s) (2, 58.6 KB)
+0145.073 (0) Table wp_term_relationships: Total expected rows (approximate): 13
+0145.106 (0) Table wp_term_relationships: Rows added in this batch (next record: 100000): 13 (uncompressed bytes in this segment=856) in 0.04 seconds
+0145.156 (0) Table wp_term_relationships: finishing file(s) (2, 0.4 KB)
+0145.393 (0) Table wp_term_taxonomy: Total expected rows (via COUNT): 6
+0145.466 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0145.565 (0) Table wp_term_taxonomy: Rows added in this batch (next record: 6): 6 (uncompressed bytes in this segment=1079) in 0.24 seconds
+0145.641 (0) Table wp_term_taxonomy: finishing file(s) (2, 0.5 KB)
+0145.706 (0) Table wp_termmeta: Total expected rows (via COUNT): 3
+0145.723 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0145.742 (0) Table wp_termmeta: Rows added in this batch (next record: 3): 3 (uncompressed bytes in this segment=832) in 0.06 seconds
+0145.807 (0) Table wp_termmeta: finishing file(s) (2, 0.4 KB)
+0145.842 (0) Table wp_terms: Total expected rows (via COUNT): 6
+0145.857 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0145.890 (0) Table wp_terms: Rows added in this batch (next record: 6): 6 (uncompressed bytes in this segment=904) in 0.05 seconds
+0145.940 (0) Table wp_terms: finishing file(s) (2, 0.5 KB)
+0146.019 (0) Table wp_e_events: Total expected rows (via COUNT): 1
+0146.040 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0146.057 (0) Table wp_e_events: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=787) in 0.08 seconds
+0146.122 (0) Table wp_e_events: finishing file(s) (2, 0.5 KB)
+0146.204 (0) Table wp_e_submissions: Total expected rows (via COUNT): 0
+0146.246 (0) Table wp_e_submissions: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=2254) in 0.09 seconds
+0146.323 (0) Table wp_e_submissions: finishing file(s) (2, 0.7 KB)
+0146.378 (0) Table wp_e_submissions_actions_log: Total expected rows (via COUNT): 0
+0146.406 (0) Table wp_e_submissions_actions_log: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1243) in 0.05 seconds
+0146.456 (0) Table wp_e_submissions_actions_log: finishing file(s) (2, 0.5 KB)
+0146.538 (0) Table wp_e_submissions_values: Total expected rows (via COUNT): 0
+0146.555 (0) Table wp_e_submissions_values: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=716) in 0.06 seconds
+0146.631 (0) Table wp_e_submissions_values: finishing file(s) (2, 0.4 KB)
+0146.776 (0) Table wp_wpforms_tasks_meta: Total expected rows (via COUNT): 1
+0146.837 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0146.966 (0) Table wp_wpforms_tasks_meta: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=736) in 0.27 seconds
+0147.061 (0) Table wp_wpforms_tasks_meta: finishing file(s) (2, 0.4 KB)
+0147.080 (0) PHP event: code E_WARNING: filemtime(): stat failed for C:\laragon\www\Kosmos/wp-content/updraft/backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db.gz (line 1924, C:\laragon\www\Kosmos\wp-content\plugins\updraftplus\backup.php)
+0147.096 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_options.table.tmpr2035.gz (1/21/fopen): adding to final database dump
+0147.141 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_options.table.gz (2/21/fopen): adding to final database dump
+0147.163 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_users.table.tmpr2.gz (3/21/fopen): adding to final database dump
+0147.178 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_users.table.gz (4/21/fopen): adding to final database dump
+0147.196 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_usermeta.table.tmpr25.gz (5/21/fopen): adding to final database dump
+0147.211 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_usermeta.table.gz (6/21/fopen): adding to final database dump
+0147.230 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_actionscheduler_actions.table.tmpr54.gz (7/21/fopen): adding to final database dump
+0147.245 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_actionscheduler_actions.table.gz (8/21/fopen): adding to final database dump
+0147.264 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_actionscheduler_claims.table.tmpr0.gz (9/21/fopen): adding to final database dump
+0147.278 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_actionscheduler_claims.table.gz (10/21/fopen): adding to final database dump
+0147.297 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_actionscheduler_groups.table.tmpr3.gz (11/21/fopen): adding to final database dump
+0147.312 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_actionscheduler_groups.table.gz (12/21/fopen): adding to final database dump
+0147.331 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_actionscheduler_logs.table.tmpr42.gz (13/21/fopen): adding to final database dump
+0147.345 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_actionscheduler_logs.table.gz (14/21/fopen): adding to final database dump
+0147.380 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_commentmeta.table.tmpr0.gz (15/21/fopen): adding to final database dump
+0147.395 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_commentmeta.table.gz (16/21/fopen): adding to final database dump
+0147.414 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_comments.table.tmpr2.gz (17/21/fopen): adding to final database dump
+0147.429 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_comments.table.gz (18/21/fopen): adding to final database dump
+0147.448 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_links.table.tmpr0.gz (19/21/fopen): adding to final database dump
+0147.462 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_links.table.gz (20/21/fopen): adding to final database dump
+0147.481 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_postmeta.table.tmpr3371.gz (21/21/fopen): adding to final database dump
+0147.545 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_postmeta.table.gz (22/21/fopen): adding to final database dump
+0147.563 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_posts.table.tmpr793.gz (23/21/fopen): adding to final database dump
+0147.580 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_posts.table.gz (24/21/fopen): adding to final database dump
+0147.597 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_term_relationships.table.tmpr100001.gz (25/21/fopen): adding to final database dump
+0147.611 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_term_relationships.table.gz (26/21/fopen): adding to final database dump
+0147.630 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_term_taxonomy.table.tmpr7.gz (27/21/fopen): adding to final database dump
+0147.645 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_term_taxonomy.table.gz (28/21/fopen): adding to final database dump
+0147.664 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_termmeta.table.tmpr4.gz (29/21/fopen): adding to final database dump
+0147.679 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_termmeta.table.gz (30/21/fopen): adding to final database dump
+0147.698 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_terms.table.tmpr7.gz (31/21/fopen): adding to final database dump
+0147.712 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_terms.table.gz (32/21/fopen): adding to final database dump
+0147.731 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_e_events.table.tmpr2.gz (33/21/fopen): adding to final database dump
+0147.746 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_e_events.table.gz (34/21/fopen): adding to final database dump
+0147.770 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_e_submissions.table.tmpr0.gz (35/21/fopen): adding to final database dump
+0147.789 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_e_submissions.table.gz (36/21/fopen): adding to final database dump
+0147.803 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_e_submissions_actions_log.table.tmpr0.gz (37/21/fopen): adding to final database dump
+0147.823 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_e_submissions_actions_log.table.gz (38/21/fopen): adding to final database dump
+0147.854 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_e_submissions_values.table.tmpr0.gz (39/21/fopen): adding to final database dump
+0147.889 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_e_submissions_values.table.gz (40/21/fopen): adding to final database dump
+0147.920 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_wpforms_tasks_meta.table.tmpr2.gz (41/21/fopen): adding to final database dump
+0147.953 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db-table-wp_wpforms_tasks_meta.table.gz (42/21/fopen): adding to final database dump
+0148.026 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db.gz: finished writing out complete database file (2181.1 KB)
+0148.197 (0) Total database tables backed up: 21 (backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db.gz, size: 2233560, sha1: ca02237d2f60b6b599ba1ccbf677fdfd04c2588a, sha256: 3d32a58b551fe57f885e8b6daded56b9a6905add0bd779249d81155647a70725)
+0148.273 (0) PHP event: code E_DEPRECATED: strlen(): Passing null to parameter #1 ($string) of type string is deprecated (line 2866, C:\laragon\www\Kosmos\wp-content\plugins\updraftplus\backup.php)
+0148.332 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-plugins.zip: plugins: This file has already been successfully uploaded
+0148.355 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-themes.zip: themes: This file has already been successfully uploaded
+0148.386 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-uploads.zip: uploads: This file has already been successfully uploaded
+0148.405 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-others.zip: others: This file has already been successfully uploaded
+0148.420 (0) backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db.gz: db: This file has not yet been successfully uploaded: will queue
+0148.438 (0) Saving backup history. Total backup size: 60.8 MB
+0148.480 (0) Requesting upload of the files that have not yet been successfully uploaded (1)
+0148.528 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0148.547 (0) No remote despatch: user chose no remote backup service
+0148.562 (0) Recording as successfully uploaded: backup_2023-05-10-2248_Agencia_Boliviana_de_Correos_0c4a7abb2c97-db.gz
+0148.638 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0148.665 (0) Number of backup sets in history: 3; groups (db): 1
+0148.697 (0) Examining (for databases) backup set with group_id=0, nonce=0c4a7abb2c97, datestamp=1683758908 (May 10 2023 22:48:28)
+0148.721 (0) This backup set is the backup set just made, so will not be deleted.
+0148.721 (0) Examining (for databases) backup set with group_id=0, nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0148.721 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0148.747 (0) Examining (for databases) backup set with group_id=0, nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0148.747 (0) 1683728862: db: this set includes a database (backup_2023-05-10-1427_Construction_Company_74efef7fddae-db.gz); db count is now 2
+0148.747 (0) 1683728862: db: over retain limit (2); will delete this database
+0148.747 (0) Delete file: backup_2023-05-10-1427_Construction_Company_74efef7fddae-db.gz, service=none
+0148.771 (0) Deleting local copy (backup_2023-05-10-1427_Construction_Company_74efef7fddae-db.gz)
+0148.821 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0148.855 (0) Number of backup sets in history: 3; groups (files): 1
+0148.880 (0) Examining (for files) backup set with nonce=0c4a7abb2c97, datestamp=1683758908 (May 10 2023 22:48:28)
+0148.880 (0) This backup set is the backup set just made, so will not be deleted.
+0148.905 (0) This backup set is the backup set just made, so will not be deleted.
+0148.906 (0) This backup set is the backup set just made, so will not be deleted.
+0148.906 (0) This backup set is the backup set just made, so will not be deleted.
+0148.906 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0148.929 (0) Examining (for files) backup set with nonce=cb50db3365d1, datestamp=1683744489 (May 10 2023 18:48:09)
+0148.929 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0148.930 (0) Examining (for files) backup set with nonce=74efef7fddae, datestamp=1683728862 (May 10 2023 14:27:42)
+0148.930 (0) plugins: over retain limit (2); will delete this file entity
+0148.930 (0) themes: over retain limit (2); will delete this file entity
+0148.930 (0) uploads: over retain limit (2); will delete this file entity
+0148.930 (0) others: over retain limit (2); will delete this file entity
+0148.930 (0) Delete file: backup_2023-05-10-1427_Construction_Company_74efef7fddae-plugins.zip, service=none
+0148.957 (0) Deleting local copy (backup_2023-05-10-1427_Construction_Company_74efef7fddae-plugins.zip)
+0148.981 (0) Delete file: backup_2023-05-10-1427_Construction_Company_74efef7fddae-themes.zip, service=none
+0149.007 (0) Deleting local copy (backup_2023-05-10-1427_Construction_Company_74efef7fddae-themes.zip)
+0149.030 (0) Delete file: backup_2023-05-10-1427_Construction_Company_74efef7fddae-uploads.zip, service=none
+0149.057 (0) Deleting local copy (backup_2023-05-10-1427_Construction_Company_74efef7fddae-uploads.zip)
+0149.079 (0) Delete file: backup_2023-05-10-1427_Construction_Company_74efef7fddae-others.zip, service=none
+0149.105 (0) Deleting local copy (backup_2023-05-10-1427_Construction_Company_74efef7fddae-others.zip)
+0149.155 (0) This backup set is now empty; will remove from history
+0149.181 (0) Deleting log file (log.74efef7fddae.txt)
+0149.206 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0149.288 (0) Resume backup (0c4a7abb2c97, 0): finish run
+0149.383 (0) Decremented the semaphore (fd) by 1
+0149.538 (0) Semaphore (fd) unlocked
+0149.580 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0149.713 (0) The backup apparently succeeded and is now complete
+0149.755 (0) No email will/can be sent - the user has not configured an email address.
+0149.780 (0) Aparentemente, la copia de seguridad ha sido correcta y ahora está completa
