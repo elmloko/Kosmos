@@ -1,0 +1,184 @@
+{
+    "packages": [
+        {
+            "name": "freemius/wordpress-sdk",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Freemius/wordpress-sdk.git",
+                "reference": "d4aa83b1e74f3269affcbfe0d2b75ceae35ba864"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/d4aa83b1e74f3269affcbfe0d2b75ceae35ba864",
+                "reference": "d4aa83b1e74f3269affcbfe0d2b75ceae35ba864",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "time": "2022-07-31T06:50:47+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "source",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "description": "Freemius WordPress SDK",
+            "homepage": "https://freemius.com",
+            "keywords": [
+                "freemius",
+                "plugin",
+                "sdk",
+                "theme",
+                "wordpress",
+                "wordpress-plugin",
+                "wordpress-theme"
+            ],
+            "support": {
+                "issues": "https://github.com/Freemius/wordpress-sdk/issues",
+                "source": "https://github.com/Freemius/wordpress-sdk/tree/2.4.5"
+            },
+            "install-path": "../freemius/wordpress-sdk"
+        },
+        {
+            "name": "hassankhan/config",
+            "version": "3.0.1",
+            "version_normalized": "3.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hassankhan/config.git",
+                "reference": "82421bb17d21cb0c10b98b89ea54aa4027adfc3f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hassankhan/config/zipball/82421bb17d21cb0c10b98b89ea54aa4027adfc3f",
+                "reference": "82421bb17d21cb0c10b98b89ea54aa4027adfc3f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8.36 || ~5.7 || ~6.5 || ~7.5 || ~8.5",
+                "scrutinizer/ocular": "~1.1",
+                "squizlabs/php_codesniffer": "~2.2",
+                "symfony/yaml": "~3.4",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "suggest": {
+                "symfony/yaml": "~3.4"
+            },
+            "time": "2022-03-26T19:37:50+00:00",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-4": {
+                    "Noodlehaus\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hassan Khan",
+                    "homepage": "http://hassankhan.me/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Lightweight configuration file loader that supports PHP, INI, XML, JSON, and YAML files",
+            "homepage": "http://hassankhan.me/config/",
+            "keywords": [
+                "config",
+                "configuration",
+                "ini",
+                "json",
+                "microphp",
+                "unframework",
+                "xml",
+                "yaml",
+                "yml"
+            ],
+            "support": {
+                "issues": "https://github.com/hassankhan/config/issues",
+                "source": "https://github.com/hassankhan/config/tree/3.0.1"
+            },
+            "install-path": "../hassankhan/config"
+        },
+        {
+            "name": "saltus/framework",
+            "version": "dev-dev-updatelibs",
+            "version_normalized": "dev-dev-updatelibs",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SaltusDev/saltus-framework.git",
+                "reference": "83489d7955ef2122cfb92990437d50107ad6674c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SaltusDev/saltus-framework/zipball/83489d7955ef2122cfb92990437d50107ad6674c",
+                "reference": "83489d7955ef2122cfb92990437d50107ad6674c",
+                "shasum": ""
+            },
+            "require": {
+                "hassankhan/config": "^3.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+                "phpcompatibility/php-compatibility": "*",
+                "phpunit/phpunit": "^8.0.0",
+                "squizlabs/php_codesniffer": "^3.2.3"
+            },
+            "time": "2022-09-29T10:17:40+00:00",
+            "type": "project",
+            "installation-source": "source",
+            "autoload": {
+                "psr-4": {
+                    "Saltus\\WP\\Framework\\": "src/"
+                },
+                "files": [
+                    "lib/codestar-framework/codestar-framework.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Saltus\\WP\\Framework\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpcs"
+                ]
+            },
+            "license": [
+                "GPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Saltus Plugin Framework",
+                    "email": "web@saltus.io",
+                    "homepage": "https://saltus.io/"
+                }
+            ],
+            "homepage": "https://saltus.io/",
+            "keywords": [
+                "composer",
+                "vagrant",
+                "wordpress",
+                "wp"
+            ],
+            "support": {
+                "source": "https://github.com/SaltusDev/saltus-framework/tree/dev-updatelibs",
+                "issues": "https://github.com/SaltusDev/saltus-framework/issues"
+            },
+            "install-path": "../saltus/framework"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

@@ -1,0 +1,47 @@
+.igm-block-preview {
+	max-width: 100%;
+	width:100%;
+}
+
+.igm-block-preview .map_aspect_ratio {
+	max-width: 100%;
+	width:100%;
+	position: relative;
+	height: 0;
+}
+
+.igm-block-preview .map_container,
+.igm-block-preview .igm-map-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display:flex;
+	flex-direction:column;
+	align-items: center;
+	justify-content: center;
+}
+
+.igm-block-preview .map_container {
+	background:none;
+}
+
+.igm-block-preview {
+	transition: opacity .2s;
+}
+
+.igm-block-preview-has-image .map_container {
+	opacity:0;
+	transition: opacity .2s;
+}
+
+.igm-block-preview-has-image:hover .igm-map-background {
+	opacity:0.5;
+	transition: opacity .2s;
+}
+
+.igm-block-preview-has-image:hover .map_container {
+	opacity:1;
+	transition: opacity .2s;
+}
