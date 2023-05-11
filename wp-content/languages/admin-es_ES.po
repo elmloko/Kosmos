@@ -14122,6 +14122,11 @@ msgstr "Marcar esta entrada como fija"
 msgid "Not Sticky"
 msgstr "No es fija"
 
+#: wp-admin/includes/class-wp-posts-list-table.php:1959
+#: wp-admin/includes/class-wp-posts-list-table.php:1962
+msgid "Sticky"
+msgstr "Fija"
+
 #: wp-admin/includes/class-wp-posts-list-table.php:1921
 msgid "Allow Pings"
 msgstr "Permitir pings"
