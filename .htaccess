@@ -1,3 +1,69 @@
+# BEGIN iThemes Security - No modifiques ni borres esta línea
+# iThemes Security Config Details: 2
+	# Proteger los archivos de sistema - Seguridad > Ajustes > Sistema de ajustes > Archivos de sistema
+	<files .htaccess>
+		<IfModule mod_authz_core.c>
+			Require all denied
+		</IfModule>
+		<IfModule !mod_authz_core.c>
+			Order allow,deny
+			Deny from all
+		</IfModule>
+	</files>
+	<files readme.html>
+		<IfModule mod_authz_core.c>
+			Require all denied
+		</IfModule>
+		<IfModule !mod_authz_core.c>
+			Order allow,deny
+			Deny from all
+		</IfModule>
+	</files>
+	<files readme.txt>
+		<IfModule mod_authz_core.c>
+			Require all denied
+		</IfModule>
+		<IfModule !mod_authz_core.c>
+			Order allow,deny
+			Deny from all
+		</IfModule>
+	</files>
+	<files wp-config.php>
+		<IfModule mod_authz_core.c>
+			Require all denied
+		</IfModule>
+		<IfModule !mod_authz_core.c>
+			Order allow,deny
+			Deny from all
+		</IfModule>
+	</files>
+
+	# Desactivar navegación por directorio - Seguridad > Ajustes > Sistema de ajustes > Navegación por directorio
+	Options -Indexes
+
+	<IfModule mod_rewrite.c>
+		RewriteEngine On
+
+		# Proteger los archivos de sistema - Seguridad > Ajustes > Sistema de ajustes > Archivos de sistema
+		RewriteRule ^wp-admin/install\.php$ - [F]
+		RewriteRule ^wp-admin/includes/ - [F]
+		RewriteRule !^wp-includes/ - [S=3]
+		RewriteRule ^wp-includes/[^/]+\.php$ - [F]
+		RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F]
+		RewriteRule ^wp-includes/theme-compat/ - [F]
+		RewriteCond %{REQUEST_FILENAME} -f
+		RewriteRule (^|.*/)\.(git|svn)/.* - [F]
+
+		# Desactivar PHP en Uploads - Seguridad > Ajustes > Ajustes del sistema > PHP en Uploads
+		RewriteRule ^wp\-content/uploads/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]
+
+		# Desactivar PHP en los Plugins - Seguridad > Ajustes > Mejoras del sistema > PHP en Plugins
+		RewriteRule ^wp\-content/plugins/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]
+
+		# Desactivar PHP en Temas - Seguridad > Ajustes > Mejoras del sistema > PHP en Temas
+		RewriteRule ^wp\-content/themes/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]
+	</IfModule>
+# END iThemes Security - No modifiques ni borres esta línea
 
 # BEGIN WordPress
 # Las directivas (líneas) entre «BEGIN WordPress» y «END WordPress» son

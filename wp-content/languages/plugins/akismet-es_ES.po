@@ -141,7 +141,7 @@ msgstr "Akismet no ha podido volver a comprobar tus comentarios para encontrar s
 
 #: class.akismet-admin.php:439
 msgid "You don&#8217;t have permission to do that."
-msgstr "No tienes permisos para hacer eso."
+msgstr "No tienes permiso para hacer eso."
 
 #: class.akismet-cli.php:165
 msgid "Stats response could not be decoded."
