@@ -1,0 +1,262 @@
+<wpml-config>
+    <elementor-widgets>
+        <widget name="premium-addon-banner">
+            <fields>
+                <field name="Banner: Title" editor_type="LINE">premium_banner_title</field>
+                <field name="Banner: Description" editor_type="AREA">premium_banner_description</field>
+                <field name="Banner: Button Text" editor_type="LINE">premium_banner_more_text</field>
+                <field name="Banner: URL" editor_type="LINK">premium_banner_image_custom_link>url</field>
+                <field name="Banner: Button URL" editor_type="LINK">premium_banner_link>url</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-addon-button">
+            <fields>
+                <field name="Button: Text" editor_type="LINE">premium_button_text</field>
+                <field name="Button: URL" editor_type="LINK">premium_button_link>url</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-addon-blog">
+            <fields>
+                <field name="Blog: Previous Page String" editor_type="LINE">premium_blog_prev_text</field>
+                <field name="Blog: Next Page String" editor_type="LINE">premium_blog_next_text</field>
+                <field name="Blog: Empty Query String" editor_type="LINE">empty_query_text</field>
+                <field name="Blog: Read More" editor_type="LINE">premium_blog_excerpt_text</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-counter">
+            <fields>
+                <field name="Counter: Title Text" editor_type="LINE">premium_counter_title</field>
+                <field name="Counter: Thousands Separator" editor_type="LINE">premium_counter_t_separator</field>
+                <field name="Counter: Prefix" editor_type="LINE">premium_counter_preffix</field>
+                <field name="Counter: Suffix" editor_type="LINE">premium_counter_suffix</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-countdown-timer">
+            <fields>
+                <field name="Countdown: Expiration Message" editor_type="AREA">premium_countdown_expiry_text_</field>
+                <field name="Countdown: Digits Separator" editor_type="LINE">premium_countdown_separator_text</field>
+                <field name="Countdown: Day Singular" editor_type="LINE">premium_countdown_day_singular</field>
+                <field name="Countdown: Day Plural" editor_type="LINE">premium_countdown_day_plural</field>
+                <field name="Countdown: Week Singular" editor_type="LINE">premium_countdown_week_singular</field>
+                <field name="Countdown: Week Plural" editor_type="LINE">premium_countdown_week_plural</field>
+                <field name="Countdown: Month Singular" editor_type="LINE">premium_countdown_month_singular</field>
+                <field name="Countdown: Month Plural" editor_type="LINE">premium_countdown_month_plural</field>
+                <field name="Countdown: Year Singular" editor_type="LINE">premium_countdown_year_singular</field>
+                <field name="Countdown: Year Plural" editor_type="LINE">premium_countdown_year_plural</field>
+                <field name="Countdown: Hour Singular" editor_type="LINE">premium_countdown_hour_singular</field>
+                <field name="Countdown: Hour Plural" editor_type="LINE">premium_countdown_hour_plural</field>
+                <field name="Countdown: Minute Singular" editor_type="LINE">premium_countdown_minute_singular</field>
+                <field name="Countdown: Minute Plural" editor_type="LINE">premium_countdown_minute_plural</field>
+                <field name="Countdown: Second Singular" editor_type="LINE">premium_countdown_second_singular</field>
+                <field name="Countdown: Second Plural" editor_type="LINE">premium_countdown_second_plural</field>
+                <field name="Countdown: Direction URL" editor_type="LINE">premium_countdown_expiry_redirection_</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-addon-dual-header">
+            <fields>
+                <field name="Dual Heading: First Heading" editor_type="LINE">premium_dual_header_first_header_text</field>
+                <field name="Dual Heading: Second Heading" editor_type="LINE">premium_dual_header_second_header_text</field>
+                <field name="Dual Heading: Background Text" editor_type="LINE">background_text</field>
+                <field name="Advanced Heading: Heading URL" editor_type="LINK">premium_dual_heading_link>url</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-carousel-widget">
+            <fields-in-item items_of="premium_carousel_templates_repeater">
+                <field name="Carousel: Template" editor_type="LINE">premium_carousel_repeater_item</field>
+            </fields-in-item>
+        </widget>
+
+        <widget name="premium-addon-fancy-text">
+            <fields>
+                <field name="Fancy Text: Prefix" editor_type="LINE">premium_fancy_prefix_text</field>
+                <field name="Fancy Text: Suffix" editor_type="LINE">premium_fancy_suffix_text</field>
+                <field name="Fancy Text: Cusror Text" editor_type="LINE">premium_fancy_text_cursor_text</field>
+            </fields>
+            <fields-in-item items_of="premium_fancy_text_strings">
+                <field name="Fancy Text: String" editor_type="LINE">premium_text_strings_text_field</field>
+            </fields-in-item>
+        </widget>
+
+        <widget name="premium-img-gallery">
+            <fields>
+                <field name="Grid: Load More Button" editor_type="LINE">premium_gallery_load_more_text</field>
+                <field name="Grid: First Category Label" editor_type="LINE">premium_gallery_first_cat_label</field>
+            </fields>
+            <fields-in-item items_of="premium_gallery_img_content">
+                <field name="Grid: Image Name" editor_type="LINE">premium_gallery_img_name</field>
+                <field name="Grid: Image Description" editor_type="AREA">premium_gallery_img_desc</field>
+                <field name="Grid: Image Link" editor_type="LINK">premium_gallery_img_link>url</field>
+                <field name="Grid: Video URL" editor_type="LINE">premium_gallery_video_url</field>
+                <field name="Grid: Video URL" editor_type="LINE">premium_gallery_video_self_url</field>
+            </fields-in-item>
+            <fields-in-item items_of="premium_gallery_cats_content">
+                <field name="Grid: Category" editor_type="LINE">premium_gallery_img_cat</field>
+            </fields-in-item>
+        </widget>
+
+        <widget name="premium-icon-list">
+            <fields-in-item items_of="list">
+                <field name="List: Item Title" editor_type="LINE">list_title</field>
+                <field name="List: Item Link Title" editor_type="LINE">link_title</field>
+                <field name="List: Item Badge" editor_type="LINE">badge_title</field>
+                <field name="List: Item Icon" editor_type="LINE">list_text_icon</field>
+                <field name="List: Item Link" editor_type="LINK">link>url</field>
+            </fields-in-item>
+        </widget>
+
+        <widget name="premium-addon-image-button">
+            <fields>
+                <field name="Button: Text" editor_type="LINE">premium_image_button_text</field>
+                <field name="Button: URL" editor_type="LINK">premium_image_button_link>url</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-image-scroll">
+            <fields>
+                <field name="Image Scroll: Link Title" editor_type="LINE">link_text</field>
+                <field name="Image Scroll: URL" editor_type="LINK">link>url</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-addon-image-separator">
+            <fields>
+                <field name="Image Separator: Link Title" editor_type="LINE">premium_image_separator_image_link_text</field>
+                <field name="Image Separator: URL" editor_type="LINK">premium_image_separator_image_link>url</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-lottie">
+            <fields>
+                <field name="Lottie : Link" editor_type="LINK">link>url</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-addon-maps">
+            <fields>
+                <field name="Maps: Center Latitude" editor_type="LINE">premium_maps_center_lat</field>
+                <field name="Maps: Center Longitude" editor_type="LINE">premium_maps_center_long</field>
+            </fields>
+            <fields-in-item items_of="premium_maps_map_pins">
+                <field name="Maps: Marker Latitude" editor_type="LINE">map_latitude</field>
+                <field name="Maps: Marker Longitude" editor_type="LINE">map_longitude</field>
+                <field name="Maps: Marker Title" editor_type="LINE">pin_title</field>
+                <field name="Maps: Marker Description" editor_type="AREA">pin_desc</field>
+            </fields-in-item>
+        </widget>
+
+        <widget name="premium-addon-modal-box">
+            <fields>
+                <field name="Modal Box: Header Title" editor_type="LINE">premium_modal_box_title</field>
+                <field name="Modal Box: Template ID" editor_type="LINE">premium_modal_box_content_temp</field>
+                <field name="Modal Box: Content Text" editor_type="VISUAL">premium_modal_box_content</field>
+                <field name="Modal Box: Close Button" editor_type="LINE">premium_modal_close_text</field>
+                <field name="Modal Box: Trigger Button" editor_type="LINE">premium_modal_box_button_text</field>
+                <field name="Modal Box: Trigger Text" editor_type="LINE">premium_modal_box_selector_text</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-addon-person">
+            <fields>
+                <field name="Person: Name" editor_type="LINE">premium_person_name</field>
+                <field name="Person: Title" editor_type="LINE">premium_person_title</field>
+                <field name="Person: Description" editor_type="AREA">premium_person_content</field>
+            </fields>
+            <fields-in-item items_of="multiple_persons">
+                <field name="Multiple Persons: Person Name" editor_type="LINE">multiple_name</field>
+                <field name="Multiple Persons: Person Title" editor_type="LINE">multiple_title</field>
+                <field name="Multiple Persons: Person Desctiption" editor_type="AREA">multiple_description</field>
+            </fields-in-item>
+        </widget>
+
+        <widget name="premium-addon-pricing-table">
+            <fields>
+                <field name="Person: Title" editor_type="LINE">premium_pricing_table_title_text</field>
+                <field name="Pricing Table: Slashed Price" editor_type="LINE">premium_pricing_table_slashed_price_value</field>
+                <field name="Pricing Table: Currency" editor_type="LINE">premium_pricing_table_price_currency</field>
+                <field name="Pricing Table: Price Value" editor_type="LINE">premium_pricing_table_price_value</field>
+                <field name="Pricing Table: Separator" editor_type="LINE">premium_pricing_table_price_separator</field>
+                <field name="Pricing Table: Duration" editor_type="LINE">premium_pricing_table_price_duration</field>
+                <field name="Pricing Table: Description" editor_type="AREA">premium_pricing_table_description_text</field>
+                <field name="Pricing Table: Button Text" editor_type="LINE">premium_pricing_table_button_text</field>
+                <field name="Pricing Table: Button URL" editor_type="LINK">premium_pricing_table_button_link>url</field>
+                <field name="Pricing Table: Badge" editor_type="LINE">premium_pricing_table_badge_text</field>
+            </fields>
+            <fields-in-item items_of="premium_fancy_text_list_items">
+                <field name="Pricing Table: Item Text" editor_type="LINE">premium_pricing_list_item_text</field>
+                <field name="Pricing Table: Tooltip Text" editor_type="LINE">premium_pricing_table_item_tooltip_text</field>
+            </fields-in-item>
+        </widget>
+
+        <widget name="premium-addon-progressbar">
+            <fields>
+                <field name="Progress Bar: Left Label" editor_type="LINE">premium_progressbar_left_label</field>
+            </fields>
+            <fields-in-item items_of="premium_progressbar_multiple_label">
+                <field name="Progress Bar: Label Text" editor_type="LINE">text</field>
+            </fields-in-item>
+        </widget>
+
+        <widget name="premium-addon-testimonials">
+            <fields>
+                <field name="Testimonial: Name" editor_type="LINE">premium_testimonial_person_name</field>
+                <field name="Testimonial: Separator" editor_type="LINE">separator_text</field>
+                <field name="Testimonial: Company Name" editor_type="LINE">premium_testimonial_company_name</field>
+                <field name="Testimonial: Company Link" editor_type="LINK">premium_testimonial_company_link>url</field>
+                <field name="Testimonial: Content" editor_type="AREA">premium_testimonial_content</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-addon-title">
+            <fields>
+                <field name="Title: Text" editor_type="LINE">premium_title_text</field>
+                <field name="Title: Background Text" editor_type="LINE">background_text</field>
+                <field name="Title: Link" editor_type="LINK">custom_link>url</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-addon-video-box">
+            <fields>
+                <field name="Video Box: Description" editor_type="AREA">premium_video_box_description_text</field>
+                <field name="Video Box: Link" editor_type="LINK">premium_video_box_link>url</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-vscroll">
+            <fields>
+                <field name="Vertical Scroll: Tooltips" editor_type="LINE">dots_tooltips</field>
+            </fields>
+            <fields-in-item items_of="id_repeater">
+                <field name="Vertical Scroll: Section ID" editor_type="LINE">section_id</field>
+            </fields-in-item>
+        </widget>
+
+        <widget name="premium-woo-products">
+            <fields>
+                <field name="Woo Products: Empty Query Message" editor_type="LINE">empty_products_msg</field>
+                <field name="Woo Products: Previous Page String" editor_type="LINE">prev_string</field>
+                <field name="Woo Products: Next Page String" editor_type="LINE">next_string</field>
+                <field name="Woo Products: Featured String" editor_type="LINE">featured_string</field>
+                <field name="Woo Products: Out Of Stock String" editor_type="LINE">sold_out_string</field>
+                <field name="Woo Products: Sale String" editor_type="LINE">sale_string</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-nav-menu">
+            <fields>
+                <field name="Mega Menu: Toggle Text" editor_type="LINE">pa_mobile_toggle_text</field>
+                <field name="Mega Menu: Close Text" editor_type="LINE">pa_mobile_toggle_close</field>
+            </fields>
+            <fields-in-item items_of="menu_items">
+                <field name="Mega Menu: Item Text" editor_type="LINE">text</field>
+                <field name="Mega Menu: Item Link" editor_type="LINK">link>url</field>
+                <field name="Mega Menu: Badge Text" editor_type="LINE">badge_text</field>
+            </fields-in-item>
+        </widget>
+    </elementor-widgets>
+</wpml-config>

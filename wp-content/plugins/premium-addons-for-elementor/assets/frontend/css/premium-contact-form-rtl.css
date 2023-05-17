@@ -1,0 +1,21 @@
+/**************** Premium Contact Form7 **********/
+/*************************************************/
+.premium-contact-form-anim-yes .wpcf7-span::after {
+  display: block;
+  height: 2px;
+  content: "";
+  top: -2px;
+  position: relative;
+  width: 0px;
+  -webkit-transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.3s;
+}
+
+.premium-contact-form-anim-yes .wpcf7-span.is-focused::after {
+  width: 100%;
+}
+
+.premium-cf7-container input.wpcf7-submit {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}

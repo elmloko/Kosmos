@@ -1,0 +1,272 @@
+/**************** Premium Pricing Table ****************/
+/*******************************************************/
+.premium-pricing-table-container {
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.premium-pricing-icon-container {
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-pack: center;
+         -webkit-justify-content: center;
+            justify-content: center;
+    line-height: 0;
+}
+
+.premium-pricing-icon-container .premium-pricing-icon {
+    display: inline-block;
+}
+
+.premium-pricing-icon-container .premium-pricing-image {
+    overflow: hidden;
+}
+
+.premium-pricing-icon-container .premium-pricing-image img {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+}
+
+.premium-badge-left {
+    position: absolute;
+    top: 0;
+}
+
+.premium-badge-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.premium-badge-left {
+    left: 0;
+}
+
+.premium-badge-triangle.premium-badge-left .corner {
+    width: 0;
+    height: 0;
+    border-top: 150px solid;
+    border-bottom: 150px solid transparent;
+    border-right: 150px solid transparent;
+}
+
+.premium-badge-triangle.premium-badge-right .corner {
+    width: 0;
+    height: 0;
+    border-bottom: 150px solid transparent;
+    border-right: 150px solid;
+    border-left: 150px solid transparent;
+}
+
+.premium-badge-triangle span {
+    position: absolute;
+    top: 35px;
+    width: 100px;
+    text-align: center;
+    -ms-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    display: block;
+    text-transform: uppercase;
+}
+
+.premium-badge-triangle.premium-badge-right span {
+    -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    right: 0;
+}
+
+.premium-badge-circle {
+    min-width: 4em;
+    min-height: 4em;
+    line-height: 4em;
+    text-align: center;
+    border-radius: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.premium-badge-stripe {
+    position: absolute;
+    -ms-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+    width: 15em;
+    overflow: hidden;
+    height: 15em;
+}
+
+.premium-badge-stripe.premium-badge-left {
+    -ms-transform: rotate(0);
+        -webkit-transform: rotate(0);
+            transform: rotate(0);
+}
+
+.premium-badge-stripe .corner {
+    text-align: center;
+    left: 0;
+    width: 150%;
+    -ms-transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg);
+        -webkit-transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg);
+            transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg);
+    margin-top: 35px;
+    font-size: 13px;
+    line-height: 2;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.premium-badge-flag .corner {
+    text-align: center;
+    border-radius: 4px 4px 0 4px;
+    padding: 3px 15px;
+    position: absolute;
+    top: 10%;
+    right: -8px;
+}
+
+.premium-badge-flag .corner::before,
+.premium-badge-flag .corner::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 100%;
+    right: 0;
+    border-bottom: 8px solid transparent;
+}
+
+.elementor-widget-premium-addon-pricing-table .elementor-widget-container {
+    overflow: visible !important;
+}
+
+.premium-badge-flag .corner::after {
+    border-left: 8px solid rgba(0, 0, 0, 0.2);
+}
+
+.premium-pricing-price-currency {
+    position: relative;
+}
+
+.premium-pricing-button-container {
+    display: block;
+}
+
+.premium-pricing-list {
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: column;
+         -webkit-flex-direction: column;
+            flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.premium-pricing-list .premium-pricing-list-item {
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+         -webkit-align-items: center;
+            align-items: center;
+}
+
+.premium-pricing-list .premium-pricing-list-item svg {
+    width: 50px;
+    height: 50px;
+}
+
+.premium-pricing-list .premium-pricing-list-item img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.premium-pricing-list .premium-pricing-list-span {
+    position: relative;
+}
+
+.premium-pricing-list .list-item-tooltip {
+    border-bottom: 1px dotted;
+}
+
+.premium-pricing-list .premium-pricing-list-tooltip {
+    position: absolute;
+    top: -webkit-calc(100% + 1px);
+    top: calc(100% + 1px);
+    right: 0;
+    visibility: hidden;
+    padding: 15px 20px;
+    border-radius: 5px;
+    min-width: 200px;
+    overflow: hidden;
+    text-align: right;
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #aaa;
+}
+
+.premium-pricing-features-left .premium-pricing-list-span {
+    text-align: right;
+}
+
+.premium-pricing-features-center .premium-pricing-list-span {
+    text-align: center;
+}
+
+.premium-pricing-features-right .premium-pricing-list-span {
+    text-align: left;
+}
+
+.premium-pricing-list-span:hover .premium-pricing-list-tooltip {
+    z-index: 99;
+    visibility: visible;
+    opacity: 1;
+}
+
+.premium-pricing-slashed-price-value {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.premium-pricing-price-value {
+    font-size: 70px;
+}
+
+.premium-pricing-description-container li {
+    list-style-position: inside;
+    text-indent: -40px;
+}
+
+@-moz-document url-prefix() {
+    .premium-pricing-description-container li {
+        text-indent: 0px;
+    }
+}
+
+.premium-pricing-price-button {
+    display: block;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    text-align: center;
+    color: #fff;
+    background: #6ec1e4;
+    margin-bottom: 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}

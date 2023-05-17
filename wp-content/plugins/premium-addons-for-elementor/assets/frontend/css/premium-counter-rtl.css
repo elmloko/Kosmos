@@ -1,0 +1,99 @@
+/**************** Premium Counter ***************/
+/************************************************/
+.premium-counter-area {
+  padding: 10px 0;
+  -js-display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-pack: center;
+       -webkit-justify-content: center;
+          justify-content: center;
+  -ms-flex-align: center;
+       -webkit-align-items: center;
+          align-items: center;
+}
+
+.premium-counter-area.top {
+  -ms-flex-direction: column;
+       -webkit-flex-direction: column;
+          flex-direction: column;
+}
+
+.premium-counter-area.right {
+  -ms-flex-direction: row-reverse;
+       -webkit-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.premium-counter-area.right .premium-counter-icon {
+  padding-right: 20px;
+}
+
+.premium-counter-area.left .premium-counter-icon {
+  padding-left: 20px;
+}
+
+.premium-counter-area .premium-counter-icon .icon i.fa:before {
+  vertical-align: text-top;
+}
+
+.premium-counter-area .premium-counter-icon span.icon {
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.premium-counter-area .premium-counter-icon .circle {
+  border-radius: 100%;
+}
+
+.premium-counter-area .premium-counter-icon img,
+.premium-counter-area .premium-counter-icon svg {
+  width: 80px;
+}
+
+.premium-counter-area .premium-counter-icon .premium-counter-animation svg {
+  height: 80px;
+}
+
+.premium-counter-area .premium-counter-title p {
+  padding: 0;
+  margin: 0;
+}
+
+.premium-counter-area .premium-counter-value-wrap {
+  -js-display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-align: center;
+       -webkit-align-items: center;
+          align-items: center;
+}
+
+.premium-init-wrapper {
+  -js-display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.premium-init-wrapper.row {
+  -ms-flex-align: center;
+       -webkit-align-items: center;
+          align-items: center;
+}
+
+.premium-init-wrapper.right {
+  text-align: right;
+}
+
+span.icon.flex-width {
+  width: auto !important;
+  height: auto !important;
+}
+
+.premium-counter-area .premium-counter-init {
+  font-size: 35px;
+}

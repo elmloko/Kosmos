@@ -1,0 +1,20 @@
+/********* Premium Lottie Animations **********/
+/**********************************************/
+.elementor-widget-premium-lottie .premium-lottie-animation {
+  position: relative;
+  -js-display: inline-flex;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.elementor-widget-premium-lottie .premium-lottie-animation a {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}

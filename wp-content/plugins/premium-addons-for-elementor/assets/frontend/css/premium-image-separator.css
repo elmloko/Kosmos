@@ -1,0 +1,34 @@
+/**************** Premium Image Separator ****************/
+/*********************************************************/
+.premium-image-separator-container {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  top: auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+  .premium-image-separator-container svg,
+  .premium-image-separator-container img {
+    display: inline-block !important;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center; }
+  .premium-image-separator-container .premium-image-separator-link {
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-decoration: none; }
+    .premium-image-separator-container .premium-image-separator-link:hover, .premium-image-separator-container .premium-image-separator-link:visited, .premium-image-separator-container .premium-image-separator-link:focus, .premium-image-separator-container .premium-image-separator-link:active {
+      box-shadow: none !important;
+      outline: none !important;
+      border: none !important;
+      text-decoration: none !important; }
+  .premium-image-separator-container i,
+  .premium-image-separator-container > svg {
+    padding: 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; }

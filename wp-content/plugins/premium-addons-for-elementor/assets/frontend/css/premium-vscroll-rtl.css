@@ -1,0 +1,351 @@
+/************ Premium Vertical Scroll ************/
+/*************************************************/
+.premium-vscroll-inner {
+    position: relative;
+    /* overflow: hidden;
+*/
+    min-height: 100%;
+}
+
+.premium-vscroll-inner .premium-vscroll-dots {
+    position: fixed;
+    z-index: 100;
+    opacity: 1;
+    margin-top: -32px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.premium-vscroll-wrap .premium-vscroll-nav-menu {
+    opacity: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.premium-vscroll-inner .premium-vscroll-dots,
+.premium-vscroll-wrap .premium-vscroll-dots-hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.premium-vscroll-nav-dots-yes .premium-vscroll-inner .premium-vscroll-dots {
+    opacity: 1;
+    visibility: visible;
+}
+
+.premium-vscroll-dots.middle {
+    top: 50%;
+    margin-top: 0;
+    -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+}
+
+.premium-vscroll-dots.top {
+    top: 40px;
+}
+
+.premium-vscroll-dots.bottom {
+    bottom: 30px;
+}
+
+.premium-vscroll-dots.right {
+    left: 17px;
+}
+
+.premium-vscroll-dots.left {
+    right: 17px;
+}
+
+.premium-vscroll-inner ul.premium-vscroll-dots-list,
+.premium-vscroll-wrap .premium-vscroll-nav-menu {
+    margin: 0 !important;
+    padding: 0;
+}
+
+.premium-vscroll-inner ul.premium-vscroll-dots-list li {
+    width: 14px;
+    height: 13px;
+    margin: 7px;
+    position: relative;
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-pack: center;
+         -webkit-justify-content: center;
+            justify-content: center;
+    -ms-flex-align: center;
+         -webkit-align-items: center;
+            align-items: center;
+    overflow: visible;
+}
+
+.premium-vscroll-inner .premium-vscroll-dot-item .premium-vscroll-nav-link {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.premium-vscroll-inner
+    .premium-vscroll-dot-item
+    .premium-vscroll-nav-link
+    span {
+    top: 2px;
+    right: 2.5px;
+    width: 8px;
+    height: 8px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.premium-vscroll-inner
+    .premium-vscroll-dot-item.active
+    .premium-vscroll-nav-link
+    span {
+    -ms-transform: scale(1.6);
+        -webkit-transform: scale(1.6);
+            transform: scale(1.6);
+}
+
+.premium-vscroll-inner .premium-vscroll-dot-item .premium-vscroll-tooltip {
+    position: absolute;
+    color: #fff;
+    font-size: 14px;
+    font-family: arial, helvetica, sans-serif;
+    white-space: nowrap;
+    max-width: 220px;
+    padding-right: 0.4em;
+    padding-left: 0.4em;
+}
+
+.premium-vscroll-inner .premium-vscroll-dots.right .premium-vscroll-tooltip {
+    left: 27px;
+}
+
+/* * Lines */
+.premium-vscroll-inner .premium-vscroll-dots.lines .premium-vscroll-dot-item {
+    width: 4px;
+    height: 30px;
+}
+
+.premium-vscroll-inner
+    .premium-vscroll-dots.lines
+    .premium-vscroll-dot-item
+    span {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.premium-vscroll-inner
+    .premium-vscroll-dots.lines
+    .premium-vscroll-dot-item.active
+    span {
+    -ms-transform: scale(1);
+        -webkit-transform: scale(1);
+            transform: scale(1);
+}
+
+@media (max-width: 768px) {
+    .premium-vscroll-dots.right {
+        left: 7px;
+    }
+
+    .premium-vscroll-dots.left {
+        right: 7px;
+    }
+}
+
+/* @media only screen and (min-device-width: 769px) and (max-device-width: 1024px) {
+    [data-animation="rotate"] .premium-vscroll-temp {
+        height: -webkit-calc(100vh - 75px) !important;
+        height: calc(100vh - 75px) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    [data-animation="rotate"] .premium-vscroll-temp {
+        height: -webkit-calc(100vh - 60px) !important;
+        height: calc(100vh - 60px) !important;
+    }
+} */
+
+/** Ipads- Safari */
+/* @supports (-webkit-touch-callout: none) {
+
+    @media (max-width: 768px) {
+        [data-animation="rotate"] .premium-vscroll-temp {
+            height: -webkit-calc(100vh - 108px) !important;
+            height: calc(100vh - 108px) !important;
+        }
+    }
+
+    @media only screen and (min-device-width: 769px) and (max-device-width: 1024px) {
+        [data-animation="rotate"] .premium-vscroll-temp {
+            height: -webkit-calc(100vh - 60px) !important;
+            height: calc(100vh - 60px) !important;
+        }
+    }
+} */
+
+.premium-vscroll-inner
+    .premium-vscroll-dots.right
+    .premium-vscroll-tooltip::after {
+    position: absolute;
+    top: 50%;
+    content: "";
+    right: -webkit-calc(100% - 1px);
+    right: calc(100% - 1px);
+    width: 10px;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid;
+    -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+}
+
+.premium-vscroll-inner
+    .premium-vscroll-dots.left
+    .premium-vscroll-tooltip::after {
+    position: absolute;
+    top: 50%;
+    content: "";
+    left: -webkit-calc(100% - 1px);
+    left: calc(100% - 1px);
+    width: 10px;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid;
+    -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+}
+
+.premium-vscroll-inner .premium-vscroll-dots.left .premium-vscroll-tooltip {
+    right: 27px;
+}
+
+.premium-vscroll-nav-menu {
+    position: fixed;
+    top: 20px;
+    height: 40px;
+    z-index: 100;
+    padding: 0;
+    margin: 0;
+}
+
+.premium-vscroll-nav-menu.left {
+    right: 0;
+}
+
+.premium-vscroll-nav-menu.right {
+    left: 0;
+}
+
+.premium-vscroll-nav-menu .premium-vscroll-nav-item {
+    display: inline-block;
+    margin: 10px;
+    color: #000;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.premium-vscroll-nav-menu .premium-vscroll-nav-item .premium-vscroll-nav-link {
+    padding: 9px 18px;
+    display: block;
+    cursor: pointer;
+}
+
+.premium-vscroll-nav-menu .premium-vscroll-nav-item .premium-vscroll-nav-link,
+.premium-vscroll-nav-menu
+    .premium-vscroll-nav-item
+    .premium-vscroll-nav-link:hover {
+    color: #000;
+}
+
+.premium-vscroll-nav-menu
+    .premium-vscroll-nav-item
+    .premium-vscroll-nav-link:focus,
+.multiscroll-nav li a:focus {
+    outline: none;
+}
+
+.premium-vscroll-temp .slimScrollBar {
+    visibility: hidden;
+}
+
+[data-hijacking="off"] .premium-vscroll-temp {
+    height: 100vh;
+}
+
+[data-hijacking="off"] .premium-vscroll-temp > div {
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Force Hardware Acceleration */
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+}
+
+[data-hijacking="off"] .premium-vscroll-temp:first-of-type > div::before {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 20px;
+    z-index: 2;
+}
+
+[data-hijacking="off"][data-animation="rotate"] .premium-vscroll-temp {
+    position: relative;
+    /* enable a 3D-space for children elements */
+    -webkit-perspective: 1800px;
+            perspective: 1800px;
+}
+
+[data-hijacking="off"][data-animation="rotate"] .premium-vscroll-temp > div {
+    position: absolute;
+    -ms-transform-origin: center bottom;
+        -webkit-transform-origin: center bottom;
+            transform-origin: center bottom;
+}
+
+[data-hijacking="off"][data-animation="rotate"]
+    .premium-vscroll-temp:last-of-type
+    > div {
+    opacity: 1 !important;
+    -webkit-transform: translateY(0px) scale(1) rotateX(0deg) !important;
+            transform: translateY(0px) scale(1) rotateX(0deg) !important;
+}
+
+[data-hijacking="off"][data-animation="parallax"] .premium-vscroll-temp > div {
+    position: fixed;
+}
+
+[data-hijacking="off"][data-animation="scaleDown"] .premium-vscroll-temp > div {
+    position: fixed;
+}
+
+[data-hijacking="off"] .premium-vscroll-parallax-last {
+    -ms-transform: translateY(0px) scale(1) !important;
+        -webkit-transform: translateY(0px) scale(1) !important;
+            transform: translateY(0px) scale(1) !important;
+}
+
+[data-hijacking="off"] .premium-vscroll-parallax-position {
+    position: unset !important;
+}

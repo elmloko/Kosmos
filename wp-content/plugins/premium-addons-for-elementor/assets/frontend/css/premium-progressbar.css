@@ -1,0 +1,289 @@
+/**************** Premium Progress Bar ****************/
+/******************************************************/
+.premium-progressbar-container {
+  position: relative; }
+
+.premium-progressbar-bar-wrap {
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  height: 25px;
+  margin-bottom: 50px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); }
+  .premium-progressbar-bar-wrap.premium-progressbar-dots {
+    background-color: transparent;
+    width: 100%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: auto;
+    box-shadow: none; }
+  .premium-progressbar-bar-wrap .progress-segment {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #f5f5f5; }
+    .premium-progressbar-bar-wrap .progress-segment.filled {
+      background: #6ec1e4; }
+    .premium-progressbar-bar-wrap .progress-segment:not(:first-child):not(:last-child) {
+      margin: 0 4px; }
+    .premium-progressbar-bar-wrap .progress-segment:first-child {
+      margin-right: 4px; }
+    .premium-progressbar-bar-wrap .progress-segment:last-child {
+      margin-left: 4px; }
+    .premium-progressbar-bar-wrap .progress-segment .segment-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #6ec1e4; }
+
+.premium-progressbar-bar {
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  background: #6ec1e4;
+  text-align: center;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15); }
+
+.premium-progressbar-striped .premium-progressbar-bar {
+  background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 40px 40px; }
+
+.premium-progressbar-active .premium-progressbar-bar {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite; }
+
+.premium-progressbar-gradient .premium-progressbar-bar {
+  background-size: 400% 400% !important;
+  -webkit-animation: progress-bar-gradient 10s ease-in-out infinite;
+  animation: progress-bar-gradient 10s ease-in-out infinite; }
+
+.premium-progressbar-bar {
+  position: absolute;
+  overflow: hidden;
+  line-height: 20px; }
+
+.premium-progressbar-container .clearfix {
+  clear: both; }
+
+.premium-progressbar-bar {
+  -webkit-transition: width 0s ease-in-out !important;
+  transition: width 0s ease-in-out !important; }
+
+.premium-progressbar-container p:first-of-type {
+  margin: 0;
+  float: left; }
+
+.premium-progressbar-container p:nth-of-type(2) {
+  margin: 0;
+  float: right; }
+
+.premium-progressbar-name {
+  left: 50%;
+  top: 0;
+  right: 0;
+  -webkit-transform: translateX(-12.5px);
+  -ms-transform: translateX(-12.5px);
+  transform: translateX(-12.5px);
+  z-index: 1; }
+
+.premium-progressbar-multiple-label {
+  position: relative;
+  float: left;
+  width: 0;
+  left: 50%; }
+
+.premium-progressbar-center-label {
+  position: relative;
+  white-space: nowrap; }
+
+.premium-progressbar-arrow {
+  height: 15px;
+  left: 50%;
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 11px solid;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%); }
+
+.premium-progressbar-pin {
+  border-left: 1px solid;
+  height: 12px;
+  left: 50%;
+  display: inline-block; }
+
+/**
+* Circle Progress Bar
+*/
+.premium-progressbar-circle-wrap,
+.premium-progressbar-hf-circle-wrap {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto; }
+  .premium-progressbar-circle-wrap .premium-progressbar-circle-content,
+  .premium-progressbar-hf-circle-wrap .premium-progressbar-circle-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center; }
+  .premium-progressbar-circle-wrap .premium-lottie-animation,
+  .premium-progressbar-hf-circle-wrap .premium-lottie-animation {
+    line-height: 1; }
+
+.premium-progressbar-circle-wrap .premium-progressbar-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-clip-path: inset(0 0 0 50%);
+  clip-path: inset(0 0 0 50%); }
+  .premium-progressbar-circle-wrap .premium-progressbar-circle div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #54595f;
+    border-radius: 50%;
+    -webkit-clip-path: inset(0 50% 0 0);
+    clip-path: inset(0 50% 0 0); }
+  .premium-progressbar-circle-wrap .premium-progressbar-circle .premium-progressbar-circle-left {
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0); }
+  .premium-progressbar-circle-wrap .premium-progressbar-circle .premium-progressbar-circle-right {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    visibility: hidden; }
+
+.premium-progressbar-circle-wrap .premium-progressbar-circle-base {
+  width: 100%;
+  height: 100%;
+  border: 6px solid #eee;
+  border-radius: 50%; }
+
+/**
+* Half Circle Progress Bar
+*/
+.premium-progressbar-hf-container {
+  position: relative;
+  width: 200px;
+  height: 200px; }
+
+.premium-progressbar-hf-circle-wrap {
+  overflow: hidden; }
+  .premium-progressbar-hf-circle-wrap .premium-progressbar-left-label {
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1; }
+
+.premium-progressbar-hf-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-clip-path: inset(0 0 50% 0);
+  clip-path: inset(0 0 50% 0); }
+
+.premium-progressbar-hf-circle-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border: 12px solid #000;
+  border-radius: 50%;
+  -webkit-clip-path: inset(50% 0 0 0);
+  clip-path: inset(50% 0 0 0);
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: -webkit-transform 1500ms linear;
+  transition: -webkit-transform 1500ms linear;
+  transition: transform 1500ms linear;
+  transition: transform 1500ms linear, -webkit-transform 1500ms linear; }
+
+.premium-progressbar-circle-inner {
+  height: 100%;
+  width: 100%;
+  border: 12px solid #eee;
+  border-radius: 50%; }
+
+.premium-progressbar-hf-labels {
+  margin: 0 auto;
+  position: relative;
+  font-size: 12px;
+  font-weight: 400;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0; }
+  to {
+    background-position: 40px 0; } }
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0; }
+  to {
+    background-position: 40px 0; } }
+
+@-webkit-keyframes progress-bar-gradient {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
+
+@keyframes progress-bar-gradient {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
+
+@media (max-width: 768px) {
+  .premium-progressbar-center-label {
+    -webkit-transform: rotate(-90deg) !important;
+    -ms-transform: rotate(-90deg) !important;
+    transform: rotate(-90deg) !important;
+    -webkit-transform-origin: 0;
+    -ms-transform-origin: 0;
+    transform-origin: 0; } }
