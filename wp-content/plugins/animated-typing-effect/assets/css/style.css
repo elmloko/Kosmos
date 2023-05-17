@@ -1,0 +1,28 @@
+#nine3digital-typed dl { display: block; width: 100%; }
+#nine3digital-typed dt, #nine3digital-typed dd { display: inline-block; float: left; margin: 0; }
+#nine3digital-typed dt { padding-right: 10px; width: 80px; }
+#nine3digital-typed dt.input { line-height: 28px; }
+#nine3digital-typed input[type="number"] { width: 70px; }
+
+#nine3digital-typed .help, .shortcode .help { display: block; clear: both; font-style: italic; color: #aaa; }
+
+.type-strings .strings { position: relative; }
+.type-strings .strings label { display: block; position: absolute; right: 0; opacity: 0; cursor: pointer !important; -moz-transition: opacity 0.6s ease; -o-transition: opacity 0.6s ease; -webkit-transition: opacity 0.6s ease; transition: opacity 0.6s ease; }
+.type-strings .strings label.visible { opacity: 1; }
+
+.typed-cursor { opacity: 1; -webkit-animation: blink 0.7s infinite; -moz-animation: blink 0.7s infinite; animation: blink 0.7s infinite; }
+
+@-moz-keyframes blink { 0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; } }
+@-webkit-keyframes blink { 0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; } }
+@keyframes blink { 0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; } }
+#preview { min-height: 100px; width: 100%; }
+
+#typed, #php { background: #fffbcc; border: 1px solid #e6db55; padding: 20px; margin: 20px; }
+
+.controls .add { margin-top: 20px !important; }
