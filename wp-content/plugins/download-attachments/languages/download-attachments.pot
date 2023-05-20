@@ -1,0 +1,625 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Download Attachments\n"
+"POT-Creation-Date: 2020-05-08 12:37+0200\n"
+"PO-Revision-Date: 2014-12-19 11:02+0100\n"
+"Last-Translator: Bartosz Arendt <info@dfactory.eu>\n"
+"Language-Team: dFactory <info@dfactory.pl>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-KeywordsList: gettext;gettext_noop;__;_e;esc_attr__;esc_attr_e;"
+"_n:1,2;_x:1,2c;_nx_noop:4c,1,2;_nx:4c,1,2;_ex:1,2c;_c,_nc:4c,1,2;esc_html__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../download-attachments.php:291
+msgid "Index"
+msgstr ""
+
+#: ../download-attachments.php:292 ../includes/widgets.php:76
+msgid "ID"
+msgstr ""
+
+#: ../download-attachments.php:293
+msgid "Exclude"
+msgstr ""
+
+#: ../download-attachments.php:294 ../templates/attachments-dynatable.php:60
+#: ../templates/attachments-list.php:89 ../templates/attachments-posts.php:83
+#: ../templates/attachments-table.php:60
+msgid "Added by"
+msgstr ""
+
+#: ../download-attachments.php:295 ../includes/widgets.php:74
+#: ../includes/widgets.php:120
+msgid "Title"
+msgstr ""
+
+#: ../download-attachments.php:296
+msgid "File type"
+msgstr ""
+
+#: ../download-attachments.php:297
+msgid "Icon"
+msgstr ""
+
+#: ../download-attachments.php:298
+msgid "Size"
+msgstr ""
+
+#: ../download-attachments.php:299 ../templates/attachments-dynatable.php:56
+#: ../templates/attachments-list.php:85 ../templates/attachments-posts.php:79
+#: ../templates/attachments-table.php:56
+msgid "Date added"
+msgstr ""
+
+#: ../download-attachments.php:300 ../includes/media.php:46
+#: ../includes/media.php:100 ../includes/media.php:166
+#: ../templates/attachments-dynatable.php:68
+#: ../templates/attachments-list.php:97 ../templates/attachments-table.php:68
+msgid "Downloads"
+msgstr ""
+
+#: ../download-attachments.php:303
+msgid "List"
+msgstr ""
+
+#: ../download-attachments.php:304
+msgid "Table"
+msgstr ""
+
+#: ../download-attachments.php:305
+msgid "Dynamic Table"
+msgstr ""
+
+#: ../download-attachments.php:440
+msgid "Are you sure you want to reset these settings to defaults?"
+msgstr ""
+
+#: ../download-attachments.php:441
+msgid "Are you sure you want to reset number of downloads of all attachments?"
+msgstr ""
+
+#: ../download-attachments.php:465
+msgid "Select Attachments"
+msgstr ""
+
+#: ../download-attachments.php:466
+msgid "Edit attachment"
+msgstr ""
+
+#: ../download-attachments.php:467
+msgid "Add selected attachments"
+msgstr ""
+
+#: ../download-attachments.php:468
+msgid "Save attachment"
+msgstr ""
+
+#: ../download-attachments.php:469
+msgid "Insert download link"
+msgstr ""
+
+#: ../download-attachments.php:470
+msgid "Insert into post"
+msgstr ""
+
+#: ../download-attachments.php:471 ../includes/metabox.php:335
+msgid "No attachments added yet."
+msgstr ""
+
+#: ../download-attachments.php:472
+msgid "Do you want to remove this attachment?"
+msgstr ""
+
+#: ../download-attachments.php:473
+msgid "Remove"
+msgstr ""
+
+#: ../download-attachments.php:474 ../includes/media.php:175
+#: ../includes/metabox.php:485
+msgid "Edit"
+msgstr ""
+
+#: ../download-attachments.php:476 ../includes/metabox.php:108
+#: ../includes/metabox.php:223
+msgid "Unexpected error occured. Please refresh the page and try again."
+msgstr ""
+
+#: ../download-attachments.php:585
+msgid "Support"
+msgstr ""
+
+#: ../download-attachments.php:604
+msgid "Settings"
+msgstr ""
+
+#: ../includes/functions.php:248 ../includes/shortcodes.php:53
+msgid "No attachments to download"
+msgstr ""
+
+#: ../includes/functions.php:252 ../includes/metabox.php:251
+#: ../includes/settings.php:114 ../includes/shortcodes.php:57
+#: ../includes/widgets.php:41 ../includes/widgets.php:47
+msgid "Attachments"
+msgstr ""
+
+#: ../includes/functions.php:322
+msgid "Previous"
+msgstr ""
+
+#: ../includes/functions.php:323
+msgid "Next"
+msgstr ""
+
+#: ../includes/functions.php:327
+msgid "Show"
+msgstr ""
+
+#: ../includes/functions.php:328
+msgid "Showing"
+msgstr ""
+
+#: ../includes/functions.php:329
+msgid "Processing"
+msgstr ""
+
+#: ../includes/functions.php:866
+msgid "No Attachments"
+msgstr ""
+
+#: ../includes/media.php:179
+msgid "Adjust the downloads count for this attachment."
+msgstr ""
+
+#: ../includes/media.php:183
+msgid "OK"
+msgstr ""
+
+#: ../includes/media.php:184
+msgid "Cancel"
+msgstr ""
+
+#: ../includes/metabox.php:269 ../includes/metabox.php:343
+msgid "Save"
+msgstr ""
+
+#: ../includes/metabox.php:272
+msgid "Add new attachment"
+msgstr ""
+
+#: ../includes/metabox.php:308
+msgid "Actions"
+msgstr ""
+
+#: ../includes/settings.php:41
+msgid "General"
+msgstr ""
+
+#: ../includes/settings.php:47
+msgid "Display"
+msgstr ""
+
+#: ../includes/settings.php:53
+msgid "Admin"
+msgstr ""
+
+#: ../includes/settings.php:61
+msgid "Enable"
+msgstr ""
+
+#: ../includes/settings.php:62
+msgid "Disable"
+msgstr ""
+
+#: ../includes/settings.php:66
+msgid "All files"
+msgstr ""
+
+#: ../includes/settings.php:67
+msgid "Attached to a post only"
+msgstr ""
+
+#: ../includes/settings.php:71
+msgid "Manage download attachments"
+msgstr ""
+
+#: ../includes/settings.php:75 ../includes/settings.php:221
+msgid "Media Library"
+msgstr ""
+
+#: ../includes/settings.php:76
+msgid "Modal"
+msgstr ""
+
+#: ../includes/settings.php:80
+msgid "before the content"
+msgstr ""
+
+#: ../includes/settings.php:81
+msgid "after the content"
+msgstr ""
+
+#: ../includes/settings.php:82
+msgid "manually"
+msgstr ""
+
+#: ../includes/settings.php:86
+msgid "Force download"
+msgstr ""
+
+#: ../includes/settings.php:87
+msgid "Redirect to file"
+msgstr ""
+
+#: ../includes/settings.php:91
+msgid "caption"
+msgstr ""
+
+#: ../includes/settings.php:92
+msgid "description"
+msgstr ""
+
+#: ../includes/settings.php:96
+msgid "_blank"
+msgstr ""
+
+#: ../includes/settings.php:97
+msgid "_self"
+msgstr ""
+
+#: ../includes/settings.php:130 ../includes/settings.php:147
+msgid "Download Attachments"
+msgstr ""
+
+#: ../includes/settings.php:149
+msgid "Need support?"
+msgstr ""
+
+#: ../includes/settings.php:150
+#, php-format
+msgid ""
+"If you are having problems with this plugin, please browse it's <a href=\"%s"
+"\" target=\"_blank\">Documentation</a> or talk about them in the <a href=\"%s"
+"\" target=\"_blank\">Support forum</a>"
+msgstr ""
+
+#: ../includes/settings.php:152
+msgid "Do you like this plugin?"
+msgstr ""
+
+#: ../includes/settings.php:153
+#, php-format
+msgid "<a href=\"%s\" target=\"_blank\">Rate it 5</a> on WordPress.org"
+msgstr ""
+
+#: ../includes/settings.php:154
+#, php-format
+msgid ""
+"Blog about it & link to the <a href=\"%s\" target=\"_blank\">plugin page</a>."
+msgstr ""
+
+#: ../includes/settings.php:155
+#, php-format
+msgid ""
+"Check out our other <a href=\"%s\" target=\"_blank\">WordPress plugins</a>."
+msgstr ""
+
+#: ../includes/settings.php:158
+msgid "Created by"
+msgstr ""
+
+#: ../includes/settings.php:175
+msgid "Reset to defaults"
+msgstr ""
+
+#: ../includes/settings.php:195
+msgid "General settings"
+msgstr ""
+
+#: ../includes/settings.php:196
+msgid "Label"
+msgstr ""
+
+#: ../includes/settings.php:197
+msgid "User roles"
+msgstr ""
+
+#: ../includes/settings.php:198
+msgid "Supported post types"
+msgstr ""
+
+#: ../includes/settings.php:199
+msgid "Download method"
+msgstr ""
+
+#: ../includes/settings.php:200
+msgid "Pretty URLs"
+msgstr ""
+
+#: ../includes/settings.php:201
+msgid "Encrypt URLs"
+msgstr ""
+
+#: ../includes/settings.php:202
+msgid "Reset count"
+msgstr ""
+
+#: ../includes/settings.php:203
+msgid "Deactivation"
+msgstr ""
+
+#: ../includes/settings.php:207
+msgid "Display settings"
+msgstr ""
+
+#: ../includes/settings.php:208 ../includes/settings.php:217
+msgid "Fields display"
+msgstr ""
+
+#: ../includes/settings.php:209 ../includes/widgets.php:136
+msgid "Display style"
+msgstr ""
+
+#: ../includes/settings.php:210 ../includes/settings.php:218
+msgid "Downloads description"
+msgstr ""
+
+#: ../includes/settings.php:211
+msgid "Use CSS style"
+msgstr ""
+
+#: ../includes/settings.php:212
+msgid "Display position"
+msgstr ""
+
+#: ../includes/settings.php:216
+msgid "Admin settings"
+msgstr ""
+
+#: ../includes/settings.php:219
+msgid "Restrict Edit"
+msgstr ""
+
+#: ../includes/settings.php:220
+msgid "Edit attachment link"
+msgstr ""
+
+#: ../includes/settings.php:222 ../includes/widgets.php:71
+msgid "Downloads count"
+msgstr ""
+
+#: ../includes/settings.php:230
+msgid "Enter download attachments list label."
+msgstr ""
+
+#: ../includes/settings.php:245
+msgid "Select which post types would you like to enable for your downloads."
+msgstr ""
+
+#: ../includes/settings.php:261
+msgid "Select download method."
+msgstr ""
+
+#: ../includes/settings.php:270
+msgid "Select redirect to file link target."
+msgstr ""
+
+#: ../includes/settings.php:288
+msgid ""
+"Select which columns would you like to enable on backend for your downloads."
+msgstr ""
+
+#: ../includes/settings.php:305
+msgid ""
+"Select which columns would you like to enable on frontend for your downloads."
+msgstr ""
+
+#: ../includes/settings.php:321
+msgid "Select if you'd like to use bultin CSS style."
+msgstr ""
+
+#: ../includes/settings.php:337
+msgid "Enable if you want to use pretty URLs."
+msgstr ""
+
+#: ../includes/settings.php:339
+msgid "Slug"
+msgstr ""
+
+#: ../includes/settings.php:341
+msgid "Download link slug."
+msgstr ""
+
+#: ../includes/settings.php:358
+msgid "Enable if you want to encrypt the attachment ids in generated URL's"
+msgstr ""
+
+#: ../includes/settings.php:374
+msgid "Select where you would like your download attachments to be displayed."
+msgstr ""
+
+#: ../includes/settings.php:390
+msgid "Select display style for file attachments."
+msgstr ""
+
+#: ../includes/settings.php:406
+msgid ""
+"Select what fields to use on backend for download attachments description."
+msgstr ""
+
+#: ../includes/settings.php:418
+msgid "Enable to restrict downloads count editing to admins only."
+msgstr ""
+
+#: ../includes/settings.php:434
+msgid ""
+"Select what fields to use on frontend for download attachments description."
+msgstr ""
+
+#: ../includes/settings.php:450
+msgid "Select where you would like to edit download attachments."
+msgstr ""
+
+#: ../includes/settings.php:466
+msgid "Select which attachments should be visible in Media Library window."
+msgstr ""
+
+#: ../includes/settings.php:482
+msgid ""
+"Enable if you want to display downloads count in your Media Library columns."
+msgstr ""
+
+#: ../includes/settings.php:508
+msgid "Select user roles allowed to add, remove and manage attachments."
+msgstr ""
+
+#: ../includes/settings.php:524
+msgid "Enable if you want all plugin data to be deleted on deactivation."
+msgstr ""
+
+#: ../includes/settings.php:534
+msgid "Reset downloads"
+msgstr ""
+
+#: ../includes/settings.php:537
+msgid "Click to reset the downloads count for all the attachments."
+msgstr ""
+
+#: ../includes/settings.php:735
+msgid "General settings restored to defaults."
+msgstr ""
+
+#: ../includes/settings.php:757
+msgid "Display settings restored to defaults."
+msgstr ""
+
+#: ../includes/settings.php:779
+msgid "Admin settings restored to defaults."
+msgstr ""
+
+#: ../includes/settings.php:793
+msgid "Error occurred while resetting the downloads count."
+msgstr ""
+
+#: ../includes/settings.php:795
+msgid "Attachments downloads count has been reset."
+msgstr ""
+
+#: ../includes/widgets.php:42
+msgid "Displays a list of attachments."
+msgstr ""
+
+#: ../includes/widgets.php:54
+msgid "No attachments found"
+msgstr ""
+
+#: ../includes/widgets.php:66
+msgid "All posts"
+msgstr ""
+
+#: ../includes/widgets.php:67
+msgid "Current post"
+msgstr ""
+
+#: ../includes/widgets.php:72
+msgid "Menu order"
+msgstr ""
+
+#: ../includes/widgets.php:73
+msgid "Date"
+msgstr ""
+
+#: ../includes/widgets.php:75 ../templates/attachments-dynatable.php:64
+#: ../templates/attachments-list.php:93 ../templates/attachments-posts.php:87
+#: ../templates/attachments-table.php:64
+msgid "File size"
+msgstr ""
+
+#: ../includes/widgets.php:80
+msgid "Ascending"
+msgstr ""
+
+#: ../includes/widgets.php:81
+msgid "Descending"
+msgstr ""
+
+#: ../includes/widgets.php:85
+msgid "Attachment page"
+msgstr ""
+
+#: ../includes/widgets.php:86
+msgid "Download URL"
+msgstr ""
+
+#: ../includes/widgets.php:124
+msgid "Display attached to"
+msgstr ""
+
+#: ../includes/widgets.php:148
+msgid "Link to"
+msgstr ""
+
+#: ../includes/widgets.php:160
+msgid "Orderby"
+msgstr ""
+
+#: ../includes/widgets.php:172
+msgid "Order"
+msgstr ""
+
+#: ../includes/widgets.php:184
+msgid "Number of attachments to show"
+msgstr ""
+
+#: ../includes/widgets.php:188
+msgid "No attachments message"
+msgstr ""
+
+#: ../includes/widgets.php:192
+msgid "Display index?"
+msgstr ""
+
+#: ../includes/widgets.php:193
+msgid "Display attachment user?"
+msgstr ""
+
+#: ../includes/widgets.php:194
+msgid "Display attachment icon?"
+msgstr ""
+
+#: ../includes/widgets.php:195
+msgid "Display attachment downloads?"
+msgstr ""
+
+#: ../includes/widgets.php:196
+msgid "Display file size?"
+msgstr ""
+
+#: ../includes/widgets.php:197
+msgid "Display file date?"
+msgstr ""
+
+#: ../includes/widgets.php:198
+msgid "Display attachment caption?"
+msgstr ""
+
+#: ../includes/widgets.php:199
+msgid "Display attachment description?"
+msgstr ""
+
+#: ../templates/attachments-dynatable.php:49
+#: ../templates/attachments-table.php:49
+msgid "File"
+msgstr ""
+
+#: ../templates/attachments-dynatable.php:52
+#: ../templates/attachments-table.php:52
+msgid "Description"
+msgstr ""
