@@ -1,0 +1,67 @@
+.pafe-image-accordion {
+	display: flex;
+	height: 500px;
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+.pafe-image-accordion__item {
+	transition-duration: 500ms;
+	flex-grow: 1;
+	flex-basis: 0;
+	font-family: 'Roboto', sans-serif;
+	position: relative;
+}
+
+.pafe-image-accordion__item>img {
+	position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%; 
+    height: 100% !important;
+}
+
+.pafe-image-accordion__item:after {
+	content: '';
+	position: absolute;
+	top: 0; 
+	left: 0;
+	width: 100%;
+	height: 100%; 
+	background-color: #00000012;
+	z-index: 0;
+}
+
+.pafe-image-accordion__item.active {
+	transition: .5s;
+	
+}
+
+.pafe-image-accordion__item.active .pafe-image-accordion__item-content {
+	opacity: 1; 
+	visibility: visible;
+	transition-duration: 500ms;
+	transition-delay: .7s;
+}
+
+.pafe-image-accordion__item-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end; 
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	padding: 30px;
+	z-index: 9;
+	opacity: 0;
+	visibility: hidden;
+}  
+
+.pafe-image-accordion__item-content__link {
+	padding: 5px 10px;
+	cursor: pointer;
+	display: inline-block;
+}

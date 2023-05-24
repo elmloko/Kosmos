@@ -1,0 +1,16 @@
+.pafe-countdown-progressbar {
+	border-radius: 50px;
+}
+
+.pafe-countdown-progressbar__inner {
+	height: 100%;
+	background: #FA766F;
+	border-radius: 50px;
+	background-image: linear-gradient(230deg, #F9EF09 0%, #F29C29 100%);
+}  
+
+.pafe-countdown-stock__label-before, .pafe-countdown-stock__number, .pafe-countdown-stock__label-after {
+	font-size: 20px;
+	color: #000;
+	font-weight: 600; 
+}

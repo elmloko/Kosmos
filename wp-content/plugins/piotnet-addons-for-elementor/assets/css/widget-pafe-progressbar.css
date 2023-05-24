@@ -1,0 +1,91 @@
+.pafe-progressbar--hidden-label .pafe-progressbar__label{
+	display: none;
+}
+
+.pafe-progressbar__label {
+	position: absolute;
+	transform: translateY(-50%);
+	top: 50%; 
+	text-align: center;
+	font-size: 28px;
+	font-weight: 700;
+	width: 100%; 
+}
+
+.pafe-progressbar__content {
+	border-radius: 50%;
+	height: 100%;
+	width: 100%;
+}
+
+.pafe-progressbar__inner {
+	height: 100%;
+	width: 100%;
+}
+
+.pafe-progressbar-circle {
+	height: 100%;
+	width: 100%;
+}
+
+.pafe-progressbar {
+/* 	width: 200px;
+	height: 200px; */
+}
+
+.left .pafe-progressbar {
+	margin: 0 auto 0 0;
+}
+
+.center .pafe-progressbar {
+	margin: 0 auto;
+}
+
+.right .pafe-progressbar {
+	margin: 0 0 0 auto;
+}
+
+.pafe-progressbar-border {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	clip-path: inset(0 0 0 50%);
+}
+
+.pafe-progressbar-circle-trail {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%; 
+	width: 100%;
+	border-style: solid;
+	border-radius: 50%; 
+	z-index: -99;
+}
+
+.pafe-progressbar-circle-stroke {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	border-style: solid;
+	border-radius: 50%; 
+	clip-path: inset(0 50% 0 0);
+}
+
+.pafe-progressbar-circle-right {
+	transform: rotate(180deg);
+} 
+
+.pafe-progressbar-circle-left {
+	transform: rotate(0);
+}
+
+.pafe-progressbar-percentage-content {
+	display: flex;
+	justify-content: center;
+}
+

@@ -1,0 +1,11 @@
+.particles-js-canvas-el {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+
+[data-pafe-particles] .elementor-widget-wrap  {
+	z-index: 10;
+} 
+

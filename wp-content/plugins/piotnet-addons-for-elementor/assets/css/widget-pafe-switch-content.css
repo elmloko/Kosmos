@@ -1,0 +1,69 @@
+.pafe-switch-content__button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.pafe-switch-content__button-switch {
+  position: relative;
+  display: block;
+  width: 4.5em;
+  height: 2.3em;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.pafe-switch-content__button-switch input {
+  display:none;
+}
+
+.pafe-switch-content__button-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0; 
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: all .4s;
+  display: block;
+}
+
+.pafe-switch-content__button-slider:before { 
+  position: absolute;
+  content: "";
+  height: 1.8em;
+  width: 1.8em;
+  left: .26em;
+  bottom: .25em;
+  transform: translateX(0em);
+  background-color: white;
+  transition: all .4s; 
+}
+
+input:checked + .pafe-switch-content__button-slider {
+  background-color: #2196F3;
+}
+
+input:focus + .pafe-switch-content__button-slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .pafe-switch-content__button-slider:before {
+  transform: translateX(2.2em);
+}
+
+/* Rounded sliders */ 
+.pafe-switch-content__button-slider.round {
+  border-radius: 50%;
+}
+
+.pafe-switch-content__button-slider.round:before {
+  border-radius: 100px;
+}
+
+.pafe-switch-content-secondary {
+  display: none; 
+} 

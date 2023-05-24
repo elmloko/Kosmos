@@ -1,0 +1,152 @@
+
+.elementor-widget-pafe-hotspot{
+	position: relative;
+}
+
+.pafe-hotspot__marker-wrapper{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: visible;
+}
+ 
+.pafe-hotspot__marker-icon{
+	overflow: visible;
+	position: absolute;
+}
+
+.pafe-hotspot__marker-icon-icon{
+  cursor: pointer;
+}
+
+.pafe-hotspot-icon-view-stacked{
+ 	background: #6ec1e4;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+	display: inline-block;
+	width: 2em;
+	height: 2em;
+	line-height: 2em;
+}
+
+.pafe-hotspot-icon-view-framed{
+ 	background: #ffffff;
+  border-radius: 50%;
+  text-align: center;
+  vertical-align: middle;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 2em;
+	height: 2em;
+	line-height: 2em;
+	border-color: #6ec1e4;
+	border-style: solid;
+	border-width: 2px;
+}
+
+
+.pafe-hotspot-icon-view-stacked i{
+	color: #ffffff;
+	fill: #ffffff;
+}
+
+.pafe-hotspot-icon-view-framed i{
+	color: #6ec1e4;
+	fill: #6ec1e4;
+}
+
+
+.pafe-hotspot__tooltip {
+  width: 120px;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.pafe-hotspot__tooltip.active {
+	visibility: visible;
+	opacity: 1;
+}
+
+.pafe-hotspot__tooltip-left{
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 5px;
+}
+
+.pafe-hotspot__tooltip-right{
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 5px;
+}
+
+.pafe-hotspot__tooltip-top{
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  margin-bottom: 5px;
+}
+
+.pafe-hotspot__tooltip-bottom{
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 5px;
+}
+
+.pafe-hotspot__tooltip-left::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+
+.pafe-hotspot__tooltip-right::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%; /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+.pafe-hotspot__tooltip-top::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.pafe-hotspot__tooltip-bottom::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+.pafe-hotspot__tooltip p {
+	margin: 0 !important;
+  color: #6ec1e4;
+}
