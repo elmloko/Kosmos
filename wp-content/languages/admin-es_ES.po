@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.2.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-04-06 14:12:40+0000\n"
+"PO-Revision-Date: 2023-06-08 13:21:54+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -90,7 +90,7 @@ msgstr "<a href=\"https://wordpress.org/documentation/article/plugins-themes-aut
 
 #: wp-admin/options-general.php:424
 msgid "<a href=\"https://wordpress.org/documentation/article/customize-date-and-time-format/\">Documentation on date and time formatting</a>."
-msgstr "<a href=\"https://wordpress.org/documentation/article/customize-date-and-time-format/\">Documentación sobre el formato de fechas y horas</a>."
+msgstr "<a href=\"https://wordpress.org/documentation/article/customize-date-and-time-format/\">Documentación sobre el formato de fecha y hora</a>."
 
 #: wp-admin/options-general.php:46 wp-admin/network/settings.php:56
 msgid "You can set the language, and WordPress will automatically download and install the translation files (available if your filesystem is writable)."
@@ -3296,7 +3296,7 @@ msgstr "[%s] Borrar mi sitio"
 
 #: wp-admin/options-discussion.php:64
 msgid "Allow people to submit comments on new posts"
-msgstr "Permitir a la gente enviar comentarios en las nuevas entradas"
+msgstr "Permitir que se envíen comentarios en las entradas nuevas"
 
 #. translators: Hidden accessibility text.
 #: wp-admin/options-discussion.php:47 wp-admin/options-discussion.php:51
@@ -9158,7 +9158,7 @@ msgstr "Los tamaños de la siguiente lista determinan las dimensiones máximas e
 
 #: wp-admin/options-discussion.php:204
 msgid "Comment must be manually approved"
-msgstr "El comentario debe aprobarse manualmente."
+msgstr "El comentario debe aprobarse manualmente"
 
 #: wp-admin/nav-menus.php:659
 msgid "<strong>Clicking the arrow to the right of any menu item</strong> in the editor will reveal a standard group of settings. Additional settings such as link target, CSS classes, link relationships, and link descriptions can be enabled and disabled via the Screen Options tab."
@@ -10070,7 +10070,7 @@ msgstr "El enlace al «Conversor de categorías y etiquetas» de esta pantalla t
 
 #: wp-admin/tools.php:49
 msgid "Categories have hierarchy, meaning that you can nest sub-categories. Tags do not have hierarchy and cannot be nested. Sometimes people start out using one on their posts, then later realize that the other would work better for their content."
-msgstr "Las categorías tienen jerarquías, lo que significa que pueden anidar subcategorías. Las Etiquetas no tienen jerarquías y no pueden anidarse. A veces, la gente empieza a usar una en sus entradas y luego se da cuenta de que otra funcionaría mejor para su contenido."
+msgstr "Las categorías tienen jerarquía, lo que significa que pueden anidar subcategorías. Las etiquetas no tienen jerarquía y no pueden anidarse. A veces, las personas empieza a usar una en sus entradas y luego se dan cuenta de que otra funcionaría mejor para su contenido."
 
 #. translators: %s: URL to General Settings screen.
 #: wp-admin/includes/class-custom-image-header.php:126
@@ -10574,7 +10574,7 @@ msgstr "Puedes filtrar la lista de perfiles de usuario usando los enlaces de tex
 
 #: wp-admin/import.php:26
 msgid "In previous versions of WordPress, all importers were built-in. They have been turned into plugins since most people only use them once or infrequently."
-msgstr "En las versiones anteriores de WordPress, todos los importadores estaban incluidos. Se han convertido en plugins porque la mayoría de la gente los usa solo una vez o pocas veces."
+msgstr "En versiones anteriores de WordPress, todos los importadores estaban incorporados. Se han convertido en plugins porque la mayoría de las personas solo los utilizaba una vez o con poca frecuencia."
 
 #. translators: %s: URL to view the autosave.
 #: wp-admin/edit-form-advanced.php:253
@@ -10876,7 +10876,7 @@ msgstr ""
 
 #: wp-admin/edit-comments.php:204
 msgid "Many people take advantage of keyboard shortcuts to moderate their comments more quickly. Use the link to the side to learn more."
-msgstr "Mucha gente aprovecha los atajos de teclado para moderar los comentarios más rapidamente. Utiliza el enlace del lateral para aprender más sobre esto."
+msgstr "Muchas personas aprovechan los atajos de teclado para moderar los comentarios más rápido. Utiliza el enlace del lateral para aprender más sobre esto."
 
 #: wp-admin/edit-comments.php:200
 msgid "In the <strong>Author</strong> column, in addition to the author&#8217;s name, email address, and blog URL, the commenter&#8217;s IP address is shown. Clicking on this link will show you all the comments made from this IP address."
@@ -11426,7 +11426,7 @@ msgstr "Cada plugin y tema del directorio de WordPress.org es 100%% GPL o con un
 #. translators: %s: https://wordpressfoundation.org/trademark-policy
 #: wp-admin/freedoms.php:87
 msgid "WordPress grows when people like you tell their friends about it, and the thousands of businesses and services that are built on and around WordPress share that fact with their users. We are flattered every time someone spreads the good word, just make sure to <a href=\"%s\">check out our trademark guidelines</a> first."
-msgstr "WordPress crece cuando la gente, como tú, les habla a sus amigos sobre él y los miles de negocios y servicios que se construyen en y alrededor de WordPress lo comparten con sus usuarios. Nos sentimos orgullosos cada vez que alguien hace correr la voz. Simplemente, asegúrate de <a href=\"%s\">echar un vistazo a nuestras directrices de marca</a>."
+msgstr "WordPress crece cuando personas como tú hablan de él a sus amigos, y los miles de negocios y servicios que se construyen sobre y alrededor de WordPress lo comparten con sus usuarios. Nos sentimos orgullosos cada vez que alguien hace correr la voz, pero asegúrate de <a href=\"%s\">consultar primero nuestras directrices de marca</a>."
 
 #: wp-admin/menu.php:109
 msgid "All Comments"
@@ -12020,7 +12020,7 @@ msgstr "Puedes personalizar la imagen de tu sitio sin tocar nada del código del
 
 #: wp-admin/user-new.php:293
 msgid "Editors can publish posts, manage posts as well as manage other people&#8217;s posts, etc."
-msgstr "Los Editores pueden publicar entradas, gestionar sus entradas y entradas de otras personas, etc."
+msgstr "Los editores pueden publicar y gestionar entradas, así como gestionar las entradas de otras personas, etc."
 
 #: wp-admin/user-edit.php:65
 msgid "Remember to click the Update Profile button when you are finished."
@@ -13662,7 +13662,7 @@ msgstr "más antiguos"
 #. page, 2: Form field control for the 'first' or 'last' page.
 #: wp-admin/options-discussion.php:150
 msgid "Break comments into pages with %1$s top level comments per page and the %2$s page displayed by default"
-msgstr "Separar los comentarios en páginas de %1$s comentarios por página y mostrar la %2$s página por defecto"
+msgstr "Separar los comentarios en páginas de %1$s comentarios cada una y mostrar la %2$s página por defecto"
 
 #: wp-admin/options-discussion.php:147
 msgid "first"
@@ -13680,7 +13680,7 @@ msgstr "Activar los comentarios anidados hasta %s niveles"
 #. translators: %s: Number of days.
 #: wp-admin/options-discussion.php:95
 msgid "Automatically close comments on posts older than %s days"
-msgstr "Cerrar automáticamente los comentarios en las entradas con más de %s días"
+msgstr "Cerrar automáticamente los comentarios en las entradas con más de %s días de antigüedad"
 
 #: wp-admin/options-discussion.php:81
 msgid "Users must be registered and logged in to comment"
