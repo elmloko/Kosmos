@@ -85,10 +85,10 @@ Developers of this software
 
 Graphic Developers
 
-*
-*
-*
-*
+* Jade Alejandra Zambrana Choque
+* Steven Ramírez Cornejo 
+* Yurguen Boris Terrazas Canaviri
+* Michelle Melissa Galvan Rojas
 
 ## License
 
