@@ -3,8 +3,8 @@ Contributors: Heateor, kamirkhan, mohammadfarhankhan, the_champ
 Donate link: https://www.heateor.com/donate/?action=Sassy+Social+Share
 Tags: social share, social sharing, social media share, share facebook, facebook social share, wordpress social share, share buttons, social share buttons, facebook like, twitter tweet, whatsapp share, line share, gab share, gab social share, gab, parler share, parler social share, gettr, gettr share, gettr social share, mewe share, mewe social share, mewe, mastodon share, mastodon social share, mastodon, rutube share, rutube social share, rutube, google news, google news share, google news icon, RSS, RSS Feed
 Requires at least: 2.5.0
-Tested up to: 6.2
-Stable tag: 3.3.51
+Tested up to: 6.2.2
+Stable tag: 3.3.52
 License: GPLv2 or later
 
 Slickest, Simplest and Optimized Share buttons. Facebook, Twitter, Reddit, Pinterest, Whatsapp, Parler, Gab, Gettr and over 100 more.
@@ -125,6 +125,12 @@ Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 4. **Universal Sharing Popup**: Universal Sharing popup having all the supported sharing and bookmarking services
 
 == Changelog ==
+= 3.3.52 [22 June 2023] =
+* [Bugfix] Mastodon share button was triggering blank popup when clicked from the More popup and Mastodon was not present in the share  bar apart from the More icon  
+* [Improvement] Social share links now have "aria-label" attribute making these accessible for screen-readers
+* [Improvement] Updated the official Facebook SDK being used throughout the plugin to the latest version 17.0
+* [Improvement] Minor improvements
+
 = 3.3.51 [13 April 2023] =
 * [Improvement] Fixed broken images at the plugin configuration pages in the admin area
 * [Improvement] Admin UI improvements
@@ -1285,3 +1291,9 @@ Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 = 3.3.51 [13 April 2023] =
 * [Improvement] Fixed broken images at the plugin configuration pages in the admin area
 * [Improvement] Admin UI improvements
+
+= 3.3.52 [22 June 2023] =
+* [Bugfix] Mastodon share button was triggering blank popup when clicked from the More popup and Mastodon was not present in the share  bar apart from the More icon  
+* [Improvement] Social share links now have "aria-label" attribute making these accessible for screen-readers
+* [Improvement] Updated the official Facebook SDK being used throughout the plugin to the latest version 17.0
+* [Improvement] Minor improvements

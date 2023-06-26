@@ -32,12 +32,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="ai1wm-whats-new-hero-container">
 		<img src="<?php echo wp_make_link_relative( AI1WM_URL ); ?>/lib/view/assets/img/whats-new/hero.png?v=<?php echo AI1WM_VERSION; ?>" />
 		<div class="ai1wm-whats-new-hero-text">
-			<div class="ai1wm-whats-new-hero-date">01/17/2023</div>
-			<div class="ai1wm-whats-new-hero-title"><span style="color: #A06AB4">Premium:</span> Exclude database tables from exported files</div>
+			<div class="ai1wm-whats-new-hero-date">06/26/2023</div>
+			<div class="ai1wm-whats-new-hero-title"><span style="color: #A06AB4">Premium:</span> Schedule Backups with Backup Scheduler</div>
 			<div class="ai1wm-whats-new-hero-content">
-				With this new feature, you now have even more control over your migration process. You can choose to leave out any unnecessary or sensitive data, resulting in smaller, more manageable export files. This can be especially useful for users who have a large amount of data, and want to avoid hitting server limits during the migration process.<br /><br />
-				Using the feature is easy: simply select the tables you want to exclude from the export page and the plugin will take care of the rest.<br /><br />
-				Whether you're migrating a website to a new host, transferring data between sites, or creating a backup, All-in-One WP Migration's new table exclusion feature has got you covered. Try it out today and see the difference it makes!
+				We're thrilled to introduce our new feature - Backup Scheduler, adding another layer of convenience and automation to your website management. This feature allows you to set up automatic backups, ensuring your data is safe and always up-to-date.<br /><br />
+				Operating the Backup Scheduler is as simple as it gets. All you need to do is specify the frequency and preferred time for your backups in the scheduler. Once set, the plugin takes over, performing regular backups without any further manual intervention. It's as easy as "set it and forget it".<br /><br />
+				This feature is a game-changer for busy website administrators who can't afford to spend time on routine backups. No more calendar reminders or missed backup opportunities – just reliable, scheduled backups that run like clockwork. The Backup Scheduler ensures that even in the face of unexpected incidents, your most recent data is always secure and recoverable.<br /><br />
+				Whether you're running a blog, an online store, or a corporate website, the new Backup Scheduler feature will simplify your website management process and give you peace of mind. Try it out today and experience hassle-free, automated backups like never before!
 			</div>
 		</div>
 	</div>

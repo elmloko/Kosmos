@@ -1,11 +1,10 @@
-= 7.70 =
-**Added**
+= 7.71 =
+* Removed the AI1WM_MAX_FILE_SIZE constant. This constant is no longer necessary
 
+= 7.70 =
 * Hooks that allow excluding specific database tables on export
 
 = 7.69 =
-**Added**
-
 * Improved support for custom backups location
 
 = 7.68 =

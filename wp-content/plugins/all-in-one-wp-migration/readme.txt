@@ -4,7 +4,7 @@ Tags: move, transfer, copy, migrate, backup, clone, restore, db migration, wordp
 Requires at least: 3.3
 Tested up to: 6.2
 Requires PHP: 5.3
-Stable tag: 7.75
+Stable tag: 7.76
 License: GPLv2 or later
 
 Move, transfer, copy, migrate, and backup a site with 1-click. Quick, easy, and reliable.
@@ -88,6 +88,11 @@ All-in-One WP Migration is in full compliance with General Data Protection Regul
 See our [GDPR Compliant Privacy Policy here](https://www.iubenda.com/privacy-policy/946881).
 
 == Changelog ==
+= 7.76 =
+**Fixed**
+
+* Removed the [beta] label from advanced settings
+
 = 7.75 =
 **Fixed**
 
@@ -111,8 +116,3 @@ See our [GDPR Compliant Privacy Policy here](https://www.iubenda.com/privacy-pol
 **Fixed**
 
 * Backups time based on selected WordPress time zone
-
-= 7.71 =
-**Fixed**
-
-* Removed the AI1WM_MAX_FILE_SIZE constant. This constant is no longer necessary

@@ -15,7 +15,7 @@ function heateorSssMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 	  mastodon: {
 	  	background_color: "#2b90d9",
 		title: "Mastodon",
-		redirect_url: "https://mastodon.social/share?text=" + postUrl + "&t=" + postTitle + "&v=3",
+		bookmarklet_url: "https://mastodon.social/share?text=" + postUrl + "&t=" + postTitle + "&v=3",
 		svg: '<svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M27 12c0-5.12-3.35-6.62-3.35-6.62C22 4.56 19.05 4.23 16 4.21c-3 0-5.92.35-7.61 1.12C8.36 5.33 5 6.83 5 12v4c.12 5 .92 9.93 5.54 11.16a17.67 17.67 0 005.44.6 10.88 10.88 0 004.18-.95l-.09-1.95a13.36 13.36 0 01-4.07.54c-2.12-.07-4.37-.23-4.71-2.84a5.58 5.58 0 01-.05-.73 27.46 27.46 0 004.73.63 26.76 26.76 0 004.68-.28c3-.35 5.53-2.17 5.85-3.83A39.25 39.25 0 0027 12zm-3.95 6.59h-2.46v-6c0-1.27-.53-1.91-1.6-1.91s-1.77.76-1.77 2.27v3.29h-2.44v-3.35c0-1.51-.59-2.27-1.77-2.27s-1.6.64-1.6 1.91v6H9v-6.18a4.49 4.49 0 011-3 3.39 3.39 0 012.63-1.12 3.17 3.17 0 012.84 1.44l.61 1 .61-1a3.17 3.17 0 012.84-1.44 3.39 3.39 0 012.63 1.12 4.49 4.49 0 011 3z" fill="#fff"></path></svg>'
 	  },
 	  twitter: {
@@ -627,15 +627,14 @@ function heateorSssMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		mainDiv.parentNode.removeChild(mainDiv);
 		bgDiv.parentNode.removeChild(bgDiv);
 	}
-	jQuery('#heateor_sss_sharing_more_content a[alt=Mastodon]').removeAttr('onclick');
 	jQuery('#heateor_sss_sharing_more_content a[alt=Mastodon]').click(function(){
 		event.preventDefault();
-		heateorSssMastodonPopup();
+		heateorSssMastodonPopup(jQuery(this).attr("href"));
 	});
 }
 
-function heateorSssMastodonPopup() {
-	var heateorSssMoreSharingServicesHtml = '<button id="heateor_sss_mastodon_popup_close" class="close-button separated"><img src="'+ heateorSssCloseIconPath +'" /></button><div id="heateor_sss_sharing_more_content"><div class="all-services" style="height:auto"><div class="filter"><center>Your Mastodon Instance</center><input type="text" id="heateor_sss_mastodon_instance" placeholder="https://mastodon.social" class="search"><center><input type="button" class="heateor_sss_mastodon_popup_button" value="Submit" onclick="var heateorMastodonInstance = jQuery(\'#heateor_sss_mastodon_instance\').val().trim(), heateorMastodonAnchor = jQuery(\'a.heateor_sss_button_mastodon\').length > 0 ? jQuery(\'a.heateor_sss_button_mastodon\').attr(\'href\') : jQuery(\'#heateor_sss_sharing_more_content a[alt=Mastodon]\').attr(\'href\'); heateorMastShareURL = heateorMastodonInstance ? heateorMastodonAnchor.replace(\'https://mastodon.social\', heateorMastodonInstance) : heateorMastodonAnchor;window.open(heateorMastShareURL,\'_blank\',\'height=520,width=770,left=315,top=80,resizable,scrollbars,toolbar=0,personalbar=0,menubar=no,location=no,directories=no,status\');" /></center></div></div><div class="footer-panel"></div></div>';
+function heateorSssMastodonPopup(targetUrl) {
+	var heateorSssMoreSharingServicesHtml = '<button id="heateor_sss_mastodon_popup_close" class="close-button separated"><img src="'+ heateorSssCloseIconPath +'" /></button><div id="heateor_sss_sharing_more_content"><div class="all-services" style="height:auto"><div class="filter"><center>Your Mastodon Instance</center><input type="text" id="heateor_sss_mastodon_instance" placeholder="https://mastodon.social" class="search"><center><input type="button" class="heateor_sss_mastodon_popup_button" value="Submit" onclick="var heateorMastodonInstance = jQuery(\'#heateor_sss_mastodon_instance\').val().trim(), heateorMastodonAnchor = jQuery(\'a.heateor_sss_button_mastodon\').length > 0 ? jQuery(\'a.heateor_sss_button_mastodon\').attr(\'href\') : \''+ targetUrl +'\'; heateorMastShareURL = heateorMastodonInstance ? heateorMastodonAnchor.replace(\'https://mastodon.social\', heateorMastodonInstance) : heateorMastodonAnchor;window.open(heateorMastShareURL,\'_blank\',\'height=520,width=770,left=315,top=80,resizable,scrollbars,toolbar=0,personalbar=0,menubar=no,location=no,directories=no,status\');" /></center></div></div><div class="footer-panel"></div></div>';
 	var mainDiv = document.createElement('div');
 	mainDiv.innerHTML = heateorSssMoreSharingServicesHtml;
 	mainDiv.setAttribute('id', 'heateor_sss_sharing_more_providers');
@@ -865,7 +864,7 @@ function heateorSssCapitaliseFirstLetter(e) {
 jQuery(function(){
 	jQuery(document).on('click', 'a.heateor_sss_button_mastodon', function(){
 		event.preventDefault();
-		heateorSssMastodonPopup();
+		heateorSssMastodonPopup('');
 	});
 	var heateorSssWhatsappJSAPI = heateorSssDetermineWhatsappShareAPI(false);
 	var classes = ['heateor_sss_vertical_sharing', 'heateor_sss_vertical_counter'];
