@@ -1,6 +1,0 @@
-Jun 28 2023 23:01:05
-{"Number":2,"Message":"rmdir(C:\\laragon\\www\\Kosmos\\wp-content\\plugins\\all-in-one-wp-migration\\storage\\87ep79nk37nr): Directory not empty","File":"C:\\laragon\\www\\Kosmos\\wp-content\\plugins\\all-in-one-wp-migration\\lib\\vendor\\servmask\\filesystem\\class-ai1wm-directory.php","Line":72}
-
-Jun 28 2023 23:01:08
-{"Number":2,"Message":"filesize(): stat failed for C:\\laragon\\www\\Kosmos\\wp-content\\plugins\\all-in-one-wp-migration\\storage\\87ep79nk37nr\\kosmos.test-20230628-230051-ve1dbq.wpress","File":"C:\\laragon\\www\\Kosmos\\wp-content\\plugins\\all-in-one-wp-migration\\lib\\vendor\\servmask\\archiver\\class-ai1wm-archiver.php","Line":231}
-
