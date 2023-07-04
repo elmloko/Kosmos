@@ -37,7 +37,7 @@ class Enqueue_Scripts {
     public function elementor_js() {
         // Register Scripts
         // size : 814 biyets ** used for back to top button circle progress bar
-        wp_register_script( 'animate-circle', \ElementsKit_Lite::widget_url() . 'init/assets/js/animate-circle.js', [], \ElementsKit_Lite::version(), true );
+        wp_register_script( 'animate-circle', \ElementsKit_Lite::widget_url() . 'init/assets/js/animate-circle.min.js', [], \ElementsKit_Lite::version(), true );
 
         // Enqueue Scripts
         wp_enqueue_script( 'elementskit-elementor', \ElementsKit_Lite::widget_url() . 'init/assets/js/elementor.js', ['jquery', 'elementor-frontend', 'animate-circle'], \ElementsKit_Lite::version(), true );

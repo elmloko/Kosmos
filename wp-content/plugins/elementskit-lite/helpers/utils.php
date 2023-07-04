@@ -360,7 +360,8 @@ class Utils {
 	}
 
 	public static function swiper_class() {
-		return \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+		$swiper_class = \Elementor\Plugin::$instance->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+		return 'ekit-main-swiper ' . $swiper_class;
 	}
 
 	public static function get_page_by_title( $page_title, $post_type = 'page' ) {

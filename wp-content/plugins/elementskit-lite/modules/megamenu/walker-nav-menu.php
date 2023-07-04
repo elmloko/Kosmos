@@ -33,7 +33,8 @@ class ElementsKit_Menu_Walker extends \Walker_Nav_Menu {
 	}
 
 	public function is_megamenu( $menu_slug ) {
-		$menu_slug = ( ( ( gettype( $menu_slug ) == 'object' ) && ( isset( $menu_slug->slug ) ) ) ? $menu_slug->slug : $menu_slug );
+		$menu_obj = wp_get_nav_menu_object($menu_slug);
+		$menu_slug = ( ( ( gettype( $menu_obj ) == 'object' ) && ( isset( $menu_obj->slug ) ) ) ? $menu_obj->slug : $menu_slug );
 
 		$cache_key = 'elementskit_megamenu_data_' . $menu_slug;
 		$cached    = wp_cache_get( $cache_key );
