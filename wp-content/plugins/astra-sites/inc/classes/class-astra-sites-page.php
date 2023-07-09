@@ -51,7 +51,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 */
 		public function __construct() {
 
-			if ( ! is_admin() ) {
+			if ( ! current_user_can( 'edit_posts' ) ) {
 				return;
 			}
 

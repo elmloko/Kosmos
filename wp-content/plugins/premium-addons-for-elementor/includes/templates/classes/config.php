@@ -66,7 +66,7 @@ if ( ! class_exists( 'Premium_Templates_Core_Config' ) ) {
 				'pro_message'   => $this->get_pro_message(),
 				'api'           => array(
 					'enabled'   => true,
-					'base'      => 'https://pa.premiumtemplates.io/',
+					'base'      => 'https://premiumtemplates.io/',
 					'path'      => 'wp-json/patemp/v2',
 					'id'        => 9,
 					'endpoints' => array(

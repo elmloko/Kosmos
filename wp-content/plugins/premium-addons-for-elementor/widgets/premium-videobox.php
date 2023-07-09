@@ -405,6 +405,61 @@ class Premium_Videobox extends Widget_Base {
 		);
 
 		$this->add_responsive_control(
+			'playlist_layout',
+			array(
+				'label'        => __( 'Layout', 'premium-addons-for-elementor' ),
+				'type'         => Controls_Manager::SELECT,
+				'options'      => array(
+					'layout1' => __( 'Layout 1', 'premium-addons-for-elementor' ),
+					'layout2' => __( 'Layout 2', 'premium-addons-for-elementor' ),
+				),
+				'prefix_class' => 'premium-videobox-',
+				'default'      => 'layout1',
+				'condition'    => array(
+					'premium_video_box_video_type' => 'youtube',
+					'youtube_list'                 => 'yes',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'first_column_width',
+			array(
+				'label'       => __( 'First Column Width', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::SLIDER,
+				'render_type' => 'template',
+				'condition'   => array(
+					'youtube_list'                 => 'yes',
+					'premium_video_box_video_type' => 'youtube',
+					'playlist_layout'              => 'layout2',
+				),
+				'selectors'   => array(
+					'{{WRAPPER}} .premium-videobox-column:first-child' => 'width: {{SIZE}}%;',
+					'{{WRAPPER}} .premium-videobox-column:nth-child(2)' => '--pa-first-column-width: {{SIZE}}%;',
+				),
+
+			)
+		);
+
+		$this->add_responsive_control(
+			'premium_video_box_video_height',
+			array(
+				'label'       => __( 'Video Height (%)', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::SLIDER,
+				'render_type' => 'template',
+				'condition'   => array(
+					'youtube_list'                 => 'yes',
+					'premium_video_box_video_type' => 'youtube',
+					'playlist_layout'              => 'layout1',
+				),
+				'selectors'   => array(
+					'{{WRAPPER}} .premium-video-box-container > div' => 'padding-bottom: {{SIZE}}%;',
+				),
+
+			)
+		);
+
+		$this->add_responsive_control(
 			'video_columns',
 			array(
 				'label'           => __( 'Videos/Row', 'premium-addons-for-elementor' ),
@@ -423,7 +478,8 @@ class Premium_Videobox extends Widget_Base {
 				'render_type'     => 'template',
 				'separator'       => 'before',
 				'selectors'       => array(
-					'{{WRAPPER}} .premium-video-box-container' => 'width: {{VALUE}}',
+					'{{WRAPPER}}.premium-videobox-layout1 .premium-video-box-container' => 'width: {{VALUE}}',
+					'{{WRAPPER}} .premium-videobox-column:nth-child(2)  .premium-video-box-container' => 'width: {{VALUE}}',
 				),
 				'condition'       => array(
 					'premium_video_box_video_type' => 'youtube',
@@ -439,7 +495,7 @@ class Premium_Videobox extends Widget_Base {
 				'type'        => Controls_Manager::NUMBER,
 				'min'         => 0,
 				'default'     => 6,
-				'description' => __( 'Set a number of videos to retrieve', 'premium-addons-for-elementor' ),
+				'description' => __( 'Set a number of videos to show', 'premium-addons-for-elementor' ),
 				'condition'   => array(
 					'premium_video_box_video_type' => 'youtube',
 					'youtube_list'                 => 'yes',
@@ -455,6 +511,7 @@ class Premium_Videobox extends Widget_Base {
 				'condition' => array(
 					'premium_video_box_video_type' => 'youtube',
 					'youtube_list'                 => 'yes',
+					'playlist_layout'              => 'layout1',
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .premium-video-box-container:first-of-type' => 'width: 100%',
@@ -1013,23 +1070,6 @@ class Premium_Videobox extends Widget_Base {
 				'condition' => array(
 					'premium_video_box_video_type' => 'self',
 				),
-			)
-		);
-
-		$this->add_responsive_control(
-			'premium_video_box_video_height',
-			array(
-				'label'       => __( 'Video Height (%)', 'premium-addons-for-elementor' ),
-				'type'        => Controls_Manager::SLIDER,
-				'render_type' => 'template',
-				'condition'   => array(
-					'youtube_list'                 => 'yes',
-					'premium_video_box_video_type' => 'youtube',
-				),
-				'selectors'   => array(
-					'{{WRAPPER}} .premium-video-box-container > div' => 'padding-bottom: {{SIZE}}%;',
-				),
-
 			)
 		);
 
@@ -2520,6 +2560,8 @@ class Premium_Videobox extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		$this->update_controls();
 	}
 
 	/**
@@ -3231,7 +3273,7 @@ class Premium_Videobox extends Widget_Base {
 
 			$limit_counter = 0;
 
-			foreach ( $playlist_videos as $video ) {
+			foreach ( $playlist_videos as $index => $video ) {
 
 				$id = 'playlist' === $source ? $video->snippet->resourceId->videoId : $video->id->videoId;
 
@@ -3376,33 +3418,52 @@ class Premium_Videobox extends Widget_Base {
 				}
 
 				?>
-				<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'container' . $id ) ); ?>>
-					<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'mask' . $id ) ); ?>>
-						<div  <?php echo wp_kses_post( $this->get_render_attribute_string( 'video_container' . $id ) ); ?>>
-							<?php if ( 'yes' === $lightbox && $settings['video_lightbox_style'] ) : ?>
-								<a <?php echo wp_kses_post( $this->get_render_attribute_string( 'video_lightbox_container' . $id ) ); ?>></a>
+
+				<?php
+
+				if ( $index < 2 && 'layout2' === $settings['playlist_layout'] ) :
+					?>
+					<div class="premium-videobox-column">
+				<?php endif; ?>
+
+					<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'container' . $id ) ); ?>>
+						<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'mask' . $id ) ); ?>>
+							<div  <?php echo wp_kses_post( $this->get_render_attribute_string( 'video_container' . $id ) ); ?>>
+								<?php if ( 'yes' === $lightbox && $settings['video_lightbox_style'] ) : ?>
+									<a <?php echo wp_kses_post( $this->get_render_attribute_string( 'video_lightbox_container' . $id ) ); ?>></a>
+								<?php endif; ?>
+							</div>
+							<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'image_container' . $id ) ); ?> ></div>
+							<?php if ( 'yes' === $settings['premium_video_box_play_icon_switcher'] ) : ?>
+								<div class="premium-video-box-play-icon-container">
+									<i class="premium-video-box-play-icon fa fa-play fa-lg"></i>
+								</div>
 							<?php endif; ?>
 						</div>
-						<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'image_container' . $id ) ); ?> ></div>
-						<?php if ( 'yes' === $settings['premium_video_box_play_icon_switcher'] ) : ?>
-							<div class="premium-video-box-play-icon-container">
-								<i class="premium-video-box-play-icon fa fa-play fa-lg"></i>
-							</div>
-						<?php endif; ?>
-					</div>
-					<?php
-					if ( 'yes' === $settings['youtube_videos_title'] ) :
-						echo wp_kses_post( $title_link );
-						?>
-						<<?php echo wp_kses_post( $vid_title_tag ); ?> class="premium-youtube-vid-title" > <?php echo esc_html( $video_title ); ?> </<?php echo wp_kses_post( $vid_title_tag ); ?>>
 						<?php
-						echo wp_kses_post( $link_close );
-						endif;
-					?>
-				</div>
+						if ( 'yes' === $settings['youtube_videos_title'] ) :
+							echo wp_kses_post( $title_link );
+							?>
+							<<?php echo wp_kses_post( $vid_title_tag ); ?> class="premium-youtube-vid-title" > <?php echo esc_html( $video_title ); ?> </<?php echo wp_kses_post( $vid_title_tag ); ?>>
+							<?php
+							echo wp_kses_post( $link_close );
+							endif;
+						?>
+					</div>
+
+				<?php if ( 0 === $index && 'layout2' === $settings['playlist_layout'] ) : ?>
+					</div>
+				<?php endif; ?>
+
 				<?php
 
 			}
+
+			if ( 'layout2' === $settings['playlist_layout'] ) :
+				?>
+				</div>
+				<?php
+			endif;
 		}
 		?>
 		</div>
@@ -3493,6 +3554,30 @@ class Premium_Videobox extends Widget_Base {
 		}
 
 		$this->render_grid_youtube_playlist( $playlist_videos );
+
+	}
+
+	/**
+	 * Update Controls
+	 *
+	 * @since 4.9.58
+	 * @access private
+	 */
+	private function update_controls() {
+
+		$this->update_responsive_control(
+			'premium_video_box_image_border_radius',
+			array(
+				'type'      => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-video-box-image-container, {{WRAPPER}} .premium-video-box-video-container'  => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				),
+				'condition' => array(
+					'adv_radius!' => 'yes',
+				),
+
+			)
+		);
 
 	}
 

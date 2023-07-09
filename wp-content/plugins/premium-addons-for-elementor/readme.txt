@@ -3,9 +3,9 @@ Contributors: Leap13, Rimoun
 Tags: elementor, elementor addons, widgets, elementor elements, templates
 Donate Link: https://premiumaddons.com/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme
 Requires at least: 5.0
-Tested Up To: 6.2
+Tested Up To: 6.2.2
 Requires PHP: 7.0
-Stable Tag: 4.9.55
+Stable Tag: 4.10.1
 License: GPL v3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -20,8 +20,11 @@ Supercharge your [Elementor Page Builder](https://wordpress.org/plugins/elemento
 ### Useful Links
 [Support](https://my.leap13.com/contact-support/) | [Docs](https://premiumaddons.com/docs/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) | [Video Tutorials](https://www.youtube.com/channel/UCXcJ9BeO2sKKHor7Q9VglTQ) | [Facebook Group](https://facebook.com/groups/premiumAddons) | [Upgrade to Pro](https://premiumaddons.com/pro/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)
 
+### New: Magazine Bundle
+Smart Post Listing, Weather, World Clock, News Ticker, Tags Cloud and Recent Posts Notification widgets newly added to create the magazine website you ever dreamed. [Check it out now!](https://premiumtemplates.io/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme).
+
 ### New: Premium Templates Portal
-Now, you can browse a wide range of Elementor page and section templates LIVE on PremiumTemplates.io [Check it out now!](https://premiumtemplates.io/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme).
+You can browse a wide range of Elementor page and section templates LIVE on PremiumTemplates.io [Check it out now!](https://premiumtemplates.io/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme).
 
 ### SVG Draw Widget
 You can now draw any Font Awesome icon or SVG path using Premium SVG Draw widget. Not just that, we have added Draw Icon option in all premium widgets that has icon option in them. [Check it out now!](https://premiumaddons.com/elementor-svg-draw-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme).
@@ -82,6 +85,19 @@ Each widget and addon has been tested on different screen sizes, mobile devices,
 ### Content Widgets
 * [**Carousel Widget**](https://premiumaddons.com/carousel-widget-for-elementor-page-builder/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(FREE)*: The best all purpose carousel widget. It can be used to create any kind of carousel you want like: Testimonials Carousel, Client Logos Carousel, and some of our users even used it as Advanced Slider in a combination with other widgets.
 * [**Blog Widget**](https://premiumaddons.com/blog-widget-for-elementor-page-builder/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(FREE)*: Blog Posts Widget comes with a modern style, advanced posts filtering options, and also it allows you to create posts carousel.
+
+* [**Smart Post Listing Widget**](https://premiumaddons.com/elementor-smart-post-listing-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(PRO)*: Create any posts layout you want using this widget. You can use it to create any grid layout to show your posts or any custom post type on your website.
+
+* [**World Clock Widget**](https://premiumaddons.com/elementor-world-clock-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(FREE)*: This widget helps you to show time from any place. You can use it to show analog/digital clock.
+
+* [**Weather Widget**](https://premiumaddons.com/elementor-weather-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(FREE)*: Weather widget is useful for showing weather forecast data by city name or custom coordinates. You can select between three neat layouts with dozens of customization options.
+
+* [**News Ticker Widget**](https://premiumaddons.com/elementor-news-ticker-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(FREE)*: Show your posts in an attractive way using this news ticker widget. Select between four different layouts. You can also use the widget to show Gold, Stock and Currencies prices.
+
+* [**Tags Cloud Widget**](https://premiumaddons.com/elementor-tags-cloud-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(FREE)*: Showcase your WordPress tags and categories as cloud, sphere, labeled using this widget. It helps you to show your taxonomies in an outstanding way on your website.
+
+* [**Recent Posts Notification Widget**](https://premiumaddons.com/elementor-recent-posts-notification-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(FREE)*: This widget helps you to show a notification icon on your website to show the latest posts that your website users have not seen yet.
+
 * [**Google Maps Widget**](https://premiumaddons.com/google-maps-widget-for-elementor-page-builder/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(FREE)*: Advanced Google Maps Widget comes with features like adding multiple markers, custom skins, and much more options.
 * [**Team Members Widget**](https://premiumaddons.com/persons-widget-for-elementor-page-builder/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(FREE)*: Very good widget to list team members, co-workers, etc. Team Members Widget comes with many customization options.
 * [**Tabs Widget**](https://premiumaddons.com/elementor-tabs-widget/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme) *(PRO)*: Create both Vertical and Horizontal tabs with tons of styling features.
@@ -222,6 +238,32 @@ Premium Addonsis 100% Ads Free, Ads can only be detected from Youtube videos, th
 14. Premium Progress Bar Widget
 
 == Changelog ==
+
+= 4.10.1 =
+
+- Tweak: Added Post Format condition in [Display Conditions addon](https://premiumaddons.com/elementor-display-conditions/).
+- Tweak: Added a new layout for Youtube playlist/channel option in Video Box widget.
+
+= 4.10.0 =
+
+- New: Added News Ticker widget - [here](https://premiumaddons.com/elementor-news-ticker-widget).
+- New: Added Weather widget - [here](https://premiumaddons.com/elementor-weather-widget/).
+- New: Added World Clock widget - [here](https://premiumaddons.com/elementor-world-clock-widget/).
+- New: Added Tags Cloud widget - [here](https://premiumaddons.com/elementor-tags-cloud-widget/).
+- New: Added Recent Posts Notification widget - [here](https://premiumaddons.com/elementor-recent-posts-notification-widget).
+- Tweak: You can now use elements to navigate to previous/next slide in Carousel widget.
+
+= 4.9.57 =
+
+- Fixed: Elementor templates responsive styling issues when used in elements from Premium Addons.
+- Fixed: PA Duplicator not duplicating styling.
+- Fixed: Lightbox not working when play icon is clicked in Video Box widget.
+- Fixed: Link text missing in Bullet List widget.
+
+= 4.9.56 =
+
+- Tweak: CSS files loading improved.
+- Fixed: PHP warning: post_title is undefined in Media Grid widget.
 
 = 4.9.55 =
 

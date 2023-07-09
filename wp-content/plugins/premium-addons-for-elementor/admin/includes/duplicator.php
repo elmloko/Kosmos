@@ -152,7 +152,7 @@ class Duplicator {
 		if ( ! is_wp_error( $duplicated_post_id ) ) {
 
 			self::duplicate_post_taxonomies( $post, $duplicated_post_id );
-			self::duplicate_post_meta_data( $post, $duplicated_post_id );
+			self::duplicate_post_meta_data( $post_id, $duplicated_post_id );
 
 			$css = Post_CSS::create( $duplicated_post_id );
 			$css->update();
@@ -224,7 +224,7 @@ class Duplicator {
 	 */
 	public static function duplicate_post_taxonomies( $post, $id ) {
 
-		$taxonomies = get_object_taxonomies( $post->post_type );
+		$taxonomies = array_map( 'sanitize_text_field', get_object_taxonomies( $post->post_type ) );
 
 		if ( ! empty( $taxonomies ) && is_array( $taxonomies ) ) {
 			foreach ( $taxonomies as $taxonomy ) {
@@ -243,35 +243,24 @@ class Duplicator {
 	 * @param object  $post WP_Post.
 	 * @param integer $id item ID.
 	 */
-	public static function duplicate_post_meta_data( $post, $id ) {
+	public static function duplicate_post_meta_data( $old_id, $new_id ) {
 
-		global $wpdb;
+		$post_meta_keys = get_post_custom_keys( $old_id );
 
-		$postmeta = esc_sql( $wpdb->postmeta );
+		if ( ! empty( $post_meta_keys ) ) {
 
-		$post_id = esc_sql( $post->ID );
+			foreach ( $post_meta_keys as $meta_key ) {
 
-		$meta = $wpdb->get_results(
-			$wpdb->prepare( "SELECT meta_key, meta_value FROM {$postmeta} WHERE post_id = %d", $post_id )
-		);
+				$meta_values = get_post_custom_values( $meta_key, $old_id );
 
-		if ( ! empty( $meta ) && is_array( $meta ) ) {
+				foreach ( $meta_values as $meta_value ) {
 
-			$query = "INSERT INTO {$postmeta} ( post_id, meta_key, meta_value ) VALUES ";
+					$meta_value = maybe_unserialize( $meta_value );
 
-			$_records = array();
+					update_post_meta( $new_id, $meta_key, wp_slash( $meta_value ) );
 
-			foreach ( $meta as $meta_info ) {
-
-				$meta_value = $meta_info->meta_value;
-				$meta_key   = sanitize_text_field( $meta_info->meta_key );
-
-				$_value     = $meta_value;
-				$_records[] = $wpdb->prepare( "( $id, %s, %s )", $meta_key, $_value );
+				}
 			}
-
-			$query .= implode( ', ', $_records ) . ';';
-			$wpdb->query( $query );
 		}
 
 	}

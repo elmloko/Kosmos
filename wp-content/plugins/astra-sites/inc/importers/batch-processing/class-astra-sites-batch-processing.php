@@ -86,7 +86,9 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			add_filter( 'astra_sites_image_importer_skip_image', array( $this, 'skip_image' ), 10, 2 );
 			add_action( 'astra_sites_import_complete', array( $this, 'start_process' ) );
 			add_action( 'astra_sites_process_single', array( $this, 'start_process_single' ) );
-			add_action( 'admin_init', array( $this, 'start_importer' ) );
+			if ( current_user_can( 'manage_options' ) ) {
+				add_action( 'admin_init', array( $this, 'start_importer' ) );
+			}
 			add_action( 'wp_ajax_astra-sites-update-library', array( $this, 'update_library' ) );
 			add_action( 'wp_ajax_astra-sites-update-library-complete', array( $this, 'update_library_complete' ) );
 			add_action( 'wp_ajax_astra-sites-import-all-categories-and-tags', array( $this, 'import_all_categories_and_tags' ) );
@@ -161,6 +163,11 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 * @return void
 		 */
 		public function import_all_categories() {
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
+			}
 			Astra_Sites_Batch_Processing_Importer::get_instance()->import_all_categories();
 			wp_send_json_success();
 		}
@@ -172,6 +179,12 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 * @return void
 		 */
 		public function import_all_categories_and_tags() {
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
+			}
+
 			Astra_Sites_Batch_Processing_Importer::get_instance()->import_all_categories_and_tags();
 			wp_send_json_success();
 		}
@@ -183,6 +196,11 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 * @return void
 		 */
 		public function import_block_categories() {
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
+			}
 			Astra_Sites_Batch_Processing_Importer::get_instance()->import_block_categories();
 			wp_send_json_success();
 		}
@@ -194,6 +212,11 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 * @return void
 		 */
 		public function import_page_builders() {
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
+			}
 			Astra_Sites_Batch_Processing_Importer::get_instance()->import_page_builders();
 			wp_send_json_success();
 		}
@@ -257,6 +280,11 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 */
 		public function sites_requests_count() {
 
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
+			}
 			// Get count.
 			$total_requests = $this->get_total_requests();
 			if ( $total_requests ) {
@@ -274,6 +302,11 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 */
 		public function blocks_requests_count() {
 
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( 'You are not allowed to perform this action', 'astra-sites' );
+			}
 			// Get count.
 			$total_requests = $this->get_total_blocks_requests();
 			if ( $total_requests ) {
@@ -290,6 +323,10 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 * @return void
 		 */
 		public function update_library_complete() {
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error();
+			}
 			Astra_Sites_Importer::get_instance()->update_latest_checksums();
 			do_action( 'starter_templates_save_sites_count_as_per_page_builder' );
 
@@ -361,6 +398,10 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 * @return void
 		 */
 		public function update_library() {
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error();
+			}
 
 			if ( 'no' === $this->get_last_export_checksums() ) {
 				wp_send_json_success( 'updated' );

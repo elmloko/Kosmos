@@ -1334,7 +1334,7 @@ class Premium_Maps extends Widget_Base {
 						<?php endif; ?>
 
 						<div class='premium-maps-info-img'>
-							<img src='<?php echo esc_attr( $pin['pin_img']['url'] ); ?>'>
+							<img src='<?php echo esc_attr( $pin['pin_img']['url'] ); ?>' alt='<?php echo esc_attr( $pin['pin_img']['alt'] ); ?>'>
 						</div>
 
 

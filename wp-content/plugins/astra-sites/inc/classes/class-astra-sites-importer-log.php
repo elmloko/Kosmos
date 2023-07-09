@@ -56,7 +56,9 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		private function __construct() {
 
 			// Check file read/write permissions.
-			add_action( 'admin_init', array( $this, 'has_file_read_write' ) );
+			if ( current_user_can( 'edit_posts' ) ) {
+				add_action( 'admin_init', array( $this, 'has_file_read_write' ) );
+			}
 
 		}
 

@@ -1,7 +1,7 @@
 /**
  * Display content below the map
  */
- function igm_display_below(id, data) {
+function igm_display_below(id, data) {
 	iMapsActions.contentBelow(id, data, false);
 	window.dispatchEvent(new Event('resize'));
 }
@@ -128,17 +128,19 @@ iMapsActions.buildDropdown = function (el) {
 
 	var opts = {
 		noResultsText: noResults,
-        position: 'bottom',
+		position: 'bottom',
 		itemSelectText: select,
 		resetScrollPosition: false,
-        searchChoices: true,
-        fuseOptions: {
-            threshold: 0.4,
-            findAllMatches: true,
-            shouldSort: true
-        },
-        searchFloor: 2,
-		searchResultLimit: 50, // maybe set this as an option?
+		searchChoices: true,
+		fuseOptions: {
+			threshold: 0.4,
+			findAllMatches: true,
+			shouldSort: true
+		},
+		searchFloor: 2,
+		searchResultLimit: 50,
+		searchFields: [ 'label', 'value', 'customProperties' ]
+
 	};
 
 	var choices = new Choices(el, opts);
@@ -235,7 +237,7 @@ iMapsActions.buildDropdownFilter = function (el) {
 
 		// change this to a iMapsManager function that goes home and triggers event
 		// let's try to avoid using iMaps object in this file.
-		if(typeof iMaps.maps[thisMapID] !== 'undefined'){
+		if (typeof iMaps.maps[thisMapID] !== 'undefined') {
 			iMaps.maps[thisMapID].map.goHome();
 			iMaps.maps[thisMapID].map.dispatchImmediately("zoomlevelchanged");
 		}
@@ -277,7 +279,7 @@ iMapsActions.buildFilter = function (el) {
 				if (typeof iMapsManager !== 'undefined') {
 					iMapsManager.filteredMap = false;
 					iMapsManager.showAllSeries(thisMapID);
-                    iMapsManager.resetDrilldown( thisMapID );
+					iMapsManager.resetDrilldown(thisMapID);
 				}
 			} else {
 				if (typeof iMapsManager !== 'undefined') {
@@ -292,7 +294,7 @@ iMapsActions.buildFilter = function (el) {
 				}
 			}
 
-			if(typeof iMaps.maps[mainID] !== 'undefined'){
+			if (typeof iMaps.maps[mainID] !== 'undefined') {
 				iMaps.maps[mainID].map.goHome();
 				iMaps.maps[mainID].map.dispatchImmediately("zoomlevelchanged");
 			}
@@ -368,7 +370,7 @@ iMapsActions.lightboxAction = function (id, data, type) {
 		zoomable: false,
 		elements: elements,
 		closeButton: false, // changed when we added the custom close button
-        closeOnOutsideClick: true // changed when we added the custom close button
+		closeOnOutsideClick: true // changed when we added the custom close button
 	};
 
 	// fix for lightbox closing on bigger touch devices
@@ -381,36 +383,36 @@ iMapsActions.lightboxAction = function (id, data, type) {
 
 	}
 
-    // add custom close button
-    iMapsActions.lightbox.on('open', function(){
-        let close = document.querySelector('.ginner-container .gslide-media .igm_close');
-        if( ! close ) {
-            close = document.createElement('span');
-            close.classList.add('igm_close');
-            close.innerHTML = '╳';
-            let containers = document.querySelectorAll('.ginner-container .gslide-media');
-            containers.forEach(function(el){
-                let clone = close.cloneNode(true);
-                clone.addEventListener('click', function(){
-                    iMapsActions.lightbox.close();
-                });
+	// add custom close button
+	iMapsActions.lightbox.on('open', function () {
+		let close = document.querySelector('.ginner-container .gslide-media .igm_close');
+		if (!close) {
+			close = document.createElement('span');
+			close.classList.add('igm_close');
+			close.innerHTML = '╳';
+			let containers = document.querySelectorAll('.ginner-container .gslide-media');
+			containers.forEach(function (el) {
+				let clone = close.cloneNode(true);
+				clone.addEventListener('click', function () {
+					iMapsActions.lightbox.close();
+				});
 
-                el.prepend(clone);
-            });
-        } 
+				el.prepend(clone);
+			});
+		}
 
-    });
+	});
 
-	if( data.content !== '' && iMapsActions.lightbox && ! iMapsActions.lightboxIsRunning ){
+	if (data.content !== '' && iMapsActions.lightbox && !iMapsActions.lightboxIsRunning) {
 		iMapsActions.lightbox.open();
 		iMapsActions.lightboxIsRunning = true;
 	} else {
 		console.log('Empty Action Content or Incorrect Request - Lightbox not triggered');
 	}
-	
-	iMapsActions.lightbox.on('close', function(){
+
+	iMapsActions.lightbox.on('close', function () {
 		iMapsManager.clearSelected(id);
-        iMaps.maps[id].map.lastClickedEntry = false;
+		iMaps.maps[id].map.lastClickedEntry = false;
 		iMapsActions.lightboxIsRunning = false;
 	});
 
@@ -441,12 +443,15 @@ iMapsActions.contentBelow = function (id, data, scroll) {
 	}
 
 	// hide
-	what2hide = mapContentContainer.firstChild;
+	what2hide = mapContentContainer.children;
+
 	if (what2hide) {
-		if( what2hide.style ){
-			what2hide.style.display = 'none';
-		}
-		footerContent.appendChild(what2hide);
+		what2hide.forEach(function (w2h) {
+			if (w2h.style) {
+				w2h.style.display = 'none';
+			}
+			footerContent.appendChild(w2h);
+		});
 	}
 
 	// display this
@@ -454,10 +459,10 @@ iMapsActions.contentBelow = function (id, data, scroll) {
 	if (what2display) {
 
 		mapContentContainer.appendChild(what2display);
-		if( what2display.style ){
+		if (what2display.style) {
 			what2display.style.display = 'block';
 		}
-		
+
 	}
 
 	if (scroll) {
@@ -1105,14 +1110,14 @@ iMapsActions.resetContainer = function (id, selector) {
 	var mapContentContainer, what2hide;
 
 	// if map container doesn't exist, return. we might be trying to reset a container with id of an overlay
-	if( mapContainer === null ) {
+	if (mapContainer === null) {
 		return;
 	}
 
 	mapContentContainer = mapContainer.querySelector(selector);
 
 	if (mapContentContainer !== null) {
-		
+
 		what2hide = mapContentContainer.firstChild;
 		if (what2hide && footerContent) {
 			what2hide.style.display = 'none';

@@ -1601,7 +1601,7 @@
     display: flex;
     -ms-flex-direction: column;
     -webkit-flex-direction: column;
-    flex-direction: column;
+            flex-direction: column;
     direction: rtl;
 }
 
@@ -1700,10 +1700,10 @@
     display: flex;
     -ms-flex-pack: center;
     -webkit-justify-content: center;
-    justify-content: center;
+            justify-content: center;
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
     width: 100%;
     height: 100%;
 }
@@ -1732,7 +1732,7 @@
 .premium-blog-post-container.premium-blog-skin-side .premium-blog-content-wrapper {
     -ms-flex: 1;
     -webkit-flex: 1;
-    flex: 1;
+            flex: 1;
 }
 
 .premium-blog-post-container.premium-blog-skin-banner {
@@ -1749,7 +1749,7 @@
     display: flex;
     -ms-flex-direction: column;
     -webkit-flex-direction: column;
-    flex-direction: column;
+            flex-direction: column;
     background-color: transparent;
     z-index: 3;
     -webkit-transition: bottom 0.3s ease-in-out;
@@ -2105,7 +2105,7 @@
     display: flex;
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
     -ms-flex-wrap: wrap;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
@@ -2120,61 +2120,39 @@
 .premium-blog-align-center .premium-blog-post-tags-container {
     -ms-flex-pack: center;
     -webkit-justify-content: center;
-    justify-content: center;
+            justify-content: center;
 }
 
 .premium-blog-align-center .premium-blog-inner-container {
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
 }
 
 .premium-blog-align-left .post-categories,
 .premium-blog-align-left .premium-blog-post-tags-container {
     -ms-flex-pack: end;
     -webkit-justify-content: flex-end;
-    justify-content: flex-end;
+            justify-content: flex-end;
 }
 
 .premium-blog-align-left .premium-blog-inner-container {
     -ms-flex-align: end;
     -webkit-align-items: flex-end;
-    align-items: flex-end;
+            align-items: flex-end;
 }
 
 .premium-blog-align-right .post-categories,
 .premium-blog-align-right .premium-blog-post-tags-container {
     -ms-flex-pack: start;
     -webkit-justify-content: flex-start;
-    justify-content: flex-start;
+            justify-content: flex-start;
 }
 
 .premium-blog-align-right .premium-blog-inner-container {
     -ms-flex-align: start;
     -webkit-align-items: flex-start;
-    align-items: flex-start;
-}
-
-/* Pagination */
-.premium-blog-pagination-container {
-    text-align: left;
-}
-
-.premium-blog-pagination-container span {
-    cursor: default;
-}
-
-.premium-blog-pagination-container .page-numbers {
-    display: inline-block;
-    color: #000;
-    line-height: 1;
-    font-size: 1em;
-    font-weight: 400;
-    text-decoration: none;
-    padding: 0.75em;
-    margin: 0 0 0.4em 0.4em;
-    -webkit-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
+            align-items: flex-start;
 }
 
 .premium-blog-wrap .premium-loading-feed {
@@ -2193,7 +2171,7 @@
     display: flex;
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
     z-index: 99;
 }
 
@@ -2232,13 +2210,14 @@
 .premium-blog-filter {
     display: -webkit-flex;
     display: -ms-flexbox;
+    -js-display: flex;
     display: flex;
     -webkit-align-items: center;
     -ms-flex-align: center;
-    align-items: center;
+            align-items: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
-    justify-content: center;
+            justify-content: center;
 }
 
 .premium-blog-filter .premium-blog-filters-container li a.category {
@@ -2261,6 +2240,7 @@
     list-style: none;
     display: -webkit-inline-flex;
     display: -ms-inline-flexbox;
+    -js-display: inline-flex;
     display: inline-flex;
 }
 
@@ -2998,6 +2978,10 @@
 .premium-cf7-container input.wpcf7-submit {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+
+.wpcf7-span.is-focused input {
+    outline: none;
 }
 /************ Premium Countdown ************/
 /*******************************************/
@@ -3843,6 +3827,9 @@ span.icon.flex-width {
     height: 100%;
     z-index: 1000;
 }
+
+.premium-bullet-list-content .premium-bullet-list-link span {
+    display: none; }
 
 .premium-bullet-list-content:not(:last-of-type) .premium-bullet-list-connector {
     width: 100%;
@@ -4980,6 +4967,7 @@ a.premium-image-separator-link:active {
 }
 
 .pa-gallery-img .premium-gallery-caption .premium-gallery-img-name {
+    display: block;
     margin-bottom: 0;
 }
 
@@ -5187,6 +5175,7 @@ a.premium-image-separator-link:active {
     width: 100%;
     height: 20px;
     background: -webkit-linear-gradient(bottom, #17181f 0%, rgba(255, 255, 255, 0) 100%);
+    background: -webkit-gradient(linear, left bottom, left top, from(#17181f), to(rgba(255, 255, 255, 0)));
     background: linear-gradient(to top, #17181f 0%, rgba(255, 255, 255, 0) 100%);
 }
 /********* Premium Lottie Animations **********/
@@ -5225,10 +5214,11 @@ a.premium-image-separator-link:active {
     z-index: 100000;
     display: -webkit-flex;
     display: -ms-flexbox;
+    -js-display: flex;
     display: flex;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
-    flex-direction: column;
+            flex-direction: column;
 }
 
 .premium-maps-info-container.advanced-pin .gm-ui-hover-effect {
@@ -5239,13 +5229,14 @@ a.premium-image-separator-link:active {
     position: absolute;
     display: -webkit-flex;
     display: -ms-flexbox;
+    -js-display: flex;
     display: flex;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
-    justify-content: center;
+            justify-content: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
-    align-items: center;
+            align-items: center;
     border-radius: 50%;
     height: 24px;
     width: 24px;
@@ -5306,14 +5297,15 @@ a.premium-image-separator-link:active {
 .premium-maps-info-container.advanced-pin .maps-info-item {
     display: -webkit-flex;
     display: -ms-flexbox;
+    -js-display: flex;
     display: flex;
     -webkit-align-items: center;
     -ms-flex-align: center;
-    align-items: center;
+            align-items: center;
     margin-bottom: 8px;
     -webkit-flex-direction: row-reverse;
     -ms-flex-direction: row-reverse;
-    flex-direction: row-reverse;
+            flex-direction: row-reverse;
 }
 
 .premium-maps-info-container.advanced-pin .maps-info-item i {
@@ -5353,15 +5345,16 @@ a.premium-image-separator-link:active {
 .premium-maps-info-container.maps-skin1 .premium-maps-location-direction {
     display: -webkit-flex;
     display: -ms-flexbox;
+    -js-display: flex;
     display: flex;
     width: 100%;
     height: 100%;
     -webkit-align-items: center;
     -ms-flex-align: center;
-    align-items: center;
+            align-items: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
-    justify-content: center;
+            justify-content: center;
 }
 
 .premium-maps-info-container.maps-skin1 .premium-maps-location-direction span {
@@ -5375,7 +5368,7 @@ a.premium-image-separator-link:active {
 .premium-maps-info-container.maps-skin2 .premium-maps-title-wrap {
     -webkit-order: 1;
     -ms-flex-order: 1;
-    order: 1;
+            order: 1;
     background-color: #fff;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(230, 230, 230, 0.5);
@@ -5389,7 +5382,7 @@ a.premium-image-separator-link:active {
 .premium-maps-info-container.maps-skin2 .premium-maps-info-img {
     -webkit-order: 2;
     -ms-flex-order: 2;
-    order: 2;
+            order: 2;
     height: 80px;
     margin-top: 10px;
 }
@@ -5398,7 +5391,7 @@ a.premium-image-separator-link:active {
     padding-top: 14px;
     -webkit-order: 3;
     -ms-flex-order: 3;
-    order: 3;
+            order: 3;
 }
 
 .premium-maps-info-container.maps-skin2 .premium-maps-info-desc {
@@ -5412,21 +5405,22 @@ a.premium-image-separator-link:active {
 .premium-maps-info-container.maps-skin3 .premium-maps-skin3-wrap {
     display: -webkit-flex;
     display: -ms-flexbox;
+    -js-display: flex;
     display: flex;
     -webkit-align-items: center;
     -ms-flex-align: center;
-    align-items: center;
+            align-items: center;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(230, 230, 230, 0.5);
     -webkit-flex-direction: row-reverse;
     -ms-flex-direction: row-reverse;
-    flex-direction: row-reverse;
+            flex-direction: row-reverse;
 }
 
 .premium-maps-info-container.maps-skin3 .premium-maps-title-wrap {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
-    flex-direction: column;
+            flex-direction: column;
     text-align: left;
     margin-right: 12px;
 }
@@ -5502,7 +5496,7 @@ a.premium-image-separator-link:active {
   cursor: pointer;
   -ms-user-select: none;
        -webkit-user-select: none;
-          user-select: none;
+       user-select: none;
   background-image: none;
   border: 1px solid transparent;
 }
@@ -7277,6 +7271,931 @@ body.premium-scroll-disabled {
     visibility: hidden !important;
     opacity: 0 !important;
 }
+/************* Premium Recent Posts Notification *************/
+/*************************************************************/
+.pa-rec-not-icon-wrap {
+    position: relative;
+    display: inline-block;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #000000;
+    border-radius: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.pa-rec-not-icon-wrap svg {
+    width: 50px;
+    height: 50px;
+    display: block;
+}
+
+.pa-rec-not-icon-wrap i {
+    font-size: 50px;
+}
+
+.pa-rec-not-icon-wrap img {
+    display: block;
+  }
+
+.pa-rec-not-icon-wrap .premium-not-icon {
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+    fill: #fff;
+}
+
+.pa-rec-not-icon-wrap .premium-not-icon-text {
+    margin: 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.pa-rec-not-number {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #ffffff;
+    background-color: #ff0000;
+    border-radius: 100%;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.pa-rec-posts-container {
+    position: fixed;
+    background: #f7f7f7;
+    height: 100vh;
+    top: 0;
+    width: 30vw;
+    z-index: 99999;
+}
+
+.pa-container-left .pa-rec-posts-container {
+    left: 0;
+}
+
+.pa-container-right .pa-rec-posts-container {
+    right: 0;
+}
+
+.pa-rec-posts-body {
+    max-height: 90vh;
+    scrollbar-width: none;
+    overflow-y: scroll;
+}
+
+.pa-rec-posts-body::-webkit-scrollbar {
+    width: 0 !important
+}
+
+.pa-rec-posts-header {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.pa-rec-posts-header .pa-rec-posts-close {
+    cursor: pointer;
+    -webkit-align-self: flex-start;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+}
+
+.pa-rec-posts-header .pa-rec-posts-close-icon {
+    display: inline;
+}
+
+.pa-rec-title-wrap {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .pa-rec-title-wrap svg {
+    width: 50px;
+    height: 50px;
+    display: block;
+  }
+
+  .pa-rec-title-wrap i {
+    font-size: 50px;
+  }
+
+  .pa-rec-posts-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+    z-index: 9999;
+    opacity: 0;
+    background-color: #07070785;
+  }
+
+.premium-blog-thumb-effect-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.premium-blog-thumb-effect-wrapper span {
+    display: none;
+}
+
+.premium-blog-thumb-effect-wrapper:hover .premium-blog-thumbnail-overlay {
+    opacity: 1;
+}
+
+.premium-blog-effect-container:not(.premium-blog-bordered-effect) .premium-blog-post-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    padding: 20px;
+}
+
+.premium-blog-bordered-effect .premium-blog-post-link {
+    display: block;
+    height: 100%;
+    position: relative;
+}
+
+/*Thumbnail Img*/
+.premium-blog-wrap .premium-blog-thumbnail-container {
+    overflow: hidden;
+}
+
+.premium-blog-wrap .premium-blog-thumbnail-container img,
+.premium-blog-wrap .premium-blog-thumbnail-container .below-entry-meta {
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.premium-blog-zoomout-effect img,
+.premium-blog-scale-effect img {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.premium-blog-sepia-effect img {
+    -webkit-filter: sepia(30%);
+    filter: sepia(30%);
+}
+
+.premium-blog-bright-effect img {
+    -webkit-filter: brightness(1);
+    filter: brightness(1);
+}
+
+.premium-blog-trans-effect img {
+    -ms-transform: translateX(15px) scale(1.1);
+    -webkit-transform: translateX(15px) scale(1.1);
+    transform: translateX(15px) scale(1.1);
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-zoomin-effect img {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-zoomout-effect img {
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-scale-effect img {
+    -ms-transform: scale(1.3) rotate(-5deg);
+    -webkit-transform: scale(1.3) rotate(-5deg);
+    transform: scale(1.3) rotate(-5deg);
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-gray-effect img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-blur-effect img {
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-sepia-effect img {
+    -webkit-filter: sepia(0%);
+    filter: sepia(0%);
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-bright-effect img {
+    -webkit-filter: brightness(1.2);
+    filter: brightness(1.2);
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-trans-effect img {
+    -ms-transform: translateX(0px) scale(1.1);
+    -webkit-transform: translateX(0px) scale(1.1);
+    transform: translateX(0px) scale(1.1);
+}
+
+.premium-blog-post-container {
+    overflow: hidden;
+}
+
+.premium-blog-post-container .premium-blog-inner-container {
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    direction: rtl;
+}
+
+.premium-blog-post-container .premium-blog-post-content {
+    line-height: 1.5em;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.premium-blog-post-container ul.post-categories a:hover,
+.premium-blog-post-container ul.post-categories a:focus,
+.premium-blog-post-container .premium-blog-post-link:hover,
+.premium-blog-post-container .premium-blog-post-link:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.premium-blog-post-container .premium-blog-entry-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.premium-blog-post-container.premium-blog-skin-modern .premium-blog-content-wrapper {
+    position: relative;
+    z-index: 3;
+    top: -50px;
+}
+
+.premium-blog-post-container .premium-blog-content-wrapper {
+    background-color: #f5f5f5;
+    padding: 30px;
+}
+
+.premium-blog-post-container .premium-blog-content-wrapper.empty-thumb {
+    top: 0;
+}
+
+.premium-blog-post-container:not(.premium-blog-skin-classic):not(.premium-blog-skin-side):not(.premium-blog-skin-banner) .premium-blog-thumbnail-container:before,
+.premium-blog-post-container:not(.premium-blog-skin-classic):not(.premium-blog-skin-side):not(.premium-blog-skin-banner) .premium-blog-thumbnail-container:after {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    top: 50%;
+    right: 50%;
+    opacity: 0;
+    -ms-transform: translate(50%, -50%);
+    -webkit-transform: translate(50%, -50%);
+    transform: translate(50%, -50%);
+    -webkit-transition: all 0.4s linear 0s;
+    transition: all 0.4s linear 0s;
+    height: 1px;
+    width: 100%;
+    background-color: #fff;
+}
+
+.premium-blog-post-container:not(.premium-blog-skin-classic):not(.premium-blog-skin-side):not(.premium-blog-skin-banner) .premium-blog-thumbnail-container:before {
+    width: 1px;
+    height: 100%;
+}
+
+.premium-blog-post-container:not(.premium-blog-skin-classic):not(.premium-blog-skin-side):not(.premium-blog-skin-banner):hover .premium-blog-thumbnail-container:after {
+    width: 20px;
+    opacity: 1;
+}
+
+.premium-blog-post-container:not(.premium-blog-skin-classic):not(.premium-blog-skin-side):not(.premium-blog-skin-banner):hover .premium-blog-thumbnail-container:before {
+    height: 20px;
+    opacity: 1;
+}
+
+.premium-blog-post-container:not(.premium-blog-skin-classic):not(.premium-blog-skin-side):not(.premium-blog-skin-banner) .premium-blog-content-wrapper {
+    margin: 0px 10px 20px;
+    clear: both;
+}
+
+.premium-blog-post-container.premium-blog-skin-classic .premium-blog-thumbnail-overlay,
+.premium-blog-post-container.premium-blog-skin-side .premium-blog-thumbnail-overlay,
+.premium-blog-post-container.premium-blog-skin-banner .premium-blog-thumbnail-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.premium-blog-post-container.premium-blog-skin-classic .premium-blog-thumbnail-overlay a,
+.premium-blog-post-container.premium-blog-skin-side .premium-blog-thumbnail-overlay a,
+.premium-blog-post-container.premium-blog-skin-banner .premium-blog-thumbnail-overlay a {
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.premium-blog-post-container.premium-blog-skin-classic .premium-blog-thumbnail-overlay span,
+.premium-blog-post-container.premium-blog-skin-classic .premium-blog-thumbnail-overlay i,
+.premium-blog-post-container.premium-blog-skin-side .premium-blog-thumbnail-overlay span,
+.premium-blog-post-container.premium-blog-skin-side .premium-blog-thumbnail-overlay i,
+.premium-blog-post-container.premium-blog-skin-banner .premium-blog-thumbnail-overlay span,
+.premium-blog-post-container.premium-blog-skin-banner .premium-blog-thumbnail-overlay i {
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.premium-blog-post-container.premium-blog-skin-side {
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.premium-blog-post-container.premium-blog-skin-side .premium-blog-thumbnail-container {
+    height: 100%;
+}
+
+.premium-blog-post-container.premium-blog-skin-side .premium-blog-content-wrapper {
+    -ms-flex: 1;
+    -webkit-flex: 1;
+            flex: 1;
+}
+
+.premium-blog-post-container.premium-blog-skin-banner {
+    position: relative;
+}
+
+.premium-blog-post-container.premium-blog-skin-banner .premium-blog-content-wrapper {
+    position: absolute;
+    width: 100%;
+    bottom: -5px;
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    background-color: transparent;
+    z-index: 3;
+    -webkit-transition: bottom 0.3s ease-in-out;
+    transition: bottom 0.3s ease-in-out;
+}
+
+.premium-blog-post-container.premium-blog-skin-banner:hover .premium-blog-content-wrapper {
+    bottom: 0px;
+}
+
+.premium-blog-post-container .premium-blog-cats-container ul.post-categories {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.premium-blog-post-container .premium-blog-cats-container a {
+    display: block;
+    font-size: 12px;
+    color: #fff;
+    background-color: #777;
+    margin: 0 0 10px 3px;
+    padding: 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+/*
+* Diagonal Effect
+*/
+.premium-blog-diagonal-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.premium-blog-diagonal-effect:before {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.2);
+    -webkit-transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, -45deg) translate3d(0, -150%, 0);
+    transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, -45deg) translate3d(0, -150%, 0);
+    -webkit-transition: all 0.3s linear 0s;
+    transition: all 0.3s linear 0s;
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-diagonal-effect:before {
+    -webkit-transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, -45deg) translate3d(0, 150%, 0);
+    transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, -45deg) translate3d(0, 150%, 0);
+}
+
+/*
+* Framed Effect
+*/
+.premium-blog-framed-effect {
+    position: absolute;
+    width: -webkit-calc(100% - 30px);
+    width: calc(100% - 30px);
+    height: -webkit-calc(100% - 30px);
+    height: calc(100% - 30px);
+    top: 15px;
+    right: 15px;
+    opacity: 0;
+    -ms-transform: scale(0.3);
+    -webkit-transform: scale(0.3);
+    transform: scale(0.3);
+    -webkit-transition: all 0.3s linear 0s;
+    transition: all 0.3s linear 0s;
+}
+
+.premium-blog-post-outer-container:hover .premium-blog-framed-effect {
+    opacity: 0.99;
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+/*
+* Bordered Effect
+*/
+.premium-blog-bordered-effect {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    padding: 15px;
+    -webkit-transition: all 0.3s linear 0s;
+    transition: all 0.3s linear 0s;
+}
+
+.premium-blog-bordered-effect .premium-blog-post-link:before,
+.premium-blog-bordered-effect .premium-blog-post-link:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all 0.5s linear 0s;
+    transition: all 0.5s linear 0s;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.premium-blog-bordered-effect .premium-blog-post-link:before {
+    border-left: 2px solid;
+    border-right: 2px solid;
+    -ms-transform: scale(1, 0);
+    -webkit-transform: scale(1, 0);
+    transform: scale(1, 0);
+    -ms-transform-origin: 0% 0;
+    -webkit-transform-origin: 0% 0;
+    transform-origin: 0% 0;
+}
+
+.premium-blog-bordered-effect .premium-blog-post-link:after {
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    -ms-transform: scale(0, 1);
+    -webkit-transform: scale(0, 1);
+    transform: scale(0, 1);
+    -ms-transform-origin: 100% 0;
+    -webkit-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+}
+
+.premium-blog-bordered-effect:hover {
+    opacity: 0.99;
+}
+
+.premium-blog-bordered-effect:hover .premium-blog-post-link:before,
+.premium-blog-bordered-effect:hover .premium-blog-post-link:after {
+    -webkit-transition-delay: 0.15s;
+    transition-delay: 0.15s;
+    opacity: 1;
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+/*
+* Squares Effect
+*/
+.premium-blog-squares-effect,
+.premium-blog-squares-square-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.premium-blog-squares-effect:before,
+.premium-blog-squares-effect:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    -ms-transform: translate(100%, -100%);
+    -webkit-transform: translate(100%, -100%);
+    transform: translate(100%, -100%);
+    opacity: 0.7;
+    -webkit-transition: all 0.3s linear 0s;
+    transition: all 0.3s linear 0s;
+}
+
+.premium-blog-squares-square-container:before,
+.premium-blog-squares-square-container:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    -ms-transform: translate(100%, -100%);
+    -webkit-transform: translate(100%, -100%);
+    transform: translate(100%, -100%);
+    opacity: 0.7;
+    -webkit-transition: all 0.3s linear 0s;
+    transition: all 0.3s linear 0s;
+}
+
+.premium-blog-squares-square-container:before,
+.premium-blog-squares-square-container:after {
+    opacity: 0.8;
+}
+
+.premium-blog-squares-effect:after {
+    -ms-transform: translate(-200%, 200%);
+    -webkit-transform: translate(-200%, 200%);
+    transform: translate(-200%, 200%);
+}
+
+.premium-blog-squares-square-container:before {
+    -ms-transform: translate(100%, 200%);
+    -webkit-transform: translate(100%, 200%);
+    transform: translate(100%, 200%);
+}
+
+.premium-blog-squares-square-container:after {
+    -ms-transform: translate(-200%, -100%);
+    -webkit-transform: translate(-200%, -100%);
+    transform: translate(-200%, -100%);
+}
+
+.premium-blog-squares-effect:hover:before {
+    -ms-transform: translate(0, 0%) scaleY(1.003) scaleX(1.003);
+    -webkit-transform: translate(0, 0%) scaleY(1.003) scaleX(1.003);
+    transform: translate(0, 0%) scaleY(1.003) scaleX(1.003);
+}
+
+.premium-blog-squares-effect:hover:after {
+    -ms-transform: translate(-100%, 100%) scaleY(1.003) scaleX(1.003);
+    -webkit-transform: translate(-100%, 100%) scaleY(1.003) scaleX(1.003);
+    transform: translate(-100%, 100%) scaleY(1.003) scaleX(1.003);
+}
+
+.premium-blog-squares-effect:hover .premium-blog-squares-square-container:before {
+    -ms-transform: translate(0, 100%);
+    -webkit-transform: translate(0, 100%);
+    transform: translate(0, 100%);
+}
+
+.premium-blog-squares-effect:hover .premium-blog-squares-square-container:after {
+    -ms-transform: translate(-100%, 0%);
+    -webkit-transform: translate(-100%, 0%);
+    transform: translate(-100%, 0%);
+}
+
+.premium-blog-clear-fix {
+    clear: both;
+}
+
+.premium-blog-masked .premium-blog-thumbnail-container {
+    position: relative;
+    overflow: visible;
+}
+
+.premium-blog-masked .premium-blog-thumbnail-container svg {
+    position: absolute;
+    height: 100px;
+    width: 100%;
+    bottom: -5px;
+    right: 0;
+    fill: #f5f5f5;
+    z-index: 99;
+}
+
+.premium-blog-masked .premium-blog-thumbnail-container svg.premium-blog-shape-divider-svg {
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.premium-blog-masked .premium-blog-author-thumbnail,
+.premium-blog-masked .premium-blog-skin-banner .premium-blog-content-wrapper {
+    z-index: 999 !important;
+}
+
+/*Post Format Container*/
+.premium-blog-format-link {
+    padding: 5px;
+    line-height: 0;
+}
+
+/*Post Format Icon*/
+/*Post Format Content Margin */
+.premium-blog-entry-meta {
+    line-height: 1.3em;
+    font-size: 12px;
+    margin-bottom: 13px;
+    color: #adadad;
+}
+
+.premium-blog-entry-meta i {
+    margin-left: 3px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.premium-blog-meta-data {
+    display: inline-block;
+}
+
+.premium-blog-meta-data .premium-blog-meta-separator {
+    margin: 0 5px;
+}
+
+.premium-blog-meta-data a,
+.premium-blog-meta-data span {
+    color: inherit;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.premium-blog-author-thumbnail {
+    position: relative;
+    padding: 0 30px;
+    width: 100%;
+    top: -10px;
+    height: 0;
+    pointer-events: none;
+}
+
+.premium-blog-author-thumbnail img {
+    border-radius: 50%;
+    width: 60px;
+    pointer-events: all;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.premium-blog-entry-title a,
+.premium-blog-post-tags-container a,
+.premium-blog-post-content .premium-blog-excerpt-link {
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.premium-blog-excerpt-link-wrap a.premium-blog-excerpt-link {
+    background-color: transparent;
+    color: #54595f;
+    padding: 0;
+}
+
+.premium-blog-cta-full-yes .premium-blog-excerpt-link {
+    width: 100%;
+}
+
+.premium-blog-post-tags-container {
+    margin-top: 8px;
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.premium-blog-post-tags-container a {
+    color: inherit;
+    margin-right: 5px;
+}
+
+.premium-blog-align-center .post-categories,
+.premium-blog-align-center .premium-blog-post-tags-container {
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+}
+
+.premium-blog-align-center .premium-blog-inner-container {
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+}
+
+.premium-blog-align-left .post-categories,
+.premium-blog-align-left .premium-blog-post-tags-container {
+    -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
+            justify-content: flex-end;
+}
+
+.premium-blog-align-left .premium-blog-inner-container {
+    -ms-flex-align: end;
+    -webkit-align-items: flex-end;
+            align-items: flex-end;
+}
+
+.premium-blog-align-right .post-categories,
+.premium-blog-align-right .premium-blog-post-tags-container {
+    -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
+            justify-content: flex-start;
+}
+
+.premium-blog-align-right .premium-blog-inner-container {
+    -ms-flex-align: start;
+    -webkit-align-items: flex-start;
+            align-items: flex-start;
+}
+
+.premium-blog-wrap .premium-loading-feed {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: rgba(255, 255, 255, 0.2);
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    z-index: 99;
+}
+
+.premium-blog-wrap {
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.premium-blog-wrap ul.slick-dots {
+    width: 100%;
+}
+
+/**
+* Even Layout
+*/
+.premium-blog-even .premium-blog-post-container {
+    height: 100%;
+}
+
+.premium-blog-even .slick-track {
+    -js-display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.premium-blog-even .slick-slide {
+    height: inherit !important;
+}
+
+.premium-blog-filter {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    -js-display: flex;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+            align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.premium-blog-filter .premium-blog-filters-container li a.category {
+    outline: none;
+    text-decoration: none;
+    border-radius: 75px;
+    margin: 15px 5px 20px;
+    padding: 7px 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.premium-blog-filter ul.premium-blog-filters-container {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.premium-blog-filter .premium-blog-filters-container li {
+    list-style: none;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    -js-display: inline-flex;
+    display: inline-flex;
+}
+
+/**
+* Responsive Style
+*/
+@media (max-width: 768px) {
+    .premium-blog-content-wrapper {
+        top: 0;
+        margin: 0;
+        padding: 15px;
+    }
+
+}
+
+[dir="rtl"] .premium-blog-wrap.slick-slider .slick-list,
+[dir="rtl"] .premium-blog-wrap.slick-slider .slick-track {
+    direction: ltr;
+}
 /************ Premium Team Members ************/
 /*********************************************/
 .premium-person-container {
@@ -7725,6 +8644,482 @@ ul.premium-person-social-list {
         -webkit-transform: translateX(0) rotate(90deg);
             transform: translateX(0) rotate(90deg);
 }
+/************* Premium Post Ticker *************/
+/***********************************************/
+/**Basic CSS*/
+.premium-post-ticker {
+    /**Stock*/
+    /**Layouts*/
+    /**Layout 1 */
+    /**Layout 2 */
+    /**Layout 3*/
+    /**Layout 4 - vertical ticker */
+  }
+
+  .premium-post-ticker__outer-wrapper, .premium-post-ticker__header-wrapper, .premium-post-ticker__content, .premium-post-ticker__title-wrapper, .premium-post-ticker__date-wrapper, .premium-post-ticker__post-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .premium-post-ticker__title-wrapper img {
+    max-width: unset;
+  }
+
+  .premium-post-ticker__outer-wrapper {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+
+  .premium-post-ticker__header-wrapper, .premium-post-ticker__title-wrapper, .premium-post-ticker__date-wrapper {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-post-ticker__post-wrapper {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-post-ticker__post-wrapper i,
+  .premium-post-ticker__post-wrapper a {
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .premium-post-ticker__post-wrapper.slick-slide {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    position: relative;
+  }
+
+  .premium-post-ticker__content {
+    width: 100%;
+  }
+
+  .premium-post-ticker__posts-wrapper {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .premium-post-ticker__posts-wrapper .slick-list,
+  .premium-post-ticker__posts-wrapper .slick-track {
+    height: 100%;
+  }
+
+  .premium-post-ticker__outer-wrapper, .premium-post-ticker__post-wrapper {
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+
+  .premium-post-ticker__post-wrapper {
+    padding: 7px 20px;
+  }
+
+  .premium-post-ticker__content {
+    background-color: #ececed;
+  }
+
+  .premium-post-ticker__header-wrapper, .premium-post-ticker__title-wrapper, .premium-post-ticker__date-wrapper {
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .premium-post-ticker__title-wrapper, .premium-post-ticker__post-wrapper {
+    -webkit-column-gap: 5px;
+    column-gap: 5px;
+  }
+
+  .premium-post-ticker__title, .premium-post-ticker__date {
+    white-space: nowrap;
+  }
+
+  .premium-post-ticker__title, .premium-post-ticker__post-title {
+    margin: 0;
+    text-transform: capitalize;
+  }
+
+  .premium-post-ticker__title {
+    font-size: 15px;
+  }
+
+  .premium-post-ticker__post-title {
+    font-size: 17px;
+  }
+
+  .premium-post-ticker__post-date {
+    font-size: 12px;
+    margin-left: 6px;
+  }
+
+  .premium-post-ticker__separator {
+    position: absolute;
+    right: 0;
+    width: 2px;
+    height: 20px;
+    background: #000;
+    z-index: 1;
+  }
+
+  .premium-post-ticker__icon-wrapper {
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-post-ticker__icon-wrapper > svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  .premium-post-ticker__icon-wrapper img {
+    width: 50px;
+  }
+
+  .premium-post-ticker__icon-wrapper .premium-lottie-animation,
+  .premium-post-ticker__icon-wrapper .premium-drawable-icon {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .premium-post-ticker__icon-wrapper .premium-lottie-animation svg,
+  .premium-post-ticker__icon-wrapper .premium-drawable-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .premium-post-ticker__thumbnail-wrapper a {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .premium-post-ticker__thumbnail-wrapper img {
+    width: 50px;
+  }
+
+  .premium-post-ticker__post-author {
+    font-size: 12px;
+  }
+
+  .premium-post-ticker__arrows {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 99;
+    -webkit-column-gap: 2px;
+    column-gap: 2px;
+  }
+
+  .premium-post-ticker__arrows a {
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-appearance: inherit;
+    border: none;
+    box-shadow: none;
+    padding: 0 5px;
+    border: 1px solid currentColor;
+    border-radius: 0;
+  }
+
+  .premium-post-ticker__hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .premium-post-ticker__change-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-column-gap: 5px;
+    column-gap: 5px;
+  }
+
+  .premium-post-ticker__change-wrapper .up {
+    color: #009e73;
+  }
+
+  .premium-post-ticker__change-wrapper .down {
+    color: #d94040;
+  }
+
+  .premium-post-ticker__change-percent {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-column-gap: 5px;
+    column-gap: 5px;
+  }
+
+  .premium-post-ticker__symbol, .premium-post-ticker__change-wrapper {
+    margin: 0 50px;
+  }
+
+  .premium-post-ticker__symbol-icon {
+    border-radius: 50% !important;
+  }
+
+  .premium-post-ticker__layout-2 .premium-post-ticker__date-wrapper, .premium-post-ticker__layout-3 .premium-post-ticker__date-wrapper {
+    background: #7a7a7a;
+  }
+
+  .premium-post-ticker__layout-1 .premium-post-ticker__date-wrapper {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .premium-post-ticker__layout-1 .premium-post-ticker__title-wrapper {
+    padding: 0 25px;
+  }
+
+  .premium-post-ticker__layout-2 .premium-post-ticker__date-wrapper {
+    margin: 0;
+    padding: 0 25px;
+  }
+
+  .premium-post-ticker__layout-2 .premium-post-ticker__title-wrapper {
+    position: relative;
+    padding: 3px 10px;
+  }
+
+  .premium-post-ticker__layout-2 .premium-post-ticker__title-wrapper::after {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    left: 100%;
+    bottom: 0;
+    -webkit-clip-path: polygon(0 0, 0% 100%, 100% 100%);
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
+  }
+
+  .premium-post-ticker__layout-3 .premium-post-ticker__header-wrapper {
+    z-index: 99;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -webkit-transform: translateY(50%);
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
+    position: relative;
+  }
+
+  .premium-post-ticker__layout-3 .premium-post-ticker__header-wrapper::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    left: 99%;
+    bottom: 0;
+    -webkit-clip-path: polygon(0% 0%, 34% 0, 100% 50%, 34% 100%, 0% 100%);
+    clip-path: polygon(0% 0%, 34% 0, 100% 50%, 34% 100%, 0% 100%);
+  }
+
+  .premium-post-ticker__layout-3 .premium-post-ticker__date-wrapper, .premium-post-ticker__layout-3 .premium-post-ticker__title-wrapper {
+    padding: 3px 7px;
+  }
+
+  .premium-post-ticker__layout-3 .premium-post-ticker__post-wrapper {
+    padding: 10px 20px;
+  }
+
+  .premium-post-ticker__layout-3 .premium-post-ticker__content {
+    padding-top: 10px;
+  }
+
+  .premium-post-ticker__layout-4 .slick-list {
+    overflow-x: visible;
+  }
+
+  .premium-post-ticker__layout-4 .premium-post-ticker__header-wrapper {
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+  }
+
+  .premium-post-ticker__layout-4 .premium-post-ticker__arrows {
+    background: transparent;
+  }
+
+  .premium-post-ticker__layout-4 .premium-post-ticker__arrows a {
+    padding: 0 1px;
+    line-height: 15px;
+  }
+
+  .premium-post-ticker__layout-4 .premium-post-ticker__arrows i {
+    font-size: 15px;
+  }
+
+  .premium-post-ticker__layout-4 .premium-post-ticker__arrows .prev-arrow {
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+  }
+
+  .premium-post-ticker__layout-4 .premium-post-ticker__title-wrapper {
+    margin: 0 5px;
+  }
+
+  .premium-post-ticker__layout-4 .premium-post-ticker__content {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .premium-post-ticker__layout-4 .premium-post-ticker__change-wrapper span {
+    text-align: center;
+  }
+
+  .premium-post-ticker__layout-4 .premium-post-ticker__arrows {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+  }
+
+  .premium-ticker-pointer-yes:not(.premium-post-ticker__layout-3) .premium-post-ticker__content > div:first-child {
+    position: relative;
+  }
+
+  .premium-ticker-pointer-yes:not(.premium-post-ticker__layout-3) .premium-post-ticker__content > div:first-child::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 100%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 999;
+    border-width: 8px 0 8px 7px;
+    border-style: solid;
+    border-color: transparent transparent transparent currentColor;
+  }
+
+  /**Typing Effect*/
+  .premium-typing-yes .premium-post-ticker__post-wrapper > div:first-child {
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+  }
+
+  .premium-typing-yes .premium-post-ticker__post-title {
+    position: relative;
+  }
+
+  .premium-typing-yes .premium-post-ticker__post-title.premium-text-typing::after {
+    content: "";
+    position: absolute;
+    opacity: 1;
+  }
+
+  /**End of Typing Effect*/
+  /**Reverse Effect*/
+  .premium-reversed-yes .premium-post-ticker__content {
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+
+  .premium-reversed-yes.premium-post-ticker__layout-2 .premium-post-ticker__outer-wrapper, .premium-reversed-yes.premium-post-ticker__layout-3 .premium-post-ticker__outer-wrapper, .premium-reversed-yes.premium-post-ticker__layout-4 .premium-post-ticker__outer-wrapper {
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+  }
+
+  .premium-reversed-yes.premium-post-ticker__layout-3 .premium-post-ticker__header-wrapper, .premium-reversed-yes.premium-post-ticker__layout-4 .premium-post-ticker__header-wrapper {
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+
+  .premium-reversed-yes.premium-post-ticker__layout-2 .premium-post-ticker__title-wrapper::after {
+    left: unset;
+    right: 100%;
+    -webkit-clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  }
+
+  .premium-reversed-yes.premium-post-ticker__layout-3 .premium-post-ticker__header-wrapper::after {
+    left: unset;
+    right: 99%;
+    -webkit-clip-path: polygon(34% 0%, 100% 0%, 100% 100%, 34% 100%, 0% 50%);
+    clip-path: polygon(34% 0%, 100% 0%, 100% 100%, 34% 100%, 0% 50%);
+  }
+
+  .premium-reversed-yes.premium-post-ticker__layout-4 .slick-list {
+    direction: rtl;
+  }
+
+  .premium-reversed-yes.premium-ticker-pointer-yes:not(.premium-post-ticker__layout-3) .premium-post-ticker__content > div:first-child {
+    position: relative;
+  }
+
+  .premium-reversed-yes.premium-ticker-pointer-yes:not(.premium-post-ticker__layout-3) .premium-post-ticker__content > div:first-child::after {
+    left: -7px;
+    top: 50%;
+    border-width: 8px 8px 7px 0;
+    border-color: transparent currentColor transparent transparent;
+  }
+
+  .premium-reversed-yes.premium-typing-yes .premium-post-ticker__post-title.premium-text-typing::after {
+    right: 100%;
+  }
+
+  .premium-reversed-yes.premium-fade-yes .premium-post-ticker__post-wrapper, .premium-reversed-yes.premium-typing-yes .premium-post-ticker__post-wrapper {
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+  }
+
+  /**End of Reverse Effect*/
+
 /**************** Premium Pricing Table ****************/
 /*******************************************************/
 .premium-pricing-table-container {
@@ -8380,6 +9775,75 @@ ul.premium-person-social-list {
                 transform-origin: 0;
     }
 }
+/**************** Premium Tags Cloud ****************/
+/****************************************************/
+.premium-tcloud-hidden {
+    opacity: 0;
+    visibility: hidden; }
+
+  .premium-tcloud-canvas-container {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+
+  .premium-tcloud-default .premium-tcloud-term,
+  .premium-tcloud-ribbon .premium-tcloud-term {
+    background-color: var(--tag-color);
+    padding: 5px;
+    margin: 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .premium-tcloud-default .premium-tcloud-term:hover,
+    .premium-tcloud-ribbon .premium-tcloud-term:hover {
+      background-color: var(--tag-hover-color); }
+      .premium-tcloud-default .premium-tcloud-term:hover::before,
+      .premium-tcloud-ribbon .premium-tcloud-term:hover::before {
+        border-color: transparent var(--tag-hover-color) transparent transparent; }
+
+  .premium-tcloud-default .premium-tcloud-term-link,
+  .premium-tcloud-ribbon .premium-tcloud-term-link {
+    color: var(--tag-text-color);
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    line-height: 1; }
+
+  .premium-tcloud-default .premium-tcloud-term {
+    border: 1px solid var(--tag-color); }
+
+  .premium-tcloud-canvas {
+    cursor: pointer; }
+
+  .premium-tcloud-ribbon .premium-tcloud-term {
+    position: relative; }
+    .premium-tcloud-ribbon .premium-tcloud-term::before {
+      position: absolute;
+      top: 0;
+      left: -14px;
+      content: "";
+      margin: 0 auto;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 14px 14px 14px 0px;
+      border-color: transparent var(--tag-color) transparent transparent;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out; }
+
+.premium-tcloud-sphere .premium-tcloud-terms-container {
+    display: none;
+}
 /**************** Premium Testimonials ****************/
 /******************************************************/
 .premium-testimonial-box {
@@ -8464,7 +9928,7 @@ ul.premium-person-social-list {
 .premium-title-container .premium-title-header:not(.premium-title-style7) {
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
 }
 
 .premium-title-container .premium-title-header svg {
@@ -8540,7 +10004,7 @@ ul.premium-person-social-list {
     display: inline-flex;
     -ms-flex-direction: column;
     -webkit-flex-direction: column;
-    flex-direction: column;
+            flex-direction: column;
 }
 
 .premium-title-style7 .premium-title-style7-inner {
@@ -8550,7 +10014,7 @@ ul.premium-person-social-list {
     display: flex;
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
 }
 
 .premium-title-style1 {
@@ -8616,6 +10080,7 @@ ul.premium-person-social-list {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-image: -webkit-linear-gradient(left, #ffa648, #f17cc1, #4da9fd);
+    background-image: -webkit-gradient(linear, left top, right top, from(#ffa648), color-stop(#f17cc1), to(#4da9fd));
     background-image: linear-gradient(to right, #ffa648, #f17cc1, #4da9fd);
     -webkit-animation: pa-text-gradient 8s infinite;
     animation: pa-text-gradient 8s infinite;
@@ -8711,7 +10176,7 @@ ul.premium-person-social-list {
     display: flex;
     -ms-flex-direction: column;
     -webkit-flex-direction: column;
-    flex-direction: column;
+            flex-direction: column;
 }
 
 .premium-video-box-container>div {
@@ -8833,7 +10298,7 @@ ul.premium-person-social-list {
     margin-left: 1px;
     -ms-flex: 1 0 auto;
     -webkit-flex: 1 0 auto;
-    flex: 1 0 auto;
+            flex: 1 0 auto;
     padding: 0;
 }
 
@@ -9010,10 +10475,10 @@ ul.premium-person-social-list {
     display: flex;
     -ms-flex-pack: center;
     -webkit-justify-content: center;
-    justify-content: center;
+            justify-content: center;
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
 }
 
 .premium-video-box-sticky-apply .premium-video-box-play-icon-container {
@@ -9124,6 +10589,36 @@ ul.premium-person-social-list {
     top: 0;
     right: 0;
 }
+
+.premium-videobox-layout2 .premium-videobox-column {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 50%;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .premium-videobox-layout2 .premium-videobox-column:first-child .premium-video-box-trigger {
+    height: 100%;
+  }
+
+  .premium-videobox-layout2 .premium-videobox-column:nth-child(2) {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: -webkit-calc(100% - var(--pa-first-column-width));
+    width: calc(100% - var(--pa-first-column-width));
+  }
+
+  .premium-videobox-layout2 .premium-videobox-column:nth-child(2) .premium-video-box-container {
+    height: auto !important;
+  }
+
 /************ Premium Vertical Scroll ************/
 /*************************************************/
 .premium-vscroll-inner {
@@ -9476,6 +10971,1042 @@ ul.premium-person-social-list {
     position: unset !important;
 }
 
+/**Premium Weather Widget*/
+.premium-weather {
+    /*Layouts**/
+  }
+
+  .premium-weather__outer-wrapper {
+    position: relative;
+  }
+
+  .premium-weather__outer-wrapper * {
+    z-index: 10;
+  }
+
+  .premium-weather__temp-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-weather__outer-wrapper, .premium-weather__desc-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .premium-weather__basic-weather {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-weather__icon-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-weather__icon-wrapper i {
+    font-size: 70px;
+  }
+
+  .premium-weather__icon-wrapper > svg,
+  .premium-weather__icon-wrapper img,
+  .premium-weather__icon-wrapper .premium-lottie-animation {
+    width: 70px;
+    height: 70px;
+  }
+
+  .premium-weather__icon-wrapper .premium-lottie-animation svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .premium-weather__city-name {
+    font-size: 30px;
+    display: inline-block;
+    color: #54595F;
+  }
+
+  .premium-weather__current-weather .premium-weather__temp-wrapper span {
+    font-size: 35px;
+  }
+
+  .premium-weather__temp-unit {
+    position: relative;
+    font-size: 20px;
+    top: -5px;
+  }
+
+  .premium-weather__temp-val {
+    font-size: 45px;
+    font-weight: 600;
+  }
+
+  .premium-weather__desc-wrapper {
+    margin-left: 50px;
+  }
+
+  .premium-weather__desc {
+    font-size: 20px;
+    text-transform: capitalize;
+    white-space: nowrap;
+  }
+
+  .premium-weather__feels-like {
+    font-size: 13px;
+    color: #54595F;
+    white-space: nowrap;
+  }
+
+  .premium-weather__extra-weather {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-column-gap: 50px;
+    column-gap: 50px;
+  }
+
+  .premium-weather__extra-weather.slick-slide {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+
+  .premium-weather__extra-weather > div {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .premium-weather__extra-weather svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .premium-weather__extra-weather span {
+    white-space: nowrap;
+    font-size: 15px;
+  }
+
+  .premium-weather__forecast {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .premium-weather__forecast .premium-weather__forecast-item {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-weather__forecast .premium-weather__forecast-item.slick-slide {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+
+  .premium-weather__forecast .premium-weather__forecast-item .premium-weather__forecast-item-data {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-weather__forecast .premium-weather__forecast-item .premium-weather__forecast-item-date {
+    white-space: nowrap;
+    font-size: 15px;
+  }
+
+  .premium-weather__forecast .premium-weather__forecast-item .premium-weather__temp-wrapper {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .premium-weather__hourly-item {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .premium-weather__hourly-item.slick-slide {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+
+  .premium-weather__hourly-item .premium-weather__icon-wrapper {
+    margin-bottom: 5px;
+  }
+
+  .premium-weather__hourly-item .premium-weather__icon-wrapper i {
+    font-size: 35px;
+  }
+
+  .premium-weather__hourly-item .premium-weather__icon-wrapper > svg,
+  .premium-weather__hourly-item .premium-weather__icon-wrapper img,
+  .premium-weather__hourly-item .premium-weather__icon-wrapper .premium-lottie-animation {
+    width: 35px;
+    height: 35px;
+  }
+
+  .premium-weather__hourly-item .premium-weather__temp-wrapper span {
+    font-size: 20px;
+  }
+
+  .premium-weather__hourly-item .premium-weather__hourly-item-date {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  @media (max-width: 1024px) {
+    .premium-weather__layout-2 .premium-weather__extra-weather {
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+  }
+
+  .premium-weather__layout-2 .premium-weather__basic-weather {
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+
+  .premium-weather__layout-2 .premium-weather__basic-weather .premium-weather__icon-weather {
+    width: 70px;
+    height: 70px;
+  }
+
+  .premium-weather__layout-2 .premium-weather__desc-wrapper {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .premium-weather__layout-2 .premium-weather__extra-outer-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-weather__layout-2 .premium-weather__extra-outer-wrapper .premium-weather__extra-weather {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+
+  .premium-weather__layout-3 .premium-weather__current-weather {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 10px;
+  }
+
+  .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__extra-outer-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__basic-weather, .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__extra-outer-wrapper, .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__extra-weather {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__basic-weather {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__basic-weather .premium-weather__icon-wrapper i {
+    font-size: 80px;
+  }
+
+  .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__basic-weather .premium-weather__icon-wrapper > svg,
+  .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__basic-weather .premium-weather__icon-wrapper img,
+  .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__basic-weather .premium-weather__icon-wrapper .premium-lottie-animation {
+    width: 80px;
+    height: 80px;
+  }
+
+  .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__basic-weather .premium-weather__desk {
+    font-size: 20px;
+  }
+
+  .premium-weather__layout-3 .premium-weather__current-weather .premium-weather__basic-weather .premium-weather__feels-like {
+    font-size: 10px;
+  }
+
+  .premium-weather__layout-3 .premium-weather__hourly-forecast-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .premium-weather__layout-3 .premium-weather__extra-outer-wrapper {
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+
+  .premium-weather__layout-3 .premium-weather__extra-outer-wrapper .premium-weather__temp-wrapper span {
+    font-size: 60px;
+  }
+
+  .premium-weather__layout-3 .premium-weather__extra-outer-wrapper .premium-weather__extra-weather {
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+
+  .premium-weather__layout-2 .premium-weather__forecast-item .premium-weather__temp-max,
+  .premium-weather__layout-2 .premium-weather__forecast-item .premium-weather__temp-min, .premium-weather__layout-3 .premium-weather__forecast-item .premium-weather__temp-max,
+  .premium-weather__layout-3 .premium-weather__forecast-item .premium-weather__temp-min {
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  /**Daily Forecast Styles */
+  @media (max-width: 1024px) {
+    .premium-daily-forecast__style-1 .premium-weather__forecast, .premium-daily-forecast__style-2 .premium-weather__forecast, .premium-daily-forecast__style-3 .premium-weather__forecast {
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+  }
+
+  .premium-daily-forecast__style-1 .premium-weather__forecast-item, .premium-daily-forecast__style-2 .premium-weather__forecast-item {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  .premium-daily-forecast__style-1 .premium-weather__forecast-item .premium-weather__temp-wrapper, .premium-daily-forecast__style-2 .premium-weather__forecast-item .premium-weather__temp-wrapper {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .premium-daily-forecast__style-2 .premium-weather__forecast-item .premium-weather__temp-wrapper, .premium-daily-forecast__style-3 .premium-weather__forecast-item .premium-weather__temp-wrapper {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-column-gap: 6px;
+    column-gap: 6px;
+  }
+
+  .premium-daily-forecast__style-2 .premium-weather__forecast-item .premium-weather__forecast-item-data, .premium-daily-forecast__style-3 .premium-weather__forecast-item .premium-weather__forecast-item-data {
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .premium-daily-forecast__style-1 .premium-weather__forecast-item .premium-weather__temp-wrapper {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .premium-daily-forecast__style-1 .premium-weather__forecast-item .premium-weather__icon-wrapper i {
+    font-size: 50px;
+  }
+
+  .premium-daily-forecast__style-1 .premium-weather__forecast-item .premium-weather__icon-wrapper > svg,
+  .premium-daily-forecast__style-1 .premium-weather__forecast-item .premium-weather__icon-wrapper img,
+  .premium-daily-forecast__style-1 .premium-weather__forecast-item .premium-weather__icon-wrapper .premium-lottie-animation {
+    width: 50px;
+    height: 50px;
+  }
+
+  .premium-daily-forecast__style-2 .premium-weather__forecast-item .premium-weather__forecast-item-date {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+  }
+
+  .premium-daily-forecast__style-2 .premium-weather__forecast-item .premium-weather__forecast-item-data {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .premium-daily-forecast__style-2 .premium-weather__forecast-item .premium-weather__icon-wrapper i {
+    font-size: 45px;
+  }
+
+  .premium-daily-forecast__style-2 .premium-weather__forecast-item .premium-weather__icon-wrapper > svg,
+  .premium-daily-forecast__style-2 .premium-weather__forecast-item .premium-weather__icon-wrapper img,
+  .premium-daily-forecast__style-2 .premium-weather__forecast-item .premium-weather__icon-wrapper .premium-lottie-animation {
+    width: 45px;
+    height: 45px;
+  }
+
+  .premium-daily-forecast__style-3 .premium-weather__forecast-item {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .premium-daily-forecast__style-3 .premium-weather__forecast-item .premium-weather__forecast-item-data {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .premium-daily-forecast__style-3 .premium-weather__forecast-item .premium-weather__icon-wrapper i {
+    font-size: 40px;
+  }
+
+  .premium-daily-forecast__style-3 .premium-weather__forecast-item .premium-weather__icon-wrapper > svg,
+  .premium-daily-forecast__style-3 .premium-weather__forecast-item .premium-weather__icon-wrapper img,
+  .premium-daily-forecast__style-3 .premium-weather__forecast-item .premium-weather__icon-wrapper .premium-lottie-animation {
+    width: 40px;
+    height: 40px;
+  }
+
+  .premium-daily-forecast__style-4 .premium-weather__forecast {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+
+  .premium-daily-forecast__style-4 .premium-weather__forecast .premium-weather__forecast-item {
+    width: 100%;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-daily-forecast__style-4 .premium-weather__forecast .premium-weather__icon-wrapper i {
+    font-size: 30px;
+  }
+
+  .premium-daily-forecast__style-4 .premium-weather__forecast .premium-weather__icon-wrapper > svg,
+  .premium-daily-forecast__style-4 .premium-weather__forecast .premium-weather__icon-wrapper img,
+  .premium-daily-forecast__style-4 .premium-weather__forecast .premium-weather__icon-wrapper .premium-lottie-animation {
+    width: 30px;
+    height: 30px;
+  }
+
+  .premium-daily-forecast__style-4 .premium-weather__forecast .premium-weather__forecast-item-data {
+    gap: 50px;
+    margin-left: auto;
+  }
+
+  .premium-daily-forecast__style-4 .premium-weather__forecast .premium-weather__forecast-item-data > *:not(.premium-weather__icon-wrapper) {
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .premium-daily-forecast__style-1 .premium-weather__forecast-item,
+  .premium-daily-forecast__style-2 .premium-weather__forecast-item,
+  .premium-daily-forecast__style-3 .premium-weather__forecast-item,
+  .premium-daily-forecast__style-4 .premium-weather__forecast {
+    background-color: #F0F0F0;
+    padding: 15px;
+  }
+
+  .premium-daily-forecast__style-3 .premium-weather__forecast-item,
+  .premium-daily-forecast__style-4 .premium-weather__forecast {
+    border-radius: 15px;
+  }
+
+  .premium-daily-forecast__style-4 .premium-weather__forecast-item {
+    padding: 10px 0 10px 0;
+  }
+
+  /**Hourly-forecast-layout*/
+  .premium-hours-vertical .premium-weather__hourly-item,
+  .premium-weather__tab-content .premium-weather__hourly-item {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-hours-vertical .premium-weather__hourly-data,
+  .premium-weather__tab-content .premium-weather__hourly-data {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-column-gap: 50px;
+    column-gap: 50px;
+  }
+
+  .premium-hours-vertical .premium-weather__hourly-data > *,
+  .premium-weather__tab-content .premium-weather__hourly-data > * {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-column-gap: 5px;
+    column-gap: 5px;
+  }
+
+  .premium-hours-vertical .premium-weather__hourly-item-date {
+    font-size: 15px;
+  }
+
+  .premium-hours-vertical .premium-weather__hourly-item {
+    padding: 10px 0 10px 0;
+  }
+
+  .premium-hours-vertical .premium-weather__hourly-item .premium-weather__hourly-data i {
+    font-size: 15px;
+  }
+
+  .premium-hours-vertical .premium-weather__hourly-item .premium-weather__hourly-data svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .premium-hours-vertical .premium-weather__hourly-item .premium-weather__icon-wrapper i {
+    font-size: 30px;
+  }
+
+  .premium-hours-vertical .premium-weather__hourly-item .premium-weather__icon-wrapper > svg,
+  .premium-hours-vertical .premium-weather__hourly-item .premium-weather__icon-wrapper img,
+  .premium-hours-vertical .premium-weather__hourly-item .premium-weather__icon-wrapper .premium-lottie-animation {
+    width: 30px;
+    height: 30px;
+  }
+
+  .premium-hours-vertical .premium-weather__hourly-item .premium-weather__hourly-data > :not(.premium-weather__icon-wrapper) > span,
+  .premium-hours-vertical .premium-weather__hourly-item .premium-weather__temp-wrapper > span {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  /**End of Hourly-forecast-layout*/
+  /**Tabs Layout*/
+  .premium-weather__forecast-tabs-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__tabs-headers, .premium-weather__forecast-tabs-wrapper .premium-weather__weather-indicators {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__tabs-headers {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__tabs-headers li {
+    background: #F0F0F0;
+    border-radius: 10px;
+    padding: 10px 0 10px 0;
+    margin: 20px 10px 0 10px;
+    cursor: pointer;
+    -webkit-transition: 0.3s all ease-in-out;
+    transition: 0.3s all ease-in-out;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__tabs-headers li:hover {
+    background: #E4E3E3;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__tab-content:not(.current) {
+    display: none;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__weather-indicators {
+    width: 100%;
+    border-bottom: 1px solid #DEDEDE;
+    padding: 20px 0px 20px 0px;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__weather-indicators .premium-weather__weather-indicator,
+  .premium-weather__forecast-tabs-wrapper .premium-weather__weather-indicators .premium-weather__weather-data-wrapper {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__weather-indicators .premium-weather__weather-indicator {
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__weather-indicators .premium-weather__weather-indicator i {
+    font-size: 17px;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__weather-indicators .premium-weather__weather-indicator svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__weather-indicators .premium-weather__weather-data-wrapper {
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-column-gap: 50px;
+    column-gap: 50px;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__hourly-item > *,
+  .premium-weather__forecast-tabs-wrapper .premium-weather__weather-indicators > * {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__hourly-item-date,
+  .premium-weather__forecast-tabs-wrapper .premium-weather__tab-content .premium-weather__hourly-item > :not(.premium-weather__hourly-item-date):not(.premium-weather__icon-wrapper) {
+    font-size: 15px;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__hourly-item {
+    padding: 15px 0 15px 0;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__icon-wrapper i {
+    font-size: 30px;
+  }
+
+  .premium-weather__forecast-tabs-wrapper .premium-weather__icon-wrapper > svg,
+  .premium-weather__forecast-tabs-wrapper .premium-weather__icon-wrapper img,
+  .premium-weather__forecast-tabs-wrapper .premium-weather__icon-wrapper .premium-lottie-animation {
+    width: 30px;
+    height: 30px;
+  }
+
+  .premium-weather-space-between .premium-weather__tab-header {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+  }
+
+  /**End of Tabs Layout*/
+  /**Defaults*/
+  .premium-weather__layout-1 .premium-weather__hourly-forecast-wrapper,
+  .premium-weather__layout-3 .premium-weather__hourly-forecast-wrapper,
+  .premium-weather__layout-2.premium-weather__hourly-yes .premium-weather__extra-outer-wrapper {
+    background-color: #F0F0F0;
+    border-radius: 20px;
+    padding: 25px 15px 25px 15px;
+    margin: 25px 0 15px 0;
+  }
+
+  /**End of Defaults*/
+  /**Current Weather Responsive*/
+  .premium-cw-sec-inline .premium-weather__current-weather {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .premium-cw-sec-inline .premium-weather__current-weather > * {
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+  }
+
+  .premium-cw-sec-block .premium-weather__current-weather {
+    display: block;
+  }
+
+  .premium-weather__layout-1.premium-cw-block .premium-weather__basic-weather {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .premium-weather__layout-1.premium-cw-block .premium-weather__basic-weather .premium-weather__city-wrapper {
+    width: 100%;
+  }
+
+  .premium-weather__layout-1.premium-cw-inline .premium-weather__basic-weather {
+    -webkit-flex-wrap: unset;
+    -ms-flex-wrap: unset;
+    flex-wrap: unset;
+  }
+
+  .premium-weather__layout-1.premium-cw-inline .premium-weather__basic-weather .premium-weather__city-wrapper {
+    width: unset;
+  }
+
+  @media (min-width: 2400px) {
+    .premium-cw-sec-widescreen-inline .premium-weather__current-weather {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+    .premium-cw-sec-widescreen-inline .premium-weather__current-weather > * {
+      -webkit-order: 1;
+      -ms-flex-order: 1;
+      order: 1;
+    }
+    .premium-cw-sec-widescreen-block .premium-weather__current-weather {
+      display: block;
+    }
+    .premium-weather__layout-1.premium-cw-widescreen-block .premium-weather__basic-weather {
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .premium-weather__layout-1.premium-cw-widescreen-block .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: 100%;
+    }
+    .premium-weather__layout-1.premium-cw-widescreen-inline .premium-weather__basic-weather {
+      -webkit-flex-wrap: unset;
+      -ms-flex-wrap: unset;
+      flex-wrap: unset;
+    }
+    .premium-weather__layout-1.premium-cw-widescreen-inline .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: unset;
+    }
+  }
+
+  @media (max-width: 1366px) {
+    .premium-cw-sec-laptop-inline .premium-weather__current-weather {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+    .premium-cw-sec-laptop-inline .premium-weather__current-weather > * {
+      -webkit-order: 1;
+      -ms-flex-order: 1;
+      order: 1;
+    }
+    .premium-cw-sec-laptop-block .premium-weather__current-weather {
+      display: block;
+    }
+    .premium-weather__layout-1.premium-cw-laptop-block .premium-weather__basic-weather {
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .premium-weather__layout-1.premium-cw-laptop-block .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: 100%;
+    }
+    .premium-weather__layout-1.premium-cw-laptop-inline .premium-weather__basic-weather {
+      -webkit-flex-wrap: unset;
+      -ms-flex-wrap: unset;
+      flex-wrap: unset;
+    }
+    .premium-weather__layout-1.premium-cw-laptop-inline .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: unset;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .premium-cw-sec-tablet_extra-inline .premium-weather__current-weather {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+    .premium-cw-sec-tablet_extra-inline .premium-weather__current-weather > * {
+      -webkit-order: 1;
+      -ms-flex-order: 1;
+      order: 1;
+    }
+    .premium-cw-sec-tablet_extra-block .premium-weather__current-weather {
+      display: block;
+    }
+    .premium-weather__layout-1.premium-cw-tablet_extra-block .premium-weather__basic-weather {
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .premium-weather__layout-1.premium-cw-tablet_extra-block .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: 100%;
+    }
+    .premium-weather__layout-1.premium-cw-tablet_extra-inline .premium-weather__basic-weather {
+      -webkit-flex-wrap: unset;
+      -ms-flex-wrap: unset;
+      flex-wrap: unset;
+    }
+    .premium-weather__layout-1.premium-cw-tablet_extra-inline .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: unset;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .premium-cw-sec-tablet-inline .premium-weather__current-weather {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+    .premium-cw-sec-tablet-inline .premium-weather__current-weather > * {
+      -webkit-order: 1;
+      -ms-flex-order: 1;
+      order: 1;
+    }
+    .premium-cw-sec-tablet-block .premium-weather__current-weather {
+      display: block;
+    }
+    .premium-weather__layout-1.premium-cw-tablet-block .premium-weather__basic-weather {
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .premium-weather__layout-1.premium-cw-tablet-block .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: 100%;
+    }
+    .premium-weather__layout-1.premium-cw-tablet-inline .premium-weather__basic-weather {
+      -webkit-flex-wrap: unset;
+      -ms-flex-wrap: unset;
+      flex-wrap: unset;
+    }
+    .premium-weather__layout-1.premium-cw-tablet-inline .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: unset;
+    }
+  }
+
+  @media (max-width: 880px) {
+    .premium-cw-sec-mobile_extra-inline .premium-weather__current-weather {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+    .premium-cw-sec-mobile_extra-inline .premium-weather__current-weather > * {
+      -webkit-order: 1;
+      -ms-flex-order: 1;
+      order: 1;
+    }
+    .premium-cw-sec-mobile_extra-block .premium-weather__current-weather {
+      display: block;
+    }
+    .premium-weather__layout-1.premium-cw-mobile_extra-block .premium-weather__basic-weather {
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .premium-weather__layout-1.premium-cw-mobile_extra-block .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: 100%;
+    }
+    .premium-weather__layout-1.premium-cw-mobile_extra-inline .premium-weather__basic-weather {
+      -webkit-flex-wrap: unset;
+      -ms-flex-wrap: unset;
+      flex-wrap: unset;
+    }
+    .premium-weather__layout-1.premium-cw-mobile_extra-inline .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: unset;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .premium-cw-sec-mobile-inline .premium-weather__current-weather {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+    .premium-cw-sec-mobile-inline .premium-weather__current-weather > * {
+      -webkit-order: 1;
+      -ms-flex-order: 1;
+      order: 1;
+    }
+    .premium-cw-sec-mobile-block .premium-weather__current-weather {
+      display: block;
+    }
+    .premium-weather__layout-1.premium-cw-mobile-block .premium-weather__basic-weather {
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .premium-weather__layout-1.premium-cw-mobile-block .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: 100%;
+    }
+    .premium-weather__layout-1.premium-cw-mobile-inline .premium-weather__basic-weather {
+      -webkit-flex-wrap: unset;
+      -ms-flex-wrap: unset;
+      flex-wrap: unset;
+    }
+    .premium-weather__layout-1.premium-cw-mobile-inline .premium-weather__basic-weather .premium-weather__city-wrapper {
+      width: unset;
+    }
+  }
+
+  /**End of Current Weather Responsive*/
+
 /********** Premium Woo Products **********/
 /******************************************/
 .ast-single-post .entry-content .premium-woocommerce a {
@@ -9525,7 +12056,7 @@ ul.premium-person-social-list {
             flex-wrap: wrap;
     list-style: none outside;
     -webkit-column-gap: 0;
-            column-gap: 0;
+         column-gap: 0;
 }
 
 .premium-woocommerce .premium-woo-products-inner ul.products li.product {
@@ -10919,4 +13450,12 @@ because it's rendered as div with custom SVG code.
     -webkit-animation: spin 2s linear infinite;
             animation: spin 2s linear infinite;
     margin: 0 auto;
+}
+
+.premium-error-notice a {
+    color: #252c59; }
+
+.premium-addons__v-hidden {
+    visibility: hidden;
+    opacity: 0;
 }

@@ -179,7 +179,7 @@ export const getGridItem = ( site ) => {
 		image: imageUrl,
 		title: decodeEntities( site.title ),
 		badge:
-			'agency-mini' === site[ 'astra-sites-type' ]
+			'free' !== site[ 'astra-sites-type' ]
 				? __( 'Premium', 'astra-sites' )
 				: '',
 		...site,

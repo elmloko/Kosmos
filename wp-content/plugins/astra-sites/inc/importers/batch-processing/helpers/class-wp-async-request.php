@@ -135,7 +135,7 @@ if ( ! class_exists( 'WP_Async_Request' ) ) {
 				'timeout'   => 0.01,
 				'blocking'  => false,
 				'body'      => $this->data,
-				'cookies'   => $_COOKIE, //phpcs:ignore WordPressVIPMinimum.Variables.RestrictedVariables.cache_constraints___COOKIE
+				'cookies'   => $_COOKIE, //phpcs:ignore WordPressVIPMinimum.Variables.RestrictedVariables.cache_constraints___COOKIE -- 3rd party library.
 				'sslverify' => apply_filters( 'https_local_ssl_verify', false ),
 			);
 		}
@@ -147,7 +147,7 @@ if ( ! class_exists( 'WP_Async_Request' ) ) {
 		 */
 		public function maybe_handle() {
 			// Don't lock up other requests while processing.
-			session_write_close(); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.session_session_write_close
+			session_write_close(); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.session_session_write_close -- 3rd party library.
 
 			check_ajax_referer( $this->identifier, 'nonce' );
 

@@ -1,14 +1,12 @@
 <?php
 
-namespace Noodlehaus\Writer\Test;
+namespace Noodlehaus\Test\Writer;
 
 use Noodlehaus\Writer\Xml;
-use Yoast\PHPUnitPolyfills\Polyfills\ExpectException;
-use Yoast\PHPUnitPolyfills\TestCases\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class XmlTest extends TestCase
 {
-    use ExpectException;
     /**
      * @var Xml
      */
@@ -28,7 +26,7 @@ class XmlTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function set_up()
+    protected function setUp(): void
     {
         $this->writer = new Xml();
         $this->temp_file = tempnam(sys_get_temp_dir(), 'config.xml');
@@ -57,18 +55,18 @@ class XmlTest extends TestCase
     }
 
     /**
-     * @covers Noodlehaus\Writer\Xml::getSupportedExtensions()
+     * @covers \Noodlehaus\Writer\Xml::getSupportedExtensions()
      */
     public function testGetSupportedExtensions()
     {
         $expected = ['xml'];
         $actual = $this->writer->getSupportedExtensions();
-        $this->assertEquals($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 
     /**
-     * @covers Noodlehaus\Writer\Xml::toString()
-     * @covers Noodlehaus\Writer\Xml::toXML()
+     * @covers \Noodlehaus\Writer\Xml::toString()
+     * @covers \Noodlehaus\Writer\Xml::toXML()
      */
     public function testEncodeXml()
     {
@@ -78,13 +76,13 @@ class XmlTest extends TestCase
 <config><application><name>configuration</name><secret>s3cr3t</secret></application><host>localhost</host><port>80</port><servers><server1>host1</server1><server2>host2</server2><server3>host3</server3></servers></config>
 
 EOD;
-        $this->assertEquals($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 
     /**
-     * @covers Noodlehaus\Writer\Xml::toFile()
-     * @covers Noodlehaus\Writer\Xml::toString()
-     * @covers Noodlehaus\Writer\Xml::toXML()
+     * @covers \Noodlehaus\Writer\Xml::toFile()
+     * @covers \Noodlehaus\Writer\Xml::toString()
+     * @covers \Noodlehaus\Writer\Xml::toXML()
      */
     public function testWriteXml()
     {
@@ -95,8 +93,8 @@ EOD;
     }
 
     /**
-     * @covers Noodlehaus\Writer\Xml::toFile()
-     * @covers Noodlehaus\Writer\Xml::toXML()
+     * @covers \Noodlehaus\Writer\Xml::toFile()
+     * @covers \Noodlehaus\Writer\Xml::toXML()
      */
     public function testUnwritableFile()
     {

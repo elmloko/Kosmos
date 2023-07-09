@@ -433,7 +433,7 @@ if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 		 */
 		public function import( $file ) {
 			add_filter( 'import_post_meta_key', array( $this, 'is_valid_meta_key' ) );
-			add_filter( 'http_request_timeout', array( &$this, 'bump_request_timeout' ) ); //phpcs:ignore WordPressVIPMinimum.Hooks.RestrictedHooks.http_request_timeout
+			add_filter( 'http_request_timeout', array( &$this, 'bump_request_timeout' ) ); //phpcs:ignore WordPressVIPMinimum.Hooks.RestrictedHooks.http_request_timeout -- We need this to avoid timeout on slow servers while installing theme, plugin etc.
 
 			$result = $this->import_start( $file );
 			if ( is_wp_error( $result ) ) {
@@ -1989,7 +1989,7 @@ if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 
 			// request failed.
 			if ( is_wp_error( $response ) ) {
-				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink
+				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink -- 3rd party library.
 				return $response;
 			}
 
@@ -1997,7 +1997,7 @@ if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 
 			// make sure the fetch was successful.
 			if ( 200 !== $code ) {
-				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink
+				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink -- 3rd party library.
 				return new WP_Error(
 					'import_file_error',
 					sprintf(
@@ -2014,18 +2014,18 @@ if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 			$headers  = wp_remote_retrieve_headers( $response );
 
 			if ( isset( $headers['content-length'] ) && $filesize !== (int) $headers['content-length'] ) {
-				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink
+				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink -- 3rd party library.
 				return new WP_Error( 'import_file_error', __( 'Remote file is incorrect size', 'wordpress-importer' ) );
 			}
 
 			if ( 0 === $filesize ) {
-				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink
+				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink -- 3rd party library.
 				return new WP_Error( 'import_file_error', __( 'Zero size file downloaded', 'wordpress-importer' ) );
 			}
 
 			$max_size = (int) $this->max_attachment_size();
 			if ( ! empty( $max_size ) && $filesize > $max_size ) {
-				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink
+				unlink( $upload['file'] ); //phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.file_ops_unlink -- 3rd party library.
 				/* translators: %s max file size. */
 				$message = sprintf( __( 'Remote file is too large, limit is %s', 'wordpress-importer' ), size_format( $max_size ) );
 				return new WP_Error( 'import_file_error', $message );
@@ -2410,7 +2410,7 @@ if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 		 */
 		protected function prefill_existing_posts() {
 			global $wpdb;
-			$posts = $wpdb->get_results( "SELECT ID, guid FROM {$wpdb->posts}" ); //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$posts = $wpdb->get_results( "SELECT ID, guid FROM {$wpdb->posts}" ); //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- 3rd party library.
 
 			foreach ( $posts as $item ) {
 				$this->exists['post'][ $item->guid ] = $item->ID;
@@ -2461,7 +2461,7 @@ if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 		 */
 		protected function prefill_existing_comments() {
 			global $wpdb;
-			$posts = $wpdb->get_results( "SELECT comment_ID, comment_author, comment_date FROM {$wpdb->comments}" ); //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$posts = $wpdb->get_results( "SELECT comment_ID, comment_author, comment_date FROM {$wpdb->comments}" ); //phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- 3rd party library.
 
 			foreach ( $posts as $item ) {
 				$exists_key                             = sha1( $item->comment_author . ':' . $item->comment_date );

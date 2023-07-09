@@ -1,14 +1,12 @@
 <?php
 
-namespace Noodlehaus\Writer\Test;
+namespace Noodlehaus\Test\Writer;
 
 use Noodlehaus\Writer\Yaml;
-use Yoast\PHPUnitPolyfills\Polyfills\ExpectException;
-use Yoast\PHPUnitPolyfills\TestCases\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class YamlTest extends TestCase
 {
-    use ExpectException;
     /**
      * @var Yaml
      */
@@ -28,7 +26,7 @@ class YamlTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function set_up()
+    protected function setUp(): void
     {
         $this->writer = new Yaml();
         $this->temp_file = tempnam(sys_get_temp_dir(), 'config.yaml');
@@ -57,17 +55,17 @@ class YamlTest extends TestCase
     }
 
     /**
-     * @covers Noodlehaus\Writer\Yaml::getSupportedExtensions()
+     * @covers \Noodlehaus\Writer\Yaml::getSupportedExtensions()
      */
     public function testGetSupportedExtensions()
     {
         $expected = ['yaml'];
         $actual = $this->writer->getSupportedExtensions();
-        $this->assertEquals($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 
     /**
-     * @covers Noodlehaus\Writer\Yaml::toString()
+     * @covers \Noodlehaus\Writer\Yaml::toString()
      */
     public function testEncodeYaml()
     {
@@ -84,12 +82,12 @@ servers:
     - host3
 
 EOD;
-        $this->assertEquals($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 
     /**
-     * @covers Noodlehaus\Writer\Yaml::toString()
-     * @covers Noodlehaus\Writer\Yaml::toFile()
+     * @covers \Noodlehaus\Writer\Yaml::toString()
+     * @covers \Noodlehaus\Writer\Yaml::toFile()
      */
     public function testWriteYaml()
     {
@@ -99,8 +97,8 @@ EOD;
     }
 
     /**
-     * @covers Noodlehaus\Writer\Yaml::toString()
-     * @covers Noodlehaus\Writer\Yaml::toFile()
+     * @covers \Noodlehaus\Writer\Yaml::toString()
+     * @covers \Noodlehaus\Writer\Yaml::toFile()
      */
     public function testUnwritableFile()
     {

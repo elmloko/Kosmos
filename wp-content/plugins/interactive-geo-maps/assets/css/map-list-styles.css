@@ -1,0 +1,34 @@
+.igm_preview_list ul.igm_preview_main_list {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+	padding:0px;
+	max-width:100%;
+	flex-wrap: wrap;
+}
+
+.igm_preview_list ul.igm_preview_main_list li {
+	text-align: left;
+	padding: 0 25px 0px 0px;
+	width: 265px;
+	font-size: 0.8em;
+	white-space: nowrap;
+	margin: 0 0 5px 0;
+}
+
+.igm_preview_list ul.igm_preview_main_list li .igm_small_list_text {
+	font-size:0.8em;
+}
+
+.igm_preview_list h2 {
+	text-align: center;
+}
+
+h2.igm_preview_list_title {
+	padding:20px 0;
+}
+
+.igm_preview_map_list_dropdown {
+	margin:20px 0;
+	width:100%;
+}

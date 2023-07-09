@@ -70,12 +70,12 @@ const AdvancedSettings = () => {
 
 	const notActivePlugins =
 		requiredPlugins !== null
-			? requiredPlugins.required_plugins.inactive
+			? requiredPlugins.required_plugins?.inactive
 			: [];
 
 	const notInstalled =
 		requiredPlugins !== null
-			? requiredPlugins.required_plugins.notinstalled
+			? requiredPlugins.required_plugins?.notinstalled
 			: [];
 
 	const themeStatusClass =

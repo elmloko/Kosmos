@@ -209,3 +209,30 @@ function astra_sites_empty_post_excerpt( $post_id = 0 ) {
 		)
 	);
 }
+
+/**
+ * Get the WP Forms URL.
+ * 
+ * @since 3.2.4
+ * @param int $id  The template ID.
+ * @return string
+ */
+function astra_sites_get_wp_forms_url( $id ) {
+	$demo_data = get_option( 'astra_sites_import_elementor_data_' . $id, array() );
+	if ( empty( $demo_data ) ) {
+		return '';
+	}
+
+	if ( isset( $demo_data['type'] ) ) {
+		$type = $demo_data['type'];
+		if ( 'site-pages' === $type && isset( $demo_data['astra-site-wpforms-path'] ) ) {
+			return $demo_data['astra-site-wpforms-path'];
+		}
+
+		if ( 'astra-blocks' === $type && isset( $demo_data['post-meta'] ) ) {
+			return $demo_data['post-meta']['astra-site-wpforms-path'];
+		}
+	}
+
+	return '';
+}

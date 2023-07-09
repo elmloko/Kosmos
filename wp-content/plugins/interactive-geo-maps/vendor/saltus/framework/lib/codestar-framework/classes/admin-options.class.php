@@ -59,7 +59,7 @@ if ( ! class_exists( 'CSF_Options' ) ) {
       'admin_bar_menu_priority' => 50,
 
       // footer
-      'footer_text'             => '',
+      'footer_text'             => 'Thank you for creating with Codestar Framework',
       'footer_after'            => '',
       'footer_credit'           => '',
 
@@ -122,71 +122,14 @@ if ( ! class_exists( 'CSF_Options' ) ) {
       return new self( $key, $params );
     }
 
-    public function pre_tabs( $sections ) {
-
-      $result  = array();
-      $parents = array();
-      $count   = 100;
-
-      foreach ( $sections as $key => $section ) {
-        if ( ! empty( $section['parent'] ) ) {
-          $section['priority'] = ( isset( $section['priority'] ) ) ? $section['priority'] : $count;
-          $parents[$section['parent']][] = $section;
-          unset( $sections[$key] );
-        }
-        $count++;
-      }
-
-      foreach ( $sections as $key => $section ) {
-        $section['priority'] = ( isset( $section['priority'] ) ) ? $section['priority'] : $count;
-        if ( ! empty( $section['id'] ) && ! empty( $parents[$section['id']] ) ) {
-          $section['subs'] = wp_list_sort( $parents[$section['id']], array( 'priority' => 'ASC' ), 'ASC', true );
-        }
-        $result[] = $section;
-        $count++;
-      }
-
-      return wp_list_sort( $result, array( 'priority' => 'ASC' ), 'ASC', true );
-    }
-
-    public function pre_fields( $sections ) {
-
-      $result  = array();
-
-      foreach ( $sections as $key => $section ) {
-        if ( ! empty( $section['fields'] ) ) {
-          foreach ( $section['fields'] as $field ) {
-            $result[] = $field;
-          }
-        }
-      }
-
-      return $result;
-    }
-
-    public function pre_sections( $sections ) {
-
-      $result = array();
-
-      foreach ( $this->pre_tabs as $tab ) {
-        if ( ! empty( $tab['subs'] ) ) {
-          foreach ( $tab['subs'] as $sub ) {
-            $sub['ptitle'] = $tab['title'];
-            $result[] = $sub;
-          }
-        }
-        if ( empty( $tab['subs'] ) ) {
-          $result[] = $tab;
-        }
-      }
-
-      return $result;
-    }
-
     // add admin bar menu
     public function add_admin_bar_menu( $wp_admin_bar ) {
 
-      if( is_network_admin() && ( $this->args['database'] !== 'network' || $this->args['show_in_network'] !== true ) ) {
+      if ( ! current_user_can( $this->args['menu_capability'] ) ) {
+        return;
+      }
+
+      if ( is_network_admin() && ( $this->args['database'] !== 'network' || $this->args['show_in_network'] !== true ) ) {
         return;
       }
 
@@ -485,13 +428,14 @@ if ( ! class_exists( 'CSF_Options' ) ) {
 
       }
 
-      add_filter( 'admin_footer_text', array( $this, 'add_admin_footer_text' ) );
+      if ( ! empty( $this->args['footer_credit'] ) ) {
+        add_filter( 'admin_footer_text', array( $this, 'add_admin_footer_text' ) );
+      }
 
     }
 
     public function add_admin_footer_text() {
-      $default = 'Thank you for creating with <a href="http://codestarframework.com/" target="_blank">Codestar Framework</a>';
-      echo ( ! empty( $this->args['footer_credit'] ) ) ? $this->args['footer_credit'] : $default;
+      echo wp_kses_post( $this->args['footer_credit'] );
     }
 
     public function error_check( $sections, $err = '' ) {

@@ -16,7 +16,10 @@
 		<# } ); #>
 	</select>
 </div>
+
+<div class="premium-templates-notice">
 	<p><?php echo wp_kses_post( __( 'Having an issue inserting <b>Magic Scroll addon</b> templates? Check this ', 'premium-addons-for-elementor' ) ); ?><a href='<?php echo esc_attr( 'https://premiumaddons.com/docs/settings-not-saved-in-elementor-magic-scroll-addon/' ); ?>' target='_blank'><?php echo wp_kses_post( __( '<b>article</b>', 'premium-addons-for-elementor' ) ); ?></a></p>
+</div>
 <#
 	}
 #>

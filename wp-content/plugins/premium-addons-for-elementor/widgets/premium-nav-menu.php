@@ -35,14 +35,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Premium_Nav_Menu extends Widget_Base {
 
 	/**
+	 * Template Instance
+	 *
+	 * @var template_instance
+	 */
+	protected $template_instance;
+
+	/**
 	 * Get Elementor Helper Instance.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 */
 	public function getTemplateInstance() {
-		$this->template_instance = Premium_Template_Tags::getInstance();
-		return $this->template_instance;
+		return $this->template_instance = Premium_Template_Tags::getInstance();
 	}
 
 	/**
@@ -4468,7 +4474,7 @@ class Premium_Nav_Menu extends Widget_Base {
 		}
 
 		$is_edit_mode = \Elementor\Plugin::$instance->editor->is_edit_mode();
-        $hidden_style   = $is_edit_mode ? '' : 'visibility:hidden; opacity:0;';
+		$hidden_style = $is_edit_mode ? '' : 'visibility:hidden; opacity:0;';
 
 		$this->add_render_attribute(
 			'wrapper',
@@ -4478,7 +4484,7 @@ class Premium_Nav_Menu extends Widget_Base {
 					'premium-nav-widget-container',
 					'premium-nav-pointer-' . $settings['pointer'],
 				),
-                'style' => $hidden_style
+				'style'         => $hidden_style,
 			)
 		);
 

@@ -3,6 +3,7 @@
 
     function handleLiveEditor() {
 
+        // close model events.
         $('.eicon-close').on('click', closeModal);
 
         $('#pa-insert-live-temp').on('click', function () {
@@ -10,6 +11,13 @@
             closeModal(true);
         });
 
+        $(document).on('click', '.premium-live-editor-iframe-modal', function (e) {
+            if ($(e.target).closest(".dialog-lightbox-widget-content").length < 1) {
+                closeModal();
+            }
+        });
+
+        // resize model event.
         $('.premium-live-editor-iframe-modal .premium-expand').on('click', function () {
 
             if ($(this).find(' > i').hasClass('eicon-frame-expand')) {
@@ -21,15 +29,10 @@
             }
         });
 
-        $(document).on('click', '.premium-live-editor-iframe-modal', function (e) {
-            if ($(e.target).closest(".dialog-lightbox-widget-content").length < 1) {
-                closeModal();
-            }
-        });
-
         elementor.channels.editor.on('createLiveTemp', function (e) {
 
             var widgetId = getTemplateKey(e),
+                tempType = getTemplateType(e),
                 $modalContainer = $('.premium-live-editor-iframe-modal'),
                 paIframe = $modalContainer.find("#pa-live-editor-control-iframe"),
                 $lightboxLoading = $modalContainer.find(".dialog-lightbox-loading"),
@@ -58,11 +61,17 @@
                     action: 'handle_live_editor',
                     security: liveEditor.nonce,
                     key: widgetId,
+                    type: tempType
                 },
                 success: function (res) {
 
                     paIframe.attr("src", res.data.url);
                     paIframe.attr("data-premium-temp-id", res.data.id);
+
+                    if ( 'loop' === tempType ) {
+                        paIframe.attr("data-premium-temp-type", tempType);
+                    }
+
                     $('#premium-live-temp-title').val(res.data.title);
 
                     paIframe.on("load", function () {
@@ -85,6 +94,10 @@
                             settingsToChange[tempSelectorId] = '';
                             settingsToChange[liveTempId] = $('#premium-live-temp-title').val();
 
+                            if ( ['loop', 'grid'].includes(tempType) ) {
+                                settingsToChange[ 'pa_' + tempType + '_live_temp_id'] = res.data.id;
+                            }
+
                             $(".premium-live-temp-title").removeClass("control-hidden");
                             $e.run('document/elements/settings', { container: e.container, settings: settingsToChange, options: { external: !0 } });
 
@@ -103,7 +116,11 @@
         });
     }
 
-    function checkTempValidity(tempID) {
+    /**
+     * Helper Funcitons.
+     */
+
+    function checkTempValidity(tempID, tempType) {
 
         if ('' !== tempID) {
             $.ajax({
@@ -114,6 +131,7 @@
                     action: 'check_temp_validity',
                     security: liveEditor.nonce,
                     templateID: tempID,
+                    tempType: tempType
                 },
                 success: function (res) {
                     console.log(res.data);
@@ -136,6 +154,24 @@
             control_id = e._parent.model.attributes._id ? e._parent.model.attributes._id : '';
 
         return widget.data('id') + control_id;
+    }
+
+    /**
+     * Check the template type.
+     * returns 'loop' if the button type contains "loop-item" to indicate we're creating/editing a loop template.
+     *
+     * @param {Object} e click event
+     * @return {string}
+     */
+    function getTemplateType(e) {
+        var classes = e.model.attributes.button_type;
+
+        if ( classes.includes('loop-temp') ) {
+            return 'loop';
+        } else if ( classes.includes('grid-temp') ) {
+            return 'grid';
+        }
+        // return classes.includes('loop-temp') ? 'loop' : '';
     }
 
     function minimizeModal(_this) {
@@ -174,16 +210,18 @@
         minimizeModal($('.premium-live-editor-iframe-modal .premium-expand'));
 
         if (!inserted) {
-            var tempId = $(".premium-live-editor-iframe-modal #pa-live-editor-control-iframe").attr('data-premium-temp-id');
+            var tempId = $(".premium-live-editor-iframe-modal #pa-live-editor-control-iframe").attr('data-premium-temp-id'),
+                tempType = $(".premium-live-editor-iframe-modal #pa-live-editor-control-iframe").attr('data-premium-temp-type');
 
             if (undefined !== tempId && '' !== tempId) {
-                checkTempValidity(tempId);
+                checkTempValidity(tempId, tempType);
             }
         }
 
         // reset temp id/src attribute.
         $(".premium-live-editor-iframe-modal #pa-live-editor-control-iframe").attr({
             'data-premium-temp-id': '',
+            'data-premium-temp-type': '',
             'src': ''
         });
     }

@@ -377,6 +377,19 @@
                 sectionId = self.getLastSection(sections);
             }
 
+            if ($target.closest('.premium_maps_map_height').length > 0) {
+
+                var $closestMapSettings = $target.closest('.premium_maps_map_height').data('settings');
+
+                if ($closestMapSettings.scrollwheel)
+                    return;
+            }
+
+            //Swiper is added here to prevent scrolling on swipe left/right on touch devices.
+            if ($('.premium-modal-open').length > 0 || $target.closest('.e-widget-swiper').length > 0) {
+                return;
+            }
+
             var curTime = new Date().getTime();
 
             if (scrollings.length > 149) {
@@ -788,6 +801,10 @@
                     return;
             }
 
+            //We don't want to return if swiper on desktops.
+            if ($('.premium-modal-open').length > 0) {
+                return;
+            }
 
             var curTime = new Date().getTime();
 
