@@ -42,11 +42,10 @@
 				if (-1 < tabsPosition) {
 					aboveTabsHtml = settingHtml.substr(0, tabsPosition);
 
-					var tabsHtml = $('.wrap .nav-tab-wrapper').clone().wrap('<div>').parent().html(),
-						ajaxUrl  = <?php echo Freemius::ajax_url() ?>;
+					var tabsHtml = $('.wrap .nav-tab-wrapper').clone().wrap('<div>').parent().html();
 
 					$.ajax({
-							url      : ajaxUrl + (ajaxUrl.includes('?') ? '&' : '?') + $.param({
+						url        : <?php echo Freemius::ajax_url() ?> + '?' + $.param({
 							action   : '<?php echo $fs->get_ajax_action( 'store_tabs' ) ?>',
 							security : '<?php echo $fs->get_ajax_security( 'store_tabs' ) ?>',
 							module_id: '<?php echo $fs->get_id() ?>'

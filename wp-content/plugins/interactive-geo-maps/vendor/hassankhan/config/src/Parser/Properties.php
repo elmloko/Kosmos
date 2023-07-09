@@ -2,6 +2,8 @@
 
 namespace Noodlehaus\Parser;
 
+use Noodlehaus\Exception\ParseException;
+
 /**
  * Properties parser.
  *

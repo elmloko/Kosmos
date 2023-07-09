@@ -47,7 +47,7 @@ class Map {
 		$options   = get_option( 'interactive-maps' );
 		$map_meta  = $this->get_meta( $id );
 		$main_meta = [
-			'regions'      => [],
+			'regions' => [],
 			'roundMarkers' => [],
 		];
 
@@ -83,7 +83,7 @@ class Map {
 		// meta
 		if ( isset( $atts['meta'] ) ) {
 			$json_meta = json_decode( $atts['meta'], true );
-			if ( json_last_error() === 0 ) {
+			if( json_last_error() === 0 ){
 				$main_meta = array_merge( $main_meta, $json_meta );
 			}
 		}
@@ -102,6 +102,7 @@ class Map {
 				$main_meta['roundMarkers'] = array_merge( $main_meta['roundMarkers'], $json_meta );
 			}
 		}
+
 
 		// in case we use this shortcode for demo purposes, the map that will render might ne in the URL
 		if ( isset( $atts['demo'] ) && isset( $_GET['map'] ) ) {
@@ -155,25 +156,20 @@ class Map {
 			$meta['roundMarkers'] = [];
 		}
 
-		if ( empty( $meta['visual'] ) ) {
-			$meta['visual'] = [];
-		}
+        if( empty( $meta['visual'] ) ){
+            $meta['visual'] = [];
+        }
 
-		// make sure map height is not empty or 0
-		$meta['visual']['paddingTop'] = isset( $meta['visual']['paddingTop'] ) && ! empty( $meta['visual']['paddingTop'] ) && $meta['visual']['paddingTop'] !== '0' ? $meta['visual']['paddingTop'] : '56.25';
+        // make sure map height is not empty or 0
+        $meta['visual']['paddingTop'] = isset( $meta['visual']['paddingTop'] ) && ! empty( $meta['visual']['paddingTop'] ) && $meta['visual']['paddingTop'] !== '0' ? $meta['visual']['paddingTop'] : '56.25';
 
 		// check if we need to process regions convertion
 		if ( isset( $meta['regions'] ) && ( ! isset( $this->options['dictionary'] ) || ( isset( $this->options['dictionary'] ) && $this->options['dictionary'] ) ) ) {
 			$meta['regions'] = $this->process_regions_dictionary( $id, $meta['regions'] );
 		}
 
-		$render_tooltip_mode = false;
-		if ( ! empty( $this->options['tooltip_render_html'] ) ) {
-			$render_tooltip_mode = (bool) $this->options['tooltip_render_html'];
-		}
-
-		$meta['regions']      = isset( $meta['regions'] ) ? $this->tooltip_nl2br( $id, $meta['regions'], $render_tooltip_mode ) : array();
-		$meta['roundMarkers'] = isset( $meta['roundMarkers'] ) ? $this->tooltip_nl2br( $id, $meta['roundMarkers'], $render_tooltip_mode ) : array();
+		$meta['regions']      = isset( $meta['regions'] ) ? $this->tooltip_nl2br( $id, $meta['regions'] ) : array();
+		$meta['roundMarkers'] = isset( $meta['roundMarkers'] ) ? $this->tooltip_nl2br( $id, $meta['roundMarkers'] ) : array();
 
 		if ( ! empty( $meta['map'] ) ) {
 			$meta['urls'] = [ $meta['map'] ];
@@ -181,10 +177,8 @@ class Map {
 			$meta['urls'] = $this->convert_source_urls( $meta['urls'] );
 		}
 
-		$combine = isset( $meta['combineRegions'] ) ? $meta['combineRegions'] : false;
-
 		// merge entries with same ID
-		$meta['regions'] = $this->merge_entries_with_same_id( $meta['regions'], $combine );
+		$meta['regions'] = $this->merge_entries_with_same_id( $meta['regions'] );
 
 		do_action( 'igm_prepare_meta_actions', $meta, 10 );
 
@@ -194,40 +188,33 @@ class Map {
 		return $meta;
 	}
 
-	/**
-	 * Filter an array of arrays by removing or combining entries with the same ID.
-	 *
-	 * @param array $data The input array of arrays to filter.
-	 * @param bool $combine Whether to combine the 'content' property for entries with the same ID.
-	 *             If true, the 'content' property will be combined, otherwise only the last entry will be kept.
-	 * @return array The filtered array of arrays.
-	 */
-	function merge_entries_with_same_id( $data, $combine ) {
+	function merge_entries_with_same_id( $data ) {
 
 		if( ! is_array( $data ) ){
 			return $data;
 		}
 
-		$output = array();
-		$temp = array();
+		// initialise our new array
+		$newArray = array();
+		// loop through each entry from the original array in turn
+		foreach($data as $entry) {
 
-		foreach ($data as $entry) {
+			if( ! isset( $entry['id'] ) ){
+				continue;
+			}
+
 			$id = $entry['id'];
-			if (!isset($temp[$id])) {
-				$temp[$id] = $entry;
+			if( isset( $newArray[$id] ) ){
+				$newArray[$id] = array_merge( $entry, $newArray[$id] );
 			} else {
-				if ($combine) {
-					$temp[$id]['content'] .= '<div class="igm_combined_content_seperator"></div>' . $entry['content'];
-				} else {
-					$temp[$id] = $entry;
-				}
+				$newArray[$id] = $entry;
 			}
 		}
-		foreach ($temp as $entry) {
-			$output[] = $entry;
-		}
-		return $output;
 
+		//  Reset top-level keys to numerics
+		$newArray = array_values( $newArray );
+
+		return $newArray;
 	}
 
 	/**
@@ -237,12 +224,9 @@ class Map {
 	 * @param array  $entries
 	 * @return array $entries
 	 */
-	private function tooltip_nl2br( int $id, array $entries = [], $html_mode = false ) {
+	function tooltip_nl2br( int $id, array $entries = [] ) {
 
 		if ( empty( $entries ) ) {
-			return $entries;
-		}
-		if ( $html_mode === true ) {
 			return $entries;
 		}
 
@@ -454,10 +438,13 @@ class Map {
 		$before = apply_filters( 'igm_map_before', $before, $id );
 		$after  = apply_filters( 'igm_map_after', $after, $id );
 
-		$height       = isset( $this->meta['visual']['paddingTop'] ) ? floatval( $this->meta['visual']['paddingTop'] ) : '56.25';
-		$heightMobile = isset( $this->meta['visual']['paddingTopMobile'] ) ? floatval( $this->meta['visual']['paddingTopMobile'] ) : '';
-		$max_width    = isset( $this->meta['visual']['maxWidth'] ) && '' !== $this->meta['visual']['maxWidth'] && '0' !== $this->meta['visual']['maxWidth'] ? floatval( $this->meta['visual']['maxWidth'] ) : '2200';
+		$height       = isset( $this->meta['visual']['paddingTop'] ) ? intval( $this->meta['visual']['paddingTop'] ) : '56.25';
+		$heightMobile = isset( $this->meta['visual']['paddingTopMobile'] ) ? intval( $this->meta['visual']['paddingTopMobile'] ) : '';
 
+		// if percentage sign was included, remove it
+		$height       = (float) strpos( $height, '%' ) !== false ? str_replace( '%', '', $height ) : $height;
+		$heightMobile = (float) strpos( $heightMobile, '%' ) !== false ? str_replace( '%', '', $heightMobile ) : $heightMobile;
+		$max_width    = (float) isset( $this->meta['visual']['maxWidth'] ) && '' !== $this->meta['visual']['maxWidth'] && '0' !== $this->meta['visual']['maxWidth'] ? intval( $this->meta['visual']['maxWidth'] ) : '2200';
 		$map_classes  = apply_filters( 'igm_mapbox_classes', 'map_box' );
 
 		// add percentage values

@@ -50,20 +50,15 @@ class Premium_Icon_List extends Widget_Base {
 	}
 
 	/**
-	 * Template Instance
-	 *
-	 * @var template_instance
-	 */
-	protected $template_instance;
-
-	/**
 	 * Get Elementor Helper Instance.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 */
 	public function getTemplateInstance() {
-		return $this->template_instance = Premium_Template_Tags::getInstance();
+		$this->template_instance = Premium_Template_Tags::getInstance();
+
+		return $this->template_instance;
 	}
 
 	/**
@@ -198,8 +193,8 @@ class Premium_Icon_List extends Widget_Base {
 			array(
 				'label'       => __( 'Title', 'premium-addons-for-elementor' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => __( 'List Title', 'premium-addons-for-elementor' ),
 				'dynamic'     => array( 'active' => true ),
+				'default'     => __( 'List Title', 'premium-addons-for-elementor' ),
 				'label_block' => true,
 			)
 		);
@@ -2464,9 +2459,7 @@ class Premium_Icon_List extends Widget_Base {
 				<?php } ?>
 
 				<?php if ( 'yes' === $item['show_list_link'] ) { ?>
-					<a <?php echo wp_kses_post( $this->get_render_attribute_string( $item_link ) ); ?>>
-						<span><?php echo wp_kses_post( $item['list_title'] ); ?></span>
-					</a>
+					<a <?php echo wp_kses_post( $this->get_render_attribute_string( $item_link ) ); ?> ></a>
 				<?php } ?>
 
 			</li>
@@ -2740,7 +2733,7 @@ class Premium_Icon_List extends Widget_Base {
 
 				<# if ( 'yes' === item.show_badge ){ #>
 				<div class="premium-bullet-list-badge">
-					<span  {{{ view.getRenderAttributeString( textBadge ) }}}>{{{ item.badge_title }}}</span>
+					<span  {{{ view.getRenderAttributeString( textBadge ) }}} >{{{ item.badge_title }}}</span>
 				</div>
 				<# } #>
 
@@ -2749,9 +2742,7 @@ class Premium_Icon_List extends Widget_Base {
 
 					url = 'url' === linkType ? item.link.url : item.existing_page;
 				#>
-					<a class="premium-bullet-list-link" {{{ view.getRenderAttributeString( itemLink ) }}}>
-						<span>{{{ item.list_title }}}</span>
-					</a>
+					<a class="premium-bullet-list-link" {{{ view.getRenderAttributeString( itemLink ) }}} ></a>
 				<# } #>
 			</li>
 			<#

@@ -16,11 +16,9 @@ if ( ! class_exists( 'CSF_Field_checkbox' ) ) {
 
     public function render() {
 
-      $args              = wp_parse_args( $this->field, array(
-        'inline'         => false,
-        'query_args'     => array(),
-        'check_all'      => false,
-        'check_all_text' => esc_html__( 'Check/Uncheck All' ),
+      $args = wp_parse_args( $this->field, array(
+        'inline'     => false,
+        'query_args' => array(),
       ) );
 
       $inline_class = ( $args['inline'] ) ? ' class="csf--inline-list"' : '';
@@ -73,10 +71,6 @@ if ( ! class_exists( 'CSF_Field_checkbox' ) ) {
 
           echo '</ul>';
 
-          if ( $args['check_all'] ) {
-            echo '<div class="csf-checkbox-all">'. esc_html( $args['check_all_text'] ) .'</div>';
-          }
-
         } else {
 
           echo ( ! empty( $this->field['empty_message'] ) ) ? esc_attr( $this->field['empty_message'] ) : esc_html__( 'No data available.', 'csf' );
@@ -87,7 +81,7 @@ if ( ! class_exists( 'CSF_Field_checkbox' ) ) {
 
         echo '<label class="csf-checkbox">';
         echo '<input type="hidden" name="'. esc_attr( $this->field_name() ) .'" value="'. $this->value .'" class="csf--input"'. $this->field_attributes() .'/>';
-        echo '<input type="checkbox" name="_pseudo" class="csf--checkbox"'. esc_attr( checked( $this->value, 1, false ) ) . $this->field_attributes() .'/>';
+        echo '<input type="checkbox" name="_pseudo" class="csf--checkbox"'. esc_attr( checked( $this->value, 1, false ) ) .'/>';
         echo ( ! empty( $this->field['label'] ) ) ? '<span class="csf--text">'. esc_attr( $this->field['label'] ) .'</span>' : '';
         echo '</label>';
 

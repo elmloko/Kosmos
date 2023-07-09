@@ -165,7 +165,7 @@ const ImportSite = () => {
 		}
 
 		if ( spectraStatus ) {
-			await importSpectraSettings();
+			await ImportSpectraSettings();
 		}
 	};
 
@@ -416,7 +416,7 @@ const ImportSite = () => {
 	/**
 	 * 1. Reset.
 	 * The following steps are covered here.
-	 * 		1. Settings backup file store.
+	 * 		1. Settings backup file store. 
 	 * 		2. Reset Customizer
 	 * 		3. Reset Site Options
 	 * 		4. Reset Widgets
@@ -583,7 +583,10 @@ const ImportSite = () => {
 		} );
 
 		const customizerContent = new FormData();
-		customizerContent.append( 'action', 'astra-sites-backup-settings' );
+		customizerContent.append(
+			'action',
+			'astra-sites-backup-settings'
+		);
 		customizerContent.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
 		const status = await fetch( ajaxurl, {
@@ -917,6 +920,7 @@ const ImportSite = () => {
 
 		const flows = new FormData();
 		flows.append( 'action', 'astra-sites-import-cartflows' );
+		flows.append( 'cartflows_url', cartflowsUrl );
 		flows.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
 		const status = await fetch( ajaxurl, {
@@ -980,6 +984,7 @@ const ImportSite = () => {
 
 		const flows = new FormData();
 		flows.append( 'action', 'astra-sites-import-wpforms' );
+		flows.append( 'wpforms_url', wpformsUrl );
 		flows.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
 		const status = await fetch( ajaxurl, {
@@ -1129,6 +1134,7 @@ const ImportSite = () => {
 
 		const content = new FormData();
 		content.append( 'action', 'astra-sites-import-prepare-xml' );
+		content.append( 'wxr_url', wxrUrl );
 		content.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
 		const status = await fetch( ajaxurl, {
@@ -1181,7 +1187,7 @@ const ImportSite = () => {
 	/**
 	 * 6. Import Spectra Settings.
 	 */
-	const importSpectraSettings = async () => {
+	const ImportSpectraSettings = async () => {
 		const spectraSettings =
 			encodeURI( templateResponse[ 'astra-site-spectra-settings' ] ) ||
 			'';
@@ -1197,6 +1203,7 @@ const ImportSite = () => {
 
 		const spectra = new FormData();
 		spectra.append( 'action', 'astra-sites-import-spectra-settings' );
+		spectra.append( 'spectra_settings', spectraSettings );
 		spectra.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
 		const status = await fetch( ajaxurl, {

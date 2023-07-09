@@ -11,32 +11,31 @@ if ( ! class_exists( 'CSF_Customize_Options' ) ) {
   class CSF_Customize_Options extends CSF_Abstract {
 
     // constans
-    public $unique       = '';
-    public $abstract     = 'customize';
-    public $options      = array();
-    public $sections     = array();
-    public $pre_fields   = array();
-    public $pre_sections = array();
-    public $priority     = 10;
-    public $args         = array(
-      'database'         => 'option',
-      'transport'        => 'refresh',
-      'capability'       => 'manage_options',
-      'save_defaults'    => true,
-      'enqueue_webfont'  => true,
-      'async_webfont'    => false,
-      'output_css'       => true,
-      'defaults'         => array()
+    public $unique      = '';
+    public $abstract    = 'customize';
+    public $options     = array();
+    public $sections    = array();
+    public $pre_fields  = array();
+    public $pre_tabs    = array();
+    public $priority    = 10;
+    public $args        = array(
+      'database'        => 'option',
+      'transport'       => 'refresh',
+      'capability'      => 'manage_options',
+      'save_defaults'   => true,
+      'enqueue_webfont' => true,
+      'async_webfont'   => false,
+      'output_css'      => true,
+      'defaults'        => array()
     );
 
     // run customize construct
     public function __construct( $key, $params ) {
 
-      $this->unique       = $key;
-      $this->args         = apply_filters( "csf_{$this->unique}_args", wp_parse_args( $params['args'], $this->args ), $this );
-      $this->sections     = apply_filters( "csf_{$this->unique}_sections", $params['sections'], $this );
-      $this->pre_fields   = $this->pre_fields( $this->sections );
-      $this->pre_sections = $this->pre_sections_customize( $this->sections );
+      $this->unique     = $key;
+      $this->args       = apply_filters( "csf_{$this->unique}_args", wp_parse_args( $params['args'], $this->args ), $this );
+      $this->sections   = apply_filters( "csf_{$this->unique}_sections", $params['sections'], $this );
+      $this->pre_fields = $this->pre_fields( $this->sections );
 
       $this->get_options();
       $this->save_defaults();
@@ -117,7 +116,23 @@ if ( ! class_exists( 'CSF_Customize_Options' ) ) {
 
     }
 
-    public function pre_sections_customize( $sections ) {
+    public function pre_fields( $sections ) {
+
+      $result  = array();
+
+      foreach ( $sections as $key => $section ) {
+        if ( ! empty( $section['fields'] ) ) {
+          foreach ( $section['fields'] as $field ) {
+            $result[] = $field;
+          }
+        }
+      }
+
+      return $result;
+    }
+
+
+    public function pre_tabs( $sections ) {
 
       $result  = array();
       $parents = array();
@@ -146,37 +161,43 @@ if ( ! class_exists( 'CSF_Customize_Options' ) ) {
         CSF::include_plugin_file( 'functions/customize.php'  );
       }
 
-      foreach ( $this->pre_sections as $section ) {
+      if ( ! empty( $this->sections ) ) {
 
-        if ( ! empty( $section['subs'] ) ) {
+        $sections = $this->pre_tabs( $this->sections );
 
-          $panel_id = ( isset( $section['id'] ) ) ? $section['id'] : $this->unique .'-panel-'. $this->priority;
+        foreach ( $sections as $section ) {
 
-          $wp_customize->add_panel( new WP_Customize_Panel_CSF( $wp_customize, $panel_id, array(
-            'title'       => ( isset( $section['title'] ) ) ? $section['title'] : null,
-            'description' => ( isset( $section['description'] ) ) ? $section['description'] : null,
-            'priority'    => ( isset( $section['priority'] ) ) ? $section['priority'] : null,
-          ) ) );
+          if ( ! empty( $section['subs'] ) ) {
 
-          $this->priority++;
+            $panel_id = ( isset( $section['id'] ) ) ? $section['id'] : $this->unique .'-panel-'. $this->priority;
 
-          foreach ( $section['subs'] as $sub_section ) {
+            $wp_customize->add_panel( new WP_Customize_Panel_CSF( $wp_customize, $panel_id, array(
+              'title'       => ( isset( $section['title'] ) ) ? $section['title'] : null,
+              'description' => ( isset( $section['description'] ) ) ? $section['description'] : null,
+              'priority'    => ( isset( $section['priority'] ) ) ? $section['priority'] : null,
+            ) ) );
 
-            $section_id = ( isset( $sub_section['id'] ) ) ? $sub_section['id'] : $this->unique .'-section-'. $this->priority;
+            $this->priority++;
 
-            $this->add_section( $wp_customize, $section_id, $sub_section, $panel_id );
+            foreach ( $section['subs'] as $sub_section ) {
+
+              $section_id = ( isset( $sub_section['id'] ) ) ? $sub_section['id'] : $this->unique .'-section-'. $this->priority;
+
+              $this->add_section( $wp_customize, $section_id, $sub_section, $panel_id );
+
+              $this->priority++;
+
+            }
+
+          } else {
+
+            $section_id = ( isset( $section['id'] ) ) ? $section['id'] : $this->unique .'-section-'. $this->priority;
+
+            $this->add_section( $wp_customize, $section_id, $section, false );
 
             $this->priority++;
 
           }
-
-        } else {
-
-          $section_id = ( isset( $section['id'] ) ) ? $section['id'] : $this->unique .'-section-'. $this->priority;
-
-          $this->add_section( $wp_customize, $section_id, $section, false );
-
-          $this->priority++;
 
         }
 
@@ -219,7 +240,7 @@ if ( ! class_exists( 'CSF_Customize_Options' ) ) {
           $field_sanitize  = ( isset( $field['sanitize'] ) ) ? $field['sanitize'] : '';
           $field_validate  = ( isset( $field['validate'] ) ) ? $field['validate'] : '';
           $field_default   = ( isset( $field['default'] ) ) ? $field['default'] : '';
-          $field_customize = ( ( isset( $field['selectors'] ) || isset( $field['selector'] ) ) && ! isset( $field['transport'] ) ) ? true : false;
+          $field_customize = ( isset( $field['customize'] ) && ! isset( $field['transport'] ) ) ? true : false;
           $has_selective   = ( isset( $field['selective_refresh'] ) && isset( $wp_customize->selective_refresh ) ) ? true : false;
 
           $setting_id = $this->unique .'['. $field_id .']';

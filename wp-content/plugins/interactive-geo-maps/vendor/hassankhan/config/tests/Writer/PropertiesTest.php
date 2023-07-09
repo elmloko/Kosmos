@@ -1,12 +1,14 @@
 <?php
 
-namespace Noodlehaus\Test\Writer;
+namespace Noodlehaus\Writer\Test;
 
 use Noodlehaus\Writer\Properties;
-use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\Polyfills\ExpectException;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 class PropertiesTest extends TestCase
 {
+    use ExpectException;
     /**
      * @var Properties
      */
@@ -26,7 +28,7 @@ class PropertiesTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp(): void
+    protected function set_up()
     {
         $this->writer = new Properties();
         $this->temp_file = tempnam(sys_get_temp_dir(), 'config.properties');
@@ -51,18 +53,18 @@ class PropertiesTest extends TestCase
     }
 
     /**
-     * @covers \Noodlehaus\Writer\Properties::getSupportedExtensions()
+     * @covers Noodlehaus\Writer\Properties::getSupportedExtensions()
      */
     public function testGetSupportedExtensions()
     {
         $expected = ['properties'];
         $actual = $this->writer->getSupportedExtensions();
-        $this->assertSame($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
-     * @covers \Noodlehaus\Writer\Properties::toString()
-     * @covers \Noodlehaus\Writer\Properties::toProperties()
+     * @covers Noodlehaus\Writer\Properties::toString()
+     * @covers Noodlehaus\Writer\Properties::toProperties()
      */
     public function testEncodeProperties()
     {
@@ -78,13 +80,13 @@ key\:with\=colonAndEqualsSign = This is the value for the key "key:with=colonAnd
 path = c:\\wiki\\templates
 
 EOD;
-        $this->assertSame($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
-     * @covers \Noodlehaus\Writer\Properties::toString()
-     * @covers \Noodlehaus\Writer\Properties::toFile()
-     * @covers \Noodlehaus\Writer\Properties::toProperties()
+     * @covers Noodlehaus\Writer\Properties::toString()
+     * @covers Noodlehaus\Writer\Properties::toFile()
+     * @covers Noodlehaus\Writer\Properties::toProperties()
      */
     public function testWriteProperties()
     {
@@ -95,9 +97,9 @@ EOD;
     }
 
     /**
-     * @covers \Noodlehaus\Writer\Properties::toString()
-     * @covers \Noodlehaus\Writer\Properties::toFile()
-     * @covers \Noodlehaus\Writer\Properties::toProperties()
+     * @covers Noodlehaus\Writer\Properties::toString()
+     * @covers Noodlehaus\Writer\Properties::toFile()
+     * @covers Noodlehaus\Writer\Properties::toProperties()
      */
     public function testUnwritableFile()
     {

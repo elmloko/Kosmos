@@ -190,7 +190,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Admin' ) ) {
 							<h2><?php esc_html_e( 'View Dark Mode usages inside WordPress Dashboard', 'wp-dark-mode' ); ?></h2>
 							<p><?php esc_html_e( 'Upgrade to Pro and get access to the reports.', 'wp-dark-mode' ); ?></p>
 							<p>
-								<a href="https://go.wppool.dev/pdOs" class="button-primary button-hero" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Upgrade to Pro', 'wp-dark-mode' ); ?></a>
+								<a href="https://wppool.dev/wp-dark-mode/" class="button-primary button-hero" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Upgrade to Pro', 'wp-dark-mode' ); ?></a>
 							</p>
 						</div>
 					</div>

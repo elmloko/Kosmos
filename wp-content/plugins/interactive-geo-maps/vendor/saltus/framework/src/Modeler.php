@@ -43,6 +43,7 @@ class Modeler {
 			return $path;
 		}
 		return false;
+
 	}
 
 	/**
@@ -93,11 +94,6 @@ class Modeler {
 		}
 	}
 
-	/**
-	 * Creates the model in the factory
-	 *
-	 * @param $config The set of configurations for the cpt/tax
-	 */
 	protected function create( $config ) {
 		$model = $this->model_factory->create( $config );
 		if ( $model === false ) {
@@ -106,9 +102,6 @@ class Modeler {
 		$this->add( $model );
 	}
 
-	/**
-	 * Adds the model to a list
-	 */
 	protected function add( $model ) {
 		$this->model_list[ $model->get_type() ] = $model;
 	}

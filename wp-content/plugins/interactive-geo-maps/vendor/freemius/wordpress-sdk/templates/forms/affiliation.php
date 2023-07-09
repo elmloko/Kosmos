@@ -87,8 +87,6 @@
 
     $module_id                   = $fs->get_id();
     $affiliate_program_terms_url = "https://freemius.com/plugin/{$module_id}/{$slug}/legal/affiliate-program/";
-
-    $has_tabs = $fs->_add_tabs_before_content();
 ?>
 <div id="fs_affiliation_content_wrapper" class="wrap">
     <form method="post" action="">
@@ -502,10 +500,6 @@
         </script>
     </div>
 <?php
-    if ( $has_tabs ) {
-        $fs->_add_tabs_after_content();
-    }
-
     $params = array(
         'page'           => 'affiliation',
         'module_id'      => $module_id,

@@ -506,9 +506,6 @@ class Assets_Manager {
 			$common_assets = self::has_pro_elements( $elements ) ? array_merge( $common_assets, array( 'common-pro' ) ) : $common_assets;
 
 			$elements = array_merge( $elements, $common_assets );
-            $indep_elements = array(
-                'premium-world-clock'
-            );
 
 		} else {
 			$indep_elements = array(
@@ -518,20 +515,16 @@ class Assets_Manager {
 				'premium-behance-feed',
 				'premium-lottie',
 				'premium-vscroll',
-				'premium-hscroll',
 				'premium-nav-menu',
 				'premium-addon-maps',
 				'premium-woo-products-pro',
 				'premium-addon-testimonials',
-				'premium-smart-post-listing',
 				'premium-addon-pricing-table',
 				'premium-addon-image-separator',
-				'premium-notifications',
 			);
 
+			$elements = array_diff( $elements, $indep_elements );
 		}
-
-        $elements = array_diff( $elements, $indep_elements );
 
 		return $elements;
 	}
@@ -655,10 +648,6 @@ class Assets_Manager {
 	public static function has_free_elements( $post_elems ) {
 
 		$pa_elems = Admin_Helper::get_free_widgets_names();
-
-		// add smart post listing
-		$pa_elements[] = 'premium-smart-post-listing';
-
 		$has_free = array_intersect( $post_elems, $pa_elems ) ? true : false;
 
 		return $has_free;

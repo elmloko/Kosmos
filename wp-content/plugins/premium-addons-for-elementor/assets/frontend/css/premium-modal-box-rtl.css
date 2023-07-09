@@ -16,7 +16,7 @@
   cursor: pointer;
   -ms-user-select: none;
        -webkit-user-select: none;
-       user-select: none;
+          user-select: none;
   background-image: none;
   border: 1px solid transparent;
 }

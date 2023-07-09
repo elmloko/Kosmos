@@ -335,11 +335,3 @@ because it's rendered as div with custom SVG code.
             animation: spin 2s linear infinite;
     margin: 0 auto;
 }
-
-.premium-error-notice a {
-    color: #252c59; }
-
-.premium-addons__v-hidden {
-    visibility: hidden;
-    opacity: 0;
-}

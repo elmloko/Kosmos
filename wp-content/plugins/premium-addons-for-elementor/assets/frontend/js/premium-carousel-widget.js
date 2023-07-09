@@ -4,8 +4,7 @@
 
         var $carouselElem = $scope.find(".premium-carousel-wrapper"),
             settings = $($carouselElem).data("settings"),
-            computedStyle = getComputedStyle($scope[0]),
-            widgetID = $scope.data('id');
+            computedStyle = getComputedStyle($scope[0]);
 
         if ($carouselElem.find(".item-wrapper").length < 1)
             return;
@@ -253,16 +252,7 @@
                     })
                 }
 
-            });
-
-            $('.carousel-next-' + widgetID).on('click', function () {
-                $carouselElem.find(".premium-carousel-inner").slick("slickNext");
-            });
-
-            $('.carousel-prev-' + widgetID).on('click', function () {
-                $carouselElem.find(".premium-carousel-inner").slick("slickPrev");
-            });
-
+            })
         })
 
     };

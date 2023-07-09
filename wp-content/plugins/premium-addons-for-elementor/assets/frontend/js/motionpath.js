@@ -1820,8 +1820,7 @@
                 $scope.find(".premium-image-hotspots-main-icons div[class*='premium-svg-'] svg").addClass("premium-image-hotspots-icon premium-svg-drawer").unwrap();
             }
 
-            //This is handled by premium-notifications.js file.
-            $scope.not('.elementor-widget-premium-notifications').find(".elementor-invisible").removeClass("elementor-invisible");
+            $scope.find(".elementor-invisible").removeClass("elementor-invisible");
         }, 50);
 
 

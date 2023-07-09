@@ -4,7 +4,7 @@ Tags: dark, dark mode, night mode, dark theme, dark mode plugin, social share, G
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 4.2.0
+Stable tag: 4.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -195,15 +195,6 @@ Yes, You can toggle the dark mode/ light mode by keyboard shortcut `(Ctrl + Alt 
 7. Dark Mode color presets
 
 == Changelog ==
-
-= 4.2.0 - July 6 2023 =
-* [Fixed] Dark Mode switch label typography style
-
-= 4.1.9 - July 5 2023 =
-* [Fixed] Dark Mode toggler inside Block Editor
-* [Fixed] Button and Icon color contrast ratio
-* [Fixed] Spelling mistake on changelogs
-* [Fixed] Mismatch between switch element accessibility
 
 = 4.1.8 - June 19 2023 =
 * [Fixed] Fixed license integration for Ultimate Single Site
@@ -399,7 +390,7 @@ Yes, You can toggle the dark mode/ light mode by keyboard shortcut `(Ctrl + Alt 
 = 2.1.2 =
 * Fix: Fixed triggers posts query
 * Fix: Excluded the default audio/ video player
-* Fix: Fixed click color
+* Fix: Fixed lick color
 
 = 2.1.1 =
 * New: Added posts exclude settings

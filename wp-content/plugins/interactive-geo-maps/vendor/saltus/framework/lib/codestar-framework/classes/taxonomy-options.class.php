@@ -14,8 +14,8 @@ if ( ! class_exists( 'CSF_Taxonomy_Options' ) ) {
     public $unique      = '';
     public $taxonomy    = '';
     public $abstract    = 'taxonomy';
-    public $sections    = array();
     public $pre_fields  = array();
+    public $sections    = array();
     public $taxonomies  = array();
     public $args        = array(
       'taxonomy'        => 'category',
@@ -49,6 +49,22 @@ if ( ! class_exists( 'CSF_Taxonomy_Options' ) ) {
     // instance
     public static function instance( $key, $params ) {
       return new self( $key, $params );
+    }
+
+    public function pre_fields( $sections ) {
+
+      $result  = array();
+
+      foreach ( $sections as $key => $section ) {
+        if ( ! empty( $section['fields'] ) ) {
+          foreach ( $section['fields'] as $field ) {
+            $result[] = $field;
+          }
+        }
+      }
+
+      return $result;
+
     }
 
     // add taxonomy add/edit fields
@@ -234,10 +250,8 @@ if ( ! class_exists( 'CSF_Taxonomy_Options' ) ) {
       if ( empty( $data ) ) {
 
         if ( $this->args['data_type'] !== 'serialize' ) {
-          foreach ( $this->pre_fields as $field ) {
-            if ( ! empty( $field['id'] ) ) {
-              delete_term_meta( $term_id, $field['id'] );
-            }
+          foreach ( $data as $key => $value ) {
+            delete_term_meta( $term_id, $key );
           }
         } else {
           delete_term_meta( $term_id, $this->unique );

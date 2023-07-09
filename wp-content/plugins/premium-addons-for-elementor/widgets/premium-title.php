@@ -33,13 +33,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Premium_Title extends Widget_Base {
 
 	/**
-	 * Template Instance
-	 *
-	 * @var template_instance
-	 */
-	protected $template_instance;
-
-	/**
 	 * Check Icon Draw Option.
 	 *
 	 * @since 4.9.26
@@ -57,7 +50,8 @@ class Premium_Title extends Widget_Base {
 	 * @access public
 	 */
 	public function getTemplateInstance() {
-		return $this->template_instance = Premium_Template_Tags::getInstance();
+		$this->template_instance = Premium_Template_Tags::getInstance();
+		return $this->template_instance;
 	}
 
 	/**

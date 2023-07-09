@@ -46,7 +46,7 @@ export const useFilteredSites = () => {
 
 	if ( siteType ) {
 		for ( const siteId in sites ) {
-			if ( 'free' !== sites[ siteId ][ 'astra-sites-type' ] ) {
+			if ( siteType === sites[ siteId ][ 'astra-sites-type' ] ) {
 				sites[ siteId ] = sites[ siteId ];
 			} else {
 				delete sites[ siteId ];
@@ -160,17 +160,18 @@ const SiteList = () => {
 										/>
 									</div>
 									<div className="st-type-and-order-filters">
-										<SiteType
-											value={ siteType }
-											onClick={ ( event, type ) => {
-												dispatch( {
-													type: 'set',
-													siteType: type.id,
-													onMyFavorite: false,
-												} );
-											} }
-										/>
-
+										{ builder !== 'gutenberg' && (
+											<SiteType
+												value={ siteType }
+												onClick={ ( event, type ) => {
+													dispatch( {
+														type: 'set',
+														siteType: type.id,
+														onMyFavorite: false,
+													} );
+												} }
+											/>
+										) }
 										<SiteOrder
 											value={ siteOrder }
 											onClick={ ( event, order ) => {

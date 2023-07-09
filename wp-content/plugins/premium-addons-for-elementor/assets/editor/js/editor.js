@@ -104,7 +104,7 @@
 
         onBeforeDestroy: function () {
             if (this.ui.select.data('select2')) {
-                // this.ui.select.select2('destroy');
+                this.ui.select.select2('destroy');
             }
 
             this.$el.remove();
@@ -148,25 +148,15 @@
                     post_type: type
                 },
                 success: function (res) {
-
                     var options = JSON.parse(res.data);
                     self.updateTaxOptions(options);
                     self.isUpdated = false;
 
                     if (0 !== options.length) {
-
-                        self.$el.removeClass('elementor-hidden-control');
-
-                        $('.premium-live-temp-title').addClass('control-hidden');
-
-                        // var $tax = Object.keys(options);
-                        // self.container.settings.setExternalChange({ 'filter_tabs_type': $tax[0] });
+                        var $tax = Object.keys(options);
+                        self.container.settings.setExternalChange({ 'filter_tabs_type': $tax[0] });
                         self.container.render();
                         self.render();
-                    } else {
-                        self.$el.addClass('elementor-hidden-control');
-
-                        $('.premium-live-temp-title.control-hidden').removeClass('control-hidden');
                     }
                 },
                 error: function (err) {
@@ -176,9 +166,7 @@
         },
 
         updateTaxOptions: function (options) {
-
             this.model.set("options", options);
-
         },
     });
 

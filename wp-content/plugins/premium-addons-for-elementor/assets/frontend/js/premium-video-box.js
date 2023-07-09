@@ -22,7 +22,7 @@
             }
 
             $lighboxContainer.find('.premium-video-box-image-container, .premium-video-box-play-icon-container').on('click', function (e) {
-                triggerLightbox($(this).closest('.premium-video-box-container'), lightBox.type);
+                triggerLightbox($lighboxContainer, lightBox.type);
             });
 
         } else {
@@ -176,9 +176,9 @@
 
         function triggerLightbox($container, type) {
             if ('elementor' === type) {
-                $container.find('.premium-video-box-video-container').trigger('click');
+                $container.find('.premium-video-box-video-container').click();
             } else {
-                $container.find(".premium-vid-lightbox-container[data-rel^='prettyPhoto']").trigger('click');
+                $container.find(".premium-vid-lightbox-container[data-rel^='prettyPhoto']").click();
             }
         }
 

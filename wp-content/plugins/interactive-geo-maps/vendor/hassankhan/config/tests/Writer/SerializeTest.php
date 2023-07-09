@@ -1,12 +1,14 @@
 <?php
 
-namespace Noodlehaus\Test\Writer;
+namespace Noodlehaus\Writer\Test;
 
 use Noodlehaus\Writer\Serialize;
-use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\Polyfills\ExpectException;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 class SerializeTest extends TestCase
 {
+    use ExpectException;
     /**
      * @var Serialize
      */
@@ -26,7 +28,7 @@ class SerializeTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp(): void
+    protected function set_up()
     {
         $this->writer = new Serialize();
         $this->temp_file = tempnam(sys_get_temp_dir(), 'config.txt');
@@ -55,29 +57,29 @@ class SerializeTest extends TestCase
     }
 
     /**
-     * @covers \Noodlehaus\Writer\Serialize::getSupportedExtensions()
+     * @covers Noodlehaus\Writer\Serialize::getSupportedExtensions()
      */
     public function testGetSupportedExtensions()
     {
         $expected = ['txt'];
         $actual = $this->writer->getSupportedExtensions();
-        $this->assertSame($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
-     * @covers \Noodlehaus\Writer\Serialize::toString()
+     * @covers Noodlehaus\Writer\Serialize::toString()
      */
     public function testSerialize()
     {
         $actual = $this->writer->toString($this->data, false);
         $expected = 'a:4:{s:11:"application";a:2:{s:4:"name";s:13:"configuration";s:6:"secret";s:6:"s3cr3t";}s:4:"host";s:9:"localhost";s:4:"port";i:80;s:7:"servers";a:3:{i:0;s:5:"host1";i:1;s:5:"host2";i:2;s:5:"host3";}}';
 
-        $this->assertSame($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
-     * @covers \Noodlehaus\Writer\Serialize::toString()
-     * @covers \Noodlehaus\Writer\Serialize::toFile()
+     * @covers Noodlehaus\Writer\Serialize::toString()
+     * @covers Noodlehaus\Writer\Serialize::toFile()
      */
     public function testWriteSerialize()
     {
@@ -88,8 +90,8 @@ class SerializeTest extends TestCase
     }
 
     /**
-     * @covers \Noodlehaus\Writer\Serialize::toString()
-     * @covers \Noodlehaus\Writer\Serialize::toFile()
+     * @covers Noodlehaus\Writer\Serialize::toString()
+     * @covers Noodlehaus\Writer\Serialize::toFile()
      */
     public function testUnwritableFile()
     {

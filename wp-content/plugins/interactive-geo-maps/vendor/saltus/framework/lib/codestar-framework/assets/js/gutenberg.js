@@ -20,7 +20,7 @@
     var RawHTML           = element.RawHTML;
     var Button            = components.Button;
 
-    registerBlockType(block.name, {
+    registerBlockType('csf-gutenberg-block/block-'+block.hash, {
       title: block.gutenberg.title,
       description: block.gutenberg.description,
       icon: block.gutenberg.icon || 'screenoptions',
@@ -43,7 +43,7 @@
 
             createElement(Button, {
               'data-modal-id': block.modal_id,
-              'data-gutenberg-id': block.name,
+              'data-gutenberg-id': block.hash,
               className: 'is-secondary csf-shortcode-button',
               onClick: function () {
                 window.csf_gutenberg_props = props;

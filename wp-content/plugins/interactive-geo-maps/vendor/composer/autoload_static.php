@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit311c703192b21114d68af63dacd37d52
+class ComposerStaticInit23a220c3fbbd96260d0bd5aaabc08d59
 {
     public static $files = array (
         '57aea4427272562eb78cf61f6733ec6a' => __DIR__ . '/..' . '/saltus/framework/lib/codestar-framework/codestar-framework.php',
@@ -78,8 +78,6 @@ class ComposerStaticInit311c703192b21114d68af63dacd37d52
         'Saltus\\WP\\Framework\\Features\\DragAndDrop\\UpdateMenuDragAndDrop' => __DIR__ . '/..' . '/saltus/framework/src/Features/DragAndDrop/UpdateMenuDragAndDrop.php',
         'Saltus\\WP\\Framework\\Features\\Duplicate\\Duplicate' => __DIR__ . '/..' . '/saltus/framework/src/Features/Duplicate/Duplicate.php',
         'Saltus\\WP\\Framework\\Features\\Duplicate\\SaltusDuplicate' => __DIR__ . '/..' . '/saltus/framework/src/Features/Duplicate/SaltusDuplicate.php',
-        'Saltus\\WP\\Framework\\Features\\FeatureA\\FeatureA' => __DIR__ . '/..' . '/saltus/framework/src/Features/FeatureA/FeatureA.php',
-        'Saltus\\WP\\Framework\\Features\\FeatureA\\SaltusFeatureA' => __DIR__ . '/..' . '/saltus/framework/src/Features/FeatureA/SaltusFeatureA.php',
         'Saltus\\WP\\Framework\\Features\\Meta\\CMB2Meta' => __DIR__ . '/..' . '/saltus/framework/src/Features/Meta/CMB2Meta.php',
         'Saltus\\WP\\Framework\\Features\\Meta\\CodestarMeta' => __DIR__ . '/..' . '/saltus/framework/src/Features/Meta/CodestarMeta.php',
         'Saltus\\WP\\Framework\\Features\\Meta\\Meta' => __DIR__ . '/..' . '/saltus/framework/src/Features/Meta/Meta.php',
@@ -87,14 +85,6 @@ class ComposerStaticInit311c703192b21114d68af63dacd37d52
         'Saltus\\WP\\Framework\\Features\\Settings\\Settings' => __DIR__ . '/..' . '/saltus/framework/src/Features/Settings/Settings.php',
         'Saltus\\WP\\Framework\\Features\\SingleExport\\SaltusSingleExport' => __DIR__ . '/..' . '/saltus/framework/src/Features/SingleExport/SaltusSingleExport.php',
         'Saltus\\WP\\Framework\\Features\\SingleExport\\SingleExport' => __DIR__ . '/..' . '/saltus/framework/src/Features/SingleExport/SingleExport.php',
-        'Saltus\\WP\\Framework\\Infrastructure\\Container\\CanRegister' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Container/CanRegister.php',
-        'Saltus\\WP\\Framework\\Infrastructure\\Container\\Container' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Container/Container.php',
-        'Saltus\\WP\\Framework\\Infrastructure\\Container\\ContainerAssembler' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Container/ContainerAssembler.php',
-        'Saltus\\WP\\Framework\\Infrastructure\\Container\\FailedToMakeInstance' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Container/FailedToMakeInstance.php',
-        'Saltus\\WP\\Framework\\Infrastructure\\Container\\GenericContainer' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Container/GenericContainer.php',
-        'Saltus\\WP\\Framework\\Infrastructure\\Container\\Instantiator' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Container/Instantiator.php',
-        'Saltus\\WP\\Framework\\Infrastructure\\Container\\Invalid' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Container/Invalid.php',
-        'Saltus\\WP\\Framework\\Infrastructure\\Container\\ServiceContainer' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Container/ServiceContainer.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Feature\\EnqueueAssets' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Feature/EnqueueAssets.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Plugin\\Activateable' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Plugin/Activateable.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Plugin\\Deactivateable' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Plugin/Deactivateable.php',
@@ -103,7 +93,11 @@ class ComposerStaticInit311c703192b21114d68af63dacd37d52
         'Saltus\\WP\\Framework\\Infrastructure\\Service\\Actionable' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/Actionable.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Service\\App' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/App.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Service\\Conditional' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/Conditional.php',
+        'Saltus\\WP\\Framework\\Infrastructure\\Service\\FailedToMakeInstance' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/FailedToMakeInstance.php',
+        'Saltus\\WP\\Framework\\Infrastructure\\Service\\Instantiator' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/Instantiator.php',
+        'Saltus\\WP\\Framework\\Infrastructure\\Service\\Invalid' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/Invalid.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Service\\Service' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/Service.php',
+        'Saltus\\WP\\Framework\\Infrastructure\\Service\\ServiceContainer' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/ServiceContainer.php',
         'Saltus\\WP\\Framework\\Modeler' => __DIR__ . '/..' . '/saltus/framework/src/Modeler.php',
         'Saltus\\WP\\Framework\\Models\\BaseModel' => __DIR__ . '/..' . '/saltus/framework/src/Models/BaseModel.php',
         'Saltus\\WP\\Framework\\Models\\Config\\NoFile' => __DIR__ . '/..' . '/saltus/framework/src/Models/Config/NoFile.php',
@@ -139,9 +133,9 @@ class ComposerStaticInit311c703192b21114d68af63dacd37d52
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit311c703192b21114d68af63dacd37d52::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit311c703192b21114d68af63dacd37d52::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit311c703192b21114d68af63dacd37d52::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit23a220c3fbbd96260d0bd5aaabc08d59::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit23a220c3fbbd96260d0bd5aaabc08d59::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit23a220c3fbbd96260d0bd5aaabc08d59::$classMap;
 
         }, null, ClassLoader::class);
     }

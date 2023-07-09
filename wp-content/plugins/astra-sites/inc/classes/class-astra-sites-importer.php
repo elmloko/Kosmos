@@ -216,10 +216,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				}
 			}
 
-			$screen = ( isset( $_REQUEST['screen'] ) ) ? sanitize_text_field( $_REQUEST['screen'] ) : '';
-			$id = ( isset( $_REQUEST['id'] ) ) ? absint( $_REQUEST['id'] ) : '';
-
-			$wpforms_url = ( 'elementor' === $screen ) ? astra_sites_get_wp_forms_url( $id ) : astra_get_site_data( 'astra-site-wpforms-path' );
+			$wpforms_url = ( isset( $_REQUEST['wpforms_url'] ) ) ? sanitize_url( urldecode( $_REQUEST['wpforms_url'] ) ) : sanitize_url( $wpforms_url ); // phpcs:ignore -- We need to remove this ignore once the WPCS has released this issue fix - https://github.com/WordPress/WordPress-Coding-Standards/issues/2189.
 			$ids_mapping = array();
 
 			if ( ! astra_sites_is_valid_url( $wpforms_url ) ) {
@@ -324,7 +321,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			add_action( 'cartflows_step_imported', array( $this, 'track_flows' ) );
 			add_filter( 'cartflows_enable_imported_content_processing', '__return_false' );
 
-			$url = astra_get_site_data( 'astra-site-cartflows-path' );
+			$url = ( isset( $_REQUEST['cartflows_url'] ) ) ? sanitize_url( urldecode( $_REQUEST['cartflows_url'] ) ) : sanitize_url( urldecode( $url ) ); // phpcs:ignore -- We need to remove this ignore once the WPCS has released this issue fix - https://github.com/WordPress/WordPress-Coding-Standards/issues/2189.
 			if ( ! empty( $url ) && is_callable( 'CartFlows_Importer::get_instance' ) ) {
 
 				// Download JSON file.
@@ -350,8 +347,6 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				} else {
 					wp_send_json_error( __( 'There was an error downloading the CartFlows flows file.', 'astra-sites' ) );
 				}
-			} else {
-				wp_send_json_error( __( 'Empty file for CartFlows flows', 'astra-sites' ) );
 			}
 
 			if ( defined( 'WP_CLI' ) ) {
@@ -375,7 +370,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			if ( ! current_user_can( 'edit_posts' ) ) {
 				wp_send_json_error();
 			}
-			$url = astra_get_site_data( 'astra-site-spectra-settings' );
+			$url = ( isset( $_REQUEST['spectra_settings'] ) ) ? sanitize_url( urldecode( $_REQUEST['spectra_settings'] ) ) : sanitize_url( urldecode( $url ) ); // phpcs:ignore -- We need to remove this ignore once the WPCS has released this issue fix - https://github.com/WordPress/WordPress-Coding-Standards/issues/2189.
 			if ( ! astra_sites_is_valid_url( $url ) ) {
 				/* Translators: %s is XML URL. */
 				wp_send_json_error( sprintf( __( 'Invalid Request URL - %s', 'astra-sites' ), $url ) );
@@ -409,7 +404,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			}
 
 			if ( defined( 'WP_CLI' ) ) {
-				WP_CLI::line( 'Imported Spectra settings from ' . $url );
+				WP_CLI::line( 'Imported from ' . $url );
 			} elseif ( wp_doing_ajax() ) {
 				wp_send_json_success( $url );
 			}
@@ -482,7 +477,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 				wp_send_json_error( __( 'The XMLReader library is not available. This library is required to import the content for the website.', 'astra-sites' ) );
 			}
 
-			$wxr_url = astra_get_site_data( 'astra-site-wxr-path' );
+			$wxr_url = ( isset( $_REQUEST['wxr_url'] ) ) ? sanitize_url( urldecode( $_REQUEST['wxr_url'] ) ) : ''; // phpcs:ignore -- We need to remove this ignore once the WPCS has released this issue fix - https://github.com/WordPress/WordPress-Coding-Standards/issues/2189.
 
 			if ( ! astra_sites_is_valid_url( $wxr_url ) ) {
 				/* Translators: %s is XML URL. */

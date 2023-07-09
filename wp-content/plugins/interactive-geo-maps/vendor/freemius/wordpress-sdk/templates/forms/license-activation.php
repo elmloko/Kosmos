@@ -888,5 +888,3 @@ HTML;
 	});
 })( jQuery );
 </script>
-<?php
-    fs_require_once_template( 'api-connectivity-message-js.php' );

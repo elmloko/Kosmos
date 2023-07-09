@@ -2055,30 +2055,6 @@
     content: "\e954";
 }
 
-.pa-dash-premium-notifications::before {
-    content: "\e956";
-}
-
-.pa-dash-premium-tcloud::before {
-    content: "\e955";
-}
-
-.pa-dash-premium-weather::before {
-    content: "\e958";
-}
-
-.pa-dash-premium-world-clock:before {
-    content: "\e959";
-}
-
-.pa-dash-premium-post-ticker:before {
-    content: "\e957";
-}
-
-.pa-dash-premium-smart-post-listing:before {
-    content: "\e95a";
-}
-
 @-webkit-keyframes spin {
     0% {
         -webkit-transform: rotateZ(-180deg) rotateY(180deg);
@@ -2130,7 +2106,6 @@
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
-    justify-content: center;
 }
 
 .premium-live-editor-iframe-modal .elementor-templates-modal__header__logo__title {
