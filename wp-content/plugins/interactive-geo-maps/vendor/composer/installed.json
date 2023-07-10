@@ -7,18 +7,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Freemius/wordpress-sdk.git",
-                "reference": "d4aa83b1e74f3269affcbfe0d2b75ceae35ba864"
+                "reference": "e9e3b37d165a881326991a672af0269a6e2b2cda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/d4aa83b1e74f3269affcbfe0d2b75ceae35ba864",
-                "reference": "d4aa83b1e74f3269affcbfe0d2b75ceae35ba864",
+                "url": "https://api.github.com/repos/Freemius/wordpress-sdk/zipball/e9e3b37d165a881326991a672af0269a6e2b2cda",
+                "reference": "e9e3b37d165a881326991a672af0269a6e2b2cda",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2"
             },
-            "time": "2022-07-31T06:50:47+00:00",
+            "time": "2023-06-12T06:57:05+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "source",
@@ -39,39 +39,38 @@
             ],
             "support": {
                 "issues": "https://github.com/Freemius/wordpress-sdk/issues",
-                "source": "https://github.com/Freemius/wordpress-sdk/tree/2.4.5"
+                "source": "https://github.com/Freemius/wordpress-sdk/tree/2.5.9"
             },
             "install-path": "../freemius/wordpress-sdk"
         },
         {
             "name": "hassankhan/config",
-            "version": "3.0.1",
-            "version_normalized": "3.0.1.0",
+            "version": "3.1.0",
+            "version_normalized": "3.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hassankhan/config.git",
-                "reference": "82421bb17d21cb0c10b98b89ea54aa4027adfc3f"
+                "reference": "8e1c07f4fdc2b986b8a781f0dcba155af2a579b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hassankhan/config/zipball/82421bb17d21cb0c10b98b89ea54aa4027adfc3f",
-                "reference": "82421bb17d21cb0c10b98b89ea54aa4027adfc3f",
+                "url": "https://api.github.com/repos/hassankhan/config/zipball/8e1c07f4fdc2b986b8a781f0dcba155af2a579b6",
+                "reference": "8e1c07f4fdc2b986b8a781f0dcba155af2a579b6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9"
+                "php": ">=7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8.36 || ~5.7 || ~6.5 || ~7.5 || ~8.5",
-                "scrutinizer/ocular": "~1.1",
-                "squizlabs/php_codesniffer": "~2.2",
-                "symfony/yaml": "~3.4",
-                "yoast/phpunit-polyfills": "^1.0"
+                "phpunit/phpunit": "^9.5",
+                "scrutinizer/ocular": "^1.9",
+                "squizlabs/php_codesniffer": "^3.6",
+                "symfony/yaml": "^5.4"
             },
             "suggest": {
-                "symfony/yaml": "~3.4"
+                "symfony/yaml": "^5.4"
             },
-            "time": "2022-03-26T19:37:50+00:00",
+            "time": "2022-12-20T19:48:37+00:00",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -105,36 +104,35 @@
             ],
             "support": {
                 "issues": "https://github.com/hassankhan/config/issues",
-                "source": "https://github.com/hassankhan/config/tree/3.0.1"
+                "source": "https://github.com/hassankhan/config/tree/3.1.0"
             },
             "install-path": "../hassankhan/config"
         },
         {
             "name": "saltus/framework",
-            "version": "dev-dev-updatelibs",
-            "version_normalized": "dev-dev-updatelibs",
+            "version": "dev-dev",
+            "version_normalized": "dev-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SaltusDev/saltus-framework.git",
-                "reference": "83489d7955ef2122cfb92990437d50107ad6674c"
+                "reference": "481fac594b73179faadf253886ee60d3a6d4c412"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SaltusDev/saltus-framework/zipball/83489d7955ef2122cfb92990437d50107ad6674c",
-                "reference": "83489d7955ef2122cfb92990437d50107ad6674c",
+                "url": "https://api.github.com/repos/SaltusDev/saltus-framework/zipball/481fac594b73179faadf253886ee60d3a6d4c412",
+                "reference": "481fac594b73179faadf253886ee60d3a6d4c412",
                 "shasum": ""
             },
             "require": {
-                "hassankhan/config": "^3.0",
-                "php": "^7.2|^8.0"
+                "hassankhan/config": "^3.1.0",
+                "php": ">=7.2"
             },
             "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-                "phpcompatibility/php-compatibility": "*",
-                "phpunit/phpunit": "^8.0.0",
+                "phpunit/phpunit": "^9.6.0",
                 "squizlabs/php_codesniffer": "^3.2.3"
             },
-            "time": "2022-09-29T10:17:40+00:00",
+            "time": "2023-07-03T18:10:18+00:00",
+            "default-branch": true,
             "type": "project",
             "installation-source": "source",
             "autoload": {
@@ -156,7 +154,7 @@
                 ]
             },
             "license": [
-                "GPLv3"
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -173,7 +171,7 @@
                 "wp"
             ],
             "support": {
-                "source": "https://github.com/SaltusDev/saltus-framework/tree/dev-updatelibs",
+                "source": "https://github.com/SaltusDev/saltus-framework/tree/dev",
                 "issues": "https://github.com/SaltusDev/saltus-framework/issues"
             },
             "install-path": "../saltus/framework"

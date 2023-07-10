@@ -1197,7 +1197,7 @@ html.wp-dark-mode-theme-concord .interface-interface-skeleton__sidebar {
   top: 50px;
   width: 180px;
   background: #555;
-  left: -75px;
+  right: -37px;
 }
 #wpdmColorPalettesContainer .wpdm-color-palettes-wrapper {
   padding: 10px;

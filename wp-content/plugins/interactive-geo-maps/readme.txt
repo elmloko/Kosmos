@@ -1,10 +1,10 @@
 === Interactive Geo Maps ===
-Contributors: carlosmoreirapt, pcarvalho
+Contributors: carlosmoreirapt, pcarvalho, freemius
 Tags: map, interactive map, world map, travel map, us map
 Requires at least: 5.0
 Tested up to: 6.2
 Requires PHP: 7.0
-Stable tag: 1.5.11
+Stable tag: 1.6.1
 Donate link: https://interactivegeomaps.com
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -98,6 +98,58 @@ You can visit this [article on how to use the plugin together with WP Rocket](ht
 10. Administration 04
 
 == Changelog ==
+
+= 1.5.19 =
+Improve meta texts
+Update dependencies
+
+= 1.5.18 =
+Wrap text in tooltip by default
+Add option for tooltip render mode
+new map of spain added
+
+= 1.5.17 =
+[PRO] Allow multiple searchable properties from custom source.
+
+= 1.5.16 =
+elementor fix
+disable-wpautop
+[PRO] merge region content
+[PRO] improvements to auto labels - for custom maps
+[PRO] draggable-cursor
+
+= 1.5.15 =
+[PRO] New feature introducing Auto labels positioning
+[PRO] Zoom on click improvements
+
+= 1.5.14 =
+Freemius SDK update to 2.5.5
+Tested up to WordPress 6.2
+Improvements when using transparent hover color
+PHP 8.2 compatibility improvements
+Plugin size reduction
+[Pro] Fixed tooltips improvements
+[Pro] Display map list improvements
+
+= 1.5.13 =
+[Pro] Prevent self map shortcode to run in actions
+[Pro] Remove empty placeholders on action content template for spreadsheets
+
+= 1.5.12 =
+Map height option improvement
+[Pro] Region automatic labels improvements
+[Pro] Fix issues with second clicks/taps
+[Pro] Fixed issues with dropdown filter
+
+= 1.5.11 =
+Empty map height issue fixed
+Security Update
+[Pro] Hold click actions on mobile - bug fix
+[Pro] Fix live filter bug introduced in last update
+[Pro] Fix grouping bug
+[Pro] Fullscreen button issue on Firefox fixed
+[Pro] Added option to reset auto labels positions
+
 = 1.5.11 =
 Empty map height issue fixed
 Security Update
@@ -125,7 +177,7 @@ Improvements in region names to code convertion
 Freemius Library Update - v2.4.5
 PHP 8.1 compatibility improvements
 Grouping regions fixes
-[Pro] Bug fixes related with the way select/fixed tooltip worked 
+[Pro] Bug fixes related with the way select/fixed tooltip worked
 [Pro] Live filter bug fixes
 
 
@@ -143,11 +195,11 @@ Merges region entries with same ID
 Codestar Framework Update
 Option to set different map height on mobile
 Edit screen tabs now remember position after update
-[Pro] Action Content Template option for Other Data Sources 
+[Pro] Action Content Template option for Other Data Sources
 [Pro] Color Gradient beta support added
 
 = 1.5.4 =
-Freemius SDK Update 
+Freemius SDK Update
 
 = 1.5.3 =
 Security Update in Clone Feature
@@ -167,7 +219,7 @@ Security Update in Clone Feature
 
 = 1.5.0 =
 Codestar Framework Update
-New JS public methods added 
+New JS public methods added
 
 = 1.4.12 =
 [Pro] Google Spreadsheets feature added as old JSON method is now depracated
@@ -193,10 +245,10 @@ Projection fixes for USA Territories map
 
 = 1.4.9 =
 New Maps: Côte d'Ivoire (Ivory Coast), Uganda and Province map of Italy
-[Pro] Include markers in display-map-list shortcode 
+[Pro] Include markers in display-map-list shortcode
 [Pro] Drilldown issue fixed for Congo DR
 
-= 1.4.8 = 
+= 1.4.8 =
 Option to overwrite meta in shortcode parameter
 [Pro] Bug fix on external list shortcode html
 [Pro] Bug fix on drilldown for Canada and Mexico regions

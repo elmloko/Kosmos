@@ -1,0 +1,165 @@
+.map_wrapper {
+	max-width: 100%;
+	width:100%;
+	overflow:hidden;
+}
+
+.map_box {
+	max-width: 100%;
+	margin: 0 auto;
+	overflow:hidden;
+}
+
+.map_wrapper .map_aspect_ratio {
+	max-width: 100%;
+	width:100%;
+	position: relative;
+	height: 0;
+}
+
+
+.map_wrapper:fullscreen {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 999999;
+	text-align: center;
+	padding:10px;
+}
+
+
+.map_wrapper:fullscreen .map_aspect_ratio {
+	position: inherit;
+	padding-bottom: 100%;
+	overflow:hidden;
+}
+
+
+.map_wrapper .map_container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.map_container .map_render {
+	height:100%;
+}
+
+/* Pointer events for marker labels */
+.imapsCircle-group + .imapsLabel-group {
+	pointer-events:none;
+}
+
+
+/* Tooltip */
+.imapsLabel foreignObject br {
+	height:0px;
+	content: '';
+	clear:both;
+	display: block;
+}
+
+.imapsLabel foreignObject p {
+	margin:0;
+	padding:0;
+}
+
+.imapsLabel foreignObject {
+	box-sizing: content-box;
+}
+
+.imapsLabel foreignObject img {
+	margin:0;
+	padding:0;
+	display: block;
+	position: relative;
+	max-width:100%;
+	box-sizing: content-box;
+}
+
+.imapsLabel foreignObject img.aligncenter {
+	margin:0 auto;
+}
+
+.imapsInnerTooltip {
+	display:block;
+	white-space:initial;
+	word-break: initial;
+	word-wrap: initial;
+	width:100%;
+}
+
+/* twentytwenty fix for css rule affecting all svg paths */
+.map_wrapper path {
+	transition: inherit;
+}
+
+.imaps_fullscreen_button_only_mobile,
+.igm_select_mobile_only {
+	display:none;
+}
+
+.igm_select_container {
+	margin-bottom:20px;
+}
+
+.map_wrapper:fullscreen .imaps_fullscreen_button {
+	display:none;
+}
+
+/* External Controls */
+.map_controls {
+	display: none;
+}
+
+@media only screen and (max-width: 768px) {
+	.imaps_fullscreen_button_only_mobile,
+	.igm_select_mobile_only {
+		display:block;
+	}
+	.map_wrapper:fullscreen .imaps_fullscreen_button_only_mobile {
+		display:none;
+	}
+
+	/* External Controls */
+	.map_controls {
+		width:100%;
+		display:flex;
+		flex-direction:row;
+		justify-content:space-between;
+		padding:20px 0;
+	}
+
+	.map_controls > div {
+		background:#d9d9d9;
+		font-size:1.5em;
+		cursor:pointer;
+		width:30%;
+		text-align:center;
+		border-radius: 3px;
+	}
+
+	.map_controls .map_home_button {
+		display:flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.map_has_external_controls .imapsZoomControl-group {
+		display:none;
+	}
+
+	.map_wrapper.map_has_external_controls:fullscreen .imapsZoomControl-group {
+		display:inherit;
+	}
+}
+
+/* Elementor Preview */
+.elementor-editor-active .map_wrapper .map_render {
+	content: 'map';
+	background-color: #CCC;
+}

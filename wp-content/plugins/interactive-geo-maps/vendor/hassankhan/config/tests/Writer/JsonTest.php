@@ -1,14 +1,12 @@
 <?php
 
-namespace Noodlehaus\Writer\Test;
+namespace Noodlehaus\Test\Writer;
 
 use Noodlehaus\Writer\Json;
-use Yoast\PHPUnitPolyfills\Polyfills\ExpectException;
-use Yoast\PHPUnitPolyfills\TestCases\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class JsonTest extends TestCase
 {
-    use ExpectException;
     /**
      * @var Json
      */
@@ -28,7 +26,7 @@ class JsonTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function set_up()
+    protected function setUp(): void
     {
         $this->writer = new Json();
         $this->temp_file = tempnam(sys_get_temp_dir(), 'config.json');
@@ -57,29 +55,29 @@ class JsonTest extends TestCase
     }
 
     /**
-     * @covers Noodlehaus\Writer\Json::getSupportedExtensions()
+     * @covers \Noodlehaus\Writer\Json::getSupportedExtensions()
      */
     public function testGetSupportedExtensions()
     {
         $expected = ['json'];
         $actual = $this->writer->getSupportedExtensions();
-        $this->assertEquals($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 
     /**
-     * @covers Noodlehaus\Writer\Json::toString()
+     * @covers \Noodlehaus\Writer\Json::toString()
      */
     public function testEncodeJson()
     {
         $actual = $this->writer->toString($this->data, false);
         $expected = '{"application":{"name":"configuration","secret":"s3cr3t"},"host":"localhost","port":80,"servers":["host1","host2","host3"]}';
 
-        $this->assertEquals($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 
     /**
-     * @covers Noodlehaus\Writer\Json::toString()
-     * @covers Noodlehaus\Writer\Json::toFile()
+     * @covers \Noodlehaus\Writer\Json::toString()
+     * @covers \Noodlehaus\Writer\Json::toFile()
      */
     public function testWriteJson()
     {
@@ -90,8 +88,8 @@ class JsonTest extends TestCase
     }
 
     /**
-     * @covers Noodlehaus\Writer\Json::toString()
-     * @covers Noodlehaus\Writer\Json::toFile()
+     * @covers \Noodlehaus\Writer\Json::toString()
+     * @covers \Noodlehaus\Writer\Json::toFile()
      */
     public function testUnwritableFile()
     {

@@ -235,6 +235,13 @@ function igmaps_model() {
 									'text'      => __( 'Text Input', 'interactive-geo-maps' ),
 								],
 							],
+							'tooltip_render_html' => [
+								'type'    => 'switcher',
+								/* translators: field type = input type (textarea, rich text editor...) */
+								'title'   => __( 'Render as HTML', 'interactive-geo-maps' ),
+								'desc'    => __( 'Enable this to remove automatic paragraphs, rendering content as it was written. Default is false.', 'interactive-geo-maps' ),
+								'default' => false,
+							],
 
 						],
 					],
@@ -380,7 +387,7 @@ function igmaps_model() {
 									<div class="map_information_box" style="display:none;">
 										<div class="map_information_title">%2$s</div>
 										<div id="map_click_events_info"></div>
-	
+
 									</div>
 									<div class="map_information_box" id="map_clicked_coordinates" style="display:none;">
 										<div class="map_information_title">%3$s</div>
@@ -388,7 +395,7 @@ function igmaps_model() {
 										<div id="map_clicked_coordinates_box" style="display:none;">
 										</div>
 									</div>
-									
+
 								</div>
 							</div>
 							<div class="igm_small">%4$s<br>%6$s <span class="dashicons dashicons-external"></span></div>',

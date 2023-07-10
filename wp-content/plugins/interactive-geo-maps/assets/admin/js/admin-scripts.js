@@ -7,44 +7,44 @@ iMapsBuilder = {
 	imageSaved: false,
 	needsUpdate: false,
 	previewBlocked: false,
-	advanced:false,
+	advanced: false,
 	form: document.querySelector("form#post"),
 };
 
 
-iMapsBuilder.editControls = function(){
+iMapsBuilder.editControls = function () {
 
 	// Basic
 	let addMarker = document.createElement("div");
-	addMarker.setAttribute('id','map_click_add_marker');
+	addMarker.setAttribute('id', 'map_click_add_marker');
 	addMarker.innerHTML = '<span class="dashicons dashicons-plus-alt"></span><span class="map_action_label">Add Marker There</span>';
-	
+
 	let coordinatesBox = document.getElementById("map_clicked_coordinates_box");
 	coordinatesBox.appendChild(addMarker);
 	coordinatesBox.style.display = 'block';
-	
+
 
 	// Advanced
-	if( ! iMapsBuilder.advanced ){
+	if (!iMapsBuilder.advanced) {
 		return;
 	}
 
 	let setCenter = document.createElement("div");
-	setCenter.setAttribute('id','map_set_center');
-	setCenter.setAttribute('title','Set as initial zoom and center');
+	setCenter.setAttribute('id', 'map_set_center');
+	setCenter.setAttribute('title', 'Set as initial zoom and center');
 	setCenter.innerHTML = '<span class="dashicons dashicons-admin-post"></span><span class="map_action_label"></span>';
-	
-	setCenter.addEventListener('click',function(ev){
+
+	setCenter.addEventListener('click', function (ev) {
 		let centerData = document.getElementById('map_visual_info').dataset.visual;
 		centerData = JSON.parse(centerData);
 		iMapsBuilder.setInitialCenter(centerData);
 		let icon = ev.target;
 		icon.classList.remove('dashicons-admin-post');
 		icon.classList.add('dashicons-yes-alt');
-		setTimeout(function(){
+		setTimeout(function () {
 			icon.classList.remove('dashicons-yes-alt');
 			icon.classList.add('dashicons-admin-post');
-		},2500);
+		}, 2500);
 	});
 
 	let visualBox = document.getElementById("map_visual_info_box");
@@ -54,7 +54,7 @@ iMapsBuilder.editControls = function(){
 
 }
 
-iMapsBuilder.setInitialCenter = function(centerData){
+iMapsBuilder.setInitialCenter = function (centerData) {
 
 	let zoomField = document.getElementsByName("map_info[viewport][zoomLevel]")[0];
 	let latitudeField = document.getElementsByName("map_info[viewport][homeGeoPoint][latitude]")[0];
@@ -64,57 +64,57 @@ iMapsBuilder.setInitialCenter = function(centerData){
 	longitudeField.value = centerData.long;
 
 	// rebuildPreview
-	const event = new Event('change');  
+	const event = new Event('change');
 	longitudeField.dispatchEvent(event);
 
 }
 
-iMapsBuilder.listenToClicks = function( mapID ){
+iMapsBuilder.listenToClicks = function (mapID) {
 
-	console.log( iMapsData.data[0].container );
-	document.getElementById( iMapsData.data[0].container ).addEventListener('mapEntryClicked', function(ev) { 
+	console.log(iMapsData.data[0].container);
+	document.getElementById(iMapsData.data[0].container).addEventListener('mapEntryClicked', function (ev) {
 		let data = iMapsManager.maps[mapID].map.lastClickedEntry.dataItem.dataContext;
 		iMapsBuilder.populateClickInfo(data);
 	});
-	
+
 }
 
 iMapsBuilder.populateClickInfo = function (data) {
 	var container = document.getElementById("map_click_events_info"),
-	info = "";
+		info = "";
 	controls = false;
 
 	if (container && data) {
-	info += "ID: " + data.id + "<br>";
+		info += "ID: " + data.id + "<br>";
 
-	if (data.name) {
-		info += "Name: " + data.name + "<br>";
-	}
+		if (data.name) {
+			info += "Name: " + data.name + "<br>";
+		}
 
-	if (data.madeFromGeoData) {
-		controls = iMapsBuilder.addRegionButton(data.id, data.name);
-		controls.addEventListener('click',function(ev){
-			ev.target.classList.remove('dashicons-plus-alt');
-			ev.target.classList.add('dashicons-yes-alt');
-			ev.target.style.pointerEvents = "none";
-		});
-	}
+		if (data.madeFromGeoData) {
+			controls = iMapsBuilder.addRegionButton(data.id, data.name);
+			controls.addEventListener('click', function (ev) {
+				ev.target.classList.remove('dashicons-plus-alt');
+				ev.target.classList.add('dashicons-yes-alt');
+				ev.target.style.pointerEvents = "none";
+			});
+		}
 
-	if (data.latitude) {
-		info += "LAT: " + Number(data.latitude).toFixed(6) + "<br>";
-		info += "LONG: " + Number(data.longitude).toFixed(6) + "<br>";
-	}
+		if (data.latitude) {
+			info += "LAT: " + Number(data.latitude).toFixed(6) + "<br>";
+			info += "LONG: " + Number(data.longitude).toFixed(6) + "<br>";
+		}
 
-	if (data.action) {
-		info += "Action: " + data.action.replace("igm_", "") + "<br>";
-	}
-	container.parentElement.style.display = 'block'
-	container.innerHTML = info;
+		if (data.action) {
+			info += "Action: " + data.action.replace("igm_", "") + "<br>";
+		}
+		container.parentElement.style.display = 'block'
+		container.innerHTML = info;
 
-	if(controls){
-		container.appendChild(controls);
-	}
-	
+		if (controls) {
+			container.appendChild(controls);
+		}
+
 	}
 };
 
@@ -146,22 +146,22 @@ iMapsBuilder.checkMaxInputVars = function () {
 
 iMapsBuilder.init = function () {
 	var saveBtn = document.getElementById("publish"),
-	mapID = document.getElementById("post_ID").value;
+		mapID = document.getElementById("post_ID").value;
 
 	// add listner to accordions and clone buttons for maxInputVars
 	iMapsBuilder.addRepeatFieldsListener();
 
 	//check if advanced
-	if( document.body.classList.contains('igm-pro') ){
+	if (document.body.classList.contains('igm-pro')) {
 		iMapsBuilder.advanced = true;
 	}
 
 	// remember tabs
-    try {
-        iMapsBuilder.rememberTabInit();
-    } catch( err ) {
-        console.log('Error: will not remember tab;');
-    }
+	try {
+		iMapsBuilder.rememberTabInit();
+	} catch (err) {
+		console.log('Error: will not remember tab;');
+	}
 
 	// click action warning
 	iMapsBuilder.clickActionWarnings();
@@ -171,7 +171,7 @@ iMapsBuilder.init = function () {
 		iMapsBuilder.buildPreview();
 		iMapsBuilder.initAvailableRegions();
 		iMapsBuilder.addPreviewImage();
-		iMapsBuilder.listenToClicks( mapID );
+		iMapsBuilder.listenToClicks(mapID);
 	}
 
 	// save button
@@ -205,8 +205,8 @@ iMapsBuilder.init = function () {
 	// check for overlay and make sortable
 	iMapsBuilder.sortableOverlay();
 
-    // check for auto labels clear link
-    iMapsBuilder.autoLabelsReset();
+	// check for auto labels clear link
+	iMapsBuilder.autoLabelsReset();
 
 	// geocoding fields
 	if (iMapsOptions.googleApiKey && iMapsOptions.googleApiKey !== "") {
@@ -281,18 +281,17 @@ iMapsBuilder.clickActionWarnings = function () {
 /** 
  * Set up click event to reset auto labels custom coordinates 
  */
-iMapsBuilder.autoLabelsReset = function() {
-    var clearLink = document.getElementById('igm-reset-auto-labels');
-    if(clearLink) { 
-        clearLink.addEventListener( "click", function (ev) {
-                if( confirm(iMapsOptions.messages.resetAutoLabels) ){
-                    var regionLabelsCustomCoordinates = document.getElementsByName('map_info[regionLabels][regionLabelCustomCoordinates]')[0];
-                    regionLabelsCustomCoordinates.value = '';
-                    regionLabelsCustomCoordinates.dispatchEvent(new Event("change"));
-                }
-            } 
-        );
-    }
+iMapsBuilder.autoLabelsReset = function () {
+	var clearLink = document.getElementById('igm-reset-auto-labels');
+	if (clearLink) {
+		clearLink.addEventListener("click", function (ev) {
+			if (confirm(iMapsOptions.messages.resetAutoLabels)) {
+				var regionLabelsCustomCoordinates = document.getElementsByName('map_info[regionLabels][regionLabelCustomCoordinates]')[0];
+				regionLabelsCustomCoordinates.value = '';
+				regionLabelsCustomCoordinates.dispatchEvent(new Event("change"));
+			}
+		});
+	}
 }
 
 iMapsBuilder.sortableOverlay = function () {
@@ -473,7 +472,7 @@ iMapsBuilder.populateAvailableRegions = function (regionCodes) {
 		)[0],
 		container = document.getElementById("map_region_data"),
 		currentMap = document.getElementsByName("map_info[map]")[0]
-			.selectedOptions[0].text,
+		.selectedOptions[0].text,
 		jsonContainer,
 		containerContent,
 		tree,
@@ -537,8 +536,7 @@ iMapsBuilder.populateAvailableRegions = function (regionCodes) {
 				regionData[regionCodes[region].name] = region;
 
 				regionDataArray.push({
-					label:
-						regionCodes[region].name + " " + "(" + region + ")",
+					label: regionCodes[region].name + " " + "(" + region + ")",
 					value: region
 				});
 
@@ -578,7 +576,9 @@ iMapsBuilder.populateAvailableRegions = function (regionCodes) {
 		container.appendChild(jsonContainer);
 
 		// Create json-tree
-		tree = jsonTree.create({ full: regionCodes }, jsonContainer);
+		tree = jsonTree.create({
+			full: regionCodes
+		}, jsonContainer);
 
 		// set regionData to hidden field to be saved
 		regionDataContainer.value = JSON.stringify(regionData);
@@ -886,8 +886,7 @@ iMapsBuilder.updatePreview = function (form, ev) {
 	// borders width
 	if (ev && ev.target.name == "map_info[visual][borderWidth]" && map) {
 		baseRegionSeries.mapPolygons.each(function (polygon) {
-			polygon.animate(
-				{
+			polygon.animate({
 					property: "strokeWidth",
 					to: ev.target.value
 				},
@@ -905,8 +904,7 @@ iMapsBuilder.updatePreview = function (form, ev) {
 				return;
 			}
 
-			polygon.animate(
-				{
+			polygon.animate({
 					property: "inactiveColor",
 					to: ev.target.value
 				},
@@ -920,8 +918,7 @@ iMapsBuilder.updatePreview = function (form, ev) {
 	// border color
 	if (ev && ev.target.name == "map_info[visual][borderColor]" && map) {
 		baseRegionSeries.mapPolygons.each(function (polygon) {
-			polygon.animate(
-				{
+			polygon.animate({
 					property: "stroke",
 					to: am4core.color(ev.target.value)
 				},
@@ -997,7 +994,7 @@ iMapsBuilder.updatePreview = function (form, ev) {
 		async: true
 	});
 
-	console.log( formData );
+	console.log(formData);
 
 	jQuery.ajax({
 		url: iMapsOptions.ajax_url,
@@ -1184,7 +1181,9 @@ iMapsBuilder.geocodeAddress = function () {
 
 	addressInput.setAttribute("readonly", "readyonly");
 
-	geocoder.geocode({ address: address }, function (results, status) {
+	geocoder.geocode({
+		address: address
+	}, function (results, status) {
 		if (status === "OK") {
 			place = results[0];
 			latfield.value = place.geometry.location.lat();
@@ -1210,7 +1209,7 @@ iMapsBuilder.getClosest = function (elem, selector) {
 			function (s) {
 				var matches = (this.document || this.ownerDocument).querySelectorAll(s),
 					i = matches.length;
-				while (--i >= 0 && matches.item(i) !== this) { }
+				while (--i >= 0 && matches.item(i) !== this) {}
 				return i > -1;
 			};
 	}
@@ -1304,44 +1303,46 @@ iMapsBuilder.addRegion = function (regionCode, regionName) {
 	iMapsBuilder.populateAvailableRegions();
 };
 
-iMapsBuilder.hitTab = function(index){
-	setTimeout(function(){
+iMapsBuilder.hitTab = function (index) {
+	setTimeout(function () {
 		let tab = document.querySelector('#map_info .csf-nav ul li:nth-child(' + index + ') a');
-		if( tab ) {
+		if (tab) {
 			tab.click();
 		}
-	},1000);
+	}, 1000);
 }
 
-iMapsBuilder.rememberTabInit = function() {
+iMapsBuilder.rememberTabInit = function () {
 
 	// check if URL contains tab parameter
-	let referer    = document.querySelector('#referredby'); 
-	let refererUrl = new URL( window.location.origin + referer.value );
+	let referer = document.querySelector('#referredby');
+	let refererUrl = new URL(window.location.origin + referer.value);
 
-    if( typeof refererUrl.origin === 'undefined' ) {
-        return;
-    }
+	if (typeof refererUrl.origin === 'undefined') {
+		return;
+	}
 
 	if (refererUrl.searchParams.get('igmtab')) {
-		iMapsBuilder.hitTab( refererUrl.searchParams.get('igmtab') );
+		iMapsBuilder.hitTab(refererUrl.searchParams.get('igmtab'));
 	} else {
-		let currentUrl = new URL (window.location.href );
+		let currentUrl = new URL(window.location.href);
 		if (currentUrl.searchParams.get('igmtab')) {
-			iMapsBuilder.hitTab( currentUrl.searchParams.get('igmtab') );
+			iMapsBuilder.hitTab(currentUrl.searchParams.get('igmtab'));
 		}
 	}
 
-	let tabs          = document.querySelectorAll("#map_info .csf-nav-metabox ul li");
-	let currentURL    = window.location.href;
-	let url           = new URL( currentURL );
+	let tabs = document.querySelectorAll("#map_info .csf-nav-metabox ul li");
+	let currentURL = window.location.href;
+	let url = new URL(currentURL);
 	let search_params = url.searchParams;
 
-	tabs.forEach(function(tab,index){
-		tab.addEventListener('click',function(){
-			search_params.set('igmtab', index+1);
+	tabs.forEach(function (tab, index) {
+		tab.addEventListener('click', function () {
+			search_params.set('igmtab', index + 1);
 			const nextTitle = document.title;
-			const nextState = { additionalInformation: 'Updated the URL with JS' };
+			const nextState = {
+				additionalInformation: 'Updated the URL with JS'
+			};
 			window.history.replaceState(nextState, nextTitle, url.toString());
 		});
 	});
@@ -1450,5 +1451,3 @@ if (typeof iMapsOptions !== "undefined") {
 } else {
 	iMapsBuilder.geoLocateInit();
 }
-
-

@@ -57,6 +57,9 @@ class Core
      * @var object
      */
     public  $actions ;
+    public  $extra_scripts ;
+    public  $extra_styles ;
+    public  $footer_scripts ;
     /**
      * Setup the class variables
      *
