@@ -2360,12 +2360,6 @@
         var PremiumSVGDrawerHandler = ModuleHandler.extend({
 
             bindEvents: function () {
-
-                ScrollTrigger.config({
-                    limitCallbacks: true,
-                    ignoreMobileResize: true
-                });
-
                 this.run();
             },
 
@@ -2483,6 +2477,904 @@
 
         });
 
+        var PremiumTermsCloud = ModuleHandler.extend({
+
+            getDefaultSettings: function () {
+
+                return {
+                    selectors: {
+                        container: '.premium-tcloud-container',
+                        canvas: '.premium-tcloud-canvas',
+                        termWrap: '.premium-tcloud-term',
+                    },
+                }
+
+            },
+
+            getDefaultElements: function () {
+
+                var selectors = this.getSettings('selectors');
+
+                return {
+                    $container: this.$element.find(selectors.container),
+                    $canvas: this.$element.find(selectors.canvas),
+                    $termWrap: this.$element.find(selectors.termWrap),
+                }
+
+            },
+
+            bindEvents: function () {
+                this.run();
+            },
+
+            run: function () {
+
+                var widgetSettings = this.getElementSettings(),
+                    $container = this.elements.$container,
+                    _this = this,
+                    $canvas = this.elements.$canvas;
+
+
+
+                if (['shape', 'sphere'].includes(widgetSettings.words_order)) {
+
+                    var computedStyle = getComputedStyle($canvas[0]);
+
+                    $canvas.attr({
+                        width: computedStyle.getPropertyValue('--pa-tcloud-width'),
+                        height: computedStyle.getPropertyValue('--pa-tcloud-height')
+                    });
+                }
+
+                setTimeout(function () {
+
+                    if ('shape' === widgetSettings.words_order) {
+
+                        elementorFrontend.waypoint($canvas, function () {
+                            _this.renderWordCloud();
+                        });
+
+                    } else if ('sphere' === widgetSettings.words_order) {
+
+                        _this.renderWordSphere();
+
+                    } else {
+                        _this.handleTermsGrid();
+                    }
+
+                    $container.removeClass('premium-tcloud-hidden');
+                }, 500);
+
+            },
+
+            renderWordSphere: function () {
+
+                var widgetID = this.getID(),
+                    widgetSettings = this.getElementSettings(),
+                    $termWrap = this.elements.$termWrap,
+                    _this = this;
+
+                var colorScheme = widgetSettings.colors_select;
+
+                if ('custom' === colorScheme && widgetSettings.words_colors) {
+                    var colors = widgetSettings.words_colors.split("\n");
+                }
+
+                $termWrap.map(function (index, term) {
+
+                    var generatedColor = null;
+
+
+                    if ('custom' !== colorScheme) {
+
+                        generatedColor = _this.genRandomColor(colorScheme);
+
+                    } else if (widgetSettings.words_colors) {
+                        generatedColor = Math.floor(Math.random() * colors.length);
+
+                        generatedColor = colors[generatedColor];
+                    }
+
+                    if (generatedColor) {
+                        $(term).find('.premium-tcloud-term-link').css(('background' === widgetSettings.colors_target ? 'background-' : '') + 'color', generatedColor);
+                    }
+
+
+                })
+
+                setTimeout(function () {
+
+                    $('#premium-tcloud-canvas-' + widgetID).tagcanvas({
+
+                        decel: 'yes' === widgetSettings.stop_onDrag ? 0.95 : 1,
+
+                        overlap: false,
+                        textColour: null,
+
+                        weight: 'yes' === widgetSettings.sphere_weight,
+                        weightFrom: 'data-weight',
+                        weightSizeMin: 'yes' === widgetSettings.sphere_weight ? widgetSettings.weight_min.size : 10,
+                        weightSizeMax: 'yes' === widgetSettings.sphere_weight ? widgetSettings.weight_max.size : 20,
+
+                        textHeight: widgetSettings.text_height || 15,
+                        textFont: widgetSettings.font_family,
+                        textWeight: widgetSettings.font_weight,
+
+                        wheelZoom: 'yes' === widgetSettings.wheel_zoom,
+                        reverse: 'yes' === widgetSettings.reverse,
+                        dragControl: 'yes' === widgetSettings.drag_control,
+                        initial: [widgetSettings.start_xspeed.size, widgetSettings.start_yspeed.size],
+
+                        bgColour: 'tag',
+
+                        padding: 'background' === widgetSettings.colors_target ? widgetSettings.sphere_term_padding.size : 0,
+                        bgRadius: 'background' === widgetSettings.colors_target ? widgetSettings.sphere_term_radius.size : 0,
+
+                        outlineColour: 'rgba(2,2,2,0)',
+                        maxSpeed: 0.03,
+                        depth: 0.75
+
+                    }, 'premium-tcloud-terms-container-' + widgetID);
+                }, 100);
+
+
+            },
+
+            handleTermsGrid: function () {
+
+                var widgetSettings = this.getElementSettings(),
+                    $termWrap = this.elements.$termWrap,
+                    _this = this;
+
+                var colorScheme = widgetSettings.colors_select;
+
+                if ('custom' === colorScheme && widgetSettings.words_colors) {
+                    var colors = widgetSettings.words_colors.split("\n");
+                }
+
+                $termWrap.map(function (index, term) {
+
+                    var generatedColor = null,
+                        fontSize = $(term).find('.premium-tcloud-term-link').css('font-size').replace('px', '');
+
+                    if (widgetSettings.fsize_scale.size > 0)
+                        fontSize = parseFloat(fontSize) + ($(term).find('.premium-tcloud-term-link').data('weight') * widgetSettings.fsize_scale.size);
+
+                    if ('custom' !== colorScheme) {
+                        generatedColor = _this.genRandomColor(colorScheme, 'grid');
+
+                        var opacities = {
+                            original: 'random-light' === colorScheme ? '0.15)' : '80%)',
+                            replaced: 'random-light' === colorScheme ? '0.3)' : '100%)'
+                        };
+
+                        $(term).get(0).style.setProperty("--tag-hover-color", generatedColor.replace(opacities.original, opacities.replaced));
+                        $(term).get(0).style.setProperty("--tag-text-color", 'random-dark' === colorScheme ? '#fff' : generatedColor.replace('42%,0.15)', '35%,100%)'));
+
+                    } else if (widgetSettings.words_colors) {
+
+                        generatedColor = Math.floor(Math.random() * colors.length);
+
+                        generatedColor = colors[generatedColor];
+
+                        $(term).get(0).style.setProperty("--tag-hover-color", generatedColor);
+
+                    }
+
+                    $(term).get(0).style.setProperty("--tag-color", generatedColor);
+
+                    if (widgetSettings.fsize_scale.size > 0)
+                        $(term).find('.premium-tcloud-term-link').css('font-size', Math.ceil(fontSize) + 'px');
+
+
+                    if ('ribbon' === widgetSettings.words_order) {
+                        $(term).get(0).style.setProperty("--tag-ribbon-size", (Math.ceil($(term).outerHeight(false)) / 2) + 'px');
+                    }
+
+
+                })
+
+
+
+            },
+
+            renderWordCloud: function () {
+
+                var widgetID = this.getID(),
+                    widgetSettings = this.getElementSettings(),
+                    $container = this.elements.$container,
+                    settings = $container.data("chart");
+
+                var wordsArr = settings.wordsArr,
+                    colors = [],
+                    rotationRatio = rotationSteps = null,
+                    minRot = -90 * (Math.PI / 180),
+                    maxRot = 90 * (Math.PI / 180);
+
+
+                switch (widgetSettings.rotation_select) {
+
+                    case 'horizontal':
+                        rotationRatio = 0;
+                        rotationSteps = 0;
+                        break;
+
+                    case 'vertical':
+                        rotationRatio = 1;
+                        rotationSteps = 2;
+                        break;
+
+                    case 'hv':
+                        rotationRatio = 0.5;
+                        rotationSteps = 2;
+                        break;
+
+                    case 'custom':
+                        rotationRatio = widgetSettings.rotation.size || 0.3;
+
+                        minRot = widgetSettings.degrees.size * (Math.PI / 180) || 45;
+                        maxRot = widgetSettings.degrees.size * (Math.PI / 180) || 45;
+
+                        break;
+
+                    case 'random':
+                        rotationRatio = Math.random();
+                        rotationSteps = 0;
+
+                        break;
+
+                    default:
+                        rotationRatio = 0.3;
+                        break;
+                }
+
+
+                if ('custom' === widgetSettings.colors_select) {
+                    colors = widgetSettings.words_colors.split("\n");
+                }
+
+                WordCloud(document.getElementById('premium-tcloud-canvas-' + widgetID),
+                    {
+
+                        backgroundColor: 'rgba(0, 0, 0, 0)',
+                        shuffle: false,
+
+                        list: wordsArr,
+                        shape: widgetSettings.shape,
+                        color: widgetSettings.colors_select,
+                        wordsColors: colors,
+
+                        wait: (widgetSettings.interval.size * 1000) || 0,
+
+                        gridSize: widgetSettings.grid_size.size || 8,
+
+                        weightFactor: widgetSettings.weight_scale || 5,
+
+                        minRotation: minRot,
+                        maxRotation: maxRot,
+
+                        rotateRatio: rotationRatio,
+                        rotationSteps: rotationSteps,
+
+                        fontFamily: widgetSettings.font_family || 'Arial',
+                        fontWeight: widgetSettings.font_weight,
+
+                        click: function (item) {
+
+                            if (!elementorFrontend.isEditMode()) {
+                                var link = item[2];
+
+                                window.open(link, 'yes' === widgetSettings.new_tab ? '_blank' : '_top');
+                            }
+                        }
+
+                        // minSize: 10
+                        // rotationSteps: 90
+                    }
+                );
+
+
+
+            },
+
+            genRandomColor: function (scheme, shape) {
+
+                var min = 50,
+                    max = 90;
+
+                if ('random-dark' === scheme) {
+                    min = 10;
+                    max = 50;
+                }
+
+                var lightandOpacity = (Math.random() * (max - min) + min).toFixed() + '%, 100%';
+                if (shape) {
+                    lightandOpacity = '42%,' + ('random-dark' === scheme ? '80%' : '0.15');
+                }
+
+
+                return 'hsla(' +
+                    (Math.random() * 360).toFixed() + ',' +
+                    '100%,' +
+                    lightandOpacity + ')';
+
+            },
+
+            genRandomRotate: function () {
+
+                return Math.floor(Math.random() * 361);
+
+            },
+
+
+        });
+
+        var PremiumWorldClockHandler = function ($scope, $) {
+
+            var _ = luxon,
+                id = $scope.data('id'),
+                settings = $scope.find('.premium-world-clock__clock-wrapper').data('settings'),
+                isParentHotspot = $scope.closest('#tooltip_content').length > 0,
+                analogclocks = ['skin-1', 'skin-5', 'skin-6', 'skin-7'],
+                inc = isParentHotspot ? 300 : 1000;
+
+            if (!settings)
+                return;
+
+            window['clockInterval-' + id];
+
+            if (window['clockInterval-' + id]) {
+                clearInterval(window['clockInterval-' + id]);
+            }
+
+            if (analogclocks.includes(settings.skin) && settings.showClockNum) {
+                window['clockNumbers-' + id] = false;
+                drawClockNumbers($scope);
+            }
+
+            window['clockInterval-' + id] = setInterval(clockInit, inc, settings, $scope, id);
+
+            function clockInit(settings, $scope, id) {
+
+                var isInHotspots = $('.elementor-element-' + id).closest('.premium-tooltipster-base').length > 0;
+
+                if (isInHotspots) {
+                    $scope = $('.elementor-element-' + id);
+
+                    settings = $scope.find('.premium-world-clock__clock-wrapper').data('settings');
+
+                    if (!window['clockNumbers-' + id] && analogclocks.includes(settings.skin) && settings.showClockNum) {
+                        drawClockNumbers($scope);
+                        window['clockNumbers-' + id] = true;
+                    }
+                }
+
+                var time = getTimeComponents(settings);
+
+                if (!time) {
+                    var htmlNotice = '<div class="premium-error-notice">This Is An Invalid Timezone Name. Please Enter a Valid Timezone Name</div>';
+                    $scope.find('.premium-world-clock__clock-wrapper').html(htmlNotice);
+                }
+
+                if (['skin-1', 'skin-5', 'skin-6', 'skin-7'].includes(settings.skin)) {
+
+                    $scope.find('.premium-world-clock__hours').css('transform', 'rotate(' + ((time.hours * 30) + (time.minutes * 6 / 12)) + 'deg)').text('');
+                    $scope.find('.premium-world-clock__minutes').css('transform', 'rotate(' + time.minutes * 6 + 'deg)').text('');
+                    $scope.find('.premium-world-clock__seconds').css('transform', 'rotate(' + time.seconds * 6 + 'deg)').text('');
+
+                    if (settings.showMeridiem) {
+                        $scope.find('.premium-world-clock__meridiem').text(time.meridiem);
+                    }
+
+                } else {
+
+                    $scope.find('.premium-world-clock__hours').text(time.hours);
+                    $scope.find('.premium-world-clock__minutes').text(time.minutes);
+
+                    if (settings.showSeconds) {
+                        $scope.find('.premium-world-clock__seconds').text(time.seconds);
+                    }
+
+                    if (settings.showMeridiem) {
+                        var type = settings.meridiemType;
+
+                        if ('text' === type) {
+
+                            $scope.find('.premium-world-clock__meridiem').text(time.meridiem);
+
+                        } else {
+                            var meridiemIcons = {
+                                'AM': '<svg id="Weather_Icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#333;}</style></defs><g id="Clear_Sky"><circle class="cls-1" cx="12" cy="12" r="5.5"/><path class="cls-1" d="m21.76,12.74h-1.95c-.98,0-.98-1.47,0-1.47h1.95c.98,0,.98,1.47,0,1.47Z"/><path class="cls-1" d="m19.39,5.62l-1.38,1.38c-.29.29-.75.29-1.04,0-.29-.29-.29-.75,0-1.04l1.38-1.38c.29-.28.75-.28,1.04,0,.28.29.28.75,0,1.04Z"/><path class="cls-1" d="m12.74,2.24v1.95c0,.4-.33.73-.73.73s-.74-.33-.74-.73v-1.95c0-.41.33-.74.74-.74s.73.33.73.74Z"/><path class="cls-1" d="m5.96,7.03l-1.38-1.38c-.32-.31-.29-.75,0-1.04s.72-.31,1.03,0l1.38,1.38c.69.69-.34,1.73-1.03,1.04Z"/><path class="cls-1" d="m4.19,12.74h-1.95c-.98,0-.98-1.47,0-1.47h1.95c.98,0,.98,1.47,0,1.47Z"/><path class="cls-1" d="m7.02,18.04l-1.38,1.38c-.31.31-.75.29-1.04,0s-.31-.72,0-1.03l1.38-1.38c.32-.31.75-.29,1.04,0,.29.28.31.72,0,1.03Z"/><path class="cls-1" d="m12.74,19.82v1.95c0,.98-1.47.98-1.47,0v-1.95c0-.98,1.47-.98,1.47,0Z"/><path class="cls-1" d="m19.43,19.4c-.29.28-.73.31-1.04,0l-1.38-1.39c-.31-.31-.29-.75,0-1.03.28-.29.72-.31,1.03,0l1.39,1.38c.31.31.28.75,0,1.04Z"/></g></svg>',
+                                'PM': '<svg id="Weather_Icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#333;}</style></defs><path id="Moon" class="cls-1" d="m21.93,17.23c-1.89,3.24-5.4,5.27-9.26,5.27-5.89,0-10.67-4.7-10.67-10.51S6.37,1.87,11.95,1.5c.4-.02.67.41.46.76-.83,1.42-1.28,3.04-1.28,4.73,0,5.25,4.33,9.51,9.68,9.51.22,0,.44,0,.65-.02.4-.03.67.4.47.75Z"/></svg>'
+                            },
+                                currentIcon = (6 <= time.hoursNotPadded <= 17) ? meridiemIcons['AM'] : meridiemIcons['PM'];
+
+                            $scope.find('.premium-world-clock__meridiem').html(currentIcon);
+                        }
+                    }
+
+                    if (settings.equalWidth) {
+                        equalWidth();
+                    }
+                }
+
+                if (settings.date) {
+
+                    if ('skin-3' === settings.skin) {
+
+                        var daysNum = settings.daysNum,
+                            currentDay = time.date.d.toLowerCase(),
+                            $daysWrapper = $scope.find('.premium-world-clock__days-wrapper'),
+                            daysMap = {
+                                0: 'mon',
+                                1: 'tue',
+                                2: 'wed',
+                                3: 'thu',
+                                4: 'fri',
+                                5: 'sat',
+                                6: 'sun',
+                            },
+                            currentDayOrder = parseInt(time.date.order) - 1;
+
+                        $daysWrapper.html('<span class="premium-world-clock__day-name current-day">' + currentDay + '</span>');
+
+                        for (var i = 1; i <= parseInt(daysNum); i++) {
+
+                            var dayBefore = currentDayOrder - i,
+                                dayAfter = currentDayOrder + i;
+
+                            if (dayBefore < 0) {
+                                dayBefore += 7;
+                            }
+
+                            if (dayAfter > 6) {
+                                dayAfter -= 7;
+                            }
+
+                            $daysWrapper.prepend('<span class="premium-world-clock__day-name">' + daysMap[dayBefore] + '</span>');
+                            $daysWrapper.append('<span class="premium-world-clock__day-name">' + daysMap[dayAfter] + '</span>');
+                        }
+
+                        $scope.find('.premium-world-clock__month').text(time.date.m);
+                        $scope.find('.premium-world-clock__day').text(time.date.dn);
+
+                    } else if ('skin-4' === settings.skin) {
+
+                        $scope.find('.premium-world-clock__date-wrapper').html('');
+
+                        settings.dateFormat.forEach(function (format) {
+                            if (time.date[format] !== undefined && time.date[format] !== null) {
+                                var html = '<span class="premium-world-clock__date-segment">' + time.date[format] + '</span>';
+                                $scope.find('.premium-world-clock__date-wrapper').append(html);
+                            }
+                        });
+
+                    } else {
+                        $scope.find('.premium-world-clock__date').text(time.date);
+                    }
+                }
+
+                if (settings.gmtOffset) {
+                    var offset = 'Z' === settings.offsetFormat ? time.offset + 'HRS' : time.offset;
+                    $scope.find('.premium-world-clock__gmt-offset').text(offset);
+                }
+
+                $scope.find('.premium-addons__v-hidden').removeClass('premium-addons__v-hidden');
+            }
+
+            function getTimeComponents(settings) {
+
+                var skin = settings.skin,
+                    showDate = settings.date,
+                    showGmtOffset = settings.gmtOffset,
+                    time = {
+                        hours: '',
+                        minutes: '',
+                        seconds: '',
+                        meridiem: '',
+                        date: '',
+                    },
+                    dateTime = _.DateTime.local().setZone(settings.timezone);
+
+                if (!dateTime.isValid) {
+                    return false;
+                }
+
+                time.hours = dateTime.toFormat(settings.format);
+                time.minutes = dateTime.toFormat('mm');
+                time.seconds = dateTime.toFormat('ss');
+
+                if (showDate) {
+                    if ('skin-3' === skin || 'skin-4' === skin) {
+                        time.date = {
+                            d: dateTime.toFormat('ccc'),
+                            dn: dateTime.toFormat('dd'),
+                            m: dateTime.toFormat('LLL'),
+                            order: dateTime.toFormat('c')
+                        };
+
+                    } else {
+                        time.date = dateTime.toFormat(settings.dateFormat);
+                    }
+                }
+
+                if (showGmtOffset) {
+                    time.offset = dateTime.toFormat(settings.offsetFormat);
+                }
+
+                if (settings.showMeridiem) {
+                    time.meridiem = dateTime.toFormat('a');
+                    time.hoursNotPadded = parseInt(dateTime.toFormat('H'));
+                }
+
+                return time;
+            }
+
+            function equalWidth(skin) {
+                var width = 0,
+                    selector = 'skin-3' === skin ? '.premium-world-clock__hand:not(.premium-world-clock__seconds)' : '.premium-world-clock__hand';
+
+                $scope.find(selector).each(function (index, slot) {
+                    if (width < $(slot).outerWidth()) {
+                        width = $(slot).outerWidth();
+                    }
+                });
+
+                $scope.find(selector).css('min-width', width);
+            }
+
+            function drawClockNumbers($scope) {
+
+                var $clockNumbers = $scope.find('.premium-world-clock__clock-number');
+
+                for (var i = 0; i < 12; i++) {
+                    var point = getCirclePoint(50, i * 30, 50, 50);
+
+                    $($clockNumbers[i]).css('left', point.x + '%');
+                    $($clockNumbers[i]).css('top', point.y + '%');
+                }
+            }
+
+            function getCirclePoint(r, degrees, cx, cy) {
+                var angleInRadians = degrees * (Math.PI / 180);
+                var xp = cx + r * Math.cos(angleInRadians);
+                var yp = cy + r * Math.sin(angleInRadians);
+
+                return {
+                    x: xp,
+                    y: yp
+                };
+            }
+        };
+
+        var PremiumPostTickerHandler = function ($scope, $) {
+
+            var timer = null,
+                $postsWrapper = $scope.find('.premium-post-ticker__posts-wrapper'),
+                settings = $scope.find('.premium-post-ticker__outer-wrapper').data('ticker-settings');
+
+            if (!settings)
+                return;
+
+            if ('' !== settings.animation && 'layout-4' !== settings.layout) {
+                $postsWrapper.on("init", function (event) {
+                    resetAnimations("init");
+                });
+            }
+
+            if (settings.typing) {
+                $postsWrapper.on('init', function (event, slick) {
+                    var $currentTyping = $postsWrapper.find('[data-slick-index="' + slick.currentSlide + '"] .premium-post-ticker__post-title a');
+
+                    typeTitle($currentTyping);
+                });
+
+                $postsWrapper.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+
+                    var $typedItem = $postsWrapper.find('[data-slick-index="' + currentSlide + '"] .premium-post-ticker__post-title'),
+                        $currentTyping = $postsWrapper.find('[data-slick-index="' + currentSlide + '"] .premium-post-ticker__post-title a'),
+                        $nextTyping = $postsWrapper.find('[data-slick-index="' + nextSlide + '"] .premium-post-ticker__post-title a');
+
+                    clearInterval(timer);
+                    $typedItem.removeClass('premium-text-typing');
+                    $currentTyping.text('');
+
+                    typeTitle($nextTyping);
+                });
+            }
+
+            $postsWrapper.slick(getSlickSettings());
+
+            if ('' !== settings.animation && 'layout-4' !== settings.layout) {
+
+                $postsWrapper.on("beforeChange", function () {
+                    resetAnimations();
+                });
+
+                $postsWrapper.on("afterChange", function () {
+                    triggerAnimation();
+                });
+            }
+
+            if (settings.arrows) {
+
+                $scope.find('.premium-post-ticker__arrows a').on('click.paTickerNav', function () {
+
+                    if ($(this).hasClass('prev-arrow')) {
+
+                        $postsWrapper.slick('slickPrev');
+
+                    } else if ($(this).hasClass('next-arrow')) {
+
+                        $postsWrapper.slick('slickNext');
+
+                    }
+                });
+            }
+
+            $scope.find('.premium-post-ticker__outer-wrapper').removeClass('premium-post-ticker__hidden');
+
+            function getSlickSettings() {
+
+                $postsWrapper.off('mouseenter.paTickerPause');
+
+                var closestTab = $scope.closest('.premium-tabs-content-section'),
+                    autoPlay = settings.autoPlay;
+
+                //If there is a parent tab and it's not active, then autoplay should not be true.
+                if (closestTab.length > 0) {
+                    if (!closestTab.hasClass('content-current'))
+                        autoPlay = false;
+                }
+
+                var slickSetting = {
+                    infinite: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    autoplay: autoPlay,
+                    rows: 0,
+                    speed: settings.speed,
+                    fade: settings.fade,
+                    draggable: true,
+                    pauseOnHover: settings.pauseOnHover,
+                    vertical: settings.vertical
+                };
+
+                if (settings.autoPlay) {
+                    slickSetting.autoplaySpeed = settings.autoplaySpeed;
+                }
+
+                if (settings.infinite) {
+                    slickSetting.autoplaySpeed = 0;
+                    slickSetting.cssEase = 'linear';
+
+                    slickSetting.useCSS = false;
+
+                    if ('layout-4' !== settings.layout && !settings.vertical) {
+                        slickSetting.variableWidth = true; // this only is required if the slider is horizontal
+                    }
+                }
+
+                if ('layout-4' === settings.layout) {
+                    slickSetting.vertical = true;
+                    slickSetting.slidesToShow = settings.slidesToShow || 1;
+                }
+
+                if ($scope.hasClass('premium-reversed-yes') && 'layout-4' !== settings.layout && !settings.vertical && !settings.typing && !settings.fade) {
+
+                    slickSetting.rtl = true;
+                }
+
+                return slickSetting;
+            }
+
+            function resetAnimations() {
+
+                var $slides = $postsWrapper.find(".slick-slide").not(".slick-current");
+
+                $slides.each(function (index, elem) {
+                    $(elem).removeClass("animated " + settings.animation).addClass("elementor-invisible");
+                });
+            };
+
+            function triggerAnimation() {
+
+                $postsWrapper.find(".slick-active.elementor-invisible").each(function (index, elem) {
+
+                    $(elem).removeClass("elementor-invisible").addClass(settings.animation + ' animated');
+
+                });
+            }
+
+            function typeTitle($tickerItem) {
+
+                if (!$tickerItem.length) {
+                    return;
+                }
+
+                var typingCounter = 0,
+                    $typedItem = $tickerItem.closest('.premium-post-ticker__post-title'),
+                    typingText = $tickerItem.data('typing'),
+                    typingTextLength = typingText.length;
+
+                $typedItem.addClass('premium-text-typing');
+                $tickerItem.text(typingText.substr(0, typingCounter++));
+
+                timer = setInterval(function () {
+                    if (typingCounter <= typingTextLength) {
+                        $tickerItem.text(typingText.substr(0, typingCounter++));
+                    } else {
+                        clearInterval(timer);
+                        $typedItem.removeClass('premium-text-typing'); // have the '_' after.
+                    }
+                }, 40);
+            }
+        };
+
+        var PremiumWeatherHandler = function ($scope, $) {
+
+            var id = $scope.data('id'),
+                isInHotspots = $('.elementor-element-' + id).closest('.premium-tooltipster-base').length > 0;
+
+            if (isInHotspots) {
+                $scope = $('.elementor-element-' + id);
+            }
+
+            if (!elementorFrontend.isEditMode()) {
+                $scope.find('.premium-weather__outer-wrapper').css({ visibility: 'visible', opacity: 1 });
+            }
+
+            var settings = $scope.find('.premium-weather__outer-wrapper').data('pa-weather-settings');
+
+            if (!settings) {
+                return;
+            }
+
+            var forecastHeight = $scope.find('.premium-weather__outer-wrapper').data('pa-height'),
+                $forecastSlider = 'layout-2' === settings.layout ? $scope.find('.premium-weather__extra-outer-wrapper') : $scope.find('.premium-weather__hourly-forecast-wrapper'),
+                forecastTabs = $scope.hasClass('premium-forecast-tabs-yes') ? true : false,
+                dailyForecastCarousel = $scope.hasClass('premium-forecast-carousel-yes') ? true : false,
+                dailyEqWidth = !forecastTabs && !dailyForecastCarousel & !$scope.hasClass('premium-daily-forecast__style-4') ? true : false;
+
+
+            if ($forecastSlider.length) {
+                $forecastSlider.addClass('premium-addons__v-hidden').slick(getSlickSettings(settings, settings.layout, false));
+            }
+
+            if (dailyForecastCarousel) {
+                var dailyCarouselSettings = $scope.find('.premium-weather__outer-wrapper').data('pa-daily-settings');
+
+                $scope.find('.premium-weather__forecast').slick(getSlickSettings(dailyCarouselSettings, '', true));
+            }
+
+            // append the arrows here.
+            if ('layout-2' !== settings.layout && 'vertical' === settings.hourlyLayout) {
+                var prevArrow = '<a type="button" data-role="none" class="carousel-arrow carousel-prev" aria-label="Next" role="button" style=""><i class="fas fa-chevron-left" aria-hidden="true"></i></a>',
+                    nextArrow = '<a type="button" data-role="none" class="carousel-arrow carousel-next" aria-label="Next" role="button" style=""><i class="fas fa-chevron-right" aria-hidden="true"></i></a>';
+
+                $forecastSlider.append(prevArrow + nextArrow);
+
+                $scope.find('a.carousel-arrow').on('click.paWeatherNav', function () {
+
+                    if ($(this).hasClass('carousel-prev')) {
+                        $forecastSlider.slick('slickPrev');
+                    } else if ($(this).hasClass('carousel-next')) {
+                        $forecastSlider.slick('slickNext');
+                    }
+
+                });
+            }
+
+            if ($forecastSlider.length) {
+                $forecastSlider.removeClass('premium-addons__v-hidden');
+            }
+
+            $(window).trigger('resize');
+
+            if (forecastTabs) {
+
+                var $tabs_headers = $scope.find('.premium-weather__tab-header');
+
+                $tabs_headers.on('click.paWeatherTabs', function () {
+                    $scope.find('.current').removeClass('current');
+
+                    $(this).addClass('current');
+                    $scope.find($(this).data('content-id')).addClass('current');
+                });
+            }
+
+            if ('' !== forecastHeight) {
+                $scope.find('.premium-weather__forecast').slimScroll({
+                    color: '#00000033',
+                    height: forecastHeight,
+                });
+
+                $scope.find('.slimScrollDiv').css('overflow', '');
+            }
+
+            if (dailyEqWidth) {
+                equalWidth($scope);
+            }
+
+            function getSlickSettings(settings, widgetLayout, dailyForecast) {
+
+                var slickSetting = {
+                    infinite: false,
+                    arrows: true,
+                    autoplay: false,
+                    draggable: true,
+                };
+
+                if (!dailyForecast && 'layout-2' !== widgetLayout && 'vertical' === settings.hourlyLayout) {
+                    slickSetting.slidesToShow = 1;
+                    slickSetting.slidesToScroll = 1;
+                    slickSetting.rows = settings.slidesToShow;
+                    slickSetting.arrows = false;
+                    slickSetting.responsive = [
+                        {
+                            breakpoint: 1025,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                rows: settings.slidesToShowTab || 1
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                rows: settings.slidesToShowMobile || 1
+                            }
+                        }
+                    ];
+                } else {
+
+                    var prevArrow = '<a type="button" data-role="none" class="carousel-arrow carousel-prev" aria-label="Next" role="button" style=""><i class="fas fa-chevron-left" aria-hidden="true"></i></a>',
+                        nextArrow = '<a type="button" data-role="none" class="carousel-arrow carousel-next" aria-label="Next" role="button" style=""><i class="fas fa-chevron-right" aria-hidden="true"></i></a>';
+
+                    slickSetting.slidesToScroll = settings.slidesToScroll || 1;
+                    slickSetting.slidesToShow = settings.slidesToShow;
+                    slickSetting.rows = 0;
+                    slickSetting.nextArrow = nextArrow;
+                    slickSetting.prevArrow = prevArrow;
+
+                    slickSetting.responsive = [
+                        {
+                            breakpoint: 1025,
+                            settings: {
+                                slidesToShow: settings.slidesToShowTab || 1,
+                                slidesToScroll: settings.slidesToScrollTab || 1
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: settings.slidesToShowMobile || 1,
+                                slidesToScroll: settings.slidesToScrollMobile || 1
+                            }
+                        }
+                    ];
+                }
+
+                return slickSetting;
+            }
+
+            function equalWidth($scope) {
+                var width = 0,
+                    selector = '.premium-weather__forecast .premium-weather__forecast-item';
+
+                $scope.find(selector).each(function (index, slot) {
+                    if (width < $(slot).outerWidth()) {
+                        width = $(slot).outerWidth();
+                    }
+                });
+
+                $scope.find(selector).css('min-width', width);
+            }
+        };
+
         var functionalHandlers = {
             'premium-addon-dual-header.default': PremiumMaskHandler,
             'premium-addon-video-box.default': PremiumVideoBoxWidgetHandler,
@@ -2497,6 +3389,9 @@
             'premium-icon-list.default': PremiumBulletListHandler,
             'premium-addon-button.default': PremiumButtonHandler,
             'premium-addon-image-button.default': PremiumButtonHandler,
+            'premium-world-clock.default': PremiumWorldClockHandler,
+            'premium-post-ticker.default': PremiumPostTickerHandler,
+            'premium-weather.default': PremiumWeatherHandler,
         };
 
         var classHandlers = {
@@ -2504,7 +3399,8 @@
             'premium-addon-blog': PremiumBlogHandler,
             'premium-img-gallery': PremiumGridWidgetHandler,
             'premium-addon-banner': PremiumBannerHandler,
-            'premium-svg-drawer': PremiumSVGDrawerHandler
+            'premium-svg-drawer': PremiumSVGDrawerHandler,
+            'premium-tcloud': PremiumTermsCloud
         };
 
         $.each(functionalHandlers, function (elemName, func) {

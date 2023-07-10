@@ -9,7 +9,7 @@
 .premium-title-container .premium-title-header:not(.premium-title-style7) {
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
 }
 
 .premium-title-container .premium-title-header svg {
@@ -85,7 +85,7 @@
     display: inline-flex;
     -ms-flex-direction: column;
     -webkit-flex-direction: column;
-    flex-direction: column;
+            flex-direction: column;
 }
 
 .premium-title-style7 .premium-title-style7-inner {
@@ -95,7 +95,7 @@
     display: flex;
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
 }
 
 .premium-title-style1 {
@@ -161,6 +161,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-image: -webkit-linear-gradient(left, #ffa648, #f17cc1, #4da9fd);
+    background-image: -webkit-gradient(linear, left top, right top, from(#ffa648), color-stop(#f17cc1), to(#4da9fd));
     background-image: linear-gradient(to right, #ffa648, #f17cc1, #4da9fd);
     -webkit-animation: pa-text-gradient 8s infinite;
     animation: pa-text-gradient 8s infinite;

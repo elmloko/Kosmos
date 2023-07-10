@@ -1,0 +1,598 @@
+/**Premium World Clock*/
+@font-face {
+  font-family: "DS-DIGI";
+  src: url("../../frontend/fonts/DS-DIGI.TTF");
+}
+
+.premium-world-clock__clock-wrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.premium-world-clock__clock-wrapper .premium-world-clock__time-wrapper,
+.premium-world-clock__clock-wrapper .premium-world-clock__additonal-info {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.premium-world-clock__clock-wrapper .premium-world-clock__time-wrapper,
+.premium-world-clock__clock-wrapper .premium-world-clock__days-wrapper,
+.premium-world-clock__clock-wrapper .premium-world-clock__date-wrapper,
+.premium-world-clock__clock-wrapper .premium-world-clock__additonal-info {
+  -webkit-order: 1;
+  -ms-flex-order: 1;
+  order: 1;
+}
+
+.premium-world-clock__clock-wrapper .premium-world-clock__clock-title {
+  padding: 3px 0px;
+}
+
+.premium-world-clock__clock-wrapper,
+.premium-world-clock__additonal-info {
+  gap: 10px;
+}
+
+.premium-world-clock__info-row .premium-world-clock__additonal-info {
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.premium-world-clock__info-column .premium-world-clock__additonal-info {
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.premium-world-clock__row .premium-world-clock__clock-wrapper {
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.premium-world-clock__column .premium-world-clock__clock-wrapper {
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.premium-world-clock__separator {
+  -webkit-animation: tick 1s infinite;
+  animation: tick 1s infinite;
+  -webkit-transition: all 0s;
+  transition: all 0s;
+}
+
+.elementor-element.elementor-widget-empty.elementor-widget-premium-world-clock {
+  background-color: unset !important;
+}
+
+.premium-world-clock__meridiem {
+  position: relative;
+  font-size: 20px;
+}
+
+.premium-world-clock__meridiem > svg {
+  width: 20px;
+  height: 20px;
+}
+
+/**Analog Skins*/
+.premium-world-clock__skin-1 .premium-world-clock__circle,
+.premium-world-clock__skin-5 .premium-world-clock__circle,
+.premium-world-clock__skin-6 .premium-world-clock__circle,
+.premium-world-clock__skin-7 .premium-world-clock__circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  box-shadow: -6px -6px 16px #fff, 6px 6px 16px #d1d1e6, inset 6px 6px 16px #d1d1e6, inset -6px -6px 16px #fff;
+  border-radius: 50%;
+  justify-self: center;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__clock-numbers,
+.premium-world-clock__skin-5 .premium-world-clock__clock-numbers,
+.premium-world-clock__skin-6 .premium-world-clock__clock-numbers,
+.premium-world-clock__skin-7 .premium-world-clock__clock-numbers {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__clock-number,
+.premium-world-clock__skin-5 .premium-world-clock__clock-number,
+.premium-world-clock__skin-6 .premium-world-clock__clock-number,
+.premium-world-clock__skin-7 .premium-world-clock__clock-number {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__rounder,
+.premium-world-clock__skin-5 .premium-world-clock__rounder,
+.premium-world-clock__skin-6 .premium-world-clock__rounder,
+.premium-world-clock__skin-7 .premium-world-clock__rounder {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: #3b3bbf;
+  border-radius: 50%;
+  border: 2px solid #ececf3;
+  z-index: 10;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__hand,
+.premium-world-clock__skin-5 .premium-world-clock__hand,
+.premium-world-clock__skin-6 .premium-world-clock__hand,
+.premium-world-clock__skin-7 .premium-world-clock__hand {
+  position: absolute;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__hand::before,
+.premium-world-clock__skin-5 .premium-world-clock__hand::before,
+.premium-world-clock__skin-6 .premium-world-clock__hand::before,
+.premium-world-clock__skin-7 .premium-world-clock__hand::before {
+  content: "";
+  position: absolute;
+  height: 50%;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__hours::before, .premium-world-clock__skin-1 .premium-world-clock__minutes::before,
+.premium-world-clock__skin-5 .premium-world-clock__hours::before,
+.premium-world-clock__skin-5 .premium-world-clock__minutes::before,
+.premium-world-clock__skin-6 .premium-world-clock__hours::before,
+.premium-world-clock__skin-6 .premium-world-clock__minutes::before,
+.premium-world-clock__skin-7 .premium-world-clock__hours::before,
+.premium-world-clock__skin-7 .premium-world-clock__minutes::before {
+  width: 0.25rem;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__hours,
+.premium-world-clock__skin-5 .premium-world-clock__hours,
+.premium-world-clock__skin-6 .premium-world-clock__hours,
+.premium-world-clock__skin-7 .premium-world-clock__hours {
+  width: 105px;
+  height: 105px;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__minutes,
+.premium-world-clock__skin-5 .premium-world-clock__minutes,
+.premium-world-clock__skin-6 .premium-world-clock__minutes,
+.premium-world-clock__skin-7 .premium-world-clock__minutes {
+  width: 136px;
+  height: 136px;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__seconds,
+.premium-world-clock__skin-5 .premium-world-clock__seconds,
+.premium-world-clock__skin-6 .premium-world-clock__seconds,
+.premium-world-clock__skin-7 .premium-world-clock__seconds {
+  width: 130px;
+  height: 130px;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__seconds::before,
+.premium-world-clock__skin-5 .premium-world-clock__seconds::before,
+.premium-world-clock__skin-6 .premium-world-clock__seconds::before,
+.premium-world-clock__skin-7 .premium-world-clock__seconds::before {
+  width: 0.125rem;
+  height: 62%;
+  z-index: 3;
+  background-color: #3b3bbf;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__face {
+  position: absolute;
+  width: 1rem;
+  height: 1px;
+  background-color: #9b9bb0;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__twelve, .premium-world-clock__skin-1 .premium-world-clock__six {
+  -webkit-transform: translateX(-50%) rotate(90deg);
+  -ms-transform: translateX(-50%) rotate(90deg);
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__twelve {
+  top: 1.25rem;
+  left: 50%;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__three {
+  top: 50%;
+  right: 0.75rem;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__six {
+  bottom: 1.25rem;
+  left: 50%;
+}
+
+.premium-world-clock__skin-1 .premium-world-clock__nine {
+  left: 0.75rem;
+  top: 50%;
+}
+
+.premium-world-clock__skin-5 .premium-world-clock__circle,
+.premium-world-clock__skin-6 .premium-world-clock__circle,
+.premium-world-clock__skin-7 .premium-world-clock__circle {
+  position: relative;
+}
+
+.premium-world-clock__skin-5 .premium-world-clock__circle > svg,
+.premium-world-clock__skin-6 .premium-world-clock__circle > svg,
+.premium-world-clock__skin-7 .premium-world-clock__circle > svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+/** Hands Style*/
+.premium-world-clock__hand-0 .premium-world-clock__hours::before, .premium-world-clock__hand-0 .premium-world-clock__minutes::before, .premium-world-clock__hand-0 .premium-world-clock__seconds::before {
+  border-radius: 0.75rem;
+  z-index: 1;
+}
+
+.premium-world-clock__hand-0 .premium-world-clock__hours::before, .premium-world-clock__hand-0 .premium-world-clock__minutes::before {
+  background-color: #4f4f64;
+}
+
+.premium-world-clock__hand-1 .premium-world-clock__hours, .premium-world-clock__hand-1 .premium-world-clock__minutes,
+.premium-world-clock__hand-2 .premium-world-clock__hours,
+.premium-world-clock__hand-2 .premium-world-clock__minutes,
+.premium-world-clock__hand-3 .premium-world-clock__hours,
+.premium-world-clock__hand-3 .premium-world-clock__minutes,
+.premium-world-clock__hand-4 .premium-world-clock__hours,
+.premium-world-clock__hand-4 .premium-world-clock__minutes,
+.premium-world-clock__hand-5 .premium-world-clock__hours,
+.premium-world-clock__hand-5 .premium-world-clock__minutes {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.premium-world-clock__hand-1 .premium-world-clock__hours::before, .premium-world-clock__hand-1 .premium-world-clock__minutes::before,
+.premium-world-clock__hand-2 .premium-world-clock__hours::before,
+.premium-world-clock__hand-2 .premium-world-clock__minutes::before,
+.premium-world-clock__hand-3 .premium-world-clock__hours::before,
+.premium-world-clock__hand-3 .premium-world-clock__minutes::before,
+.premium-world-clock__hand-4 .premium-world-clock__hours::before,
+.premium-world-clock__hand-4 .premium-world-clock__minutes::before,
+.premium-world-clock__hand-5 .premium-world-clock__hours::before,
+.premium-world-clock__hand-5 .premium-world-clock__minutes::before {
+  width: 0.5rem;
+  background-color: #000;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  z-index: 1;
+}
+
+.premium-world-clock__hand-1 .premium-world-clock__hours::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-hours-hand-1.svg");
+  mask-image: url("../images/world-clock/analog-clock-hours-hand-1.svg");
+}
+
+.premium-world-clock__hand-1 .premium-world-clock__minutes::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-min-hand-1.svg");
+  mask-image: url("../images/world-clock/analog-clock-min-hand-1.svg");
+}
+
+.premium-world-clock__hand-2 .premium-world-clock__hours::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-hours-hand-2.svg");
+  mask-image: url("../images/world-clock/analog-clock-hours-hand-2.svg");
+}
+
+.premium-world-clock__hand-2 .premium-world-clock__minutes::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-min-hand-2.svg");
+  mask-image: url("../images/world-clock/analog-clock-min-hand-2.svg");
+}
+
+.premium-world-clock__hand-3 .premium-world-clock__hours::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-hours-hand-3.svg");
+  mask-image: url("../images/world-clock/analog-clock-hours-hand-3.svg");
+}
+
+.premium-world-clock__hand-3 .premium-world-clock__minutes::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-min-hand-3.svg");
+  mask-image: url("../images/world-clock/analog-clock-min-hand-3.svg");
+}
+
+.premium-world-clock__hand-4 .premium-world-clock__hours::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-hours-hand-4.svg");
+  mask-image: url("../images/world-clock/analog-clock-hours-hand-4.svg");
+}
+
+.premium-world-clock__hand-4 .premium-world-clock__minutes::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-min-hand-4.svg");
+  mask-image: url("../images/world-clock/analog-clock-min-hand-4.svg");
+}
+
+.premium-world-clock__hand-5 .premium-world-clock__hours::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-hours-hand-5.svg");
+  mask-image: url("../images/world-clock/analog-clock-hours-hand-5.svg");
+}
+
+.premium-world-clock__hand-5 .premium-world-clock__minutes::before {
+  -webkit-mask-image: url("../images/world-clock/analog-clock-min-hand-5.svg");
+  mask-image: url("../images/world-clock/analog-clock-min-hand-5.svg");
+}
+
+/**Digital Skins*/
+.premium-world-clock__skin-2 .premium-world-clock__separator {
+  -webkit-animation: tick 1s infinite;
+  animation: tick 1s infinite;
+}
+
+.premium-world-clock__skin-2 .premium-world-clock__time-wrapper {
+  position: relative;
+  border: 3px solid #4ab7f4;
+  border-radius: 2px;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 3px;
+  padding: 12px 38px;
+}
+
+.premium-world-clock__skin-2 .premium-world-clock__hand,
+.premium-world-clock__skin-2 .premium-world-clock__separator {
+  color: #4ab7f4;
+  font-size: 43px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.premium-world-clock__skin-2 .premium-world-clock__meridiem {
+  position: relative;
+  font-size: 20px;
+}
+
+.premium-world-clock__skin-2.premium-world-clock__unit-column .premium-world-clock__separator {
+  display: none;
+}
+
+.premium-world-clock__skin-2 .premium-world-clock__hand,
+.premium-world-clock__skin-2 .premium-world-clock__separator {
+  font-family: "DS-DIGI", Sans-serif;
+  font-weight: 800;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__date-wrapper, .premium-world-clock__skin-3 .premium-world-clock__clock-wrapper, .premium-world-clock__skin-3 .premium-world-clock__days-wrapper {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__clock-wrapper {
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__days-wrapper {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  margin-right: 10px;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__days-wrapper .current-day {
+  color: red;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__days-wrapper span {
+  font-size: 20px;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__hand, .premium-world-clock__skin-3 .premium-world-clock__separator, .premium-world-clock__skin-3 .premium-world-clock__date-segment {
+  font-family: "DS-DIGI", Sans-serif;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__time-wrapper {
+  text-align: center;
+  line-height: 1;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__time-wrapper > *:not(.premium-world-clock__meridiem) {
+  font-size: 210px;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__date-wrapper, .premium-world-clock__skin-3 .premium-world-clock__time-wrapper {
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__date-wrapper, .premium-world-clock__skin-3 .premium-world-clock__time-wrapper, .premium-world-clock__skin-3 .premium-world-clock__days-wrapper {
+  position: relative;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__sec-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0px;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__seconds, .premium-world-clock__skin-3 .premium-world-clock__date-segment {
+  font-size: 36px;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__symbol {
+  position: relative;
+  right: 3px;
+  top: 0px;
+  font-size: 15px;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__meridiem {
+  position: absolute;
+  top: 40px;
+  right: 101%;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__date-wrapper {
+  margin-left: 10px;
+  min-width: 50px;
+}
+
+.premium-world-clock__skin-3 .premium-world-clock__additonal-info {
+  width: 100%;
+}
+
+.premium-world-clock__skin-4 .premium-world-clock__clock-wrapper {
+  gap: 0;
+}
+
+.premium-world-clock__skin-4 .premium-world-clock__time-wrapper {
+  width: 200px;
+  border-bottom: 2px solid currentColor;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 45px;
+}
+
+.premium-world-clock__skin-4 .premium-world-clock__date-wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  width: 200px;
+  font-size: 30px;
+}
+
+.premium-world-clock__skin-4 .premium-world-clock__time-wrapper, .premium-world-clock__skin-4 .premium-world-clock__date-wrapper {
+  font-family: "DS-DIGI";
+  font-weight: bold;
+}
+
+.premium-world-clock__skin-4 .premium-world-clock__date-segment {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.premium-world-clock__skin-4 .premium-world-clock__date-segment:nth-child(2) {
+  border-left: 2px solid currentColor;
+}
+
+.premium-world-clock__skin-4 .premium-world-clock__date-segment:nth-child(3) {
+  border-left: 2px solid currentColor;
+}
+
+.premium-world-clock__skin-4 .premium-world-clock__hand {
+  text-align: center;
+}
+
+.premium-world-clock__circle .premium-world-clock__meridiem {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  font-size: 12px;
+  padding: 0 5px;
+  color: #000;
+  z-index: 1;
+}
+
+.premium-world-clock__skin-7 .premium-world-clock__circle .premium-world-clock__meridiem {
+  top: 65%;
+}
+
+@-webkit-keyframes tick {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tick {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

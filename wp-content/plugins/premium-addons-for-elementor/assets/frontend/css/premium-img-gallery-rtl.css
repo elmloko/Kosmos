@@ -214,6 +214,7 @@
 }
 
 .pa-gallery-img .premium-gallery-caption .premium-gallery-img-name {
+    display: block;
     margin-bottom: 0;
 }
 
@@ -421,5 +422,6 @@
     width: 100%;
     height: 20px;
     background: -webkit-linear-gradient(bottom, #17181f 0%, rgba(255, 255, 255, 0) 100%);
+    background: -webkit-gradient(linear, left bottom, left top, from(#17181f), to(rgba(255, 255, 255, 0)));
     background: linear-gradient(to top, #17181f 0%, rgba(255, 255, 255, 0) 100%);
 }

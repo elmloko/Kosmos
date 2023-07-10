@@ -47,7 +47,7 @@
             flex-wrap: wrap;
     list-style: none outside;
     -webkit-column-gap: 0;
-            column-gap: 0;
+         column-gap: 0;
 }
 
 .premium-woocommerce .premium-woo-products-inner ul.products li.product {

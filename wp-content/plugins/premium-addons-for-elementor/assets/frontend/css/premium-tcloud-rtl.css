@@ -1,0 +1,69 @@
+/**************** Premium Tags Cloud ****************/
+/****************************************************/
+.premium-tcloud-hidden {
+    opacity: 0;
+    visibility: hidden; }
+
+  .premium-tcloud-canvas-container {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+
+  .premium-tcloud-default .premium-tcloud-term,
+  .premium-tcloud-ribbon .premium-tcloud-term {
+    background-color: var(--tag-color);
+    padding: 5px;
+    margin: 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .premium-tcloud-default .premium-tcloud-term:hover,
+    .premium-tcloud-ribbon .premium-tcloud-term:hover {
+      background-color: var(--tag-hover-color); }
+      .premium-tcloud-default .premium-tcloud-term:hover::before,
+      .premium-tcloud-ribbon .premium-tcloud-term:hover::before {
+        border-color: transparent var(--tag-hover-color) transparent transparent; }
+
+  .premium-tcloud-default .premium-tcloud-term-link,
+  .premium-tcloud-ribbon .premium-tcloud-term-link {
+    color: var(--tag-text-color);
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    line-height: 1; }
+
+  .premium-tcloud-default .premium-tcloud-term {
+    border: 1px solid var(--tag-color); }
+
+  .premium-tcloud-canvas {
+    cursor: pointer; }
+
+  .premium-tcloud-ribbon .premium-tcloud-term {
+    position: relative; }
+    .premium-tcloud-ribbon .premium-tcloud-term::before {
+      position: absolute;
+      top: 0;
+      left: -14px;
+      content: "";
+      margin: 0 auto;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 14px 14px 14px 0px;
+      border-color: transparent var(--tag-color) transparent transparent;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out; }
+
+.premium-tcloud-sphere .premium-tcloud-terms-container {
+    display: none;
+}

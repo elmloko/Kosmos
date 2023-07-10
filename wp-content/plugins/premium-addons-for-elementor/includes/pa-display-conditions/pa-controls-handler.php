@@ -121,6 +121,7 @@ class PA_Controls_Handler {
 				'options' => array(
 					'post'        => __( 'Post', 'premium-addons-for-elementor' ),
 					'post_type'   => __( 'Post Type', 'premium-addons-for-elementor' ),
+					'post_format' => __( 'Post Format', 'premium-addons-for-elementor' ),
 					'page'        => __( 'Page', 'premium-addons-for-elementor' ),
 					'static_page' => __( 'Website Static Pages', 'premium-addons-for-elementor' ),
 				),
@@ -168,6 +169,7 @@ class PA_Controls_Handler {
 				'return_visitor',
 				'post',
 				'post_type',
+				'post_format',
 				'page',
 				'static_page',
 				'operating_system',

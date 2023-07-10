@@ -1,5 +1,4 @@
 const { post } = wp.ajax;
-const { nonce } = starterTemplates;
 
 // Store current sync status.
 let syncStatus = [];
@@ -24,9 +23,12 @@ export const isSyncSuccess = () => {
 export const SyncStart = async () => {
 	// Sync Start.
 	try {
+		const formData = new FormData();
+		formData.append( 'action', 'astra-sites-update-library' );
+		formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 		const response = await fetch( ajaxurl, {
 			method: 'post',
-			body: getFormData( 'action', 'astra-sites-update-library' ),
+			body: formData,
 		} );
 		const jsonData = await response.json();
 		const data = await jsonData.data;
@@ -68,12 +70,12 @@ export const SyncStart = async () => {
 export const SyncLibraryComplete = async () => {
 	// Sync complete.
 	try {
+		const formData = new FormData();
+		formData.append( 'action', 'astra-sites-update-library-complete' );
+		formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 		const response = await fetch( ajaxurl, {
 			method: 'post',
-			body: getFormData(
-				'action',
-				'astra-sites-update-library-complete'
-			),
+			body: formData,
 		} ).then( ( res ) => res.json() );
 
 		if ( response.success === true ) {
@@ -89,9 +91,12 @@ export const SyncLibraryComplete = async () => {
 export const SyncBlockCategories = async () => {
 	// Import Block Categories.
 	try {
+		const formData = new FormData();
+		formData.append( 'action', 'astra-sites-import-page-builders' );
+		formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 		const response = await fetch( ajaxurl, {
 			method: 'post',
-			body: getFormData( 'action', 'astra-sites-import-page-builders' ),
+			body: formData,
 		} ).then( ( res ) => res.json() );
 
 		if ( response.success === true ) {
@@ -107,12 +112,12 @@ export const SyncBlockCategories = async () => {
 export const SyncBlocks = async () => {
 	// Import Blocks.
 	try {
+		const formData = new FormData();
+		formData.append( 'action', 'astra-sites-get-blocks-request-count' );
+		formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 		const totalBlocks = await fetch( ajaxurl, {
 			method: 'post',
-			body: getFormData(
-				'action',
-				'astra-sites-get-blocks-request-count'
-			),
+			body: formData,
 		} )
 			.then( ( res ) => res.json() )
 			.then( ( data ) => data.data );
@@ -121,15 +126,15 @@ export const SyncBlocks = async () => {
 			const allBlocksRequest = [];
 
 			for ( let i = 1; i <= totalBlocks; i++ ) {
-				const formData = new FormData();
-				formData.append( 'action', 'astra-sites-import-blocks' );
-				formData.append( 'page_no', i );
-				formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+				const _formData = new FormData();
+				_formData.append( 'action', 'astra-sites-import-blocks' );
+				_formData.append( 'page_no', i );
+				_formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 
 				allBlocksRequest.push(
 					fetch( ajaxurl, {
 						method: 'post',
-						body: formData,
+						body: _formData,
 					} )
 				);
 			}
@@ -148,9 +153,12 @@ export const SyncBlocks = async () => {
 export const SyncPageBuilders = async () => {
 	// Import page builders.
 	try {
+		const formData = new FormData();
+		formData.append( 'action', 'astra-sites-import-page-builders' );
+		formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 		const response = await fetch( ajaxurl, {
 			method: 'post',
-			body: getFormData( 'action', 'astra-sites-import-page-builders' ),
+			body: formData,
 		} ).then( ( res ) => res.json() );
 
 		if ( response.success === true ) {
@@ -166,9 +174,12 @@ export const SyncPageBuilders = async () => {
 export const SyncAllCategories = async () => {
 	// Import all categories.
 	try {
+		const formData = new FormData();
+		formData.append( 'action', 'astra-sites-import-all-categories' );
+		formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 		const response = await fetch( ajaxurl, {
 			method: 'post',
-			body: getFormData( 'action', 'astra-sites-import-all-categories' ),
+			body: formData,
 		} ).then( ( res ) => res.json() );
 
 		if ( response.success === true ) {
@@ -184,12 +195,15 @@ export const SyncAllCategories = async () => {
 export const SyncAllCategoriesAndTags = async () => {
 	// Import all categories and tags.
 	try {
+		const formData = new FormData();
+		formData.append(
+			'action',
+			'astra-sites-import-all-categories-and-tags'
+		);
+		formData.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
 		const response = await fetch( ajaxurl, {
 			method: 'post',
-			body: getFormData(
-				'action',
-				'astra-sites-import-all-categories-and-tags'
-			),
+			body: formData,
 		} ).then( ( res ) => res.json() );
 
 		if ( response.success === true ) {
@@ -207,7 +221,7 @@ export const SyncImportAllSites = async () => {
 		// Get sites request count.
 		const totalRequest = await post( {
 			action: 'astra-sites-get-sites-request-count',
-			_ajax_nonce: nonce,
+			_ajax_nonce: astraSitesVars._ajax_nonce,
 		} );
 
 		// Import all sites.

@@ -13,7 +13,7 @@
     display: flex;
     -ms-flex-direction: column;
     -webkit-flex-direction: column;
-    flex-direction: column;
+            flex-direction: column;
 }
 
 .premium-video-box-container>div {
@@ -135,7 +135,7 @@
     margin-left: 1px;
     -ms-flex: 1 0 auto;
     -webkit-flex: 1 0 auto;
-    flex: 1 0 auto;
+            flex: 1 0 auto;
     padding: 0;
 }
 
@@ -312,10 +312,10 @@
     display: flex;
     -ms-flex-pack: center;
     -webkit-justify-content: center;
-    justify-content: center;
+            justify-content: center;
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+            align-items: center;
 }
 
 .premium-video-box-sticky-apply .premium-video-box-play-icon-container {
@@ -426,3 +426,32 @@
     top: 0;
     right: 0;
 }
+
+.premium-videobox-layout2 .premium-videobox-column {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 50%;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .premium-videobox-layout2 .premium-videobox-column:first-child .premium-video-box-trigger {
+    height: 100%;
+  }
+
+  .premium-videobox-layout2 .premium-videobox-column:nth-child(2) {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: -webkit-calc(100% - var(--pa-first-column-width));
+    width: calc(100% - var(--pa-first-column-width));
+  }
+
+  .premium-videobox-layout2 .premium-videobox-column:nth-child(2) .premium-video-box-container {
+    height: auto !important;
+  }

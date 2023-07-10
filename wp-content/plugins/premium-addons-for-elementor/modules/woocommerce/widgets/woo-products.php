@@ -35,6 +35,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Woo_Products extends Widget_Base {
 
 	/**
+	 * Template Instance
+	 *
+	 * @var template_instance
+	 */
+	protected $template_instance;
+
+	/**
 	 * Query object
 	 *
 	 * @since 1.5.0
@@ -49,8 +56,7 @@ class Woo_Products extends Widget_Base {
 	 * @access public
 	 */
 	public function getTemplateInstance() {
-		$this->template_instance = Premium_Template_Tags::getInstance();
-		return $this->template_instance;
+		return $this->template_instance = Premium_Template_Tags::getInstance();
 	}
 
 	/**

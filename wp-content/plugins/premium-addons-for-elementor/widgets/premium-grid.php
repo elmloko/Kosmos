@@ -38,6 +38,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Premium_Grid extends Widget_Base {
 
 	/**
+	 * Template Instance
+	 *
+	 * @var template_instance
+	 */
+	protected $template_instance;
+
+	/**
 	 * Check for Self Hosted Videos
 	 *
 	 * @var is_self_hosted
@@ -61,8 +68,7 @@ class Premium_Grid extends Widget_Base {
 	 * @access public
 	 */
 	public function getTemplateInstance() {
-		$this->template_instance = Premium_Template_Tags::getInstance();
-		return $this->template_instance;
+		return $this->template_instance = Premium_Template_Tags::getInstance();
 	}
 
 	/**
@@ -1538,6 +1544,17 @@ class Premium_Grid extends Widget_Base {
 			)
 		);
 
+		$this->add_responsive_control(
+			'title_spacing',
+			array(
+				'label'     => __( 'Spacing', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-gallery-img-name'  => 'margin-bottom: {{SIZE}}px',
+				),
+			)
+		);
+
 		$this->add_control(
 			'premium_gallery_description_heading',
 			array(
@@ -1569,6 +1586,14 @@ class Premium_Grid extends Widget_Base {
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
 				'selector' => '{{WRAPPER}} .premium-gallery-img-desc, {{WRAPPER}} .premium-gallery-img-desc a',
+			)
+		);
+
+		$this->add_control(
+			'container_heading',
+			array(
+				'label' => __( 'Container', 'premium-addons-for-elementor' ),
+				'type'  => Controls_Manager::HEADING,
 			)
 		);
 
@@ -2732,7 +2757,12 @@ class Premium_Grid extends Widget_Base {
 
 				$image_id = apply_filters( 'wpml_object_id', $image['premium_gallery_img']['id'], 'elementor_library', true );
 
-				$alt = apply_filters( 'pa_grid_image_alt', get_post( $image_id )->post_title );
+				$image_by_id = get_post( $image_id );
+
+				$alt = '';
+				if ( isset( $image_by_id->post_title ) ) {
+					$alt = apply_filters( 'pa_grid_image_alt', get_post( $image_id )->post_title );
+				}
 
 				$this->add_render_attribute(
 					$key,

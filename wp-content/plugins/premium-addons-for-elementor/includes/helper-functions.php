@@ -1029,4 +1029,50 @@ class Helper_Functions {
 
 	}
 
+	/**
+	 * Checks if Elementor PRO 3.8 or higher is activated && if the Loop expirement is activated.
+	 *
+	 * @since 4.9.45
+	 * @access public
+	 *
+	 * @return bool
+	 */
+	public static function is_loop_exp_enabled() {
+
+		if ( defined( 'ELEMENTOR_PRO_VERSION' ) && version_compare( ELEMENTOR_PRO_VERSION, '3.8', '>=' ) ) {
+			$is_loop_enabled = self::check_elementor_experiment( 'loop' );
+
+			if ( $is_loop_enabled ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get Element Classes.
+	 *
+	 * @access private
+	 * @since 2.8.22
+	 *
+	 * @param array $devices  devices to hide on.
+	 *
+	 * @return array
+	 */
+	public static function get_element_classes( $devices, $default = array() ) {
+
+		$classes = $default;
+
+		if ( count( $devices ) ) {
+			foreach ( $devices as $index => $device ) {
+				array_push( $classes, 'elementor-hidden-' . $device );
+			}
+
+			array_push( $classes, 'premium-addons-element' );
+		}
+
+		return $classes;
+	}
+
 }

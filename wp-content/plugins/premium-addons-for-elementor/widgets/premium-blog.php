@@ -510,6 +510,7 @@ class Premium_Blog extends Widget_Base {
 					'date'          => __( 'Date', 'premium-addons-for-elementor' ),
 					'modified'      => __( 'Last Modified', 'premium-addons-for-elementor' ),
 					'rand'          => __( 'Random', 'premium-addons-for-elementor' ),
+					'menu_order'    => __( 'Menu Order', 'premium-addons-for-elementor' ),
 					'comment_count' => __( 'Number of Comments', 'premium-addons-for-elementor' ),
 				),
 				'default'     => 'date',
@@ -3100,8 +3101,9 @@ class Premium_Blog extends Widget_Base {
 
 		$settings = $this->get_settings();
 
-		$settings['widget_id']  = $this->get_id();
-		$settings['active_cat'] = '';
+		$settings['widget_type'] = 'premium-addon-blog';
+		$settings['widget_id']   = $this->get_id();
+		$settings['active_cat']  = '';
 
 		$blog_helper = Blog_Helper::getInstance();
 

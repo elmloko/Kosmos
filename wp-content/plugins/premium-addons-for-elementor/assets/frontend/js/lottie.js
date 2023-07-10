@@ -12631,7 +12631,7 @@
                 this.layerElement.setAttribute('font-weight', fWeight);
             }
 
-            this.layerElement.setAttribute('aria-label', documentData.t);
+            // this.layerElement.setAttribute('aria-label', documentData.t);
             var letters = documentData.l || [];
             var usesGlyphs = !!this.globalData.fontManager.chars;
             len = letters.length;
@@ -18681,7 +18681,6 @@
 
 
     var PremiumLottieHandler = function ($scope, $) {
-
         var $lottieIcons = $scope.find(".premium-lottie-animation");
 
         if (!$lottieIcons.length)

@@ -104,6 +104,9 @@
     z-index: 1000;
 }
 
+.premium-bullet-list-content .premium-bullet-list-link span {
+    display: none; }
+
 .premium-bullet-list-content:not(:last-of-type) .premium-bullet-list-connector {
     width: 100%;
     height: 100%;

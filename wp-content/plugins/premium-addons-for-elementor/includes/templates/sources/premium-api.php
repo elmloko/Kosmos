@@ -61,58 +61,6 @@ class Premium_Templates_Source_Api extends Premium_Templates_Source_Base {
 	}
 
 	/**
-	 * Prepare items tab
-	 *
-	 * @return object $result templates data
-	 *
-	 * @param string $tab tab slug.
-	 */
-	public function prepare_items_tab( $tab = '' ) {
-
-		if ( ! empty( $this->_object_cache[ $tab ] ) ) {
-			return $this->_object_cache[ $tab ];
-		}
-
-		$result = array(
-			'templates'  => array(),
-			'categories' => array(),
-			'keywords'   => array(),
-		);
-
-		$templates_cache  = $this->get_templates_cache();
-		$categories_cache = $this->get_categories_cache();
-		$keywords_cache   = $this->get_keywords_cache();
-
-		if ( empty( $templates_cache ) ) {
-			$templates_cache = array();
-		}
-
-		if ( empty( $categories_cache ) ) {
-			$categories_cache = array();
-		}
-
-		if ( empty( $keywords_cache ) ) {
-			$keywords_cache = array();
-		}
-
-		$result['templates'] = $this->remote_get_templates( $tab );
-		$result['templates'] = $this->remote_get_categories( $tab );
-		$result['templates'] = $this->remote_get_keywords( $tab );
-
-		$templates_cache[ $tab ]  = $result['templates'];
-		$categories_cache[ $tab ] = $result['categories'];
-		$keywords_cache[ $tab ]   = $result['keywords'];
-
-		$this->set_templates_cache( $templates_cache );
-		$this->set_categories_cache( $categories_cache );
-		$this->set_keywords_cache( $keywords_cache );
-
-		$this->_object_cache[ $tab ] = $result;
-
-		return $result;
-	}
-
-	/**
 	 * Get templates from remote server
 	 *
 	 * @param  string $tab tab slug.

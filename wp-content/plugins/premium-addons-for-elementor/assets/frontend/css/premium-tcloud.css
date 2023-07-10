@@ -1,0 +1,107 @@
+/**************** Premium Tags Cloud ****************/
+/****************************************************/
+.premium-tcloud-term-wrap {
+  margin: 5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.premium-tcloud-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.premium-tcloud-canvas-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.premium-tcloud-default .premium-tcloud-term,
+.premium-tcloud-ribbon .premium-tcloud-term {
+  background-color: var(--tag-color);
+  padding: 5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.premium-tcloud-default .premium-tcloud-term:hover,
+.premium-tcloud-ribbon .premium-tcloud-term:hover {
+  background-color: var(--tag-hover-color);
+}
+
+.premium-tcloud-default .premium-tcloud-term:hover::before,
+.premium-tcloud-ribbon .premium-tcloud-term:hover::before {
+  border-color: transparent var(--tag-hover-color) transparent transparent;
+}
+
+.premium-tcloud-default .premium-tcloud-term-link,
+.premium-tcloud-ribbon .premium-tcloud-term-link {
+  color: var(--tag-text-color);
+  -webkit-transition: all 0.3s ease-in-out, font-size 0s;
+  transition: all 0.3s ease-in-out, font-size 0s;
+  line-height: 1;
+}
+
+.premium-tcloud-default .premium-tcloud-term {
+  border: 1px solid var(--tag-color);
+}
+
+.premium-tcloud-canvas {
+  cursor: pointer;
+}
+
+.premium-tcloud-ribbon .premium-tcloud-term {
+  position: relative;
+}
+
+.premium-tcloud-ribbon .premium-tcloud-term::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 100%;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: var(--tag-ribbon-size) var(--tag-ribbon-size) var(--tag-ribbon-size) 0px;
+  border-color: transparent var(--tag-color) transparent transparent;
+  -webkit-transition: all 0.3s ease-in-out, border-width 0s;
+  transition: all 0.3s ease-in-out, border-width 0s;
+}
+
+.premium-tcloud-ribbon .premium-tcloud-term::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: -8px;
+  margin: 0 auto;
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background-color: #fff;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.premium-tcloud-sphere .premium-tcloud-terms-container {
+  display: none;
+}

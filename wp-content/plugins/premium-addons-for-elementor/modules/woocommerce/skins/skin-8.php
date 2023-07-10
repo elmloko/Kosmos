@@ -48,7 +48,7 @@ class Skin_8 extends Skin_Base {
 	 * @access public
 	 */
 	public function get_title() {
-		return apply_filters( 'pa_pro_woo_skins', __( 'Skin 7 ( PRO )', 'premium-addons-for-elementor' ) );
+		return apply_filters( 'pa_pro_label', __( 'Skin 7 (Pro)', 'premium-addons-for-elementor' ) );
 	}
 
 	/**

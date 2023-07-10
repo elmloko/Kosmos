@@ -25,8 +25,8 @@ const Survey = () => {
 		dispatch,
 	] = storedState;
 
-	const notInstalled = requiredPlugins.required_plugins.notinstalled;
-	const notActivated = requiredPlugins.required_plugins.inactive;
+	const notInstalled = requiredPlugins?.required_plugins?.notinstalled;
+	const notActivated = requiredPlugins?.required_plugins?.inactive;
 	const allPuginList = [];
 	if ( notInstalled.length > 0 ) {
 		notInstalled.map( ( plugin ) => {

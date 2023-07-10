@@ -57,7 +57,7 @@ class Astra_WXR_Importer {
 		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
 		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-import-info.php';
 
-		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) ); //phpcs:ignore WordPressVIPMinimum.Hooks.RestrictedHooks.upload_mimes
+		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) ); //phpcs:ignore WordPressVIPMinimum.Hooks.RestrictedHooks.upload_mimes -- Added this to allow upload of SVG files.
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
 		add_filter( 'wp_import_post_data_processed', array( $this, 'pre_post_data' ), 10, 2 );
@@ -285,17 +285,17 @@ class Astra_WXR_Importer {
 			// Verify Nonce.
 			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'edit_posts' ) ) {
+			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error();
 			}
 
 			// Start the event stream.
 			header( 'Content-Type: text/event-stream, charset=UTF-8' );
 			// Turn off PHP output compression.
-			$previous = error_reporting( error_reporting() ^ E_WARNING ); //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting
-			ini_set( 'output_buffering', 'off' ); //phpcs:ignore WordPress.PHP.IniSet.Risky
-			ini_set( 'zlib.output_compression', false ); //phpcs:ignore WordPress.PHP.IniSet.Risky
-			error_reporting( $previous ); //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting
+			$previous = error_reporting( error_reporting() ^ E_WARNING ); //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting -- 3rd party library.
+			ini_set( 'output_buffering', 'off' ); //phpcs:ignore WordPress.PHP.IniSet.Risky -- 3rd party library.
+			ini_set( 'zlib.output_compression', false ); //phpcs:ignore WordPress.PHP.IniSet.Risky -- 3rd party library.
+			error_reporting( $previous ); //phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_error_reporting -- 3rd party library.
 
 			if ( $GLOBALS['is_nginx'] ) {
 				// Setting this header instructs Nginx to disable fastcgi_buffering

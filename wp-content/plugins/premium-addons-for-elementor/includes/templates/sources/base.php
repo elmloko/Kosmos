@@ -311,7 +311,7 @@ abstract class Premium_Templates_Source_Base {
 			$file_ext = pathinfo( $settings['url'] )['extension'];
 			switch ( true ) {
 				case 'mp4' === $file_ext:
-					$settings['url'] = 'https://pa.premiumtemplates.io/wp-content/uploads/2018/10/video-placeholder.mp4';
+					$settings['url'] = 'https://premiumtemplates.io/wp-content/uploads/2018/10/video-placeholder.mp4';
 					break;
 				case 'jpg' === $file_ext || 'png' === $file_ext:
 					$settings['url'] = ELEMENTOR_ASSETS_URL . 'images/placeholder.png';

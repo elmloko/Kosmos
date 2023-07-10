@@ -258,5 +258,18 @@
                 <field name="Mega Menu: Badge Text" editor_type="LINE">badge_text</field>
             </fields-in-item>
         </widget>
+
+        <widget name="premium-world-clock">
+            <fields>
+                <field name="World Clock: Title" editor_type="LINE">clock_title</field>
+            </fields>
+        </widget>
+
+        <widget name="premium-post-ticker">
+            <fields>
+                <field name="Post Ticker: Title" editor_type="LINE">ticker_title</field>
+            </fields>
+        </widget>
+
     </elementor-widgets>
 </wpml-config>

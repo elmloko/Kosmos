@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * PA Premium Temlpate Tags.
  */
 
@@ -10,6 +9,9 @@ namespace PremiumAddons\Includes;
 use Elementor\Plugin;
 use Elementor\Group_Control_Image_Size;
 use PremiumAddons\Includes\ACF_Helper;
+use PremiumAddonsPro\Includes\Smart_Post_Listing_Helper as Posts_Helper;
+use ElementorPro\Plugin as PluginPro;
+use ElementorPro\Modules\LoopBuilder\Files\Css\Loop_Dynamic_CSS;
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -198,6 +200,12 @@ class Premium_Template_Tags {
 
 		$frontend = Plugin::$instance->frontend;
 
+		$custom_temp = apply_filters( 'pa_temp_id', false );
+
+		if ( $custom_temp ) {
+			$id = $title = $custom_temp;
+		}
+
 		if ( ! $id ) {
 			$id = $this->get_id_by_title( $title );
 
@@ -206,11 +214,12 @@ class Premium_Template_Tags {
 			$id = $title;
 		}
 
-		$template_content = $frontend->get_builder_content_for_display( $id, true );
+		$template_content = $frontend->get_builder_content_for_display( $id, false );
 
 		return $template_content;
 
 	}
+
 
 	/**
 	 * Get authors
@@ -403,7 +412,6 @@ class Premium_Template_Tags {
 		}
 
 		return $data;
-
 	}
 
 	/**
@@ -424,6 +432,7 @@ class Premium_Template_Tags {
 		$tax_count = 0;
 
 		$post_type = $settings['post_type_filter'];
+		$post_id   = get_the_ID();
 
 		$post_args = array(
 			'post_type'        => $post_type,
@@ -433,8 +442,32 @@ class Premium_Template_Tags {
 			'suppress_filters' => false,
 		);
 
+		if ( 'related' === $post_type ) {
+			$current_post_type      = get_post_type( $post_id );
+			$post_args['post_type'] = $current_post_type;
+		}
+
 		$post_args['orderby'] = $settings['premium_blog_order_by'];
 		$post_args['order']   = $settings['premium_blog_order'];
+
+		if ( isset( $settings['posts_from'] ) ) {
+
+			if ( '' !== $settings['posts_from'] ) {
+				$last_time = strtotime( '-1 ' . $settings['posts_from'] );
+
+				$start_date = date( 'Y-m-d', $last_time );
+				$end_date   = date( 'Y-m-d' );
+
+				$post_args['date_query'] = array(
+					array(
+						'after'     => $start_date,
+						'before'    => $end_date,
+						'inclusive' => true,
+					),
+				);
+
+			}
+		}
 
 		$excluded_posts = array();
 
@@ -445,7 +478,27 @@ class Premium_Template_Tags {
 			} else {
 				$excluded_posts = $settings['premium_blog_posts_exclude'];
 			}
-		} elseif ( ! empty( $settings['custom_posts_filter'] ) && 'post' !== $post_type ) {
+		} elseif ( 'related' === $post_type ) {
+
+			if ( 'product' === $current_post_type ) {
+
+				$post_cats = self::get_product_cats_ids( $post_id );
+
+				$post_args['tax_query'][] = array(
+					'taxonomy' => 'product_cat',
+					'field'    => 'term_id',
+					'terms'    => $post_cats,
+					'operator' => 'IN',
+				);
+
+			} else {
+				$post_cats = wp_get_post_categories( $post_id );
+
+				if ( ! empty( $post_cats ) ) {
+					$post_args['category__in'] = $post_cats;
+				}
+			}
+		} elseif ( ! empty( $settings['custom_posts_filter'] ) && ! in_array( $post_type, array( 'post', 'related' ), true ) ) {
 
 			$keys = array_keys( self::get_default_posts_list( $post_type ) );
 
@@ -464,32 +517,35 @@ class Premium_Template_Tags {
 			$post_args[ $settings['author_filter_rule'] ] = $settings['premium_blog_users'];
 		}
 
-		// Get all the taxanomies associated with the post type.
-		$taxonomy = self::get_taxnomies( $post_type );
+		if ( 'related' !== $post_type ) {
+			// Get all the taxanomies associated with the post type.
+			$taxonomy = self::get_taxnomies( $post_type );
 
-		if ( ! empty( $taxonomy ) && ! is_wp_error( $taxonomy ) ) {
+			if ( ! empty( $taxonomy ) && ! is_wp_error( $taxonomy ) ) {
 
-			// Get all taxonomy values under the taxonomy.
+				// Get all taxonomy values under the taxonomy.
 
-			$tax_count = 0;
-			foreach ( $taxonomy as $index => $tax ) {
+				$tax_count = 0;
+				foreach ( $taxonomy as $index => $tax ) {
 
-				if ( ! empty( $settings[ 'tax_' . $index . '_' . $post_type . '_filter' ] ) ) {
+					if ( ! empty( $settings[ 'tax_' . $index . '_' . $post_type . '_filter' ] ) ) {
 
-					$operator = $settings[ $index . '_' . $post_type . '_filter_rule' ];
+						$operator = $settings[ $index . '_' . $post_type . '_filter_rule' ];
 
-					$post_args['tax_query'][] = array(
-						'taxonomy' => $index,
-						'field'    => 'slug',
-						'terms'    => $settings[ 'tax_' . $index . '_' . $post_type . '_filter' ],
-						'operator' => $operator,
-					);
-					$tax_count++;
+						$post_args['tax_query'][] = array(
+							'taxonomy' => $index,
+							'field'    => 'slug',
+							'terms'    => $settings[ 'tax_' . $index . '_' . $post_type . '_filter' ],
+							'operator' => $operator,
+						);
+						$tax_count++;
+					}
 				}
 			}
 		}
 
-		if ( '' !== $settings['active_cat'] && '*' !== $settings['active_cat'] ) {
+		// needs to be checked.
+		if ( '' !== $settings['active_cat'] && '*' !== $settings['active_cat'] && 'related' !== $post_type ) {
 
 			$filter_type = $settings['filter_tabs_type'];
 
@@ -521,13 +577,35 @@ class Premium_Template_Tags {
 			$excluded_posts = array_merge( $excluded_posts, get_option( 'sticky_posts' ) );
 		}
 
-		if ( 'yes' === $settings['query_exclude_current'] ) {
-			array_push( $excluded_posts, get_the_id() );
+		if ( 'yes' === $settings['query_exclude_current'] || 'related' === $post_type ) {
+			array_push( $excluded_posts, $post_id );
 		}
 
 		$post_args['post__not_in'] = $excluded_posts;
 
 		return $post_args;
+	}
+
+	/**
+	 * Retrieves the product's categories IDs.
+	 *
+	 * @access public
+	 * @since 2.8.20
+	 *
+	 * @param int $prod_id  product id.
+	 *
+	 * @return array
+	 */
+	public static function get_product_cats_ids( $prod_id ) {
+
+		$prod_cats = get_the_terms( $prod_id, 'product_cat' );
+		$cats_ids  = array();
+
+		foreach ( $prod_cats as $index => $cat ) {
+			array_push( $cats_ids, $cat->term_id );
+		}
+
+		return $cats_ids;
 	}
 
 	/**
@@ -624,7 +702,6 @@ class Premium_Template_Tags {
 			the_content();
 
 		} else {
-
 			$excerpt = trim( get_the_excerpt() );
 
 			$words = explode( ' ', $excerpt, $excerpt_length + 1 );
@@ -654,15 +731,16 @@ class Premium_Template_Tags {
 	 *
 	 * @param string $read_more read more text.
 	 * @param string $post_target  link target value.
+	 * @param string $link_class   link class
 	 */
-	public static function get_post_excerpt_link( $read_more, $post_target ) {
+	public static function get_post_excerpt_link( $read_more, $post_target, $link_class_prefix ) {
 
 		if ( empty( $read_more ) ) {
 			return;
 		}
 
-		echo '<div class="premium-blog-excerpt-link-wrap">';
-			echo '<a href="' . esc_url( get_permalink() ) . '" target="' . esc_attr( $post_target ) . '" class="premium-blog-excerpt-link elementor-button">';
+		echo '<div class="' . $link_class_prefix . 'excerpt-link-wrap">';
+			echo '<a href="' . esc_url( get_permalink() ) . '" target="' . esc_attr( $post_target ) . '" class="' . $link_class_prefix . 'excerpt-link elementor-button">';
 				echo wp_kses_post( $read_more );
 			echo '</a>';
 		echo '</div>';
@@ -706,11 +784,9 @@ class Premium_Template_Tags {
 	 *
 	 * @param string $target target.
 	 */
-	protected function get_post_thumbnail( $target ) {
+	protected function get_post_thumbnail( $target, $widget = '' ) {
 
 		$settings = self::$settings;
-
-		$skin = $settings['premium_blog_skin'];
 
 		$settings['featured_image'] = array(
 			'id' => get_post_thumbnail_id(),
@@ -722,15 +798,23 @@ class Premium_Template_Tags {
 			return;
 		}
 
-		if ( in_array( $skin, array( 'modern', 'cards' ), true ) ) { ?>
-			<a href="<?php esc_url( the_permalink() ); ?>" target="<?php echo esc_attr( $target ); ?>">
-			<?php
-		}
+		if ( 'magazine' !== $widget ) {
+
+			$skin = $settings['premium_blog_skin'];
+
+			if ( in_array( $skin, array( 'modern', 'cards' ), true ) ) { ?>
+				<a href="<?php esc_url( the_permalink() ); ?>" target="<?php echo esc_attr( $target ); ?>">
+				<?php
+			}
+
 			echo wp_kses_post( $thumbnail_html );
-		if ( in_array( $skin, array( 'modern', 'cards' ), true ) ) {
-			?>
-			</a>
-			<?php
+			if ( in_array( $skin, array( 'modern', 'cards' ), true ) ) {
+				?>
+				</a>
+				<?php
+			}
+		} else {
+			echo wp_kses_post( $thumbnail_html );
 		}
 	}
 
@@ -742,12 +826,13 @@ class Premium_Template_Tags {
 	 *
 	 * @param string $link_target target.
 	 * @param string $key unique key.
+	 * @param string $class title class.
 	 */
-	protected function render_post_title( $link_target, $key ) {
+	protected function render_post_title( $link_target, $key, $class ) {
 
 		$settings = self::$settings;
 
-		$this->add_render_attribute( $key . '_title', 'class', 'premium-blog-entry-title' );
+		$this->add_render_attribute( $key . '_title', 'class', $class );
 
 		$title_tag = Helper_Functions::validate_html_tag( $settings['premium_blog_title_tag'] );
 
@@ -761,7 +846,7 @@ class Premium_Template_Tags {
 	}
 
 	/**
-	 * Get Post Meta
+	 * Get Post Meta.
 	 *
 	 * @since 3.4.4
 	 * @access protected
@@ -833,45 +918,41 @@ class Premium_Template_Tags {
 	}
 
 	/**
-	 * Renders post content
+	 * Renders post content.
 	 *
 	 * @since 3.0.5
 	 * @access protected
+	 *
+	 * @param array $options  post content options.
 	 */
-	protected function get_post_content() {
+	protected function get_post_content( $options ) {
 
-		$settings = self::$settings;
-
-		if ( 'yes' !== $settings['premium_blog_excerpt'] || empty( $settings['premium_blog_excerpt_length'] ) ) {
+		if ( 'yes' !== $options['excerpt'] || empty( $options['length'] ) ) {
 			return;
 		}
 
-		$src = $settings['content_source'];
+		$this->add_render_attribute( 'post-content-inner-' . get_the_ID(), 'class', $options['content_classes'] );
 
-		$excerpt_type = $settings['premium_blog_excerpt_type'];
-		$excerpt_text = $settings['premium_blog_excerpt_text'];
-
-		if ( 'yes' === $settings['premium_blog_new_tab'] ) {
-			$post_target = '_blank';
-		} else {
-			$post_target = '_self';
-		}
-
-		$length = $settings['premium_blog_excerpt_length'];
-
+		?>
+		<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'post-content-inner-' . get_the_ID() ) ); ?>>
+		<?php
 		// Get post content.
-		if ( 'excerpt' === $src ) :
-			echo '<p class="premium-blog-post-content">';
+		if ( 'excerpt' === $options['source'] ) :
+			echo '<p class="' . $options['class'] . '">';
 		endif;
-			echo wp_kses_post( $this->render_post_content( $src, $length, $excerpt_type, $excerpt_text ) );
-		if ( 'excerpt' === $src ) :
+			echo wp_kses_post( $this->render_post_content( $options['source'], $options['length'], $options['excerpt_type'], $options['excerpt_text'] ) );
+		if ( 'excerpt' === $options['source'] ) :
 			echo '</p>';
 		endif;
 
 		// Get post excerpt.
-		if ( 'link' === $excerpt_type ) :
-			$this->get_post_excerpt_link( $excerpt_text, $post_target );
+		if ( 'link' === $options['excerpt_type'] ) :
+			$this->get_post_excerpt_link( $options['excerpt_text'], $options['target'], $options['excerpt_class_prefix'] );
 		endif;
+
+		?>
+		 </div>
+		 <?php
 	}
 
 	/**
@@ -892,11 +973,19 @@ class Premium_Template_Tags {
 
 		$total = self::$page_limit;
 
-		if ( 'yes' === $settings['premium_blog_new_tab'] ) {
-			$target = '_blank';
-		} else {
-			$target = '_self';
-		}
+		$target = 'yes' === $settings['premium_blog_new_tab'] ? '_blank' : '_self';
+
+		$content_options = array(
+			'excerpt'              => $settings['premium_blog_excerpt'],
+			'length'               => $settings['premium_blog_excerpt_length'],
+			'target'               => $target,
+			'source'               => $settings['content_source'],
+			'excerpt_type'         => $settings['premium_blog_excerpt_type'],
+			'excerpt_text'         => $settings['premium_blog_excerpt_text'],
+			'class'                => 'premium-blog-post-content',
+			'excerpt_class_prefix' => 'premium-blog-',
+			'content_classes'      => array( 'premium-blob-content-inner-wrapper' ),
+		);
 
 		$skin = $settings['premium_blog_skin'];
 
@@ -1016,7 +1105,7 @@ class Premium_Template_Tags {
 							</div>
 						<?php } ?>
 						<?php
-							$this->render_post_title( $target, $key );
+							$this->render_post_title( $target, $key, 'premium-blog-entry-title' );
 						if ( 'cards' !== $skin ) {
 							$this->get_post_meta( $target );
 						}
@@ -1029,7 +1118,7 @@ class Premium_Template_Tags {
 
 						do_action( 'pa_before_post_content' );
 
-						$this->get_post_content();
+						$this->get_post_content( $content_options );
 
 					if ( 'cards' === $skin ) {
 						$this->get_post_meta( $target );
@@ -1053,7 +1142,7 @@ class Premium_Template_Tags {
 	}
 
 	/**
-	 * Render Posts
+	 * Render Posts.
 	 *
 	 * @since 3.20.9
 	 * @access public
@@ -1086,7 +1175,7 @@ class Premium_Template_Tags {
 	 * @param object $widget widget.
 	 * @param string $active_cat active category.
 	 */
-	public function inner_render( $widget, $active_cat ) {
+	public function inner_render( $widget, $active_cat, $page_num, $req_type ) {
 
 		ob_start();
 
@@ -1094,12 +1183,44 @@ class Premium_Template_Tags {
 
 		$settings['widget_id'] = $widget->get_id();
 
+		$widget_name = $widget->get_name();
+
+		if ( 'premium-smart-post-listing' === $widget_name ) {
+			$settings['widget_type'] = 'premium-smart-listing';
+		} else {
+			$settings['widget_type'] = $widget_name;
+		}
+
 		$this->set_widget_settings( $settings, $active_cat );
 
-		$this->render_posts();
+		if ( 'premium-smart-post-listing' === $widget_name ) {
+			$this->render_smart_posts( $page_num, $req_type );
+		} else {
+			$this->render_posts();
+		}
 
 		return ob_get_clean();
+	}
 
+	/**
+	 * Get Empty Query Message.
+	 *
+	 * @since 3.20.3
+	 * @access protected
+	 *
+	 * @param string $notice empty query notice.
+	 */
+	public function get_empty_query_message( $notice ) {
+
+		if ( empty( $notice ) ) {
+			$notice = __( 'The current query has no posts. Please make sure you have published items matching your query.', 'premium-addons-for-elementor' );
+		}
+
+		?>
+	   <div class="premium-error-notice">
+		   <?php echo wp_kses_post( $notice ); ?>
+	   </div>
+		<?php
 	}
 
 	/**
@@ -1127,28 +1248,53 @@ class Premium_Template_Tags {
 		$paged = $this->get_paged();
 
 		$current_page = $paged;
+
 		if ( ! $current_page ) {
 			$current_page = 1;
 		}
 
-		$nav_links = paginate_links(
-			array(
-				'current'   => $current_page,
-				'total'     => $pages,
-				'prev_next' => 'yes' === $settings['pagination_strings'] ? true : false,
-				'prev_text' => sprintf( '« %s', $settings['premium_blog_prev_text'] ),
-				'next_text' => sprintf( '%s »', $settings['premium_blog_next_text'] ),
-				'type'      => 'array',
-			)
-		);
+		if ( isset( $settings['pagination_type'] ) && 'default' === $settings['pagination_type'] ) {
 
-		if ( ! is_array( $nav_links ) ) {
-			return;
+			$prev_disabled = 1 == $current_page ? 'disabled' : '';
+			$next_disabled = $current_page == $pages ? 'disabled' : '';
+
+			$this->add_navigation_arrows( $prev_disabled, $next_disabled );
+
+		} else {
+
+			$container_class = 'premium-addon-blog' !== $settings['widget_type'] ? $settings['widget_type'] . '__pagination-container' : 'premium-blog-pagination-container';
+			$nav_links       = paginate_links(
+				array(
+					'current'   => $current_page,
+					'total'     => $pages,
+					'prev_next' => 'yes' === $settings['pagination_strings'] ? true : false,
+					'prev_text' => sprintf( '« %s', $settings['premium_blog_prev_text'] ),
+					'next_text' => sprintf( '%s »', $settings['premium_blog_next_text'] ),
+					'type'      => 'array',
+				)
+			);
+
+			if ( ! is_array( $nav_links ) ) {
+				return;
+			}
+
+			?>
+			<nav class="<?php echo esc_attr( $container_class ); ?>" role="navigation" aria-label="<?php echo esc_attr( __( 'Pagination', 'premium-addons-for-elementor' ) ); ?>">
+				<?php echo wp_kses_post( implode( PHP_EOL, $nav_links ) ); ?>
+			</nav>
+			<?php
 		}
 
+	}
+
+	public function add_navigation_arrows( $prev_disabled = '', $next_disabled = '' ) {
 		?>
-		<nav class="premium-blog-pagination-container" role="navigation" aria-label="<?php echo esc_attr( __( 'Pagination', 'premium-addons-for-elementor' ) ); ?>">
-			<?php echo wp_kses_post( implode( PHP_EOL, $nav_links ) ); ?>
+		<nav class="premium-smart-listing__pagination-container" role="navigation" aria-label="<?php echo esc_attr( __( 'Pagination', 'premium-addons-for-elementor' ) ); ?>">
+			<button class="prev page-numbers" aria-label="<?php echo esc_attr( __( 'Previous', 'premium-addons-for-elementor' ) ); ?>" <?php echo esc_attr( $prev_disabled ); ?>>
+				<i class="fa fa-angle-left"></i>
+			</button><button class="next page-numbers" aria-label="<?php echo esc_attr( __( 'Next', 'premium-addons-for-elementor' ) ); ?>" <?php echo esc_attr( $next_disabled ); ?>>
+				<i class="fa fa-angle-right"></i>
+			</button>
 		</nav>
 		<?php
 	}
@@ -1190,6 +1336,8 @@ class Premium_Template_Tags {
 		$doc_id     = isset( $_POST['page_id'] ) ? sanitize_text_field( wp_unslash( $_POST['page_id'] ) ) : '';
 		$elem_id    = isset( $_POST['widget_id'] ) ? sanitize_text_field( wp_unslash( $_POST['widget_id'] ) ) : '';
 		$active_cat = isset( $_POST['category'] ) ? wp_unslash( $_POST['category'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$page_num   = isset( $_POST['page_number'] ) ? sanitize_text_field( wp_unslash( $_POST['page_number'] ) ) : '';
+		$req_type   = isset( $_POST['req_type'] ) ? sanitize_text_field( wp_unslash( $_POST['req_type'] ) ) : '';
 
 		$elementor = Plugin::$instance;
 		$meta      = $elementor->documents->get( $doc_id )->get_elements_data();
@@ -1206,13 +1354,14 @@ class Premium_Template_Tags {
 
 			$widget = $elementor->elements_manager->create_element_instance( $widget_data );
 
-			$posts = $this->inner_render( $widget, $active_cat );
+			$posts = $this->inner_render( $widget, $active_cat, $page_num, $req_type );
 
 			$pagination = $this->inner_pagination_render();
 
-			$data['ID']     = $widget->get_id();
-			$data['posts']  = $posts;
 			$data['paging'] = $pagination;
+
+			$data['ID']    = $widget->get_id();
+			$data['posts'] = $posts;
 		}
 
 		wp_send_json_success( $data );
@@ -1499,6 +1648,7 @@ class Premium_Template_Tags {
 	 *                is empty or not exist.
 	 */
 	public function get_render_attribute_string( $element ) {
+
 		if ( empty( $this->_render_attributes[ $element ] ) ) {
 			return '';
 		}
@@ -1609,5 +1759,440 @@ class Premium_Template_Tags {
 		echo $mask_array[ $mask ]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
+	public function render_custom_featured_post( $page_num, $req_type ) {
 
+		$settings = self::$settings;
+
+		$source = $settings['post_type_filter'];
+
+		$post_id = 'post' === $source ? $settings['featured_post_default'] : $settings['featured_post'];
+
+		if ( empty( $post_id ) ) {
+			return false;
+		}
+
+		$general    = in_array( $settings['active_cat'], array( '*', '' ) );
+		$first_page = in_array( $page_num, array( 1, '' ) );
+
+		if ( $general && $first_page ) {
+			return true;
+		}
+	}
+
+	/**
+	 * Renders the custom grid.
+	 *
+	 * @access public
+	 * @since 4.9.48
+	 *
+	 * @param string $grid_template_id  grid template id.
+	 */
+	public function render_custom_grid_posts( $grid_template_id ) {
+
+		$settings = self::$settings;
+
+		/**
+		 * added by the grid item widget used in the premium grid template.
+		 *
+		 * @see premium-addons-pro/includes/grid-builder/widgets/premium-grid.php.
+		*/
+		$pattern = '/\[papro_grid_item (.+?)\]/';
+
+		$grid_template_content = '<div class="premium-smart-listing__custom-grid-wrapper">' . $this->get_template_content( $grid_template_id, true ) . '</div>';
+
+		$grid_items_templates = $this->get_grid_items_templates( $pattern, $grid_template_content );
+
+		$query = $this->get_query_posts();
+
+		$posts = $query->posts;
+
+		// Holds the items ( loop ) templates ids.
+		$items_templates_container = array();
+
+		$template_output = '';
+
+		$total = self::$page_limit;
+
+		if ( count( $posts ) ) {
+
+			global $post;
+
+			foreach ( $posts as $index => $post ) {
+
+				/**
+				 * Add a new grid template to the output if:
+				 * 1- first render.
+				 * 2- we looped through all the templates ids choosen by the user and the queried posts are > the loop templates ids.
+				 */
+				if ( empty( $items_templates_container ) ) {
+
+					$template_output .= $grid_template_content; // add a new grid template.
+
+					$items_templates_container = $grid_items_templates; // refill the templates container to start over.
+				}
+
+				// remove one id at a time and use it.
+				$item_template_id = array_shift( $items_templates_container );
+
+				setup_postdata( $post );
+
+				if ( empty( $item_template_id ) ) {
+
+					$notice = __( 'Please make sure to choose a loop template for this item.', 'premium-addons-for-elementor' );
+
+					$item_template_content = '<div class="premium-error-notice">' . $notice . '</div>';
+
+				} else {
+					// render the post skin.
+					$item_template_content = $this->get_template_content( $item_template_id, true );
+
+					$item_template_content = ! empty( $item_template_content ) ? '<div class="premium-smart-listing__post-wrapper premium-smart-listing__grid-item" data-total="' . $total . '">' . $item_template_content . '</div>' : '';
+				}
+
+				// we limit what we replace to only one match to render each template correctly.
+				$template_output = preg_replace( $pattern, $item_template_content, $template_output, 1 );
+
+				wp_reset_postdata();
+			}
+
+			/**
+			 * Replace the extra items by an invisible div to be removed later via JS.
+			 * Case: We have a grid template with fewer items that the queried post number, especially if the user added style to the items' containing columns.
+			 * Example: No.of posts per page is 4, and the grid templates has 3 columns each contains one item.
+			 */
+			$template_output = preg_replace( $pattern, '<div class="premium-extra-item"></div>', $template_output );
+
+			echo '<div class="premium-smart-listing__posts-wrapper">' . $template_output . '</div>';
+		} else {
+			// display a message here.
+		}
+
+	}
+
+	/**
+	 * Gets Grid Items Custom Skins/Templates.
+	 *
+	 * @access public
+	 * @since 3.2.9
+	 *
+	 * @param string  $pattern  premium grid widget's shortcode pattern.
+	 * @param content $string   custom grid template content.
+	 *
+	 * @return array  the items custom skins/templates IDs.
+	 */
+	public function get_grid_items_templates( $pattern, $content ) {
+
+		$matches = array();
+
+		preg_match_all( $pattern, $content, $matches );
+
+		$matches = array_pop( $matches ); // fetch last array element to get the ids.
+
+		$templates = array();
+
+		foreach ( $matches as $match ) {
+
+			list($key, $val) = explode( '=', $match );
+
+			$templates[] = trim( $val, '"' );
+		}
+
+		return $templates;
+	}
+
+	/**
+	 * Render Posts
+	 *
+	 * @since 3.20.9
+	 * @access public
+	 */
+	public function render_smart_posts( $page_num = '', $req_type = '' ) {
+
+		$settings = self::$settings;
+
+		$is_custom_grid = 'custom' === $settings['pa_spl_skin'] ? true : false;
+
+		if ( $is_custom_grid ) {
+
+			$grid_template_id = empty( $settings['pa_grid_template_id'] ) ? $settings['pa_grid_live_temp_id'] : $settings['pa_grid_template_id'];
+
+			if ( ! empty( $grid_template_id ) ) {
+				$this->render_custom_grid_posts( $grid_template_id );
+			} else {
+				$notice = __( 'Please choose your custom premium grid template.', 'premium-addons-for-elementor' );
+				$this->get_empty_query_message( $notice );
+			}
+		} else {
+
+			$display_featured_posts = 'yes' === $settings['display_featured_posts'] ? true : false;
+
+			$post_id = '';
+
+			if ( $display_featured_posts && 'infinite' !== $req_type ) {
+
+				$source = $settings['post_type_filter'];
+
+				$post_id = 'post' === $source ? $settings['featured_post_default'] : $settings['featured_post'];
+
+				$render_custom_featured_post = $this->render_custom_featured_post( $page_num, $req_type );
+
+				if ( $render_custom_featured_post ) {
+
+					$featured_post = get_post( $post_id, OBJECT );
+
+					global $post;
+
+					$post = $featured_post;
+
+					setup_postdata( $post );
+
+					$this->render_featured_posts( $featured_post, 'custom' );
+
+					wp_reset_postdata();
+				}
+			}
+
+			$query = $this->get_query_posts();
+
+			$posts = $query->posts;
+
+			$flag = true;
+
+			if ( count( $posts ) ) {
+
+				global $post;
+
+				foreach ( $posts as $index => $post ) {
+
+					setup_postdata( $post ); // setup global post data.
+
+					if ( empty( $post_id ) && ( $display_featured_posts && 0 == $index ) ) {
+						if ( 'infinite' !== $req_type ) {
+							$this->render_featured_posts( $post ); // render the first one by default for now.
+						}
+					} else {
+
+						if ( $flag ) {
+							?>
+							<div class="premium-smart-listing__posts-wrapper">
+							<?php
+							$flag = false;
+						}
+
+						$this->get_magazine_post_layout();
+					}
+				}
+
+				?>
+
+				<?php if ( ! $flag ) : ?>
+					</div>
+				<?php endif; ?>
+
+				<?php
+			}
+
+			wp_reset_postdata(); // After looping through a separate query, this function restores the $post global to the current post in the main query.
+		}
+	}
+
+	public function render_custom_loop_temp() {
+
+		$settings = self::$settings;
+
+		$loop_item_id = get_the_ID();
+
+		/** @var LoopDocument $document */
+		$document = PluginPro::elementor()->documents->get( $settings['pa_loop_template_id'] );
+
+		if ( ! $document ) {
+			return;
+		}
+
+		$this->print_dynamic_css( $loop_item_id, $settings['pa_loop_template_id'] );
+		$document->print_content();
+
+	}
+
+	protected function print_dynamic_css( $post_id, $post_id_for_data ) {
+
+		$css_file = Loop_Dynamic_CSS::create( $post_id, $post_id_for_data );
+		$post_css = $css_file->get_content();
+
+		if ( empty( $post_css ) ) {
+			return;
+		}
+
+		$css = '';
+		$css = str_replace( '.elementor-' . $post_id, '.e-loop-item-' . $post_id, $post_css );
+		$css = sprintf( '<style id="%s">%s</style>', 'loop-dynamic-' . $post_id_for_data, $css );
+
+		echo $css; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
+
+
+	/**
+	 * Render Featured Posts.
+	 */
+	public function render_featured_posts( $post, $mode = '' ) {
+
+		$settings = self::$settings;
+
+		$post_id = get_the_ID();
+
+		$widget_id = $settings['widget_id'];
+
+		$key = sprintf( 'post_%s_%s_%s', $widget_id, $post_id, $mode );
+
+		$wrap_key = sprintf( '%s_wrap', $key );
+
+		$post_tag = 'yes' === $settings['article_tag_switcher'] ? 'article' : 'div';
+
+		$target = 'yes' === $settings['new_tab'] ? '_blank' : '_self';
+
+		$meta_key = sprintf( '%s_meta', $key );
+
+		$meta_order_class = 'yes' === $settings['pa_featured_meta_above_title'] ? 'premium-order-0' : '';
+
+		$content_options = array(
+			'excerpt'              => $settings['pa_featured_excerpt'],
+			'length'               => $settings['pa_featured_excerpt_length'],
+			'target'               => $target,
+			'source'               => $settings['pa_featured_content_source'],
+			'excerpt_type'         => $settings['pa_featured_excerpt_type'],
+			'excerpt_text'         => $settings['pa_featured_excerpt_text'],
+			'class'                => 'premium-smart-listing__post-content',
+			'content_classes'      => Helper_Functions::get_element_classes( $settings['pa_featured_hide_content'], array( 'premium-smart-listing__post-content-inner', 'premium-addons-element' ) ),
+			'excerpt_class_prefix' => 'premium-smart-listing__',
+		);
+
+		$this->add_render_attribute(
+			$meta_key,
+			'class',
+			array(
+				'premium-smart-listing__post-meta-container',
+				$meta_order_class,
+			)
+		);
+
+		$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id(), $settings['featured_image_size'] );
+
+		$this->add_render_attribute(
+			$wrap_key,
+			'class',
+			array(
+				'premium-smart-listing__featured-post-wrapper',
+				'premium-smart-listing__grid-item',
+			)
+		);
+
+		?>
+		<div class="premium-smart-listing__featured-posts-wrapper">
+			<<?php echo wp_kses_post( $post_tag . ' ' . $this->get_render_attribute_string( $wrap_key ) ); ?>>
+				<div class="premium-smart-listing__post-thumbnail-wrapper">
+					<?php
+					if ( 'yes' === $settings['pa_featured_categories_meta'] ) {
+						Posts_Helper::get_post_categories( $settings, $post_id );
+					}
+					?>
+					<div class="premium-smart-listing__thumbnail-container" style="background-image: url('<?php echo $thumbnail_src[0]; ?>');">
+					<?php // $this->get_post_thumbnail( $target, 'magazine' ); ?>
+					</div>
+					<div class="premium-smart-listing__thumbnail-overlay">
+						<a class="elementor-icon" href="<?php the_permalink(); ?>" target="<?php echo esc_attr( $target ); ?>" aria-hidden="true"></a>
+					</div>
+				</div>
+				<div class="premium-smart-listing__post-content-wrapper">
+					<div class="premium-smart-listing__post-title-wrapper"> <?php $this->render_post_title( $target, $key, 'premium-smart-listing__post-title' ); ?> </div>
+					<div <?php echo wp_kses_post( $this->get_render_attribute_string( $meta_key ) ); ?>> <?php Posts_Helper::render_smart_post_meta( 'featured', $settings, $post_id ); ?> </div>
+					<?php $this->get_post_content( $content_options ); ?>
+				</div>
+			</<?php echo wp_kses_post( $post_tag ); ?>>
+		</div>
+
+		<?php
+	}
+
+	public function get_magazine_post_layout() {
+
+		$settings = self::$settings;
+
+		$post_tag = 'yes' === $settings['article_tag_switcher'] ? 'article' : 'div';
+
+		$post_id = get_the_ID();
+
+		$widget_id = $settings['widget_id'];
+
+		$total = self::$page_limit;
+
+		$key = sprintf( 'post_%s_%s', $widget_id, $post_id );
+
+		$wrap_key = sprintf( '%s_wrap', $key );
+
+		$target = 'yes' === $settings['new_tab'] ? '_blank' : '_self';
+
+		$show_thumbnail = 'yes' === $settings['post_img'] ? 'true' : false;
+
+		$meta_key = sprintf( '%s_meta', $key );
+
+		$meta_order_class = 'yes' === $settings['meta_above_title'] ? 'premium-order-0' : '';
+
+		$content_options = array(
+			'excerpt'              => $settings['post_excerpt'],
+			'length'               => $settings['post_excerpt_length'],
+			'target'               => $target,
+			'source'               => $settings['content_source'],
+			'excerpt_type'         => $settings['post_excerpt_type'],
+			'excerpt_text'         => $settings['post_excerpt_text'],
+			'class'                => 'premium-smart-listing__post-content',
+			'excerpt_class_prefix' => 'premium-smart-listing__',
+			'content_classes'      => Helper_Functions::get_element_classes( $settings['hide_content'], array( 'premium-smart-listing__post-content-inner', 'premium-addons-element' ) ),
+		);
+
+		$this->add_render_attribute(
+			$meta_key,
+			'class',
+			array(
+				'premium-smart-listing__post-meta-container',
+				$meta_order_class,
+			)
+		);
+
+		$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id(), $settings['image_size'] );
+
+		$this->add_render_attribute(
+			$wrap_key,
+			array(
+				'class'      => array( 'premium-smart-listing__post-wrapper', 'premium-smart-listing__grid-item' ),
+				'data-total' => $total,
+			)
+		);
+		?>
+			<<?php echo wp_kses_post( $post_tag . ' ' . $this->get_render_attribute_string( $wrap_key ) ); ?>>
+				<?php
+				if ( $show_thumbnail ) :
+					?>
+					<div class="premium-smart-listing__post-thumbnail-wrapper">
+						<div class="premium-smart-listing__thumbnail-container" style="background-image:url('<?php echo $thumbnail_src[0]; ?>')">
+						<?php // $this->get_post_thumbnail( '_blank', 'magazine' ); ?>
+						</div>
+						<div class="premium-smart-listing__thumbnail-overlay">
+							<a class="elementor-icon" href="<?php the_permalink(); ?>" target="<?php echo esc_attr( $target ); ?>" aria-hidden="true"></a>
+						</div>
+					</div>
+					<?php endif; ?>
+					<div class="premium-smart-listing__post-content-wrapper">
+						<?php
+						if ( 'yes' === $settings['categories_meta'] ) {
+							Posts_Helper::get_post_categories( $settings, $post_id );
+						}
+						?>
+						<div class="premium-smart-listing__post-title-wrapper"> <?php $this->render_post_title( $target, $key, 'premium-smart-listing__post-title' ); ?>  </div>
+						<div <?php echo wp_kses_post( $this->get_render_attribute_string( $meta_key ) ); ?>> <?php Posts_Helper::render_smart_post_meta( 'post', $settings, $post_id ); ?> </div>
+						<?php $this->get_post_content( $content_options ); ?>
+					</div>
+			</<?php echo wp_kses_post( $post_tag ); ?>>
+
+		<?php
+	}
 }
