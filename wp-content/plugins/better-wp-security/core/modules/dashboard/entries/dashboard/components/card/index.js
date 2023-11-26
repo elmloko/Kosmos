@@ -3,12 +3,18 @@
  */
 import { ErrorBoundary } from 'react-error-boundary';
 import classnames from 'classnames';
+import styled from '@emotion/styled';
 
 /**
  * WordPress dependencies
  */
 import { pure } from '@wordpress/compose';
 import { useSelect } from '@wordpress/data';
+
+/**
+ * iThemes dependencies
+ */
+import { Surface } from '@ithemes/ui';
 
 /**
  * Internal dependencies
@@ -18,6 +24,13 @@ import { useCardElementQueries, useCardRenderer } from '../../cards';
 import CardUnknown from '../empty-states/card-unknown';
 import CardCrash from '../empty-states/card-crash';
 import './style.scss';
+
+const StyledCard = styled( Surface )`
+	width: 100%;
+	height: 100%;
+	border-radius: 2px;
+	box-shadow: 0 0 5px rgba(211, 211, 211, 0.35);
+`;
 
 function Card( { id, dashboardId, className, gridWidth, children, ...rest } ) {
 	const { card, config } = useSelect(
@@ -35,7 +48,8 @@ function Card( { id, dashboardId, className, gridWidth, children, ...rest } ) {
 
 	if ( card.card === 'unknown' ) {
 		return (
-			<article
+			<StyledCard
+				as="article"
 				className={ classnames(
 					className,
 					'itsec-card',
@@ -44,13 +58,14 @@ function Card( { id, dashboardId, className, gridWidth, children, ...rest } ) {
 				{ ...rest }
 			>
 				<CardUnknown card={ card } dashboardId={ dashboardId } />
-			</article>
+			</StyledCard>
 		);
 	}
 
 	if ( ! CardRender ) {
 		return (
-			<article
+			<StyledCard
+				as="article"
 				className={ classnames(
 					className,
 					'itsec-card',
@@ -59,12 +74,13 @@ function Card( { id, dashboardId, className, gridWidth, children, ...rest } ) {
 				{ ...rest }
 			>
 				<CardCrash card={ card } config={ config } />
-			</article>
+			</StyledCard>
 		);
 	}
 
 	return (
-		<article
+		<StyledCard
+			as="article"
 			className={ classnames( className, 'itsec-card' ) }
 			id={ `itsec-card-${ card.id }` }
 			{ ...rest }
@@ -81,7 +97,7 @@ function Card( { id, dashboardId, className, gridWidth, children, ...rest } ) {
 				/>
 			</ErrorBoundary>
 			{ children }
-		</article>
+		</StyledCard>
 	);
 }
 

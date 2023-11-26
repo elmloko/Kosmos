@@ -169,11 +169,13 @@
                         if (this.getOption('notice').length) {
                             var message = "";
                             if (-1 !== this.getOption('notice').indexOf("facebook")) {
-                                message += "<p>Please login with your Facebook account in order to get your Facebook Reviews.</p>";
+                                message += "<p>Please login with your account in order to get your data.</p>";
                             } else if (-1 !== this.getOption('notice').indexOf("google")) {
                                 message += "<p>You need to add your Google API key from Dashboard -> Premium Add-ons for Elementor -> Google Maps</p>";
                             } else if (-1 !== this.getOption('notice').indexOf("form")) {
                                 message += "<p>You need to have <a href='https://wordpress.org/plugins/contact-form-7/' target='_blank'>Contact Form 7 plugin</a> installed and active.</p>";
+                            } else if (-1 !== this.getOption('notice').indexOf("container")) {
+                                message += "<p>You need to enable Flexbox Container feature from your WP Dashboard -> Elementor -> Settings -> Features tab.</p>";
                             }
 
                             this.ui.notice.html('<div><p><strong>Important!</strong></p>' + message + '</div>');
@@ -426,6 +428,11 @@
                         proTemplate = ' premium-template-pro';
                     }
 
+                    if (this.model.get('notice')) {
+                        if (-1 !== this.model.get('notice').indexOf('container'))
+                            proTemplate += ' premium-template-flexbox';
+                    }
+
                     return 'elementor-template-library-template' + sourceClass + urlClass + proTemplate;
                 },
 
@@ -594,7 +601,7 @@
 
                     this.getRegion('modalContent').show(new self.ModalPreviewView({
                         'preview': preview.get('preview'),
-                        'url': preview.get('url'),
+                        'url': preview.get('preview_url'),
                         'notice': preview.get('notice')
                     }));
 

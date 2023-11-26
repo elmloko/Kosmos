@@ -78,7 +78,7 @@ $image_size      = $settings['featured_image_size'];
 		if ( 'yes' === $quick_view ) {
 
 			echo '<div class="premium-woo-qv-btn" data-product-id="' . esc_attr( $product_id ) . '">';
-			esc_html_e( __( 'Quick View', 'premium-addons-for-elementor' ) );
+			esc_html_e( apply_filters( 'premium_woo_product_quick_view', __( 'Quick View', 'premium-addons-for-elementor' ) ) );
 				echo '<i class="premium-woo-qv-icon fa fa-eye"></i>';
 			echo '</div>';
 

@@ -2,7 +2,7 @@
 Contributors: 93digital
 Tags: animated typing effect, typewriter effect, typing effect plugin
 Requires at least: 3.5
-Tested up to: 5.4
+Tested up to: 6.3.2
 Stable tag: trunk
 License: GPL v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.en.html
@@ -50,6 +50,9 @@ To view a demo of the original animation [click here](http://www.mattboldt.com/d
 1. Generate a shortcode screen
 
 == Changelog ==
+
+= 1.3.7 =
+* Security patch. Tested with WordPress v6.3.2
 
 = 1.3.6 = 
 * Plugin abandoned and not longer supported! We are keeping it publicly available due to its popularity. We hope to start developing a v2 in the coming year or so.

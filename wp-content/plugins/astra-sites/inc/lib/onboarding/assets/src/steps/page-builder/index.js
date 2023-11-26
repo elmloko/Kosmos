@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { DefaultStep, PreviousStepLink } from '../../components/index';
 import { useStateValue } from '../../store/store';
 import './style.scss';
-const { imageDir, isBrizyEnabled } = starterTemplates;
+const { imageDir, isBrizyEnabled, isElementorDisabled } = starterTemplates;
 
 const PageBuilder = () => {
 	const [ { currentIndex }, dispatch ] = useStateValue();
@@ -85,24 +85,26 @@ const PageBuilder = () => {
 							</div>
 							<h6>{ __( 'Block Editor', 'astra-sites' ) }</h6>
 						</div>
-						<div
-							className="page-builder-item d-flex-center-align"
-							onClick={ () => {
-								update( 'elementor' );
-							} }
-							tabIndex="0"
-							onKeyDown={ ( event ) =>
-								handleKeyPress( event, 'elementor' )
-							}
-						>
-							<div className="elementor-image-wrap image-wrap">
-								<img
-									src={ `${ imageDir }elementor.svg` }
-									alt={ __( 'Elementor', 'astra-sites' ) }
-								/>
+						{ isElementorDisabled === '' && (
+							<div
+								className="page-builder-item d-flex-center-align"
+								onClick={ () => {
+									update( 'elementor' );
+								} }
+								tabIndex="0"
+								onKeyDown={ ( event ) =>
+									handleKeyPress( event, 'elementor' )
+								}
+							>
+								<div className="elementor-image-wrap image-wrap">
+									<img
+										src={ `${ imageDir }elementor.svg` }
+										alt={ __( 'Elementor', 'astra-sites' ) }
+									/>
+								</div>
+								<h6>{ __( 'Elementor', 'astra-sites' ) }</h6>
 							</div>
-							<h6>{ __( 'Elementor', 'astra-sites' ) }</h6>
-						</div>
+						) }
 						<div
 							className="page-builder-item d-flex-center-align"
 							onClick={ () => {
@@ -149,7 +151,13 @@ const PageBuilder = () => {
 			}
 			actions={
 				<>
-					<PreviousStepLink before>
+					<PreviousStepLink
+						before
+						customizeStep={ true }
+						onClick={ () => {
+							window.location.href = starterTemplates.adminUrl;
+						} }
+					>
 						{ __( 'Back', 'astra-sites' ) }
 					</PreviousStepLink>
 				</>

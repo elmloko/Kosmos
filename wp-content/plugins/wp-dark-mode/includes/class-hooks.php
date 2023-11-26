@@ -45,7 +45,19 @@ if ( ! class_exists( 'WP_Dark_Mode_Hooks' ) ) {
 			// WPtouch plugin compatibility.
 			add_action( 'wptouch_switch_bottom', [ $this, 'footer_scripts' ] );
 			add_filter( 'wp_dark_mode_switch_label_class', [ $this, 'switch_label_class' ] );
+		}
 
+
+		/**
+		 * Handle exclude screen
+		 *
+		 * @param mixed $is_excluded is excluded.
+		 * @return mixed
+		 */
+		public function is_current_page_excluded( $is_excluded = false ) {
+			global $pagenow;
+
+			return true;
 		}
 
 		/**
@@ -136,7 +148,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Hooks' ) ) {
 			$is_custom_color = wp_dark_mode_is_custom_color();
 
 			// Add custom color init CSS.
-			if ( $is_custom_color ) : ?>
+			if ( $is_custom_color ) { ?>
 				<style>
 					html.wp-dark-mode-active {
 						--wp-dark-mode-bg: <?php echo esc_attr( $colors['bg'] ); ?>;
@@ -147,7 +159,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Hooks' ) ) {
 					}
 				</style>
 				<?php
-			endif;
+			}
 
 			// Custom color css.
 			if ( $is_custom_color ) {
@@ -309,8 +321,8 @@ if ( ! class_exists( 'WP_Dark_Mode_Hooks' ) ) {
 
 			return self::$instance;
 		}
-
 	}
+
 }
 
 /**

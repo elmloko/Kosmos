@@ -383,7 +383,21 @@
     background: #fff;
 }
 
-#premium-modal-templates-container .premium-template-pro::before {
+#premium-modal-templates-container .premium-template-flexbox::before {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    content: "FLEXBOX";
+    z-index: 10;
+    width: 45px;
+    font-size: 9px;
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    background: #f1f3f5;
+}
+
+#premium-modal-templates-container .premium-template-pro::after {
     position: absolute;
     right: -76px;
     top: 2px;
@@ -574,6 +588,10 @@ div.premium-template-has-url:hover .premium-clone-template {
     position: absolute;
     top: 10px;
     right: 0;
+}
+
+.premium-templates-search #elementor-template-library-filter-text {
+    background-color: transparent;
 }
 
 .premium-templates-notice {

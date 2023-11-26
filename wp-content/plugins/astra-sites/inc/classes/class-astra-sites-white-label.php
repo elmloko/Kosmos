@@ -81,6 +81,9 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 			}
 
 			add_filter( 'gutenberg_templates_localize_vars', array( $this, 'add_white_label_name' ) );
+
+			add_filter( 'ast_block_templates_white_label', array( $this, 'is_white_labeled' ) );
+			add_filter( 'ast_block_templates_white_label_name', array( $this, 'get_white_label' ) );
 		}
 
 		/**

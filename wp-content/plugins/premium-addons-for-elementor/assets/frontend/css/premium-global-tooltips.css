@@ -1,0 +1,61 @@
+/*
+*Premium Global Tooltip
+*/
+.premium-gtooltips-temp {
+  position: absolute;
+  z-index: 9999;
+}
+
+.premium-global-tooltip-content .premium-tootltip-icon {
+  vertical-align: middle;
+}
+
+.premium-global-tooltip-content .premium-tootltip-text,
+.premium-global-tooltip-content .premium-tooltip-gallery,
+.premium-global-tooltip-content .premium-tootltip-icon {
+  display: inline-block;
+}
+
+.premium-global-tooltip-content .premium-tootltip-icon svg {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.premium-global-tooltip-content .premium-tooltip-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.premium-global-tooltip-content .premium-lottie-animation {
+  width: 100px;
+  height: 100px;
+}
+
+.premium-global-tooltip-content .premium-lottie-animation svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tooltipster-sidetip .tooltipster-content {
+  background: transparent;
+  text-align: center;
+  padding: 0;
+}
+
+.premium-tooltipster-base {
+  width: auto !important;
+  height: auto !important;
+}
+
+.premium-tooltipster-base .tooltipster-content {
+  padding: 0.3em 0.6em;
+  border-radius: 2px;
+}
+
+.premium-tooltipster-base .tooltipster-box {
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}

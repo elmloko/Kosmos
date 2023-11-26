@@ -6,7 +6,7 @@
  * @package WP_DARK_MODE
  */
 
-use Elementor\Controls_Manager;
+use Elementor\Controls_Manager; // phpcs:ignore
 
 // if direct access than exit the file.
 defined( 'ABSPATH' ) || exit();

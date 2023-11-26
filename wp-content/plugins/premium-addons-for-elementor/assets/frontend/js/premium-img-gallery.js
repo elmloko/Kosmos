@@ -38,6 +38,11 @@
             bindEvents: function () {
                 this.getGlobalSettings();
                 this.run();
+
+                var self = this;
+                $(document).on('elementor/popup/show', function () {
+                    self.run();
+                });
             },
 
             getGlobalSettings: function () {

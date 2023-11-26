@@ -101,8 +101,11 @@
 .premium-facebook-feed-wrapper a.carousel-arrow,
 .premium-instafeed-container a.carousel-arrow,
 .premium-persons-container a.carousel-arrow,
+.premium-testimonial-box a.carousel-arrow,
 .premium-tcloud-container a.carousel-arrow,
 .premium-woocommerce a.carousel-arrow,
+.premium-tiktok-feed__videos-wrapper a.carousel-arrow,
+.premium-pinterest-feed__pins-wrapper a.carousel-arrow,
 .elementor-widget-premium-weather.premium-hours-vertical a.carousel-arrow {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -139,13 +142,17 @@ div[class^="premium-"] .slick-arrow i {
 .premium-facebook-feed-wrapper a.carousel-arrow,
 .premium-instafeed-container a.carousel-arrow,
 .premium-persons-container a.carousel-arrow,
+.premium-testimonial-box a.carousel-arrow,
 .premium-tcloud-container a.carousel-arrow,
 .premium-woocommerce a.carousel-arrow,
+.premium-tiktok-feed__videos-wrapper a.carousel-arrow,
+.premium-pinterest-feed__pins-wrapper a.carousel-arrow,
 .elementor-widget-premium-weather.premium-hours-vertical a.carousel-arrow {
   top: 50%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  text-decoration: none;
 }
 
 a.carousel-arrow.carousel-next {
@@ -182,6 +189,8 @@ a.square-border {
 .premium-woocommerce ul.slick-dots,
 .premium-carousel-dots-below ul.slick-dots,
 .premium-blog-wrap ul.slick-dots,
+.premium-tiktok-feed__videos-wrapper ul.slick-dots,
+.premium-pinterest-feed__pins-wrapper ul.slick-dots,
 .premium-tcloud-container ul.slick-dots,
 .premium-fb-rev-reviews ul.slick-dots {
   position: relative;

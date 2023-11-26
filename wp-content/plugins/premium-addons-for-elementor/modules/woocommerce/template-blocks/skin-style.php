@@ -286,7 +286,7 @@ abstract class Skin_Style {
 					'post__not_in'   => array(),
 				);
 
-				if ( 'grid' === $settings['layout_type'] || 'metro' === $settings['layout_type'] ) {
+				if ( 'grid' === $settings['layout_type'] || 'masonry' === $settings['layout_type'] ) {
 
 					if ( $settings['products_numbers'] > 0 ) {
 						$query_args['posts_per_page'] = $settings['products_numbers'];
@@ -400,7 +400,7 @@ abstract class Skin_Style {
 			 */
 
 			// carousel.
-			if ( 'grid' === $settings['layout_type'] || 'metro' === $settings['layout_type'] ) {
+			if ( 'grid' === $settings['layout_type'] || 'masonry' === $settings['layout_type'] ) {
 
 				if ( $settings['products_numbers'] > 0 ) {
 					$query_args['posts_per_page'] = $settings['products_numbers'];
@@ -468,7 +468,7 @@ abstract class Skin_Style {
 				 */
 
 				// carousel.
-				if ( 'grid' === $settings['layout_type'] || 'metro' === $settings['layout_type'] ) {
+				if ( 'grid' === $settings['layout_type'] || 'masonry' === $settings['layout_type'] ) {
 
 					if ( $settings['products_numbers'] > 0 ) {
 						$query_args['posts_per_page'] = $settings['products_numbers'];
@@ -538,7 +538,7 @@ abstract class Skin_Style {
 				'post__not_in'   => array(),
 			);
 
-			if ( 'grid' === $settings['layout_type'] || 'metro' === $settings['layout_type'] ) {
+			if ( 'grid' === $settings['layout_type'] || 'masonry' === $settings['layout_type'] ) {
 
 				if ( $settings['products_numbers'] > 0 ) {
 					$query_args['posts_per_page'] = $settings['products_numbers'];
@@ -611,6 +611,10 @@ abstract class Skin_Style {
 						'terms'    => $settings['tags'],
 						'operator' => $tag_rule,
 					);
+				}
+
+				if ( ! empty( $settings['products'] ) ) {
+					$query_args[ $settings['product_filter_rule'] ] = $settings['products'];
 				}
 
 				if ( 0 < $settings['offset'] ) {
@@ -719,15 +723,12 @@ abstract class Skin_Style {
 
 		$settings = self::$settings;
 
-		if ( 'grid' === $settings['layout_type'] || 'metro' === $settings['layout_type'] ) {
+		if ( 'grid' === $settings['layout_type'] || 'masonry' === $settings['layout_type'] ) {
 
-			if ( 'grid' === $settings['layout_type'] ) {
+			$woocommerce_loop['columns'] = intval( 100 / substr( $settings['columns'], 0, strpos( $settings['columns'], '%' ) ) );
 
-				$woocommerce_loop['columns'] = intval( 100 / substr( $settings['columns'], 0, strpos( $settings['columns'], '%' ) ) );
-
-				if ( '16.667%' === $settings['columns'] ) {
-					$woocommerce_loop['columns'] = 6;
-				}
+			if ( '16.667%' === $settings['columns'] ) {
+				$woocommerce_loop['columns'] = 6;
 			}
 
 			// if ( 'main' !== $settings['query_type'] ) {
@@ -755,8 +756,8 @@ abstract class Skin_Style {
 
 			if ( 'yes' === $divider && 'grid' === $settings['layout_type'] ) {
 				$this->add_render_attribute( 'wrapper', 'class', 'premium-woo-grid-' . $woocommerce_loop['columns'] );
-			} else {
-				$this->add_render_attribute( 'wrapper', 'class', 'premium-woo-metro-' . $settings['metro_style'] );
+			} elseif ( 'masonry' === $settings['layout_type'] ) {
+				$this->add_render_attribute( 'wrapper', 'class', 'premium-woo-masonry-' . $woocommerce_loop['columns'] );
 			}
 
 			// }
@@ -806,7 +807,7 @@ abstract class Skin_Style {
 
 		$settings = self::$settings;
 
-		if ( 'yes' !== $settings['load_more'] || 'grid' !== $settings['layout_type'] ) {
+		if ( 'yes' !== $settings['load_more'] || 'carousel' == $settings['layout_type'] ) {
 			return;
 		}
 
@@ -886,33 +887,6 @@ abstract class Skin_Style {
 				'data-quick-view' => $quick_view,
 			)
 		);
-
-		if ( 'metro' === $settings['layout_type'] ) {
-
-			$this->add_render_attribute( 'wrapper', 'data-metro-style', $settings['metro_style'] );
-
-			if ( 'custom' === $settings['metro_style'] ) {
-
-				$metro_settings = array(
-					'wPattern'        => $settings['width_pattern'],
-					'hPattern'        => $settings['height_pattern'],
-					'wPattern_tablet' => $settings['width_pattern_tablet'],
-					'hPattern_tablet' => $settings['height_pattern_tablet'],
-					'wPattern_mobile' => $settings['width_pattern_mobile'],
-					'hPattern_mobile' => $settings['height_pattern_mobile'],
-				);
-
-				// $metro_settings = [
-				// 'scaled'        => $settings['scaled_products'],
-				// 'scaledCellsW'  => $settings['scaled_cells_width'],
-				// 'scaledCellsH'  => $settings['scaled_cells_height'],
-				// 'normalCellsW'  => $settings['normal_cells_width'],
-				// 'normalCellsH'  => $settings['normal_cells_height']
-				// ];
-
-				$this->add_render_attribute( 'wrapper', 'data-metro', wp_json_encode( $metro_settings ) );
-			}
-		}
 
 		echo '<div ' . wp_kses_post( $this->get_render_attribute_string( 'wrapper' ) ) . '>';
 	}
@@ -1078,6 +1052,13 @@ abstract class Skin_Style {
 			return;
 		}
 
+		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+
+			if ( 'masonry' === self::$settings['layout_type'] ) {
+				$this->render_editor_script();
+			}
+		}
+
 		$this->set_query_args();
 
 		$this->start_loop_wrapper();
@@ -1098,6 +1079,55 @@ abstract class Skin_Style {
 
 		$this->quick_view_modal();
 
+	}
+
+		/**
+		 * Render Editor Masonry Script.
+		 *
+		 * @since 3.12.3
+		 * @access protected
+		 */
+	protected function render_editor_script() {
+
+		?>
+		<script type="text/javascript">
+			jQuery( document ).ready( function( $ ) {
+
+				$( '.premium-woo-products-masonry .products' ).each( function() {
+
+					var selector 	= $(this);
+
+
+					if ( selector.closest( '.premium-woocommerce' ).length < 1 ) {
+						return;
+					}
+
+
+					var masonryArgs = {
+						itemSelector	: 'li.product',
+						percentPosition : true,
+						layoutMode		: 'masonry',
+					};
+
+					var $isotopeObj = {};
+
+					selector.imagesLoaded( function() {
+
+						$isotopeObj = selector.isotope( masonryArgs );
+
+						$isotopeObj.imagesLoaded().progress(function() {
+							$isotopeObj.isotope("layout");
+						});
+
+						selector.find('li.product').resize( function() {
+							$isotopeObj.isotope( 'layout' );
+						});
+					});
+
+				});
+			});
+		</script>
+		<?php
 	}
 
 	/**

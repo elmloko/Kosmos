@@ -7,7 +7,7 @@
  * Plugin Name:       Interactive Geo Maps
  * Plugin URI:        https://interactivegeomaps.com/
  * Description:       Create interactive geographic vector maps of the world, continents or any country in the world. Color full regions or create markers on specific locations that will have information on hover and can also have actions on click. This plugin uses the online amcharts library to generate the maps.
- * Version:           1.6.1
+ * Version:           1.6.6.2
  * Requires PHP:      7.0
  * Author:            Carlos Moreira
  * Author URI:        https://cmoreira.net/
@@ -127,7 +127,7 @@ if ( function_exists( __NAMESPACE__ . '\\igmfreemiusinit' ) ) {
         add_action( 'plugins_loaded', function () use( $framework ) {
             $plugin = new Core(
                 'interactive-geo-maps',
-                '1.6.1',
+                '1.6.6.2',
                 __FILE__,
                 $framework
             );

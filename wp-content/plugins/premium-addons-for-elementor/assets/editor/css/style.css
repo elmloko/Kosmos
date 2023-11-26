@@ -1,10 +1,11 @@
 @font-face {
     font-family: "pa-elements";
-    src: url("../fonts/pa-elements.eot?tngliy");
-    src: url("../fonts/pa-elements.eot?tngliy#iefix") format("embedded-opentype"),
-        url("../fonts/pa-elements.ttf?tngliy") format("truetype"),
-        url("../fonts/pa-elements.woff?tngliy") format("woff"),
-        url("../fonts/pa-elements.svg?tngliy#pa-elements") format("svg");
+    src: url("../fonts/pa-elements.eot?bodeei");
+    src:
+        url("../fonts/pa-elements.eot?bodeei#iefix") format("embedded-opentype"),
+        url("../fonts/pa-elements.ttf?bodeei") format("truetype"),
+        url("../fonts/pa-elements.woff?bodeei") format("woff"),
+        url("../fonts/pa-elements.svg?bodeei#pa-elements") format("svg");
     font-weight: normal;
     font-style: normal;
 }
@@ -13,6 +14,7 @@
     position: relative;
 }
 
+[class^="divider-type-"],
 [class^="pa-"],
 [class*=" pa-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
@@ -30,7 +32,7 @@
 
 #elementor-panel [class^="pa-"],
 #elementor-panel [class*=" pa-"] {
-    font-size: 26px
+    font-size: 26px;
 }
 
 /*
@@ -42,11 +44,14 @@
     font-family: "Montserrat", Sans-serif;
     font-weight: 700;
     font-size: 10px;
-    opacity: 0.4;
+    /* opacity: 0.3; */
     position: absolute;
     right: 0.6em;
     top: 0.6em;
-    padding: 1px;
+    border-radius: 2px;
+    padding: 2px;
+    /* background: #cdcfd2;
+    color: #fff; */
 }
 
 .pa-dash-icon:before {
@@ -165,6 +170,18 @@
     content: "\e943";
 }
 
+.pa-tiktok-feed:before {
+    content: "\e945";
+}
+
+html:not([dir="rtl"]) .pa-tiktok-feed:before {
+    margin-right: -2px;
+}
+
+[dir="rtl"] .pa-tiktok-feed:before {
+    margin-left: -2px;
+}
+
 .pa-weather:before {
     content: "\e942";
 }
@@ -175,6 +192,18 @@
 
 .pa-ticker:before {
     content: "\e941";
+}
+
+.pa-pinterest:before {
+    content: "\e945";
+}
+
+.pa-media-wheel:before {
+    content: "\e947";
+}
+
+.pa-tiktok:before {
+    content: "\e946";
 }
 
 .editor-pa-doc {
@@ -356,6 +385,19 @@
     content: "\e910";
 }
 
+.divider-type-icon:before {
+    content: "\e948";
+}
+.divider-type-image:before {
+    content: "\e949";
+}
+.divider-type-lottie:before {
+    content: "\e94a";
+}
+.divider-type-code:before {
+    content: "\e94b";
+}
+
 .pa-pro-table:before {
     content: "\e92f";
 }
@@ -442,7 +484,7 @@ html:not([dir="rtl"]) .premium-promotion-pro-btn {
     margin-left: 5px;
 }
 
-.elementor-panel .premium-promotion-element>.elementor-element>.eicon-lock {
+.elementor-panel .premium-promotion-element > .elementor-element > .eicon-lock {
     right: auto;
     left: 0.6em;
 }
@@ -463,11 +505,9 @@ html:not([dir="rtl"]) .premium-promotion-pro-btn {
     top: -100%;
 }
 
-
 .papro-btn-block {
     width: 100% !important;
     margin: -10px 0 10px;
-
 }
 
 .elementor-template-pa-live-editor-modal-container {
@@ -609,4 +649,99 @@ html:not([dir="rtl"]) .premium-promotion-pro-btn {
 .elementor-control-pa_loop_template_id .elementor-template-query-control-actions,
 .elementor-control-pa_grid_template_id .elementor-template-query-control-actions {
     display: none;
+}
+
+.elementor-image-choices {
+    margin: 0 0 -2px 0;
+}
+.elementor-image-choices img {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+    display: block;
+}
+
+.elementor-image-choices:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.image-choose-label-block {
+    padding: 3px;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-left: -3px;
+    vertical-align: middle;
+}
+
+.image-choose-label-block:nth-child(4n) {
+    clear: both;
+}
+
+.image-choose-label-block .imagesmall {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+}
+
+.image-choose-label-block .imagesmall.imagesmall-svg {
+    height: 50px;
+    background-color: #afafaf;
+}
+
+.image-choose-label-block input {
+    display: none !important;
+}
+
+.elementor-image-choices-label {
+    display: block;
+}
+
+.elementor-image-choices .elementor-image-choices-label {
+    border: 3px solid rgba(0, 0, 0, 0.08);
+    padding: 2px;
+}
+
+.elementor-control-premium_gdivider_defaults .elementor-image-choices .elementor-image-choices-label {
+    border-width: 1px;
+}
+
+.elementor-image-choices input.checked + .elementor-image-choices-label {
+    border: 2px solid #a4afb7;
+    border-radius: 12px;
+}
+
+.elementor-control-premium_gdivider_defaults .elementor-image-choices input.checked + .elementor-image-choices-label {
+    border: 1px solid #a4afb7;
+    border-radius: 0px;
+    padding: 2px;
+}
+
+.elementor-control-premium_gdivider_defaults .elementor-image-choices {
+    height: 195px;
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.elementor-control-premium_gdivider_defaults .elementor-image-choices-label {
+    height: 50px;
+}
+
+.elementor-control-premium_gdivider_defaults .elementor-image-choices-label svg {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.elementor-control-premium_gdivider_defaults .elementor-image-choices-label svg,
+.elementor-control-premium_gdivider_defaults .elementor-image-choices-label svg path {
+    fill: #afafaf;
+}
+
+.premium-rotate-icon {
+    transform: rotate(90deg);
 }

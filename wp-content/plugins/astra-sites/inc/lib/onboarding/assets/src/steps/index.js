@@ -144,7 +144,7 @@ const Steps = () => {
 			);
 		}
 
-		if ( currentIndex === 2 ) {
+		if ( currentIndex === 1 ) {
 			dispatch( {
 				type: 'set',
 				activePalette: {},
@@ -199,7 +199,7 @@ const Steps = () => {
 
 	return (
 		<div className={ `st-step ${ current.class }` }>
-			{ currentIndex !== 3 && (
+			{ currentIndex !== 2 && (
 				<div className="step-header">
 					{ current.header ? (
 						current.header
@@ -209,7 +209,7 @@ const Steps = () => {
 								<Logo />
 							</div>
 							<div className="right-col">
-								{ currentIndex === 4 && (
+								{ currentIndex === 3 && (
 									<div
 										className="back-to-main"
 										onClick={ goToShowcase }

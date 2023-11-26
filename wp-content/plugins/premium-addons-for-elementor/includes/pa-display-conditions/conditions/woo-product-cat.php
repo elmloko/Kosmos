@@ -78,7 +78,7 @@ class Woo_Product_Cat extends Condition {
 
 		$product = wc_get_product( $product_id );
 
-		$product_cats = $product->get_category_ids();
+		$product_cats = $product ? $product->get_category_ids() : array();
 
 		$condition_result = ! empty( array_intersect( (array) $value, $product_cats ) ) ? true : false;
 

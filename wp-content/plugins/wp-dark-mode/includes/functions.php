@@ -37,23 +37,24 @@ if ( ! function_exists( 'wp_dark_mode_color_presets' ) ) {
 		$preset = wp_dark_mode_get_settings( 'wp_dark_mode_color', 'color_preset', 0 );
 
 		$presets = apply_filters(
-			'wp_dark_mode_color_presets', [
-				[
+			'wp_dark_mode_color_presets',
+			array(
+				array(
 					'bg'   => '#000',
 					'text' => '#dfdedb',
 					'link' => '#e58c17',
-				],
-				[
+				),
+				array(
 					'bg'   => '#1B2836',
 					'text' => '#fff',
 					'link' => '#459BE6',
-				],
-				[
+				),
+				array(
 					'bg'   => '#1E0024',
 					'text' => '#fff',
 					'link' => '#E251FF',
-				],
-			]
+				),
+			)
 		);
 
 		return ! empty( $presets[ $preset ] ) ? $presets[ $preset ] : $presets['0'];
@@ -68,7 +69,7 @@ if ( ! function_exists( 'wp_dark_mode_exclude_pages' ) ) {
 	 * @version 1.0.0
 	 */
 	function wp_dark_mode_exclude_pages() {
-		return wp_dark_mode_get_settings( 'wp_dark_mode_triggers', 'exclude_pages', [] );
+		return wp_dark_mode_get_settings( 'wp_dark_mode_triggers', 'exclude_pages', array() );
 	}
 }
 
@@ -79,7 +80,7 @@ if ( ! function_exists( 'wp_dark_mode_exclude_pages' ) ) {
  * @version 1.0.0
  */
 function wp_dark_mode_exclude_pages_except() {
-	return wp_dark_mode_get_settings( 'wp_dark_mode_triggers', 'exclude_pages_except', [] );
+	return wp_dark_mode_get_settings( 'wp_dark_mode_triggers', 'exclude_pages_except', array() );
 }
 
 if ( ! function_exists( 'wp_dark_mode_enabled' ) ) {
@@ -166,15 +167,7 @@ function wp_dark_mode_frontend_mode() {
  * @version 1.0.0
  */
 function wp_dark_mode_localize_array() {
-	global $post, $current_screen;
-
-	$exclude_all_pages = 'on' === wp_dark_mode_get_settings( 'wp_dark_mode_triggers', 'exclude_all_pages', 'off' );
-
-	if ( $exclude_all_pages ) {
-		$is_excluded = isset( $post->ID ) && ! in_array( $post->ID, wp_dark_mode_exclude_pages_except(), false );
-	} else {
-		$is_excluded = isset( $post->ID ) && in_array( $post->ID, wp_dark_mode_exclude_pages(), false );
-	}
+	global $current_screen;
 
 	$pro_version = 0;
 
@@ -185,18 +178,18 @@ function wp_dark_mode_localize_array() {
 	}
 
 	$colors = wp_dark_mode_color_presets();
-	$colors = [
+	$colors = array(
 		'bg'   => apply_filters( 'wp_dark_mode_bg_color', $colors['bg'] ),
 		'text' => apply_filters( 'wp_dark_mode_text_color', $colors['text'] ),
 		'link' => apply_filters( 'wp_dark_mode_link_color', $colors['link'] ),
-	];
+	);
 
-	return [
-		'config'              => [
+	return array(
+		'config'              => array(
 			'brightness' => intval( wp_dark_mode_get_settings( 'wp_dark_mode_color', 'brightness', 100 ) ),
 			'contrast'   => intval( wp_dark_mode_get_settings( 'wp_dark_mode_color', 'contrast', 90 ) ),
 			'sepia'      => intval( wp_dark_mode_get_settings( 'wp_dark_mode_color', 'sepia', 10 ) ),
-		],
+		),
 
 		'enable_preset'       => 'on' === wp_dark_mode_get_settings( 'wp_dark_mode_color', 'enable_preset', 'off' ),
 		'customize_colors'    => 'on' === wp_dark_mode_get_settings( 'wp_dark_mode_color', 'customize_colors', 'off' ),
@@ -206,7 +199,7 @@ function wp_dark_mode_localize_array() {
 		'enable_os_mode'      => 'on' === wp_dark_mode_get_settings( 'wp_dark_mode_general', 'enable_os_mode', 'on' ),
 		'excludes'            => wp_dark_mode_get_excludes(),
 		'includes'            => wp_dark_mode_get_includes(),
-		'is_excluded'         => $is_excluded,
+		'is_excluded'         => false,
 		'remember_darkmode'   => 'on' === wp_dark_mode_get_settings( 'wp_dark_mode_advanced', 'remember_darkmode', 'off' ),
 		'default_mode'        => 'on' === wp_dark_mode_get_settings( 'wp_dark_mode_advanced', 'default_mode', 'off' ),
 		'keyboard_shortcut'   => 'on' === wp_dark_mode_get_settings( 'wp_dark_mode_accessibility', 'keyboard_shortcut', 'on' ),
@@ -220,7 +213,7 @@ function wp_dark_mode_localize_array() {
 		'is_block_editor'     => is_object( $current_screen ) && method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor(),
 		'frontend_mode'       => wp_dark_mode_frontend_mode(),
 		'pluginUrl'           => WP_DARK_MODE_URL,
-	];
+	);
 }
 
 /**
@@ -303,85 +296,88 @@ if ( ! function_exists( 'wpdm_extended_kses' ) ) {
 	 * @return array
 	 */
 	function wpdm_extended_kses() {
-		return array_merge( wp_kses_allowed_html( 'post' ), [
-			'svg'      => [
-				'xmlns'       => true,
-				'width'       => true,
-				'height'      => true,
-				'viewbox'     => true,
-				'fill'        => true,
-				'xmlns:xlink' => true,
-				'class'       => true,
-				'data-name'   => true,
-				'id'          => true,
-				'viewBox'     => true,
-			],
-			'path'     => [
-				'd'            => true,
-				'data-name'    => true,
-				'id'           => true,
-				'xlink:href'   => true,
-				'viewBox'      => true,
-				'transform'    => true,
-				'fill'         => true,
-				'fill-rule'    => true,
-				'stroke'       => true,
-				'stroke-width' => true,
-				'clip-path'    => true,
-				'class'        => true,
-			],
-			'image'    => [
-				'xlink:href' => true,
-				'width'      => true,
-				'height'     => true,
-				'data-name'  => true,
-				'id'         => true,
-				'viewBox'    => true,
-				'class'      => true,
-			],
-			'rect'     => [
-				'width'     => true,
-				'height'    => true,
-				'data-name' => true,
-				'id'        => true,
-				'viewBox'   => true,
-				'fill'      => true,
-				'fill-rule' => true,
-				'x'         => true,
-				'y'         => true,
-				'rx'        => true,
-				'class'     => true,
-				'transform' => true,
-			],
-			'circle'   => [
-				'cx'        => true,
-				'cy'        => true,
-				'r'         => true,
-				'data-name' => true,
-				'id'        => true,
-				'viewBox'   => true,
-				'fill'      => true,
-				'fill-rule' => true,
-				'class'     => true,
-			],
-			'clippath' => [
-				'id'            => true,
-				'clipPathUnits' => true,
-				'class'         => true,
-			],
-			'defs'     => [
-				'class' => true,
-			],
-			'g'        => [
-				'id'        => true,
-				'class'     => true,
-				'data-name' => true,
-				'transform' => true,
-				'clip-path' => true,
-			],
-			'span'     => [
-				'class' => true,
-			],
-		] );
+		return array_merge(
+			wp_kses_allowed_html( 'post' ),
+			[
+				'svg'      => array(
+					'xmlns'       => true,
+					'width'       => true,
+					'height'      => true,
+					'viewbox'     => true,
+					'fill'        => true,
+					'xmlns:xlink' => true,
+					'class'       => true,
+					'data-name'   => true,
+					'id'          => true,
+					'viewBox'     => true,
+				),
+				'path'     => array(
+					'd'            => true,
+					'data-name'    => true,
+					'id'           => true,
+					'xlink:href'   => true,
+					'viewBox'      => true,
+					'transform'    => true,
+					'fill'         => true,
+					'fill-rule'    => true,
+					'stroke'       => true,
+					'stroke-width' => true,
+					'clip-path'    => true,
+					'class'        => true,
+				),
+				'image'    => array(
+					'xlink:href' => true,
+					'width'      => true,
+					'height'     => true,
+					'data-name'  => true,
+					'id'         => true,
+					'viewBox'    => true,
+					'class'      => true,
+				),
+				'rect'     => array(
+					'width'     => true,
+					'height'    => true,
+					'data-name' => true,
+					'id'        => true,
+					'viewBox'   => true,
+					'fill'      => true,
+					'fill-rule' => true,
+					'x'         => true,
+					'y'         => true,
+					'rx'        => true,
+					'class'     => true,
+					'transform' => true,
+				),
+				'circle'   => array(
+					'cx'        => true,
+					'cy'        => true,
+					'r'         => true,
+					'data-name' => true,
+					'id'        => true,
+					'viewBox'   => true,
+					'fill'      => true,
+					'fill-rule' => true,
+					'class'     => true,
+				),
+				'clippath' => array(
+					'id'            => true,
+					'clipPathUnits' => true,
+					'class'         => true,
+				),
+				'defs'     => array(
+					'class' => true,
+				),
+				'g'        => [
+					'id'        => true,
+					'class'     => true,
+					'data-name' => true,
+					'transform' => true,
+					'clip-path' => true,
+				],
+				'span'     => [
+					'class' => true,
+				],
+			]
+		);
 	}
 }

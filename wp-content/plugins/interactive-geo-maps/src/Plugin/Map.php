@@ -173,6 +173,7 @@ class Map {
 		}
 
 		$meta['regions']      = isset( $meta['regions'] ) ? $this->tooltip_nl2br( $id, $meta['regions'], $render_tooltip_mode ) : array();
+		$meta['regions']      = $this->set_region_source( $meta['regions'] );
 		$meta['roundMarkers'] = isset( $meta['roundMarkers'] ) ? $this->tooltip_nl2br( $id, $meta['roundMarkers'], $render_tooltip_mode ) : array();
 
 		if ( ! empty( $meta['map'] ) ) {
@@ -181,10 +182,12 @@ class Map {
 			$meta['urls'] = $this->convert_source_urls( $meta['urls'] );
 		}
 
-		$combine = isset( $meta['combineRegions'] ) ? $meta['combineRegions'] : false;
-
+		$combine = isset( $meta['combineRegions']['enabled'] ) ? $meta['combineRegions']['enabled'] : false;
 		// merge entries with same ID
-		$meta['regions'] = $this->merge_entries_with_same_id( $meta['regions'], $combine );
+		if ( $combine ) {
+			$merge_order = isset( $meta['combineRegions']['mergeOrder'] ) ? $meta['combineRegions']['mergeOrder'] : [ 0 => '' ];
+			$meta['regions'] = $this->merge_regions_with_same_id( $meta['regions'], $merge_order );
+		}
 
 		do_action( 'igm_prepare_meta_actions', $meta, 10 );
 
@@ -194,40 +197,105 @@ class Map {
 		return $meta;
 	}
 
+
 	/**
-	 * Filter an array of arrays by removing or combining entries with the same ID.
+	 * Merge regions with the same ID, flattening them and
+	 * combining the content.
 	 *
-	 * @param array $data The input array of arrays to filter.
-	 * @param bool $combine Whether to combine the 'content' property for entries with the same ID.
-	 *             If true, the 'content' property will be combined, otherwise only the last entry will be kept.
-	 * @return array The filtered array of arrays.
+	 * @param array $regions The list of regions
+	 * @param array $order   The priority of each source
+	 * @return array The list of merged regions.
 	 */
-	function merge_entries_with_same_id( $data, $combine ) {
+	public function merge_regions_with_same_id( array $regions, array $order ) {
 
-		if( ! is_array( $data ) ){
-			return $data;
+		if ( ! is_array( $regions ) ) {
+			return $regions;
 		}
 
-		$output = array();
-		$temp = array();
 
-		foreach ($data as $entry) {
-			$id = $entry['id'];
-			if (!isset($temp[$id])) {
-				$temp[$id] = $entry;
-			} else {
-				if ($combine) {
-					$temp[$id]['content'] .= '<div class="igm_combined_content_seperator"></div>' . $entry['content'];
-				} else {
-					$temp[$id] = $entry;
-				}
+		$i    = 0;
+		// add a value to each source, DESC
+		foreach ( $order as $key => $_ ) {
+			$order[ $key ] = $i++;
+		}
+
+		// iterate the list of regions to sort the sources
+		$sorted_regions = array();
+		foreach ( $regions as $entry ) {
+			if ( ! isset( $entry['id'] ) ) {
+				continue;
 			}
+			$id  = $entry['id'];
+			$pos = 0;
+			if ( ! empty( $order[ $entry['source'] ] ) ) {
+				$pos = $order[ $entry['source'] ];
+			}
+			// per id and per source
+			$sorted_regions[ $id ][ $pos ][] = $entry;
 		}
-		foreach ($temp as $entry) {
-			$output[] = $entry;
-		}
-		return $output;
 
+		// overwrite the sources, but merge the content.
+		$merged_list = [];
+		foreach ( $sorted_regions as $key => $sources ) {
+			ksort( $sources );
+
+			// merge common sources
+			$merged_sources_list = [];
+			foreach ( $sources as $source => $common ) {
+				$merged_source = [];
+				foreach ( $common as $common_source_entry ) {
+					$merged_source = $this->merge_entries( $merged_source, $common_source_entry );
+				}
+				$merged_sources_list[ $source ] = $merged_source;
+			}
+
+			// merge different sources
+			$merged_entries = [];
+			for ( $count = count( $order ) - 1; $count >= 0; $count-- ) {
+				if ( empty( $merged_sources_list[ $count ] ) ) {
+					continue;
+				}
+				$merged_entries = $this->merge_entries( $merged_entries, $merged_sources_list[ $count ], true );
+			}
+			$merged_list[ $key ] = $merged_entries;
+		}
+
+		return array_values( $merged_list );
+	}
+
+	/**
+	 * Merge two regions, and combine the content
+	 *
+	 * @param array $a The "main" region
+	 * @param array $b The new region
+	 * @param bool $reverse_content Merge direction of the content
+	 *
+	 * @return array The merged region
+	 */
+	private function merge_entries( array $a, array $b, bool $reverse_content = false ) {
+		$merged_content = '';
+		if ( ! empty( $a['content'] ) ) {
+			$merged_content = $a['content'];
+		}
+		$separator = '';
+		if ( ! empty( $merged_content ) && ! empty( $b['content'] ) ) {
+			$separator = '<div class="igm_combined_content_separator"></div>';
+		}
+		if ( ! empty( $b['content'] ) ) {
+
+			// aaa <sep> bbb
+			$format = '%1$s %2$s %3$s';
+			if ( $reverse_content ) {
+				$format = '%3$s %2$s %1$s';
+			}
+			$merged_content = sprintf( $format, $merged_content, $separator, $b['content'] );
+		}
+
+		$res = $b;
+
+		$res['content'] = $merged_content;
+
+		return $res;
 	}
 
 	/**
@@ -256,6 +324,26 @@ class Map {
 			}
 		}
 
+		return $entries;
+	}
+	/**
+	 * Add region source to regions without source.
+	 *
+	 * @param array $entries A list of regions.
+	 *
+	 * @return array A list of regions with the input source.
+	 */
+	private function set_region_source( array $entries ) {
+		if ( empty( $entries ) ) {
+			return $entries;
+		}
+		foreach ( $entries as $key => $entry ) {
+			if ( isset( $entry['source'] ) ) {
+				continue;
+			}
+			$entries[ $key ]['source'] = 'manual_entry';
+
+		}
 		return $entries;
 	}
 

@@ -3,23 +3,23 @@
  * Plugin Name: Piotnet Addons For Elementor
  * Description: Piotnet Addons For Elementor (PAFE) adds many new features for Elementor
  * Plugin URI:  https://pafe.piotnet.com/
- * Version:     2.4.23
+ * Version:     2.4.25
  * Author:      Piotnet
  * Author URI:  https://piotnet.com/
  * Text Domain: pafe
- * Elementor tested up to: 3.11.0
- * Elementor Pro tested up to: 3.11.0
+ * Elementor tested up to: 3.17.3
+ * Elementor Pro tested up to: 3.17.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'PAFE_VERSION', '2.4.23' );
+define( 'PAFE_VERSION', '2.4.25' );
 
 define( 'PAFE_DIR', plugin_dir_path(__FILE__));
 define( 'PAFE_URL', plugins_url( '/', __FILE__ ) );
 
 final class Piotnet_Addons_For_Elementor {
-	const MINIMUM_ELEMENTOR_VERSION = '2.8.0';
+	const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
 	const MINIMUM_PHP_VERSION = '5.4';
 	const TAB_PAFE = 'tab_pafe';
 

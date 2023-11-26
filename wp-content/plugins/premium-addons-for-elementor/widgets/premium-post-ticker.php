@@ -3006,7 +3006,7 @@ class Premium_Post_Ticker extends Widget_Base {
 	 */
 	protected function render() {
 
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
 		$papro_activated = apply_filters( 'papro_activated', false );
 
@@ -3103,7 +3103,7 @@ class Premium_Post_Ticker extends Widget_Base {
 					return;
 				}
 
-				$expire_time = HOUR_IN_SECONDS * apply_filters( 'pa_ticker_reload', $settings['reload'] );
+				$expire_time = HOUR_IN_SECONDS * apply_filters( 'pa_ticker_reload_' . $id, $settings['reload'] );
 
 				$api_handler::delete_existing_transient();
 
@@ -3151,25 +3151,48 @@ class Premium_Post_Ticker extends Widget_Base {
 				$api_settings = array(
 					'id'          => $id,
 					'api_key'     => $api_key,
-					'to_currency' => $this->extract_stock_symbols( $currencies ),
+					'to_currency' => $currencies,
 				);
 
 				$api_handler = new API_Handler( $api_settings );
 
-				$req_data = $api_handler::get_gold_data( $api_settings );
+				$will_alter = false;
 
-				if ( ! $req_data ) {
-					return;
+				$req_data = $api_handler::get_gold_data( $api_settings, $will_alter );
+
+				if ( isset( $req_data['is_error_msg'] ) && $req_data['is_error_msg'] ) {
+
+					if ( ! empty( $settings['alter_api_key'] ) ) {
+
+						$will_alter = true;
+
+						$api_settings['api_key'] = $settings['alter_api_key'];
+
+						$req_data = $api_handler::get_gold_data( $api_settings, $will_alter );
+
+						if ( ! $req_data ) {
+							return;
+						}
+					} else {
+
+						$err_msg = sprintf( 'Something went wrong: %s', $req_data['error_msg'] );
+						?>
+							<div class="premium-error-notice">
+								<?php echo wp_kses_post( $err_msg ); ?>
+							</div>
+						<?php
+						return;
+					}
 				}
 
-				$expire_time = HOUR_IN_SECONDS * apply_filters( 'pa_ticker_reload', $settings['gold_reload'] );
+				$expire_time = HOUR_IN_SECONDS * apply_filters( 'pa_ticker_reload_' . $id, $settings['gold_reload'] );
 
 				$api_handler::delete_existing_transient();
 
 				set_transient( $transient_name, $req_data, $expire_time );
 			}
 		} elseif ( 'text' === $source ) {
-			// render
+
 			$text_content = $settings['text_content'];
 
 		} else {
@@ -3482,7 +3505,10 @@ class Premium_Post_Ticker extends Widget_Base {
 				}
 
 				if ( $show_change_per ) {
-					$change_percent = 'sign' === $change_indicator ? $data['percent_change'] : abs( $data['percent_change'] );
+
+					$percent_change = str_replace( '%', '', $data['percent_change'] );
+
+					$change_percent = 'sign' === $change_indicator ? $percent_change : abs( $percent_change );
 
 					$change_percent = number_format( (float) str_replace( '%', '', $change_percent ), $decimal_places, '.', ',' );
 				}
@@ -3517,7 +3543,8 @@ class Premium_Post_Ticker extends Widget_Base {
 					$currency_symbol = strtolower( $currency_symbol );
 					if ( 'CURRENCY_EXCHANGE_RATE' === $function ) {
 
-						$data['icon_src'] = sprintf( 'https://assets.coincap.io/assets/icons/%s@2x.png', $currency_symbol );
+						$data['icon_src']         = sprintf( 'https://assets.coincap.io/assets/icons/%s@2x.png', $currency_symbol );
+						$data['icon_alternative'] = $data['icon_src'];
 
 					} else {
 

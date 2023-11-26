@@ -224,6 +224,35 @@ class Astra_Site_Options_Import {
 		}
 	}
 
+
+	/**
+	 * Get post from post title and post type.
+	 *
+	 * @since 4.0.6
+	 *
+	 * @param  mixed  $post_title  post title.
+	 * @param  string $post_type post type.
+	 * @return mixed
+	 */
+	public function get_page_by_title( $post_title, $post_type ) {
+		$page = array();
+		$query = new WP_Query(
+			array(
+				'post_type'              => $post_type,
+				'title'                  => $post_title,
+				'posts_per_page'         => 1,
+				'no_found_rows'          => true,
+				'ignore_sticky_posts'    => true,
+				'update_post_term_cache' => false,
+				'update_post_meta_cache' => false,
+			)
+		);
+		if ( $query->have_posts() ) {
+			$page = $query->posts[0];
+		}
+		return $page;
+	}
+
 	/**
 	 * Update post option
 	 *
@@ -238,7 +267,8 @@ class Astra_Site_Options_Import {
 			return;
 		}
 
-		$page = get_page_by_title( $option_value );
+		$page = $this->get_page_by_title( $option_value, 'page' );
+		
 		if ( is_object( $page ) ) {
 			update_option( $option_name, $page->ID );
 		}

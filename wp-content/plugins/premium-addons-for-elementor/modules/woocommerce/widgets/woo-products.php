@@ -221,6 +221,8 @@ class Woo_Products extends Widget_Base {
 		$this->register_style_image_section( $pro_skins );
 		$this->register_style_pagination_section( $pro_skins );
 		$this->register_style_loadmore_section( $pro_skins );
+        $this->register_style_sale_controls( $pro_skins );
+		$this->register_style_featured_controls( $pro_skins );
 		$this->register_style_carousel_section( $pro_skins );
 		$this->register_style_sold_out_controls( $pro_skins );
 	}
@@ -269,8 +271,8 @@ class Woo_Products extends Widget_Base {
 				'default'   => 'grid',
 				'options'   => array(
 					'grid'     => __( 'Grid', 'premium-addons-for-elementor' ),
-					// 'metro'    => __( 'Metro', 'premium-addons-for-elementor' ),
 					'carousel' => __( 'Carousel', 'premium-addons-for-elementor' ),
+					'masonry' => __( 'Masonry', 'premium-addons-for-elementor' ),
 				),
 				'condition' => array(
 					'_skin!' => $pro_skins,
@@ -306,7 +308,7 @@ class Woo_Products extends Widget_Base {
 			array(
 				'label'     => __( 'Grid', 'premium-addons-for-elementor' ),
 				'condition' => array(
-					'layout_type' => array( 'grid', 'metro' ),
+					'layout_type' => array( 'grid', 'masonry' ),
 					'_skin!'      => $pro_skins,
 				),
 			)
@@ -333,54 +335,7 @@ class Woo_Products extends Widget_Base {
 					'{{WRAPPER}} .premium-woo-products-inner li.product' => 'width: {{VALUE}}',
 				),
 				'condition'      => array(
-					'layout_type' => 'grid',
-				),
-			)
-		);
-
-		$this->add_control(
-			'metro_style',
-			array(
-				'label'       => __( 'Metro Style', 'premium-addons-for-elementor' ),
-				'type'        => Controls_Manager::SELECT,
-				'options'     => array(
-					'style1' => __( 'Style 1', 'premium-addons-for-elementor' ),
-					'style2' => __( 'style 2', 'premium-addons-for-elementor' ),
-					'style3' => __( 'style 4', 'premium-addons-for-elementor' ),
-					'custom' => __( 'Custom', 'premium-addons-for-elementor' ),
-				),
-				'default'     => 'style1',
-				'render_type' => 'template',
-				'condition'   => array(
-					'layout_type' => 'metro',
-				),
-			)
-		);
-
-		$this->add_responsive_control(
-			'width_pattern',
-			array(
-				'label'       => __( 'Width Pattern', 'premium-addons-for-elementor' ),
-				'description' => __( 'Each row is divided into 12 cells. Add widths for the products separated by comma, for example: 6,3,3', 'premium-addons-for-elementor' ),
-				'default'     => '6,3,3',
-				'type'        => Controls_Manager::TEXT,
-				'condition'   => array(
-					'layout_type' => 'metro',
-					'metro_style' => 'custom',
-				),
-			)
-		);
-
-		$this->add_responsive_control(
-			'height_pattern',
-			array(
-				'label'       => __( 'Height Pattern', 'premium-addons-for-elementor' ),
-				'description' => __( 'Each row is divided into 12 cells. Add heights for the products separated by comma, for example: 6,3,3', 'premium-addons-for-elementor' ),
-				'default'     => '6,3,3',
-				'type'        => Controls_Manager::TEXT,
-				'condition'   => array(
-					'layout_type' => 'metro',
-					'metro_style' => 'custom',
+					'layout_type' => array( 'grid', 'masonry' ),
 				),
 			)
 		);
@@ -769,6 +724,37 @@ class Woo_Products extends Widget_Base {
 		);
 
 		$this->add_control(
+			'product_filter_rule',
+			array(
+				'label'     => __( 'Product Filter Rule', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'post__in',
+				'options'   => array(
+					'post__in'     => __( 'Match Product', 'premium-addons-for-elementor' ),
+					'post__not_in' => __( 'Exclude Product', 'premium-addons-for-elementor' ),
+				),
+				'condition' => array(
+					'query_type' => 'custom',
+				),
+			)
+		);
+
+		$products = Premium_Template_Tags::get_default_posts_list( 'product' );
+
+		$this->add_control(
+			'products',
+			array(
+				'label'     => __( 'Select Products', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SELECT2,
+				'multiple'  => true,
+				'options'   => $products,
+				'condition' => array(
+					'query_type' => 'custom',
+				),
+			)
+		);
+
+		$this->add_control(
 			'offset',
 			array(
 				'label'       => __( 'Offset', 'premium-addons-for-elementor' ),
@@ -869,7 +855,7 @@ class Woo_Products extends Widget_Base {
 				'default'     => __( 'No products were found for this query.', 'premium-addons-for-elementor' ),
 				'label_block' => true,
 				'condition'   => array(
-					'query_type!' => array( 'cross-sells', 'up-sells' ),
+					'query_type!' => array(  'up-sells' ),
 				),
 			)
 		);
@@ -892,7 +878,7 @@ class Woo_Products extends Widget_Base {
 			array(
 				'label'     => __( 'Pagination', 'premium-addons-for-elementor' ),
 				'condition' => array(
-					'layout_type' => array( 'grid', 'metro' ),
+					'layout_type' => array( 'grid', 'masonry' ),
 					'load_more!'  => 'yes',
 					'_skin!'      => $pro_skins,
 					'query_type!' => array( 'cross-sells', 'up-sells' ),
@@ -1289,7 +1275,7 @@ class Woo_Products extends Widget_Base {
 					'{{WRAPPER}} .premium-woocommerce li.product' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				),
 				'condition'   => array(
-					'layout_type' => array( 'grid', 'metro' ),
+					'layout_type' => array( 'grid', 'masonry' ),
 				),
 			)
 		);
@@ -1504,7 +1490,7 @@ class Woo_Products extends Widget_Base {
 				'label'     => __( 'Load More Button', 'premium-addons-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
-					'layout_type' => array( 'grid', 'metro' ),
+					'layout_type' => array( 'grid', 'masonry' ),
 					'load_more'   => 'yes',
 					'pagination!' => 'yes',
 					'_skin!'      => $pro_skins,
@@ -1738,7 +1724,7 @@ class Woo_Products extends Widget_Base {
 				'label'     => __( 'Pagination', 'premium-addons-for-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array(
-					'layout_type' => array( 'grid', 'metro' ),
+					'layout_type' => array( 'grid', 'masonry' ),
 					'load_more!'  => 'yes',
 					'pagination'  => 'yes',
 					'_skin!'      => $pro_skins,
@@ -2092,6 +2078,387 @@ class Woo_Products extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+    /**
+	 * Register Style Sale section.
+	 *
+	 * @access public
+	 * @since 4.8.3
+	 *
+	 * @param array $pro_skins   pro skins.
+	 */
+	public function register_style_sale_controls( $pro_skins ) {
+
+		$this->start_controls_section(
+			'section_sale_style',
+			array(
+				'label'     => __( 'Sale Ribbon', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'_skin!' => $pro_skins,
+					'sale'   => 'yes',
+					// $this->get_control_id( 'product_image' ) => 'yes', >> found in skin 9
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'sale_size',
+			array(
+				'label'      => __( 'Size', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 20,
+						'max' => 200,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-sale-wrap .premium-woo-product-onsale' => 'min-height: {{SIZE}}{{UNIT}}; min-width: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'_skin!' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_control(
+			'sale_color',
+			array(
+				'label'     => __( 'Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-woo-product-sale-wrap .premium-woo-product-onsale' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'sale_background',
+			array(
+				'label'     => __( 'Background Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'global'    => array(
+					'default' => Global_Colors::COLOR_SECONDARY,
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-sale-wrap .premium-woo-product-onsale, {{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap::after' => 'border-left-color:{{VALUE}}; border-right-color:{{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			array(
+				'name'     => 'sale_text_shadow',
+				'selector' => '{{WRAPPER}} .premium-woo-product-sale-wrap .premium-woo-product-onsale',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'sale_shadow',
+				'selector' => '{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-sale-wrap .premium-woo-product-onsale, {{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'sale_typography',
+				'global'         => array(
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				),
+				'fields_options' => array(
+					'font_size'   => array(
+						'selectors' => array(
+							'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-sale-wrap .premium-woo-product-onsale' => 'font-size: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap' => 'width: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap .premium-woo-product-onsale' => 'font-size: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap::after' => 'border-left-width: calc( {{SIZE}}{{UNIT}} / 2); border-right-width: calc( {{SIZE}}{{UNIT}} / 2);',
+						),
+					),
+					'line_height' => array(
+						'default'   => array(
+							'size' => '32',
+							'unit' => 'px',
+						),
+						'selectors' => array(
+							'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-sale-wrap .premium-woo-product-onsale' => 'line-height: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap' => 'width: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap::after' => 'border-left-width: calc( {{SIZE}}{{UNIT}} / 2); border-right-width: calc( {{SIZE}}{{UNIT}} / 2);',
+						),
+					),
+				),
+				'selector'       => '{{WRAPPER}} .premium-woo-product-sale-wrap .premium-woo-product-onsale',
+			)
+		);
+
+		$this->add_control(
+			'sales_notice',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => __( 'Use <b>Line Height</b> to control the ribbon size.', 'premium-addons-for-elementor' ),
+				'content_classes' => 'papro-upgrade-notice',
+				'condition'       => array(
+					'_skin' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'sale_radius',
+			array(
+				'label'      => __( 'Border Radius', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-sale-wrap .premium-woo-product-onsale' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
+				),
+				'condition'  => array(
+					'_skin!' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'sale_padding',
+			array(
+				'label'      => __( 'Padding', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-sale-wrap .premium-woo-product-onsale' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'_skin!' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'sale_padding_10',
+			array(
+				'label'              => __( 'Padding', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::DIMENSIONS,
+				'allowed_dimensions' => 'vertical',
+				'size_units'         => array( 'px', 'em', '%' ),
+				'selectors'          => array(
+					'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap .premium-woo-product-onsale' => 'padding: {{TOP}}{{UNIT}} 0 {{BOTTOM}}{{UNIT}} 0;',
+				),
+				'condition'          => array(
+					'_skin' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'sale_margin',
+			array(
+				'label'      => __( 'Margin', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-sale-wrap .premium-woo-product-onsale, {{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-sale-wrap' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+	}
+
+	/**
+	 * Register Style Featured section.
+	 *
+	 * @access public
+	 * @since 4.8.3
+	 *
+	 * @param array $pro_skins   pro skins.
+	 */
+	public function register_style_featured_controls( $pro_skins ) {
+
+		$this->start_controls_section(
+			'section_featured_style',
+			array(
+				'label'     => __( 'Featured Ribbon', 'premium-addons-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'_skin!'   => $pro_skins,
+					'featured' => 'yes',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'featured_size',
+			array(
+				'label'      => __( 'Size', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 20,
+						'max' => 200,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-featured-wrap .premium-woo-product-featured' => 'min-height: {{SIZE}}{{UNIT}}; min-width: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'_skin!' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_control(
+			'featured_color',
+			array(
+				'label'     => __( 'Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-woo-product-featured-wrap .premium-woo-product-featured' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'featured_background',
+			array(
+				'label'     => __( 'Background Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'global'    => array(
+					'default' => Global_Colors::COLOR_PRIMARY,
+				),
+				'selectors' => array(
+					// '{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-featured-wrap .premium-woo-product-featured, {{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-featured-wrap' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}}:not([data-widget_type="premium-woo-products.grid-10"]) .premium-woo-product-featured-wrap .premium-woo-product-featured, {{WRAPPER}}[data-widget_type="premium-woo-products.grid-10"] .premium-woo-product-featured-wrap' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-featured-wrap::after' => 'border-left-color:{{VALUE}}; border-right-color:{{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			array(
+				'name'     => 'featured_text_shadow',
+				'selector' => '{{WRAPPER}} .premium-woo-product-featured-wrap .premium-woo-product-featured',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'featured_shadow',
+				'selector' => '{{WRAPPER}}:not([data-widget_type="premium-woo-products.grid-10"]) .premium-woo-product-featured-wrap .premium-woo-product-featured, {{WRAPPER}}[data-widget_type="premium-woo-products.grid-10"] .premium-woo-product-featured-wrap',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'           => 'featured_typography',
+				'global'         => array(
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				),
+				'fields_options' => array(
+					'font_size'   => array(
+						'selectors' => array(
+							'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-featured-wrap' => 'font-size: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-featured-wrap' => 'width: {{SIZE}}{{UNIT}};  line-height: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-featured-wrap .premium-woo-product-featured' => 'font-size: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-featured-wrap::after' => 'border-left-width: calc( {{SIZE}}{{UNIT}} / 2); border-right-width: calc( {{SIZE}}{{UNIT}} / 2);',
+						),
+					),
+					'line_height' => array(
+						'default'   => array(
+							'size' => '32',
+							'unit' => 'px',
+						),
+						'selectors' => array(
+							'{{WRAPPER}} .premium-woocommerce:not(.premium-woo-skin-grid-10) .premium-woo-product-featured-wrap' => 'line-height: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-featured-wrap' => 'width: {{SIZE}}{{UNIT}};',
+							'{{WRAPPER}} .premium-woocommerce.premium-woo-skin-grid-10 .premium-woo-product-featured-wrap::after' => 'border-left-width: calc( {{SIZE}}{{UNIT}} / 2); border-right-width: calc( {{SIZE}}{{UNIT}} / 2);',
+						),
+					),
+				),
+				'selector'       => '{{WRAPPER}} .premium-woo-product-featured-wrap .premium-woo-product-featured',
+			)
+		);
+
+		$this->add_control(
+			'featured_notice',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => __( 'Use <b>Line Height</b> to control the ribbon size.', 'premium-addons-for-elementor' ),
+				'content_classes' => 'papro-upgrade-notice',
+				'condition'       => array(
+					'_skin' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'featured_radius',
+			array(
+				'label'      => __( 'Border Radius', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-woo-product-featured-wrap .premium-woo-product-featured' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'_skin!' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'featured_padding',
+			array(
+				'label'      => __( 'Padding', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-woo-product-featured-wrap .premium-woo-product-featured' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'_skin!' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'featured_padding_10',
+			array(
+				'label'              => __( 'Padding', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::DIMENSIONS,
+				'allowed_dimensions' => 'vertical',
+				'size_units'         => array( 'px', 'em', '%' ),
+				'selectors'          => array(
+					'{{WRAPPER}} .premium-woo-product-featured-wrap .premium-woo-product-featured' => 'padding: {{TOP}}{{UNIT}} 0 {{BOTTOM}}{{UNIT}} 0;',
+				),
+				'condition'          => array(
+					'_skin' => 'grid-10',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'featured_margin',
+			array(
+				'label'      => __( 'Margin', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-woo-product-featured-wrap .premium-woo-product-featured' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+	}
 
 	/**
 	 * Register style sold out section.

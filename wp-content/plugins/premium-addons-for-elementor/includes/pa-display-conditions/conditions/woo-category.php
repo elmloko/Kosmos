@@ -132,6 +132,10 @@ class Woo_Category extends Condition {
 			foreach ( $product_ids as $id ) {
 				$product = wc_get_product( $id );
 
+                if( $id < 1 ) {
+					continue;
+                }
+
 				if ( $product->is_type( 'variation' ) ) {
 					$product = wc_get_product( $product->get_parent_id() );
 				}

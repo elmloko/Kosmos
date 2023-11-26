@@ -292,7 +292,7 @@
                 var sectionID = null;
 
                 if (elementorFrontend.config.experimentalFeatures.container) {
-                    sectionID = $scope.closest('.e-con').data("model-cid");
+                    sectionID = $scope.closest('.e-con[data-nesting-level=0]').data("model-cid");
                 }
 
                 if (!sectionID)
@@ -307,7 +307,7 @@
                 var columnID = null;
 
                 if (elementorFrontend.config.experimentalFeatures.container) {
-                    columnID = $scope.closest('.e-container--column').data("model-cid");
+                    columnID = $scope.closest('.e-con--column').data("model-cid");
                 }
 
                 if (!columnID)

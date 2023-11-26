@@ -61,10 +61,10 @@ class Admin_Notices {
 
 		self::$notices = array(
 			'pa-review',
-			'magazine_notice',
+			'bf23_notice',
 		);
 
-		delete_option( 'magic_scroll_notice' );
+		delete_option( 'shape_divider' );
 
 	}
 
@@ -106,7 +106,7 @@ class Admin_Notices {
 			return;
 		}
 
-		$this->get_magazine_notice();
+		$this->get_bf_notice();
 
 	}
 
@@ -234,6 +234,61 @@ class Admin_Notices {
 	}
 
 	/**
+	 *
+	 * Shows admin notice for Black Friday Sale.
+	 *
+	 * @since 4.10.15
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function get_bf_notice() {
+
+		$papro_path = 'premium-addons-pro/premium-addons-pro-for-elementor.php';
+
+		$is_papro_installed = Helper_Functions::is_plugin_installed( $papro_path );
+
+		$license_key = get_option( 'papro_license_key' );
+
+		$bf_notice = get_option( 'bf23_notice' );
+
+		if ( '1' === $bf_notice ) {
+			return;
+		}
+
+        if ( $is_papro_installed ) {
+			$status = $this->check_status( $license_key );
+
+            if( $status ) {
+                return;
+            }
+		}
+
+		$link = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/black-friday/', 'wp-dash', 'bf23-notification', 'bf23' );
+
+		?>
+
+		<div class="error pa-notice-wrap pa-new-feature-notice pa-review-notice">
+			<div class="pa-img-wrap">
+				<img src="<?php echo PREMIUM_ADDONS_URL . 'admin/images/pa-logo-symbol.png'; ?>">
+			</div>
+			<div class="pa-text-wrap">
+				<p>
+					<?php echo __( 'Black Friday! Get <b>25% Discount</b> for a Limited Time Only on New Purchases, Upgrades and Renewals.', 'premium-addons-for-elementor' ); ?>
+					<a class="button button-primary" href="<?php echo esc_url( $link ); ?>" target="_blank">
+						<span><?php echo __( 'Catch The Deal', 'premium-addons-for-elementor' ); ?></span>
+					</a>
+				</p>
+			</div>
+			<div class="pa-notice-close" data-notice="bf23">
+				<span class="dashicons dashicons-dismiss"></span>
+			</div>
+		</div>
+
+		<?php
+	}
+
+	/**
 	 * Renders an admin notice error message
 	 *
 	 * @since 1.0.0
@@ -253,44 +308,7 @@ class Admin_Notices {
 		<?php
 	}
 
-	/**
-	 *
-	 * Shows admin notice for Premium SVG Draw.
-	 *
-	 * @since 4.8.8
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function get_magazine_notice() {
 
-		$magazine_notice = get_option( 'magazine_notice' );
-
-		if ( '1' === $magazine_notice ) {
-			return;
-		}
-
-		$notice_url = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/elementor-news-magazine-widgets-bundle/', 'magazine-notification', 'wp-dash', 'magazine' );
-
-		?>
-
-		<div class="error pa-notice-wrap pa-new-feature-notice">
-			<div class="pa-img-wrap">
-				<img src="<?php echo PREMIUM_ADDONS_URL . 'admin/images/pa-logo-symbol.png'; ?>">
-			</div>
-			<div class="pa-text-wrap">
-				<p>
-					<strong><?php echo __( 'Premium Magazine Widgets Bundle', 'premium-addons-for-elemetor' ); ?></strong>
-					<?php echo sprintf( __( 'is now available in Premium Addons for Elementor. <a href="%s" target="_blank">Check it out now!</a>', 'premium-addons-for-elementor' ), $notice_url ); ?>
-				</p>
-			</div>
-			<div class="pa-notice-close" data-notice="magazine">
-				<span class="dashicons dashicons-dismiss"></span>
-			</div>
-		</div>
-
-		<?php
-	}
 
 	/**
 	 * Register admin scripts
@@ -384,6 +402,46 @@ class Admin_Notices {
 		}
 
 	}
+
+    /**
+     * Check Status
+     *
+     * @since 4.10.15
+	 * @access public
+     */
+    public function check_status( $key ) {
+
+        $status = false;
+
+        $api_params = array(
+            'edd_action' => 'check_license',
+            'license'    => $key,
+            'item_id'    => 361,
+        );
+
+        $response = wp_remote_get(
+            'http://my.leap13.com',
+            array(
+                'timeout'   => 15,
+                'sslverify' => false,
+                'body'      => $api_params,
+            )
+        );
+
+        if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+            return false;
+        }
+
+        $body = wp_remote_retrieve_body( $response );
+
+        $body = json_decode( $body, true );
+
+        if ( isset( $body['license'] ) && 'valid' === $body['license'] ) {
+            $status = true;
+        }
+
+        return $status;
+    }
 
 	/**
 	 * Creates and returns an instance of the class

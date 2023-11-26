@@ -85,7 +85,7 @@ $out_of_stock    = 'outofstock' === get_post_meta( $product_id, '_stock_status',
 			$qv_type = $this->get_option_value( 'quick_view_type' );
 			if ( 'button' === $qv_type ) {
 				echo '<div class="premium-woo-qv-btn premium-woo-qv-btn-translate" data-product-id="' . esc_attr( $product_id ) . '">';
-					esc_html_e( __( 'Quick View', 'premium-addons-for-elementor' ) );
+					esc_html_e( apply_filters( 'premium_woo_product_quick_view', __( 'Quick View', 'premium-addons-for-elementor' ) ) );
 					echo '<i class="premium-woo-qv-icon fa fa-eye"></i>';
 				echo '</div>';
 

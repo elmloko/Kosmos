@@ -22,7 +22,7 @@ if ( ! class_exists( 'WP_Dark_Mode' ) ) {
 	 *
 	 * @since 1.0.0
 	 */
-	final class WP_Dark_Mode {
+	class WP_Dark_Mode {
 
 		/**
 		 * A reference to an instance of this class.
@@ -55,7 +55,7 @@ if ( ! class_exists( 'WP_Dark_Mode' ) ) {
 
 					$this->init_appsero();
 
-					if ( function_exists('wppool_plugin_init') ) {
+					if ( function_exists( 'wppool_plugin_init' ) ) {
 						wppool_plugin_init( 'wp_dark_mode', plugin_dir_url( WP_DARK_MODE_FILE ) . '/includes/wppool/background-image.png' );
 					}
 				}

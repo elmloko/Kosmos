@@ -46,7 +46,6 @@ const TypographyWrapper = () => {
 		if ( templateResponse !== null ) {
 			const defaultFonts = [];
 			const defaultTypography = getDefaultTypography( templateResponse );
-
 			defaultFonts.push( defaultTypography );
 
 			if ( ! document.getElementById( 'google-fonts-domain' ) ) {

@@ -432,8 +432,11 @@ const Survey = () => {
 	};
 
 	const fileSystemPermissionRequirement = () => {
-		const { is_readable: isReadable, is_writable: isWritable } =
-			fileSystemPermissions.permissions;
+		const {
+			is_readable: isReadable,
+			is_writable: isWritable,
+			is_wp_filesystem: isFilesystem,
+		} = fileSystemPermissions.permissions;
 
 		return (
 			<div className="requirement-check-wrap">
@@ -474,6 +477,21 @@ const Survey = () => {
 							<span
 								className={ `dashicons ${
 									isWritable
+										? 'dashicons-yes'
+										: 'dashicons-no'
+								}` }
+							/>
+						</div>
+					</li>
+					<li>
+						<div className="requirement-list-item">
+							{ __(
+								'WP_Filesystem Permissions:',
+								'astra-sites'
+							) }
+							<span
+								className={ `dashicons ${
+									isFilesystem
 										? 'dashicons-yes'
 										: 'dashicons-no'
 								}` }

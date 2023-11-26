@@ -1,0 +1,23 @@
+/*
+*Premium Global Tooltip
+*/
+.premium-global-tooltip {
+  display: none;
+}
+
+.premium-global-tooltip-content .premium-tootltip-icon img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.premium-global-tooltip-content .premium-tootltip-icon,
+.premium-global-tooltip-content .premium-tooltip-gallery {
+  display: inline-block;
+}
+
+.premium-global-tooltip-content .premium-tootltip-icon img,
+.premium-global-tooltip-content .premium-tooltip-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

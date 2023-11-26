@@ -209,7 +209,7 @@ if ( ! class_exists( '\Appsero\Client' ) ) {
 			if ( strpos( $this->file, WP_CONTENT_DIR . '/themes/' ) === false ) {
 				$this->basename = plugin_basename( $this->file );
 
-				list( $this->slug, $mainfile) = explode( '/', $this->basename );
+				list( $this->slug, $mainfile) = explode( '/', $this->basename ); // phpcs:ignore
 
 				require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
@@ -220,7 +220,7 @@ if ( ! class_exists( '\Appsero\Client' ) ) {
 			} else {
 				$this->basename = str_replace( WP_CONTENT_DIR . '/themes/', '', $this->file );
 
-				list( $this->slug, $mainfile) = explode( '/', $this->basename );
+				list( $this->slug, $mainfile) = explode( '/', $this->basename ); // phpcs:ignore
 
 				$theme = wp_get_theme( $this->slug );
 

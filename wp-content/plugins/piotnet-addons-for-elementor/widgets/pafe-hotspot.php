@@ -154,10 +154,9 @@ class PAFE_Hotspot extends \Elementor\Widget_Base {
 									'{{WRAPPER}} {{CURRENT_ITEM}} .pafe-hotspot-icon-view-framed' => 'background: {{VALUE}};',
 									'{{WRAPPER}} {{CURRENT_ITEM}} .pafe-hotspot-icon-view-default' => 'color: {{VALUE}};',
 								],
-								'scheme' => [
-									'type' => \Elementor\Core\Schemes\Color::get_type(),
-									'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-								],
+								'global' => [
+                                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                                ],
 								'condition' => [ 
 									'pafe_hotspot_marker_type' => 'icon',
 								]
@@ -179,10 +178,9 @@ class PAFE_Hotspot extends \Elementor\Widget_Base {
 									'{{WRAPPER}} {{CURRENT_ITEM}} .pafe-hotspot-icon-view-framed i' => 'color: {{VALUE}};',
 									'{{WRAPPER}} {{CURRENT_ITEM}} .pafe-hotspot-icon-view-framed' => 'border-color: {{VALUE}};',
 								],
-								'scheme' => [
-									'type' => \Elementor\Core\Schemes\Color::get_type(),
-									'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-								],
+								'global' => [
+                                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                                ],
 							]
 						);
 
@@ -290,7 +288,9 @@ class PAFE_Hotspot extends \Elementor\Widget_Base {
 							[
 								'name' => 'pafe_hotspot_marker_type_text_style',
 								'selector' => '{{WRAPPER}} {{CURRENT_ITEM}} .pafe-hopspot__marker-icon-text',
-								'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+								'global' => [
+                                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                                ],
 								'condition' => [
 										'pafe_hotspot_marker_type' => 'text',	
 									]
@@ -302,7 +302,6 @@ class PAFE_Hotspot extends \Elementor\Widget_Base {
 							[
 								'label' => __( 'Color', 'pafe' ),
 								'type' => \Elementor\Controls_Manager::COLOR,
-								'default' => '#000', 
 								'default' => '#000', 
 								'selectors' => [
 									'{{WRAPPER}} {{CURRENT_ITEM}} .pafe-hopspot__marker-icon-text' => 'color: {{VALUE}}',
@@ -529,10 +528,9 @@ class PAFE_Hotspot extends \Elementor\Widget_Base {
 							[
 								'label' => __( 'Content Color', 'pafe' ),
 								'type' => \Elementor\Controls_Manager::COLOR,
-								'scheme' => [
-									'type' => \Elementor\Core\Schemes\Color::get_type(),
-									'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-								],
+								'global' => [
+                                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                                ],
 								'default' => '#6ec1e4',  
 								'selectors' => [
 									'{{WRAPPER}} {{CURRENT_ITEM}} .pafe-hotspot__tooltip p' => 'color: {{VALUE}}',
@@ -576,10 +574,9 @@ class PAFE_Hotspot extends \Elementor\Widget_Base {
 							[
 								'label' => __( 'Background Color', 'pafe' ),
 								'type' => \Elementor\Controls_Manager::COLOR,
-								'scheme' => [
-									'type' => \Elementor\Core\Schemes\Color::get_type(),
-									'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-								],
+								'global' => [
+                                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                                ],
 								'default' => '#fff', 
 								'selectors' => [
 									'{{WRAPPER}} {{CURRENT_ITEM}} .pafe-hotspot__tooltip' => 'background-color: {{VALUE}}',
@@ -597,7 +594,9 @@ class PAFE_Hotspot extends \Elementor\Widget_Base {
 							[
 								'name' => 'pafe_hotspot_tooltip_label_typography',
 								'selector' => '{{WRAPPER}} {{CURRENT_ITEM}} .pafe-hotspot__tooltip p',
-								'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_4,
+								'global' => [
+                                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_ACCENT,
+                                ],
 								'condition' => [ 
 									'pafe_hotspot_tooltip_content_type' => 'content', 
 								]
@@ -639,7 +638,7 @@ class PAFE_Hotspot extends \Elementor\Widget_Base {
 		<?php if ( $settings['pafe_hotspot_list'] ) {
 			echo '<div>';
 			foreach (  $settings['pafe_hotspot_list'] as $item ) { ?>
-				<div class="pafe-hotspot__marker-wrapper elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>" data-pafe-hotspot-tippy-content='<?php echo $content;?>' data-pafe-hotspot-tippy-option='<?php echo  json_encode( $tippy_options );?>' >
+				<div class="pafe-hotspot__marker-wrapper elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>" data-pafe-hotspot-tippy-content='<?php echo !empty($content) ? $content : '';?>' data-pafe-hotspot-tippy-option='<?php echo !empty($tippy_options) ? json_encode( $tippy_options ) : '';?>' >
 					<div class="pafe-hotspot__marker-icon" data-pafe-hotspot-trigger='<?php echo $item['pafe_hotspot_tooltip_trigger'];?>'>
 						<?php if ($item['pafe_hotspot_marker_type'] == 'icon') {?>
 							 <div class="pafe-hotspot__marker-icon-icon">

@@ -132,7 +132,9 @@
 				[
 					'name' => 'label_typography',
 					'selector' => '{{WRAPPER}} .pafe-video-playlist__item-title',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ]
 				]
 			);
 			$this->add_control(
@@ -140,10 +142,9 @@
 				[
 					'label' => __( 'Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-video-playlist__item-title' => 'color: {{VALUE}}',
@@ -199,7 +200,9 @@
 				[
 					'name' => 'title_typography',
 					'selector' => '{{WRAPPER}} .pafe-video-playlist__list-title',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ]
 				]
 			);
 			$this->add_control(
@@ -207,10 +210,9 @@
 				[
 					'label' => __( 'Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-video-playlist__list-title' => 'color: {{VALUE}}',
@@ -230,10 +232,9 @@
 				[
 					'label' => __( 'Background color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#252D43', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-video-playlist__list' => 'background-color: {{VALUE}}',
@@ -245,10 +246,9 @@
 				[
 					'label' => __( 'Active Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#42527B', 
 					'selectors' => [
 						'{{WRAPPER}} .active' => 'background-color: {{VALUE}}',
@@ -261,10 +261,9 @@
 				[
 					'label' => __( 'Divider color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-video-playlist__item' => 'border-bottom-color: {{VALUE}}',

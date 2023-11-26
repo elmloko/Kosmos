@@ -106,7 +106,6 @@ if ( ! class_exists( 'WP_Dark_Mode_Theme_Supports' ) ) {
 			$theme_parent_name = ! empty( $theme->parent()->name ) ? $theme->parent()->name : '';
 
 			return in_array( $check_theme, [ $theme_name, $theme_parent_name ], false );
-
 		}
 
 		/**
@@ -170,7 +169,6 @@ if ( ! class_exists( 'WP_Dark_Mode_Theme_Supports' ) ) {
 
 			return self::$instance;
 		}
-
 	}
 
 	/**

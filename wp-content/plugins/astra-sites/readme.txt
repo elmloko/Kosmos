@@ -4,8 +4,8 @@ Donate link: https://wpastra.com/pro/
 Tags: Elementor,Beaver Builder,Templates,Gutenberg,Block Editor,Astra Starter Sites
 Requires at least: 4.4
 Requires PHP: 5.3
-Tested up to: 6.2
-Stable tag: 3.2.6
+Tested up to: 6.4
+Stable tag: 3.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,8 @@ The growing library of 300+ ready-to-use templates that work with all WordPress 
 Create professional designed pixel perfect websites in minutes with the Starter Templates plugin.
 
 This plugin gives you access to 280+ pre-made full website templates and individual pages for your favorite page builder such as Elementor, Beaver Builder and the Block Editor.
+
+[Try it out on a free dummy site](https://bsf.io/starter-templates-demo)
 
 All you need to do is select the demo that suits your needs, import, tweak and go live!
 
@@ -132,6 +134,43 @@ We are open to suggestions and would love to work on topics that our users are l
 8. Free Images by Pixabay right inside the WordPress media popup.
 
 == Changelog ==
+
+v3.4.6 - 17-November-2023
+- Improvement: Added a filter to remove the page builder selection screen and automatically select the Block Editor.
+- Improvement: Ability to remove Elementor as a Page Builder from the selection list.
+- Fix: Prevented CartFlows plugin redirection when import is in progress.
+- Fix: Handled usage of deprecated  function get_page_by_title
+
+v3.4.5 - 02-November-2023
+- Improvement: Added extra checks for filesystem permission during template import.
+- Improvement: Display a notice if filesystem permissions are insufficient.
+- Fix: On the welcome screen, the "Getting Started" button link now respects sub-folder WordPress installations.
+- Fix: Corrected an issue where uploaded retina images were not displayed after importing.
+
+v3.4.4 - 02-October-2023
+- Fix: Fixed an issue where the Free Images feature was missing in the Premium Starter Templates plugin.
+
+v3.4.3 - 26-September-2023
+- Fix: Fixed a fatal error issue with widgets import in the process.
+
+v3.4.2 - 20-September-2023
+- Fix: Plugin causes redirect URL related warnings with WP CLI plugin activate command.
+
+v3.4.1 - 13-September-2023
+- Improvement: Improved the Starter Template Modal for users using Elementor in Dark Mode.
+- Fix: Addressed broken links and alignment issues in the welcome banner, especially on different resolutions.
+- Fix: Fixed the issue of displaying HTML Markup in the notice when a block is not found in Elementor.
+
+v3.4.0 - 11-August-2023
+- New: Added SureCart variation for every eCommerce based template.
+- Fix: Resolved an issue where the import progress percentage would overflow the limit.
+
+v3.3.0 - 02-August-2023
+- New: Added compatibility to FSE based Spectra One theme.
+- Improvement: Added Plugin Name in a few admin notices in order to make it better readable and understandable.
+- Improvement: Improved code to match the WordPress coding standards.
+- Improvement: Optimised the onboarding screens for streamlined experience.
+- Fix: Fixed an issue with the import process sequence to avoid overflow in the progress percent.
 
 v3.2.6 - 16-June-2023
 - Fix: An issue that occurred as a regression from v3.2.4, where CartFlows flows were not being imported.

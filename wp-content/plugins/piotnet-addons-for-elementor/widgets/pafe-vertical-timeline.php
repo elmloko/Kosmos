@@ -179,8 +179,9 @@
 			[
 				'name' => 'title_typography',
 				'selector' => '{{WRAPPER}} .pafe-vertical-timeline-content__title',
-				'scheme' =>\Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
-
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                ]
 			]
 		);
 		$this->add_control(
@@ -188,10 +189,9 @@
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#000', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline-content__title' => 'color: {{VALUE}}',
@@ -211,7 +211,9 @@
 			[
 				'name' => 'date_typography',
 				'selector' => '{{WRAPPER}} .pafe_vertical_timeline__date',
-				'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                ]
 			]
 		);
 		$this->add_control(
@@ -219,10 +221,9 @@
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#000', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe_vertical_timeline__date' => 'color: {{VALUE}}',
@@ -253,7 +254,9 @@
 			[
 				'name' => 'content_typography',
 				'selector' => '{{WRAPPER}} .pafe-vertical-timeline-content__content',
-				'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                ]
 			]
 		);
 		$this->add_control(
@@ -261,10 +264,9 @@
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#000', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline-content__content' => 'color: {{VALUE}}',
@@ -276,10 +278,9 @@
 			[
 				'label' => __( 'Background Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#F1F2F3', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline-content' => 'background-color: {{VALUE}}',
@@ -354,10 +355,9 @@
 			[
 				'label' => __( 'Background', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#3CCD94', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline__img' => 'background-color: {{VALUE}}',
@@ -408,10 +408,9 @@
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#fff', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline__icon>i' => 'color: {{VALUE}}',
@@ -424,10 +423,9 @@
 			[
 				'label' => __( 'Background', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#3CCD94', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline__icon' => 'background-color: {{VALUE}}',       
@@ -455,10 +453,9 @@
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#B2DFBC', 
 				'selectors' => [
 					'{{WRAPPER}} .cd-timeline__container:before' => 'background-color: {{VALUE}}',       
@@ -489,10 +486,9 @@
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(), 
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#fff', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline__readmore' => 'color: {{VALUE}}',       
@@ -504,10 +500,9 @@
 			[
 				'label' => __( 'Background', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(), 
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#3CCD94',  
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline__readmore' => 'background-color: {{VALUE}}',       
@@ -526,10 +521,9 @@
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(), 
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#fff', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline__readmore:hover' => 'color: {{VALUE}}',       
@@ -541,10 +535,9 @@
 			[
 				'label' => __( 'Background', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(), 
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#3CCD94',  
 				'selectors' => [
 					'{{WRAPPER}} .pafe-vertical-timeline__readmore:hover' => 'background-color: {{VALUE}}',       
@@ -558,7 +551,9 @@
 			[
 				'name' => 'readmore_typography',
 				'selector' => '{{WRAPPER}} .pafe-vertical-timeline__readmore',
-				'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                ]
 			]
 		);
 		$this->add_responsive_control(

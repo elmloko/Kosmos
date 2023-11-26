@@ -509,7 +509,7 @@ if ( ! class_exists( 'WPPOOL_Settings_API' ) ) {
 			foreach ( $args['options'] as $key => $label ) {
 				$html .= wp_sprintf(
 					'<label class="image-choose-opt %4$s" for="wppool-%1$s[%2$s][%3$s]">', $args['section'], $args['id'],
-					$key, $value == $key ? 'active' : ''
+					$key, $value === $key ? 'active' : ''
 				);
 				$html .= wp_sprintf(
 					'<input type="radio" class="radio" id="wppool-%1$s[%2$s][%3$s]" name="%1$s[%2$s]" value="%3$s" %4$s />',

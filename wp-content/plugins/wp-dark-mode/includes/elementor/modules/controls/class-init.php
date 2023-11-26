@@ -78,7 +78,6 @@ if ( ! class_exists( 'WP_Dark_Mode_Controls_Init' ) ) {
 		public function image_choose( $controls_manager ) {
 			$controls_manager->register_control( 'image_choose', new WP_Dark_Mode_Control_Image_Choose() );
 		}
-
 	}
 
 	// Instantiate the class.

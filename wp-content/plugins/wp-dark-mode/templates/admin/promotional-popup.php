@@ -8,18 +8,28 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-// Count down time.
-$countdown_timer = get_transient('wp_dark_mode_promo_countdown_timer');
 
+$campaign_starts = '2023-11-16 00:00:01';
+$campaign_ends   = '2023-11-27 23:59:59';
+$campaign_discount = 50;
+$campaign_title = __( 'Black Friday Deal, You Can\'t Turn Down!', 'wp-dark-mode' );
+
+$is_campaign = strtotime( $campaign_starts ) < time() && time() < strtotime( $campaign_ends );
+
+// Count down time.
+$countdown_timer = get_transient( 'wp_dark_mode_promo_countdown_timer' );
 if ( empty( $countdown_timer ) || $countdown_timer < time() ) {
 	$countdown_timer = strtotime( '+ 14 hours' );
 	set_transient( 'wp_dark_mode_promo_countdown_timer', $countdown_timer, 14 * HOUR_IN_SECONDS );
 }
 
+// Change timer.
+$countdown_timer = $is_campaign ? strtotime( $campaign_ends ) : $countdown_timer;
+
 // Formatted data.
 $data = [
 	'counter_time' => $countdown_timer,
-	'discount'     => '35',
+	'discount'     => $is_campaign ? $campaign_discount : 35,
 ];
 
 $countdown_time = [
@@ -32,6 +42,8 @@ $countdown_time = [
 
 $is_pro = wp_dark_mode()->is_pro_active();
 $modal_title = $is_pro ? __( 'Unlock the PRO features', 'wp-dark-mode' ) : __( 'Unlock all the features', 'wp-dark-mode' );
+
+$modal_title = $is_campaign ? $campaign_title : $modal_title;
 
 ?>
 
@@ -156,7 +168,7 @@ $modal_title = $is_pro ? __( 'Unlock the PRO features', 'wp-dark-mode' ) : __( '
 					window.hideDarkModePromo();
 				});
 
-				<?php if ( ! empty( $countdown_time ) ) : ?>
+				<?php if ( ! empty( $countdown_time ) ) { ?>
 
 				const letCountDownStart = () => {
 					const countDownDate = new Date('<?php echo esc_html( $countdown_time['year'] ); ?>-<?php echo esc_html( $countdown_time['month'] ); ?>-<?php echo esc_html( $countdown_time['day'] ); ?> <?php echo esc_html( $countdown_time['hour'] ); ?>:<?php echo esc_html( $countdown_time['minute'] ); ?>:00').getTime();
@@ -184,7 +196,7 @@ $modal_title = $is_pro ? __( 'Unlock the PRO features', 'wp-dark-mode' ) : __( '
 				}
 
 				letCountDownStart();
-				<?php endif; ?>
+				<?php } ?>
 
 			})
 		})(jQuery);

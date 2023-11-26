@@ -360,52 +360,52 @@ class Premium_Weather extends Widget_Base {
 				'render_type' => 'template',
 				'label_block' => true,
 				'options'     => array(
-					'af'     => __( 'Afrikaans', 'premium-addons-for-elementor' ),
-					'al'     => __( 'Albanian', 'premium-addons-for-elementor' ),
-					'ar'     => __( 'Arabic', 'premium-addons-for-elementor' ),
-					'az'     => __( 'Azerbaijani', 'premium-addons-for-elementor' ),
-					'bg'     => __( 'Bulgarian', 'premium-addons-for-elementor' ),
-					'ca'     => __( 'Catalan', 'premium-addons-for-elementor' ),
-					'cz'     => __( 'Czech', 'premium-addons-for-elementor' ),
-					'da'     => __( 'Danish', 'premium-addons-for-elementor' ),
-					'de'     => __( 'German', 'premium-addons-for-elementor' ),
-					'el'     => __( 'Greek', 'premium-addons-for-elementor' ),
-					'en'     => __( 'English', 'premium-addons-for-elementor' ),
-					'eu'     => __( 'Basque', 'premium-addons-for-elementor' ),
-					'fa'     => __( 'Persian (Farsi)', 'premium-addons-for-elementor' ),
-					'fi'     => __( 'Finnish', 'premium-addons-for-elementor' ),
-					'fr'     => __( 'French', 'premium-addons-for-elementor' ),
-					'gl'     => __( 'Galician', 'premium-addons-for-elementor' ),
-					'he'     => __( 'Hebrew', 'premium-addons-for-elementor' ),
-					'hi'     => __( 'Hindi', 'premium-addons-for-elementor' ),
-					'hr'     => __( 'Croatian', 'premium-addons-for-elementor' ),
-					'hu'     => __( 'Hungarian', 'premium-addons-for-elementor' ),
-					'id'     => __( 'Indonesian', 'premium-addons-for-elementor' ),
-					'it'     => __( 'Italian', 'premium-addons-for-elementor' ),
-					'ja'     => __( 'Japanese', 'premium-addons-for-elementor' ),
-					'kr'     => __( 'Korean', 'premium-addons-for-elementor' ),
-					'la'     => __( 'Latvian', 'premium-addons-for-elementor' ),
-					'lt'     => __( 'Lithuanian', 'premium-addons-for-elementor' ),
-					'mk'     => __( 'Macedonian', 'premium-addons-for-elementor' ),
-					'no'     => __( 'Norwegian', 'premium-addons-for-elementor' ),
-					'nl'     => __( 'Dutch', 'premium-addons-for-elementor' ),
-					'pl'     => __( 'Polish', 'premium-addons-for-elementor' ),
-					'pt'     => __( 'Portuguese', 'premium-addons-for-elementor' ),
-					'pt'     => __( 'br Português Brasil', 'premium-addons-for-elementor' ),
-					'ro'     => __( 'Romanian', 'premium-addons-for-elementor' ),
-					'ru'     => __( 'Russian', 'premium-addons-for-elementor' ),
-					'sv, se' => __( 'Swedish', 'premium-addons-for-elementor' ),
-					'sk'     => __( 'Slovak', 'premium-addons-for-elementor' ),
-					'sl'     => __( 'Slovenian', 'premium-addons-for-elementor' ),
-					'sp, es' => __( 'Spanish', 'premium-addons-for-elementor' ),
-					'sr'     => __( 'Serbian', 'premium-addons-for-elementor' ),
-					'th'     => __( 'Thai', 'premium-addons-for-elementor' ),
-					'tr'     => __( 'Turkish', 'premium-addons-for-elementor' ),
-					'ua, uk' => __( 'Ukrainian', 'premium-addons-for-elementor' ),
-					'vi'     => __( 'Vietnamese', 'premium-addons-for-elementor' ),
-					'zh_cn'  => __( 'cn Chinese Simplified', 'premium-addons-for-elementor' ),
-					'zh_tw'  => __( 'Chinese Traditional', 'premium-addons-for-elementor' ),
-					'zu'     => __( 'Zulu', 'premium-addons-for-elementor' ),
+					'af'    => __( 'Afrikaans', 'premium-addons-for-elementor' ),
+					'al'    => __( 'Albanian', 'premium-addons-for-elementor' ),
+					'ar'    => __( 'Arabic', 'premium-addons-for-elementor' ),
+					'az'    => __( 'Azerbaijani', 'premium-addons-for-elementor' ),
+					'bg'    => __( 'Bulgarian', 'premium-addons-for-elementor' ),
+					'ca'    => __( 'Catalan', 'premium-addons-for-elementor' ),
+					'cz'    => __( 'Czech', 'premium-addons-for-elementor' ),
+					'da'    => __( 'Danish', 'premium-addons-for-elementor' ),
+					'de'    => __( 'German', 'premium-addons-for-elementor' ),
+					'el'    => __( 'Greek', 'premium-addons-for-elementor' ),
+					'en'    => __( 'English', 'premium-addons-for-elementor' ),
+					'eu'    => __( 'Basque', 'premium-addons-for-elementor' ),
+					'fa'    => __( 'Persian (Farsi)', 'premium-addons-for-elementor' ),
+					'fi'    => __( 'Finnish', 'premium-addons-for-elementor' ),
+					'fr'    => __( 'French', 'premium-addons-for-elementor' ),
+					'gl'    => __( 'Galician', 'premium-addons-for-elementor' ),
+					'he'    => __( 'Hebrew', 'premium-addons-for-elementor' ),
+					'hi'    => __( 'Hindi', 'premium-addons-for-elementor' ),
+					'hr'    => __( 'Croatian', 'premium-addons-for-elementor' ),
+					'hu'    => __( 'Hungarian', 'premium-addons-for-elementor' ),
+					'id'    => __( 'Indonesian', 'premium-addons-for-elementor' ),
+					'it'    => __( 'Italian', 'premium-addons-for-elementor' ),
+					'ja'    => __( 'Japanese', 'premium-addons-for-elementor' ),
+					'kr'    => __( 'Korean', 'premium-addons-for-elementor' ),
+					'la'    => __( 'Latvian', 'premium-addons-for-elementor' ),
+					'lt'    => __( 'Lithuanian', 'premium-addons-for-elementor' ),
+					'mk'    => __( 'Macedonian', 'premium-addons-for-elementor' ),
+					'no'    => __( 'Norwegian', 'premium-addons-for-elementor' ),
+					'nl'    => __( 'Dutch', 'premium-addons-for-elementor' ),
+					'pl'    => __( 'Polish', 'premium-addons-for-elementor' ),
+					'pt'    => __( 'Portuguese', 'premium-addons-for-elementor' ),
+					'pt'    => __( 'br Português Brasil', 'premium-addons-for-elementor' ),
+					'ro'    => __( 'Romanian', 'premium-addons-for-elementor' ),
+					'ru'    => __( 'Russian', 'premium-addons-for-elementor' ),
+					'se'    => __( 'Swedish', 'premium-addons-for-elementor' ),
+					'sk'    => __( 'Slovak', 'premium-addons-for-elementor' ),
+					'sl'    => __( 'Slovenian', 'premium-addons-for-elementor' ),
+					'es'    => __( 'Spanish', 'premium-addons-for-elementor' ),
+					'sr'    => __( 'Serbian', 'premium-addons-for-elementor' ),
+					'th'    => __( 'Thai', 'premium-addons-for-elementor' ),
+					'tr'    => __( 'Turkish', 'premium-addons-for-elementor' ),
+					'uk'    => __( 'Ukrainian', 'premium-addons-for-elementor' ),
+					'vi'    => __( 'Vietnamese', 'premium-addons-for-elementor' ),
+					'zh_cn' => __( 'cn Chinese Simplified', 'premium-addons-for-elementor' ),
+					'zh_tw' => __( 'Chinese Traditional', 'premium-addons-for-elementor' ),
+					'zu'    => __( 'Zulu', 'premium-addons-for-elementor' ),
 				),
 				'default'     => 'en',
 			)
@@ -1240,6 +1240,7 @@ class Premium_Weather extends Widget_Base {
 
 		$docs = array(
 			'https://premiumaddons.com/docs/elementor-weather-widget/' => __( 'Getting started »', 'premium-addons-for-elementor' ),
+			'https://premiumaddons.com/docs/how-to-get-api-key-for-elementor-weather-forecast-widget/' => __( 'How to Get an API Key for Weather widget »', 'premium-addons-for-elementor' ),
 		);
 
 		$doc_index = 1;
@@ -3708,9 +3709,9 @@ class Premium_Weather extends Widget_Base {
 	 */
 	protected function render() {
 
-		$settings = $this->get_settings();
+		$settings = $this->get_settings_for_display();
 
-		$papro_activated = apply_filters( 'papro_activated', false );
+        $papro_activated = apply_filters( 'papro_activated', false );
 
 		if ( ! $papro_activated ) {
 
@@ -3778,7 +3779,6 @@ class Premium_Weather extends Widget_Base {
 			$api_settings['custom_location_type'] = $custom_loc_type;
 
 			if ( 'name' === $custom_loc_type ) {
-
 				$city_name = $settings['city_name'];
 
 				if ( empty( $city_name ) ) {
@@ -3839,11 +3839,12 @@ class Premium_Weather extends Widget_Base {
 						</div>
 					<?php
 					return;
-				}
+				} else {
+                    $expire_time = HOUR_IN_SECONDS * $settings['reload'];
 
-				$expire_time = HOUR_IN_SECONDS * $settings['reload'];
+                    set_transient( $transient_name, $weather_data, $expire_time );
+                }
 
-				set_transient( $transient_name, $weather_data, $expire_time );
 			}
 		} else {
 
@@ -3926,8 +3927,8 @@ class Premium_Weather extends Widget_Base {
 
 			$daily_settings = array(
 				'slidesToShow'       => empty( $settings['daily_slides_to_show'] ) ? 4 : $settings['daily_slides_to_show'],
-				'slidesToShowTab'    => $settings['daily_slides_to_show_tablet'],
-				'slidesToShowMobile' => $settings['daily_slides_to_show_mobile'],
+				'slidesToShowTab'    => empty( $settings['daily_slides_to_show_tablet'] ) ? 1 : $settings['daily_slides_to_show_tablet'],
+				'slidesToShowMobile' => empty( $settings['daily_slides_to_show_mobile'] ) ? 1 : $settings['daily_slides_to_show_mobile'],
 			);
 
 			$this->add_render_attribute( 'outer_wrapper', 'data-pa-daily-settings', wp_json_encode( $daily_settings ) );

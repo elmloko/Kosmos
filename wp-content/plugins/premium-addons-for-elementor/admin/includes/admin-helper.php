@@ -1377,7 +1377,8 @@ class Admin_Helper {
 
 			$request = add_query_arg(
 				array(
-					'per_page' => 3,
+					'per_page'   => 3,
+					'categories' => 1,
 				),
 				$api_url
 			);

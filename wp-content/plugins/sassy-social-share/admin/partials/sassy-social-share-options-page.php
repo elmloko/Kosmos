@@ -11,18 +11,6 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 
 <div class="metabox-holder columns-2" id="post-body">
 	<h1>Sassy Social Share</h1>
-		<div class="notice notice-warning settings-error is-dismissible"> 
-			<p>
-				<strong><span style="display: block; margin: 0.5em 0.5em 0 0; clear: both;"><?php _e( 'We also offer WordPress Website Development and Customization services', 'sassy-social-share' ) ?>: <a href="mailto:support@heateor.com?subject=WordPress%20Website%20Development&body=I%20would%20like%20to%20request%20a%20quote%20for%20the%20following%20requirement%20specifications%20of%20my%20website" target="_blank" class="thickbox"><?php _e( 'Request a Quote', 'sassy-social-share' ) ?></a></span>
-				</strong>
-			</p>
-		</div>
-		<div class="notice notice-warning settings-error is-dismissible"> 
-			<p>
-				<strong><span style="display: block; margin: 0.5em 0.5em 0 0; clear: both;"><?php echo sprintf( __( 'You can appreciate the effort put in this free plugin by rating it <a href="%s" target="_blank">here</a>', 'sassy-social-share' ), 'https://wordpress.org/support/view/plugin-reviews/sassy-social-share' ); ?></span>
-				</strong>
-			</p>
-		</div>
 		<div class="menu_div" id="tabs">
 			<form id="heateor_sss_form" action="options.php" method="post">
 			<?php settings_fields( 'heateor_sss_options' ); ?>
@@ -900,7 +888,7 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 						</tbody>
 						<?php
 						$like_buttons = array( 'facebook_share', 'facebook_like', 'facebook_recommend', 'twitter_tweet', 'linkedin_share', 'pinterest_pin', 'buffer_share', 'xing_share', 'yummly_share', 'reddit_badge' );
-						$sharing_networks = array( 'facebook','gettr', 'gab', 'twitter', 'linkedin', 'mastodon', 'print', 'email', 'reddit', 'digg', 'float_it', 'tumblr', 'vkontakte', 'pinterest', 'xing', 'whatsapp', 'instagram', 'yummly', 'buffer', 'parler', 'AIM', 'Amazon_Wish_List', 'AOL_Mail', 'App.net', 'Balatarin', 'BibSonomy', 'Bitty_Browser', 'Blinklist', 'Blogger_Post', 'BlogMarks', 'Bookmarks.fr', 'Box.net', 'BuddyMarks', 'Care2_News', 'Comment', 'Copy_Link', 'Diary.Ru', 'Diaspora', 'Diigo', 'Douban', 'Draugiem', 'Evernote', 'Facebook_Messenger', 'Fark', 'Fintel', 'Flipboard', 'Folkd', 'GentleReader', 'Google_Classroom', 'Google_Gmail', 'Hacker_News', 'Hatena', 'Instapaper', 'Jamespot', 'Kakao', 'Kik', 'Kindle_It', 'Known', 'Line', 'LiveJournal', 'Mail.Ru', 'Mendeley', 'Meneame', 'MeWe', 'mix', 'Mixi', 'MySpace', 'Netvouz', 'Odnoklassniki', 'Outlook.com', 'Papaly', 'Pinboard', 'Plurk', 'Pocket', 'PrintFriendly', 'Protopage_Bookmarks', 'Pusha', 'Qzone', 'Rediff MyPage', 'Refind', 'Renren', 'Sina Weibo', 'SiteJot', 'Skype', 'Slashdot', 'SMS', 'StockTwits', 'Svejo', 'Symbaloo_Feeds', 'Telegram', 'Threema', 'Trello', 'Tuenti', 'Twiddla', 'TypePad_Post', 'Viadeo', 'Viber', 'Webnews', 'WordPress', 'Wykop', 'Yahoo_Mail', 'Yoolink', 'youtube', 'rutube', 'Google_News', 'rss', 'truth_social', 'snapchat', 'Goodreads' );
+						$sharing_networks = array( 'facebook','gettr', 'gab', 'twitter', 'linkedin', 'mastodon', 'print', 'email', 'reddit', 'digg', 'float_it', 'tumblr', 'vkontakte', 'pinterest', 'xing', 'whatsapp', 'instagram', 'yummly', 'buffer', 'parler', 'AIM', 'Amazon_Wish_List', 'AOL_Mail', 'App.net', 'Balatarin', 'BibSonomy', 'Bitty_Browser', 'Blinklist', 'Blogger_Post', 'BlogMarks', 'Bookmarks.fr', 'Box.net', 'BuddyMarks', 'Care2_News', 'Comment', 'Copy_Link', 'Diary.Ru', 'Diaspora', 'Diigo', 'Douban', 'Draugiem', 'Evernote', 'Facebook_Messenger', 'Fark', 'Fintel', 'Flipboard', 'Folkd', 'GentleReader', 'Google_Classroom', 'Google_Gmail', 'Hacker_News', 'Hatena', 'Instapaper', 'Jamespot', 'Kakao', 'Kik', 'Kindle_It', 'Known', 'Line', 'LiveJournal', 'Mail.Ru', 'Mendeley', 'Meneame', 'MeWe', 'mix', 'Mixi', 'MySpace', 'Netvouz', 'Odnoklassniki', 'Outlook.com', 'Papaly', 'Pinboard', 'Plurk', 'Pocket', 'PrintFriendly', 'Protopage_Bookmarks', 'Pusha', 'Qzone', 'Rediff MyPage', 'Refind', 'Renren', 'Sina Weibo', 'SiteJot', 'Skype', 'Slashdot', 'SMS', 'StockTwits', 'Svejo', 'Symbaloo_Feeds', 'Telegram', 'Threema', 'Trello', 'Tuenti', 'Twiddla', 'TypePad_Post', 'Viadeo', 'Viber', 'Webnews', 'WordPress', 'Wykop', 'Yahoo_Mail', 'Yoolink', 'youtube', 'rutube', 'Google_News', 'rss', 'truth_social', 'snapchat', 'Goodreads', 'Google_Translate', 'X', 'teams', 'minds' );
 						?>
 
 						<th colspan="2">
@@ -1220,9 +1208,9 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 							foreach( $sharing_networks as $sharing_network ) {
 								?>
 								<div class="heateorSssHorizontalSharingProviderContainer">
-								<input id="heateor_sss_<?php echo esc_attr( $sharing_network ) ?>" type="checkbox" <?php echo isset( $options['horizontal_re_providers'] ) && in_array( $sharing_network, $options['horizontal_re_providers'] ) ? 'checked = "checked"' : '';?> <?php echo in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads' ) ) ? 'disabled' : ''; ?> value="<?php echo esc_attr( $sharing_network ) ?>" />
+								<input id="heateor_sss_<?php echo esc_attr( $sharing_network ) ?>" type="checkbox" <?php echo isset( $options['horizontal_re_providers'] ) && in_array( $sharing_network, $options['horizontal_re_providers'] ) ? 'checked = "checked"' : '';?> <?php echo in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads', 'minds' ) ) ? 'disabled' : ''; ?> value="<?php echo esc_attr( $sharing_network ) ?>" />
 								<label for="heateor_sss_<?php echo esc_attr( $sharing_network ) ?>"><i style="display:block;width:18px;height:18px;" class="heateorSssSharing heateorSss<?php echo esc_attr( str_replace( array( '_', '.', ' ' ), '', ucfirst( $sharing_network ) ) ) ?>Background"><ss style="display:block;" class="heateorSssSharingSvg heateorSss<?php echo esc_attr( str_replace( array( '_', '.', ' ' ), '', ucfirst( $sharing_network) ) ) ?>Svg"></ss></i></label>
-								<label class="lblSocialNetwork" for="heateor_sss_<?php echo $sharing_network ?>"><?php echo ( in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads' ) ) ? '<a href="https://www.heateor.com/comparison-between-sassy-social-share-pro-and-premium/" target="_blank">' : '' ) . esc_html( str_replace( '_', ' ', ucfirst( $sharing_network ) ) ) . ( in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads' ) ) ? '</a>' : '' ) ?></label>
+								<label class="lblSocialNetwork" for="heateor_sss_<?php echo $sharing_network ?>"><?php echo ( in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads', 'minds' ) ) ? '<a href="https://www.heateor.com/comparison-between-sassy-social-share-pro-and-premium/" target="_blank">' : '' ) . esc_html( str_replace( '_', ' ', ucfirst( $sharing_network ) ) ) . ( in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads', 'minds' ) ) ? '</a>' : '' ) ?></label>
 								</div>
 								<?php
 							}
@@ -1427,7 +1415,7 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 							<td>
 							<input id="heateor_sss_counts" name="heateor_sss[horizontal_counts]" type="checkbox" <?php echo isset( $options['horizontal_counts'] ) ? 'checked = "checked"' : '';?> value="1" onclick="if(this.checked){heateorSssHorizontalShares = true;}else{heateorSssHorizontalShares = false;}" />
 							<br/>
-							<span class="heateor_sss_help_content" style="display:block"><?php _e( 'Share counts are supported for Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte', 'sassy-social-share' ) ?></span>
+							<span class="heateor_sss_help_content" style="display:block"><?php _e( 'Share counts are supported for X(Twitter), Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte', 'sassy-social-share' ) ?></span>
 							<span class="heateor_sss_help_content" style="display:block"><strong><?php echo sprintf( __( 'To show Twitter share count, you have to click "Give me my Twitter counts back" button at <a href="%s" target="_blank">TwitCount.com</a> and register your website %s with them. No need to copy-paste any code from their website.', 'sassy-social-share' ), 'http://twitcount.com', home_url() ) ?></strong></span>
 							</td>
 						</tr>
@@ -1775,9 +1763,9 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 							foreach( $sharing_networks as $sharing_network ) {
 								?>
 								<div class="heateorSssVerticalSharingProviderContainer">
-								<input id="heateor_sss_vertical_sharing_<?php echo esc_attr( $sharing_network ) ?>" type="checkbox" <?php echo isset( $options['vertical_re_providers'] ) && in_array( $sharing_network, $options['vertical_re_providers'] ) ? 'checked = "checked"' : ''; ?> <?php echo in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads' ) ) ? 'disabled' : ''; ?> value="<?php echo esc_attr( $sharing_network ) ?>" />
+								<input id="heateor_sss_vertical_sharing_<?php echo esc_attr( $sharing_network ) ?>" type="checkbox" <?php echo isset( $options['vertical_re_providers'] ) && in_array( $sharing_network, $options['vertical_re_providers'] ) ? 'checked = "checked"' : ''; ?> <?php echo in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads', 'minds' ) ) ? 'disabled' : ''; ?> value="<?php echo esc_attr( $sharing_network ) ?>" />
 								<label for="heateor_sss_vertical_sharing_<?php echo esc_attr( $sharing_network ) ?>"><i style="display:block;width:18px;height:18px;" class="heateorSssSharing heateorSss<?php echo esc_attr( str_replace( array( '_', '.', ' ' ), '', ucfirst( $sharing_network ) ) ) ?>Background"><ss style="display:block;" class="heateorSssSharingSvg heateorSss<?php echo esc_attr( str_replace( array( '_', '.', ' ' ), '', ucfirst( $sharing_network ) ) ) ?>Svg"></ss></i></label>
-								<label class="lblSocialNetwork" for="heateor_sss_vertical_sharing_<?php echo $sharing_network ?>"><?php echo ( in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads' ) ) ? '<a href="https://www.heateor.com/comparison-between-sassy-social-share-pro-and-premium/" target="_blank">' : '' ) . esc_html( str_replace( '_', ' ', ucfirst( $sharing_network ) ) ) . ( in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads' ) ) ? '</a>' : '' ) ?></label>
+								<label class="lblSocialNetwork" for="heateor_sss_vertical_sharing_<?php echo $sharing_network ?>"><?php echo ( in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads', 'minds' ) ) ? '<a href="https://www.heateor.com/comparison-between-sassy-social-share-pro-and-premium/" target="_blank">' : '' ) . esc_html( str_replace( '_', ' ', ucfirst( $sharing_network ) ) ) . ( in_array( $sharing_network, array( 'truth_social', 'snapchat', 'Goodreads', 'minds' ) ) ? '</a>' : '' ) ?></label>
 								</div>
 								<?php
 							}
@@ -1947,7 +1935,7 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 							<td>
 							<input id="heateor_sss_vertical_counts" name="heateor_sss[vertical_counts]" type="checkbox" <?php echo isset( $options['vertical_counts'] ) ? 'checked = "checked"' : '';?> value="1" onclick="if(this.checked){heateorSssVerticalShares = true;}else{heateorSssVerticalShares = false;}" />
 							<br/>
-							<span class="heateor_sss_help_content" style="display:block"><?php _e( 'Share counts are supported for Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte', 'sassy-social-share' ) ?></span>
+							<span class="heateor_sss_help_content" style="display:block"><?php _e( 'Share counts are supported for X(Twitter), Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte', 'sassy-social-share' ) ?></span>
 							<span class="heateor_sss_help_content" style="display:block"><strong><?php echo sprintf( __( 'To show Twitter share count, you have to click "Give me my Twitter counts back" button at <a href="%s" target="_blank">TwitCount.com</a> and register your website %s with them. No need to copy-paste any code from their website.', 'sassy-social-share' ), 'http://twitcount.com', home_url() ) ?></strong></span>
 							</td>
 						</tr>
@@ -2753,9 +2741,14 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="form-table editcomment menu_content_table">
 						<tr>
 							<td>
-								<?php _e( 'If image and other meta content is not appearing in the Facebook sharer, visit <a target="_blank" href="https://developers.facebook.com/tools/debug/">this</a> link and debug the problematic URL that is giving you problem', 'sassy-social-share' ) ?>
-								<br/><br/>
-								<?php _e( 'If image is not appearing in the tweet posted to the Twitter stream, navigate to <a href="https://cards-dev.twitter.com/validator" target="_blank">this</a> link, enter the URL of the web page that is giving you problems and click "Preview card" button', 'sassy-social-share' ) ?>
+								<p>
+									<?php _e( 'If Facebook sharing is not working fine, click at the following link and enter the problematic URL (where Facebook sharing is not working properly) of your website in the text field. Click "Debug" button.', 'sassy-social-share' ) ?><br/>
+									<a style="text-decoration: none" target="_blank" href="https://developers.facebook.com/tools/debug">https://developers.facebook.com/tools/debug</a>
+								</p>
+								<p>
+									<?php _e( 'If Linkedin share is not showing correct title, image and description, click at the following link and enter the problematic URL (where Linkedin share is not working properly) of your website in the text field. Click "Inspect" button.', 'sassy-social-share' ) ?><br/>
+									<a style="text-decoration: none" target="_blank" href="https://www.linkedin.com/post-inspector/">https://www.linkedin.com/post-inspector/</a>
+								</p>
 							</td>
 						</tr>
 					</table>
@@ -2782,7 +2775,7 @@ defined( 'ABSPATH' ) or die( "Cheating........Uh!!" );
 						<a href="javascript:void(0)"><?php _e( 'Why are Twitter shares not appearing even after registering at Twitcount.com?', 'sassy-social-share' ); ?></a>
 						<div><?php _e( "It takes some time for their service to track the shares made on Twitter from your website. If you still feel it's taking too long you can contact their support directly from their website.", 'sassy-social-share' ); ?></div>
 						</p>
-						<p><a href="https://www.heateor.com/recover-social-share-counts/" target="_blank"><?php _e('How to restore Social Share counts lost after moving my website to SSL/Https?', 'sassy-social-share' ) ?></a></p>
+						<p><a href="https://www.heateor.com/recover-social-share-counts/" target="_blank"><?php _e( 'How to restore Social Share counts lost after moving my website to SSL/Https?', 'sassy-social-share' ) ?></a></p>
 						<p><a href="http://support.heateor.com/how-to-integrate-google-analytics-with-sharing" target="_blank"><?php _e( 'How to integrate Google Analytics with sharing?', 'sassy-social-share' ) ?></a></p>
 						<p><a style="text-decoration:none" href="https://www.heateor.com/facebook-comments-moderation" target="_blank"><?php _e( 'How to show recent Facebook Comments from all over the website in a widget?', 'sassy-social-share' ) ?></a></p>
 						<p><a style="text-decoration:none" href="http://support.heateor.com/recover-facebook-comments-wordpress-moving-to-https-ssl/" target="_blank"><?php _e( 'How to recover the Facebook Comments lost after moving my website to SSL/Https?', 'sassy-social-share' ) ?></a></p>

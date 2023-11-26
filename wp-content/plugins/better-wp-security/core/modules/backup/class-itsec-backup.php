@@ -279,9 +279,13 @@ class ITSEC_Backup {
 		$nc   = ITSEC_Core::get_notification_center();
 		$mail = $nc->mail();
 
-		$mail->add_header( esc_html__( 'Database Backup', 'better-wp-security' ), sprintf( esc_html__( 'Site Database Backup for %s', 'better-wp-security' ), '<b>' . date_i18n( get_option( 'date_format' ) ) . '</b>' ) );
-		$mail->add_info_box( esc_html__( 'Attached is the database backup file for your site.', 'better-wp-security' ), 'attachment' );
-
+		$mail->add_header(
+			esc_html__( 'Database Backup', 'better-wp-security' ),
+			sprintf( esc_html__( 'Site Database Backup for %s', 'better-wp-security' ),
+				'<b>' . date_i18n( get_option( 'date_format' ) ) . '</b>' ),
+			false,
+			esc_html__( 'Attached is the database backup file for your site.', 'better-wp-security' ),
+		);
 
 		$mail->add_section_heading( esc_html__( 'Website', 'better-wp-security' ) );
 		$mail->add_text( $mail->get_display_url() );

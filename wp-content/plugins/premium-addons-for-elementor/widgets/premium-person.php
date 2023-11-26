@@ -1032,7 +1032,7 @@ class Premium_Person extends Widget_Base {
 		);
 
 		$this->add_control(
-			'carousel_autoplay_speed',
+			'speed',
 			array(
 				'label'              => __( 'Autoplay Speed', 'premium-addons-for-elementor' ),
 				'description'        => __( 'Autoplay Speed means at which time the next slide should come. Set a value in milliseconds (ms)', 'premium-addons-for-elementor' ),

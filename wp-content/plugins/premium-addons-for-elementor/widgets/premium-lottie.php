@@ -222,6 +222,7 @@ class Premium_Lottie extends Widget_Base {
 					'viewport' => __( 'Viewport', 'premium-addons-for-elementor' ),
 					'hover'    => __( 'Hover', 'premium-addons-for-elementor' ),
 					'scroll'   => __( 'Scroll', 'premium-addons-for-elementor' ),
+					'click'   => __( 'Click', 'premium-addons-for-elementor' ),
 				),
 				'frontend_available' => true,
 			)
@@ -752,6 +753,13 @@ class Premium_Lottie extends Widget_Base {
 					'data-scroll-end'      => $settings['animate_view']['sizes']['end'],
 				)
 			);
+		} elseif ( 'click' === $settings['trigger'] ) {
+			$this->add_render_attribute(
+				'lottie',
+				array(
+					'data-lottie-click' => 'true',
+				)
+			);
 		}
 
 		if ( 'yes' === $settings['link_switcher'] ) {
@@ -795,9 +803,15 @@ class Premium_Lottie extends Widget_Base {
 
 		<#
 
-		var anim_url = 'url' === settings.source ? settings.lottie_url : settings.lottie_file.url;
+		var anim_url = null;
 
-		if( '' === anim_url )
+		if( 'url' === settings.source ) {
+			anim_url = settings.lottie_url
+		} else if( settings.lottie_file ) {
+			anim_url = settings.lottie_file.url;
+		}
+
+		if( ! anim_url )
 			return;
 
 		if( '' !== settings.trigger ) {
@@ -837,6 +851,11 @@ class Premium_Lottie extends Widget_Base {
 				'data-scroll-end': settings.animate_view.sizes.end,
 			});
 
+		} else if ( 'click' === settings.trigger ) {
+
+			view.addRenderAttribute( 'lottie', {
+				'data-lottie-click': 'true',
+			});
 		}
 
 		if( 'yes' === settings.link_switcher ) {

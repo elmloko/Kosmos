@@ -12,6 +12,10 @@ use Elementor\Icons_Manager;
 use Elementor\Repeater;
 use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Typography;
+use Elementor\Group_Control_Background;
+
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 
 // PremiumAddons Classes.
 use PremiumAddons\Includes\Helper_Functions;
@@ -26,6 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Premium_Carousel extends Widget_Base {
 
+
 	/**
 	 * Template Instance
 	 *
@@ -36,17 +41,17 @@ class Premium_Carousel extends Widget_Base {
 	/**
 	 * Get Elementor Helper Instance.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function getTemplateInstance() {
-		return $this->template_instance = Premium_Template_Tags::getInstance();
+		 return $this->template_instance = Premium_Template_Tags::getInstance();
 	}
 
 	/**
 	 * Retrieve Widget Name.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function get_name() {
@@ -56,7 +61,7 @@ class Premium_Carousel extends Widget_Base {
 	/**
 	 * Retrieve Widget Title.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function get_title() {
@@ -66,7 +71,7 @@ class Premium_Carousel extends Widget_Base {
 	/**
 	 * Retrieve Widget Icon.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string widget icon.
@@ -78,7 +83,7 @@ class Premium_Carousel extends Widget_Base {
 	/**
 	 * Widget preview refresh button.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function is_reload_preview_required() {
@@ -88,7 +93,7 @@ class Premium_Carousel extends Widget_Base {
 	/**
 	 * Retrieve Widget Dependent CSS.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return array CSS style handles.
@@ -104,7 +109,7 @@ class Premium_Carousel extends Widget_Base {
 	/**
 	 * Retrieve Widget Dependent JS.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return array JS script handles.
@@ -119,7 +124,7 @@ class Premium_Carousel extends Widget_Base {
 	/**
 	 * Retrieve Widget Keywords.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access public
 	 *
 	 * @return string Widget keywords.
@@ -131,7 +136,7 @@ class Premium_Carousel extends Widget_Base {
 	/**
 	 * Retrieve Widget Categories.
 	 *
-	 * @since 1.5.1
+	 * @since  1.5.1
 	 * @access public
 	 *
 	 * @return array Widget categories.
@@ -148,13 +153,13 @@ class Premium_Carousel extends Widget_Base {
 	 * @return string support URL.
 	 */
 	public function get_custom_help_url() {
-		return 'https://premiumaddons.com/support/';
+		 return 'https://premiumaddons.com/support/';
 	}
 
 	/**
 	 * Register Carousel controls.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 */
 	protected function register_controls() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
@@ -330,13 +335,18 @@ class Premium_Carousel extends Widget_Base {
 		);
 
 		$this->add_control(
-			'premium_carousel_dot_navigation_show',
+			'premium_carousel_nav_options',
 			array(
-				'label'       => __( 'Dots', 'premium-addons-for-elementor' ),
-				'description' => __( 'Enable or disable navigation dots', 'premium-addons-for-elementor' ),
-				'type'        => Controls_Manager::SWITCHER,
-				'separator'   => 'before',
-				'default'     => 'yes',
+				'label'   => __( 'Navigation', 'premium-addons-for-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'dots',
+				'options' => array(
+					'none'        => __( 'None', 'premium-addons-for-elementor' ),
+					'dots'        => __( 'Dots', 'premium-addons-for-elementor' ),
+					'fraction'    => __( 'Slide Index', 'premium-addons-for-elementor' ),
+					'progressbar' => __( 'Progress Bar', 'premium-addons-for-elementor' ),
+					'progress'    => __( 'Animated Progress Bar', 'premium-addons-for-elementor' ),
+				),
 			)
 		);
 
@@ -351,7 +361,7 @@ class Premium_Carousel extends Widget_Base {
 					'above' => __( 'On Slides', 'premium-addons-for-elementor' ),
 				),
 				'condition' => array(
-					'premium_carousel_dot_navigation_show' => 'yes',
+					'premium_carousel_nav_options' => 'dots',
 				),
 			)
 		);
@@ -366,8 +376,8 @@ class Premium_Carousel extends Widget_Base {
 					'{{WRAPPER}} .premium-carousel-dots-above ul.slick-dots' => 'left: {{SIZE}}{{UNIT}}',
 				),
 				'condition'  => array(
-					'premium_carousel_dot_navigation_show' => 'yes',
-					'premium_carousel_dot_position'        => 'above',
+					'premium_carousel_nav_options'  => 'dots',
+					'premium_carousel_dot_position' => 'above',
 				),
 			)
 		);
@@ -381,9 +391,10 @@ class Premium_Carousel extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .premium-carousel-dots-above ul.slick-dots' => 'top: {{SIZE}}{{UNIT}}',
 					'{{WRAPPER}} .premium-carousel-dots-below ul.slick-dots' => 'bottom: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .premium-carousel-nav-fraction' => 'bottom: {{SIZE}}{{UNIT}}',
 				),
 				'condition'  => array(
-					'premium_carousel_dot_navigation_show' => 'yes',
+					'premium_carousel_nav_options!' => array( 'none', 'progress' ),
 				),
 			)
 		);
@@ -396,7 +407,7 @@ class Premium_Carousel extends Widget_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'prefix_class' => 'premium-carousel-ripple-',
 				'condition'    => array(
-					'premium_carousel_dot_navigation_show' => 'yes',
+					'premium_carousel_nav_options' => 'dots',
 				),
 			)
 		);
@@ -468,6 +479,7 @@ class Premium_Carousel extends Widget_Base {
 				'render_type' => 'template',
 				'selectors'   => array(
 					'{{WRAPPER}} .premium-carousel-scale .slick-slide' => 'transition: all {{VALUE}}ms !important',
+					'{{WRAPPER}} .premium-carousel-nav-progressbar-fill' => 'transition-duration: {{VALUE}}ms !important',
 				),
 			)
 		);
@@ -1019,13 +1031,10 @@ class Premium_Carousel extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'premium_carousel_navigation_dots',
+			'premium_carousel_navigation',
 			array(
-				'label'     => __( 'Navigation Dots', 'premium-addons-for-elementor' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => array(
-					'premium_carousel_dot_navigation_show' => 'yes',
-				),
+				'label' => __( 'Navigation', 'premium-addons-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
 
@@ -1050,7 +1059,8 @@ class Premium_Carousel extends Widget_Base {
 				),
 				'default'   => 'circle_white',
 				'condition' => array(
-					'custom_pagination_icon!' => 'yes',
+					'custom_pagination_icon!'      => 'yes',
+					'premium_carousel_nav_options' => 'dots',
 				),
 				'toggle'    => false,
 			)
@@ -1059,8 +1069,11 @@ class Premium_Carousel extends Widget_Base {
 		$this->add_control(
 			'custom_pagination_icon',
 			array(
-				'label' => __( 'Custom Icon', 'premium-addons-for-elementor' ),
-				'type'  => Controls_Manager::SWITCHER,
+				'label'     => __( 'Custom Icon', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'condition' => array(
+					'premium_carousel_nav_options' => 'dots',
+				),
 			)
 		);
 
@@ -1075,7 +1088,8 @@ class Premium_Carousel extends Widget_Base {
 				),
 				'skin'        => 'inline',
 				'condition'   => array(
-					'custom_pagination_icon' => 'yes',
+					'custom_pagination_icon'       => 'yes',
+					'premium_carousel_nav_options' => 'dots',
 				),
 				'label_block' => false,
 			)
@@ -1089,6 +1103,53 @@ class Premium_Carousel extends Widget_Base {
 				'size_units' => array( 'px', 'em' ),
 				'selectors'  => array(
 					'{{WRAPPER}} ul.slick-dots li, {{WRAPPER}} ul.slick-dots li svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; font-size: calc( {{SIZE}}{{UNIT}} / 2 )',
+				),
+				'condition'  => array(
+					'premium_carousel_nav_options' => 'dots',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'progress_height',
+			array(
+				'label'     => __( 'Height', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-carousel-nav-progressbar' => 'height: {{SIZE}}px;',
+					'{{WRAPPER}} .premium-carousel-nav-progress' => 'height: {{SIZE}}px;',
+				),
+				'condition' => array(
+					'premium_carousel_nav_options' => array( 'progressbar', 'progress' ),
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'separator_spacing',
+			array(
+				'label'      => __( 'Separator Spacing', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .fraction-pagination-separator' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'premium_carousel_nav_options' => 'fraction',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'      => 'premium_navigation_typography',
+				'selector'  => '{{WRAPPER}} .premium-carousel-nav-fraction',
+				'global'    => array(
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				),
+				'condition' => array(
+					'premium_carousel_nav_options' => 'fraction',
 				),
 			)
 		);
@@ -1104,6 +1165,27 @@ class Premium_Carousel extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} ul.slick-dots li'     => 'color: {{VALUE}}',
 					'{{WRAPPER}} ul.slick-dots li svg' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .fraction-pagination-total' => 'color: {{VALUE}}',
+				),
+				'condition' => array(
+					'premium_carousel_nav_options' => array( 'dots', 'fraction' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'premium_carousel_navigation_separator_color',
+			array(
+				'label'     => __( 'Separator Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'global'    => array(
+					'default' => Global_Colors::COLOR_SECONDARY,
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .fraction-pagination-separator' => 'color: {{VALUE}}',
+				),
+				'condition' => array(
+					'premium_carousel_nav_options' => 'fraction',
 				),
 			)
 		);
@@ -1119,6 +1201,58 @@ class Premium_Carousel extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} ul.slick-dots li.slick-active' => 'color: {{VALUE}}',
 					'{{WRAPPER}} ul.slick-dots li.slick-active svg' => 'fill: {{VALUE}}',
+					'{{WRAPPER}} .fraction-pagination-current' => 'color: {{VALUE}}',
+				),
+				'condition' => array(
+					'premium_carousel_nav_options' => array( 'dots', 'fraction' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'fill_colors_title',
+			array(
+				'label'     => __( 'Fill', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'condition' => array(
+					'premium_carousel_nav_options' => array( 'progressbar', 'progress' ),
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'premium_progressbar_progress_color',
+				'types'     => array( 'classic', 'gradient' ),
+				'selector'  =>
+					'{{WRAPPER}} .premium-carousel-nav-progressbar-fill ,{{WRAPPER}} .premium-carousel-nav-progress-fill',
+				'condition' => array(
+					'premium_carousel_nav_options' => array( 'progressbar', 'progress' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'base_colors_title',
+			array(
+				'label'     => __( 'Base', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'condition' => array(
+					'premium_carousel_nav_options' => array( 'progressbar', 'progress' ),
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			array(
+				'name'      => 'premium_progressbar_background',
+				'types'     => array( 'classic', 'gradient' ),
+				'selector'  =>
+					'{{WRAPPER}} .premium-carousel-nav-progressbar , {{WRAPPER}} .premium-carousel-nav-progress',
+				'condition' => array(
+					'premium_carousel_nav_options' => array( 'progressbar', 'progress' ),
 				),
 			)
 		);
@@ -1130,6 +1264,7 @@ class Premium_Carousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'condition' => array(
 					'premium_carousel_navigation_effect' => 'yes',
+					'premium_carousel_nav_options'       => 'dots',
 				),
 				'selectors' => array(
 					'{{WRAPPER}}.premium-carousel-ripple-yes ul.slick-dots li.slick-active:hover:before' => 'background-color: {{VALUE}}',
@@ -1144,6 +1279,7 @@ class Premium_Carousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'condition' => array(
 					'premium_carousel_navigation_effect' => 'yes',
+					'premium_carousel_nav_options'       => 'dots',
 				),
 				'selectors' => array(
 					'{{WRAPPER}}.premium-carousel-ripple-yes ul.slick-dots li:hover:before' => 'background-color: {{VALUE}}',
@@ -1160,28 +1296,31 @@ class Premium_Carousel extends Widget_Base {
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 * @access protected
 	 */
 	protected function render() {
-
 		$settings = $this->get_settings();
 
 		$content_type = $settings['premium_carousel_content_type'];
 
 		$templates = array();
 
+		$templates_count = 0;
+
 		if ( 'select' === $content_type ) {
-			$templates = $settings['premium_carousel_slider_content'];
+			$templates       = $settings['premium_carousel_slider_content'];
+			$templates_count = ! empty( $templates ) ? count( $templates ) : 0;
+
 		} else {
 			$custom_navigation = array();
 			$temp_id           = '';
 
 			foreach ( $settings['premium_carousel_templates_repeater'] as $template ) {
 				$temp_id = empty( $template['premium_carousel_repeater_item'] ) ? $template['live_temp_content'] : $template['premium_carousel_repeater_item'];
-
 				array_push( $templates, $temp_id );
 				array_push( $custom_navigation, $template['custom_navigation'] );
+				$templates_count = count( $templates );
 			}
 		}
 
@@ -1336,7 +1475,7 @@ class Premium_Carousel extends Widget_Base {
 			$arrows = false;
 		}
 
-		if ( 'yes' !== $settings['mscroll'] && 'yes' === $settings['premium_carousel_dot_navigation_show'] ) {
+		if ( 'yes' !== $settings['mscroll'] && 'dots' === $settings['premium_carousel_nav_options'] ) {
 			$dots = true;
 			if ( 'yes' !== $settings['custom_pagination_icon'] ) {
 				if ( 'square_white' === $settings['premium_carousel_dot_icon'] ) {
@@ -1356,7 +1495,9 @@ class Premium_Carousel extends Widget_Base {
 		} else {
 			$dots = false;
 		}
-		$extra_class = ! empty( $settings['premium_carousel_extra_class'] ) ? ' ' . $settings['premium_carousel_extra_class'] : '';
+
+		$carouselNavigation = $settings['premium_carousel_nav_options'];
+		$extra_class        = ! empty( $settings['premium_carousel_extra_class'] ) ? ' ' . $settings['premium_carousel_extra_class'] : '';
 
 		$animation_class = $settings['premium_carousel_animation_list'];
 
@@ -1367,31 +1508,33 @@ class Premium_Carousel extends Widget_Base {
 		$mobile_breakpoint = ! empty( $settings['premium_carousel_mobile_breakpoint'] ) ? $settings['premium_carousel_mobile_breakpoint'] : 768;
 
 		$carousel_settings = array(
-			'vertical'       => $vertical,
-			'slidesToScroll' => $slides_scroll,
-			'slidesToShow'   => $slides_show,
-			'infinite'       => $infinite,
-			'speed'          => $speed,
-			'fade'           => $fade,
-			'autoplay'       => $autoplay,
-			'autoplaySpeed'  => $autoplay_speed,
-			'draggable'      => $draggable,
-			'touchMove'      => $touch_move,
-			'rtl'            => $rtl,
-			'adaptiveHeight' => $adaptive_height,
-			'variableWidth'  => $variable_width,
-			'cssEase'        => $linear ? 'linear' : 'ease',
-			'pauseOnHover'   => $pause_hover,
-			'centerMode'     => $center_mode,
-			'arrows'         => $arrows,
-			'dots'           => $dots,
-			'slidesDesk'     => $slides_on_desk,
-			'slidesTab'      => $slides_on_tabs,
-			'slidesMob'      => $slides_on_mob,
-			'animation'      => $animation,
-			'tabletBreak'    => $tablet_breakpoint,
-			'mobileBreak'    => $mobile_breakpoint,
-			'navigation'     => 'repeater' === $content_type ? $custom_navigation : array(),
+			'vertical'           => $vertical,
+			'slidesToScroll'     => $slides_scroll,
+			'slidesToShow'       => $slides_show,
+			'infinite'           => $infinite,
+			'speed'              => $speed,
+			'fade'               => $fade,
+			'autoplay'           => $autoplay,
+			'autoplaySpeed'      => $autoplay_speed,
+			'draggable'          => $draggable,
+			'touchMove'          => $touch_move,
+			'rtl'                => $rtl,
+			'adaptiveHeight'     => $adaptive_height,
+			'variableWidth'      => $variable_width,
+			'cssEase'            => $linear ? 'linear' : 'ease',
+			'pauseOnHover'       => $pause_hover,
+			'centerMode'         => $center_mode,
+			'arrows'             => $arrows,
+			'dots'               => $dots,
+			'slidesDesk'         => $slides_on_desk,
+			'slidesTab'          => $slides_on_tabs,
+			'slidesMob'          => $slides_on_mob,
+			'animation'          => $animation,
+			'tabletBreak'        => $tablet_breakpoint,
+			'mobileBreak'        => $mobile_breakpoint,
+			'navigation'         => 'repeater' === $content_type ? $custom_navigation : array(),
+			'carouselNavigation' => $carouselNavigation,
+			'templatesNumber'    => $templates_count,
 		);
 
 		$this->add_render_attribute( 'carousel', 'id', 'premium-carousel-wrapper-' . esc_attr( $this->get_id() ) );
@@ -1408,9 +1551,17 @@ class Premium_Carousel extends Widget_Base {
 			)
 		);
 
-		if ( 'yes' === $settings['premium_carousel_dot_navigation_show'] ) {
+		if ( 'dots' === $settings['premium_carousel_nav_options'] ) {
 			$this->add_render_attribute( 'carousel', 'class', 'premium-carousel-dots-' . $settings['premium_carousel_dot_position'] );
 
+		}
+
+		if ( 'fraction' === $settings['premium_carousel_nav_options'] ) {
+			$this->add_render_attribute( 'carousel', 'class', 'premium-carousel-fraction' );
+		}
+
+		if ( 'progressbar' === $settings['premium_carousel_nav_options'] ) {
+			$this->add_render_attribute( 'carousel', 'class', 'premium-carousel-progressbar' );
 		}
 
 		if ( 'yes' === $settings['premium_carousel_fade'] && 'yes' === $settings['premium_carousel_zoom'] ) {
@@ -1422,54 +1573,73 @@ class Premium_Carousel extends Widget_Base {
 		?>
 
 		<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'carousel' ) ); ?>>
-			<?php if ( 'yes' === $settings['premium_carousel_dot_navigation_show'] ) { ?>
+		<?php if ( 'dots' === $settings['premium_carousel_nav_options'] ) { ?>
 				<div class="premium-carousel-nav-dot">
-				<?php if ( 'yes' !== $settings['custom_pagination_icon'] ) { ?>
+			<?php if ( 'yes' !== $settings['custom_pagination_icon'] ) { ?>
 					<i class="<?php echo esc_attr( $custom_paging ); ?>" aria-hidden="true"></i>
-					<?php
-				} else {
-					Icons_Manager::render_icon( $settings['custom_pagination_icon_select'], array( 'aria-hidden' => 'true' ) );
-				}
-				?>
+				<?php
+			} else {
+				Icons_Manager::render_icon( $settings['custom_pagination_icon_select'], array( 'aria-hidden' => 'true' ) );
+			}
+			?>
 				</div>
-			<?php } ?>
-			<?php if ( 'yes' === $settings['premium_carousel_navigation_show'] ) { ?>
+		<?php } ?>
+		<?php if ( 'yes' === $settings['premium_carousel_navigation_show'] ) { ?>
 				<div class="premium-carousel-nav-arrow-prev">
 					<a type="button" data-role="none" class="<?php echo esc_attr( $vertical_alignment ); ?> carousel-prev" aria-label="Previous" role="button">
-					<?php if ( 'yes' !== $settings['custom_left_arrow'] ) { ?>
+			<?php if ( 'yes' !== $settings['custom_left_arrow'] ) { ?>
 							<i class="<?php echo esc_attr( $icon_prev_class ); ?>" aria-hidden="true"></i>
-						<?php
-					} else {
-						Icons_Manager::render_icon( $settings['custom_left_arrow_select'], array( 'aria-hidden' => 'true' ) );
-					}
-					?>
+				<?php
+			} else {
+				Icons_Manager::render_icon( $settings['custom_left_arrow_select'], array( 'aria-hidden' => 'true' ) );
+			}
+			?>
 					</a>
 				</div>
 				<div class="premium-carousel-nav-arrow-next">
 					<a type="button" data-role="none" class="<?php echo esc_attr( $vertical_alignment ); ?> carousel-next" aria-label="Next" role="button">
-					<?php if ( 'yes' !== $settings['custom_right_arrow'] ) { ?>
+			<?php if ( 'yes' !== $settings['custom_right_arrow'] ) { ?>
 							<i class="<?php echo esc_attr( $icon_next_class ); ?>" aria-hidden="true"></i>
-						<?php
-					} else {
-						Icons_Manager::render_icon( $settings['custom_right_arrow_select'], array( 'aria-hidden' => 'true' ) );
-					}
-					?>
+				<?php
+			} else {
+				Icons_Manager::render_icon( $settings['custom_right_arrow_select'], array( 'aria-hidden' => 'true' ) );
+			}
+			?>
 					</a>
 				</div>
-			<?php } ?>
+		<?php } ?>
 			<div id="premium-carousel-<?php echo esc_attr( $this->get_id() ); ?>" class="premium-carousel-inner">
-				<?php
-				foreach ( $templates as $template_title ) :
-					if ( ! empty( $template_title ) ) :
-						?>
-						<div class="premium-carousel-template item-wrapper">
-							<?php echo $this->getTemplateInstance()->get_template_content( $template_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						</div>
-						<?php
-					endif;
-				endforeach;
+		<?php
+		foreach ( $templates as $template_title ) :
+			if ( ! empty( $template_title ) ) :
 				?>
+				<div class="premium-carousel-template item-wrapper">
+					<?php echo $this->getTemplateInstance()->get_template_content( $template_title ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php if ( 'progress' === $settings['premium_carousel_nav_options'] ) { ?>
+						<div class="premium-carousel-nav-progress">
+							<span class="premium-carousel-nav-progress-fill"></span>
+						</div>
+					<?php } ?>
+				</div>
+				<?php
+			endif;
+		endforeach;
+		?>
 			</div>
+			<?php if ( 'fraction' === $settings['premium_carousel_nav_options'] ) { ?>
+				<div class="premium-carousel-nav-fraction">
+
+					<span id="currentSlide" class="fraction-pagination-current">1</span>
+					<span class="fraction-pagination-separator">/</span>
+					<span class="fraction-pagination-total">
+						<?php echo esc_attr( $templates_count ); ?>
+					</span>
+				</div>
+			<?php } elseif ( 'progressbar' === $settings['premium_carousel_nav_options'] ) { ?>
+				<div class="premium-carousel-nav-progressbar">
+					<span class="premium-carousel-nav-progressbar-fill"></span>
+				</div>
+			<?php } ?>
 		</div>
 		<?php
 	}

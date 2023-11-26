@@ -233,7 +233,8 @@ html.wp-dark-mode-theme-darkmode .interface-interface-skeleton__sidebar {
   background-color: #1B2836;
 }
 
-html.wp-dark-mode-theme-chathams { /**--- Main Styles ----*/
+html.wp-dark-mode-theme-chathams {
+  /**--- Main Styles ----*/
   /**--- Link Styles ----*/
   /**--- Link Pseoudo Styles ----*/
   /**--- Input Styles ----*/
@@ -1195,7 +1196,7 @@ html.wp-dark-mode-theme-concord .interface-interface-skeleton__sidebar {
 #wpdmColorPalettesContainer {
   position: absolute;
   top: 50px;
-  width: 180px;
+  width: 180px !important;
   background: #555;
   right: -37px;
 }
@@ -1250,6 +1251,13 @@ html.wp-dark-mode-theme-concord .interface-interface-skeleton__sidebar {
   margin-right: 5px;
   border: 1px solid;
   border-radius: 50%;
+}
+
+.edit-post-header {
+  overflow: visible !important;
+}
+.edit-post-header .edit-post-header__toolbar {
+  overflow: visible !important;
 }
 
 .image-choose-wrap {

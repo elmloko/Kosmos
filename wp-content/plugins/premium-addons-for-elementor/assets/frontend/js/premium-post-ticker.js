@@ -36,6 +36,14 @@
             });
         }
 
+        if ($postsWrapper.find('.premium-post-ticker__post-wrapper').length <= 6) {
+
+            $postsWrapper.find('.premium-post-ticker__post-wrapper').map(function (index, post) {
+                $postsWrapper.append($(post).clone());
+            })
+
+        }
+
         $postsWrapper.slick(getSlickSettings());
 
         if ('' !== settings.animation && 'layout-4' !== settings.layout) {
@@ -114,7 +122,7 @@
                 slickSetting.slidesToShow = settings.slidesToShow || 1;
             }
 
-            if ( $scope.hasClass('premium-reversed-yes') && 'layout-4' !== settings.layout && !settings.vertical && !settings.typing && !settings.fade) {
+            if ($scope.hasClass('premium-reversed-yes') && 'layout-4' !== settings.layout && !settings.vertical && !settings.typing && !settings.fade) {
 
                 slickSetting.rtl = true;
             }

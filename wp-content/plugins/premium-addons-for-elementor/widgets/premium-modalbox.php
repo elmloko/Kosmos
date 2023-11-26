@@ -547,7 +547,8 @@ class Premium_Modalbox extends Widget_Base {
 				),
 				'default'   => 'icon',
 				'condition' => array(
-					'premium_modal_box_display_on' => 'button',
+					'premium_modal_box_icon_switcher' => 'yes',
+					'premium_modal_box_display_on'    => 'button',
 				),
 			)
 		);
@@ -1592,6 +1593,17 @@ class Premium_Modalbox extends Widget_Base {
 			)
 		);
 
+        $this->add_control(
+			'header_separator_background',
+			array(
+				'label'     => __( 'Separator Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-modal-box-modal-header'  => 'border-bottom-color: {{VALUE}};',
+				),
+			)
+		);
+
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
 			array(
@@ -1970,6 +1982,17 @@ class Premium_Modalbox extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'box_background',
+			array(
+				'label'     => __( 'Box Background Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-modal-box-modal-dialog'  => 'background: {{VALUE}};',
+				),
+			)
+		);
+
 		$this->add_responsive_control(
 			'premium_modal_box_modal_size',
 			array(
@@ -2051,6 +2074,17 @@ class Premium_Modalbox extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .premium-modal-box-modal-footer'  => 'background: {{VALUE}};',
+				),
+			)
+		);
+
+        $this->add_control(
+			'footer_separator_background',
+			array(
+				'label'     => __( 'Separator Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-modal-box-modal-footer'  => 'border-top-color: {{VALUE}};',
 				),
 			)
 		);

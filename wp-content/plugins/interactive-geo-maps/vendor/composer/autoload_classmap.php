@@ -70,6 +70,7 @@ return array(
     'Saltus\\WP\\Framework\\Infrastructure\\Plugin\\Registerable' => $vendorDir . '/saltus/framework/src/Infrastructure/Plugin/Registerable.php',
     'Saltus\\WP\\Framework\\Infrastructure\\Service\\Actionable' => $vendorDir . '/saltus/framework/src/Infrastructure/Service/Actionable.php',
     'Saltus\\WP\\Framework\\Infrastructure\\Service\\App' => $vendorDir . '/saltus/framework/src/Infrastructure/Service/App.php',
+    'Saltus\\WP\\Framework\\Infrastructure\\Service\\Assembly' => $vendorDir . '/saltus/framework/src/Infrastructure/Service/Assembly.php',
     'Saltus\\WP\\Framework\\Infrastructure\\Service\\Conditional' => $vendorDir . '/saltus/framework/src/Infrastructure/Service/Conditional.php',
     'Saltus\\WP\\Framework\\Infrastructure\\Service\\Service' => $vendorDir . '/saltus/framework/src/Infrastructure/Service/Service.php',
     'Saltus\\WP\\Framework\\Modeler' => $vendorDir . '/saltus/framework/src/Modeler.php',

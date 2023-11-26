@@ -7,6 +7,7 @@ import ImportLoader from '../../components/import-steps/import-loader';
 import ErrorScreen from '../../components/error/index';
 import { useStateValue } from '../../store/store';
 import lottieJson from '../../../images/website-building.json';
+import ICONS from '../../../icons';
 import sseImport from './sse-import';
 import {
 	installAstra,
@@ -19,6 +20,7 @@ import {
 } from './import-utils';
 const { reportError } = starterTemplates;
 let sendReportFlag = reportError;
+const successMessageDelay = 8000; // 8 seconds delay for fully assets load.
 
 import './style.scss';
 
@@ -32,7 +34,6 @@ const ImportSite = () => {
 			templateResponse,
 			reset,
 			themeStatus,
-			currentIndex,
 			importError,
 			siteLogo,
 			activePalette,
@@ -145,6 +146,7 @@ const ImportSite = () => {
 		let formsStatus = false;
 		let customizerStatus = false;
 		let spectraStatus = false;
+		let sureCartStatus = false;
 
 		resetStatus = await resetOldSite();
 
@@ -161,11 +163,15 @@ const ImportSite = () => {
 		}
 
 		if ( customizerStatus ) {
-			spectraStatus = await importSiteContent();
+			spectraStatus = await importSpectraSettings();
 		}
 
 		if ( spectraStatus ) {
-			await importSpectraSettings();
+			sureCartStatus = await importSureCartSettings();
+		}
+
+		if ( sureCartStatus ) {
+			await importSiteContent();
 		}
 	};
 
@@ -496,7 +502,7 @@ const ImportSite = () => {
 		percentage += 10;
 		dispatch( {
 			type: 'set',
-			importPercent: percentage,
+			importPercent: percentage >= 50 ? 50 : percentage,
 			importStatus: __( 'Reset for old website is done.', 'astra-sites' ),
 		} );
 
@@ -536,7 +542,7 @@ const ImportSite = () => {
 						percentage += 2;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage <= 70 ? percentage : 70,
+							importPercent: percentage >= 50 ? 50 : percentage,
 						} );
 					} else {
 						throw result;
@@ -994,7 +1000,7 @@ const ImportSite = () => {
 						percentage += 2;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage,
+							importPercent: percentage >= 60 ? 60 : percentage,
 						} );
 						return true;
 					}
@@ -1033,7 +1039,7 @@ const ImportSite = () => {
 			percentage += 5;
 			dispatch( {
 				type: 'set',
-				importPercent: percentage,
+				importPercent: percentage >= 65 ? 65 : percentage,
 			} );
 			return true;
 		}
@@ -1058,7 +1064,7 @@ const ImportSite = () => {
 						percentage += 5;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage,
+							importPercent: percentage >= 65 ? 65 : percentage,
 						} );
 						return true;
 					}
@@ -1098,7 +1104,7 @@ const ImportSite = () => {
 			percentage += 20;
 			dispatch( {
 				type: 'set',
-				importPercent: percentage,
+				importPercent: percentage >= 80 ? 80 : percentage,
 				xmlImportDone: true,
 			} );
 			return true;
@@ -1142,7 +1148,7 @@ const ImportSite = () => {
 					percentage += 2;
 					dispatch( {
 						type: 'set',
-						importPercent: percentage <= 80 ? percentage : 80,
+						importPercent: percentage >= 80 ? 80 : percentage,
 					} );
 					if ( false === data.success ) {
 						const errorMsg = data.data.error || data.data;
@@ -1211,7 +1217,7 @@ const ImportSite = () => {
 						percentage += 2;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage,
+							importPercent: percentage >= 75 ? 75 : percentage,
 						} );
 						return true;
 					}
@@ -1234,6 +1240,67 @@ const ImportSite = () => {
 			.catch( ( error ) => {
 				report(
 					__( 'Importing Spectra Settings Failed.', 'astra-sites' ),
+					'',
+					error
+				);
+				return false;
+			} );
+		return status;
+	};
+
+	/**
+	 * 7. Import Surecart Settings.
+	 */
+	const importSureCartSettings = async () => {
+		const sourceID =
+			templateResponse?.[ 'astra-site-surecart-settings' ]?.id || '';
+		const sourceCurrency =
+			templateResponse?.[ 'astra-site-surecart-settings' ]?.currency ||
+			'usd';
+		if ( '' === sourceID || 'null' === sourceID ) {
+			return true;
+		}
+		const surecart = new FormData();
+		surecart.append( 'action', 'astra-sites-import-surecart-settings' );
+		surecart.append( 'source_id', sourceID );
+		surecart.append( 'source_currency', sourceCurrency );
+		surecart.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
+
+		const status = await fetch( ajaxurl, {
+			method: 'post',
+			body: surecart,
+		} )
+			.then( ( response ) => response.text() )
+			.then( ( text ) => {
+				try {
+					const data = JSON.parse( text );
+					if ( data.success ) {
+						percentage += 2;
+						dispatch( {
+							type: 'set',
+							importPercent: percentage >= 75 ? 75 : percentage,
+						} );
+						return true;
+					}
+					throw data.data;
+				} catch ( error ) {
+					report(
+						__(
+							'Importing Surecart Settings failed.',
+							'astra-sites'
+						),
+						'',
+						error,
+						'',
+						'',
+						text
+					);
+					return false;
+				}
+			} )
+			.catch( ( error ) => {
+				report(
+					__( 'Importing Surecart Settings Failed.', 'astra-sites' ),
 					'',
 					error
 				);
@@ -1337,7 +1404,7 @@ const ImportSite = () => {
 						percentage += 5;
 						dispatch( {
 							type: 'set',
-							importPercent: percentage,
+							importPercent: percentage >= 90 ? 90 : percentage,
 						} );
 						return true;
 					}
@@ -1460,7 +1527,6 @@ const ImportSite = () => {
 		const finalSteps = new FormData();
 		finalSteps.append( 'action', 'astra-sites-import-end' );
 		finalSteps.append( '_ajax_nonce', astraSitesVars._ajax_nonce );
-		let counter = 3;
 
 		const status = await fetch( ajaxurl, {
 			method: 'post',
@@ -1471,30 +1537,14 @@ const ImportSite = () => {
 				try {
 					const data = JSON.parse( text );
 					if ( data.success ) {
-						dispatch( {
-							type: 'set',
-							importPercent: 100,
-							importEnd: true,
-						} );
-
 						localStorage.setItem( 'st-import-end', +new Date() );
-						setInterval( function () {
-							counter--;
-							const counterEl =
-								document.getElementById( 'redirect-counter' );
-							if ( counterEl ) {
-								if ( counter < 0 ) {
-									dispatch( {
-										type: 'set',
-										currentIndex: currentIndex + 1,
-									} );
-								} else {
-									const timeType =
-										counter <= 1 ? ' second…' : ' seconds…';
-									counterEl.innerHTML = counter + timeType;
-								}
-							}
-						}, 1000 );
+						setTimeout( function () {
+							dispatch( {
+								type: 'set',
+								importPercent: 100,
+								importEnd: true,
+							} );
+						}, successMessageDelay );
 						return true;
 					}
 					throw data.data;
@@ -1510,31 +1560,15 @@ const ImportSite = () => {
 						'',
 						text
 					);
-
-					dispatch( {
-						type: 'set',
-						importPercent: 100,
-						importEnd: true,
-					} );
+					setTimeout( function () {
+						dispatch( {
+							type: 'set',
+							importPercent: 100,
+							importEnd: true,
+						} );
+					}, successMessageDelay );
 
 					localStorage.setItem( 'st-import-end', +new Date() );
-					setInterval( function () {
-						counter--;
-						const counterEl =
-							document.getElementById( 'redirect-counter' );
-						if ( counterEl ) {
-							if ( counter < 0 ) {
-								dispatch( {
-									type: 'set',
-									currentIndex: currentIndex + 1,
-								} );
-							} else {
-								const counterText =
-									counter <= 1 ? ' second…' : ' seconds…';
-								counterEl.innerHTML = counter + counterText;
-							}
-						}
-					}, 1000 );
 					return false;
 				}
 			} )
@@ -1655,12 +1689,19 @@ const ImportSite = () => {
 			content={
 				<div className="middle-content middle-content-import">
 					<>
-						<h1>
-							{ __(
-								'We are building your website…',
-								'astra-sites'
-							) }
-						</h1>
+						{ importPercent === 100 ? (
+							<h1 className="import-done-congrats">
+								{ __( 'Congratulations', 'astra-sites' ) }
+								<span>{ ICONS.tada }</span>
+							</h1>
+						) : (
+							<h1>
+								{ __(
+									'We are building your website…',
+									'astra-sites'
+								) }
+							</h1>
+						) }
 						{ importError && (
 							<div className="ist-import-process-step-wrap">
 								<ErrorScreen />
@@ -1671,15 +1712,17 @@ const ImportSite = () => {
 								<div className="ist-import-process-step-wrap">
 									<ImportLoader />
 								</div>
-								<Lottie
-									loop
-									animationData={ lottieJson }
-									play
-									style={ {
-										height: 400,
-										margin: '-70px auto -90px auto',
-									} }
-								/>
+								{ importPercent !== 100 && (
+									<Lottie
+										loop
+										animationData={ lottieJson }
+										play
+										style={ {
+											height: 400,
+											margin: '-70px auto -90px auto',
+										} }
+									/>
+								) }
 							</>
 						) }
 					</>

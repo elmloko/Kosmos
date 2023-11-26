@@ -1860,7 +1860,7 @@
                     yoyo: drawSettings.svgYoyo ? true : false,
                     repeat: drawSettings.svgLoop ? -1 : 0,
                     onReverseComplete: function () {
-                        if (drawSettings.svgRestart)
+                        if (drawSettings.svgRestart && individualTimeLine.stop)
                             individualTimeLine.stop();
                     }
                 });
@@ -1971,7 +1971,7 @@
                     }
 
                 }, {
-                    offset: "50%",
+                    offset: drawSettings.svgAnimOffset || "50%",
                     triggerOnce: false
                 });
 

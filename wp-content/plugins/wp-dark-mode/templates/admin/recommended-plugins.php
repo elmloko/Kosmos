@@ -101,7 +101,13 @@ $recommended_plugins_slug = [
 	'social-contact-form',
 ];
 
-$recommended_plugins = array_map(function ( $slug ) {
+/**
+ * Get plugin information from WordPress.org.
+ *
+ * @param string $slug Plugin slug.
+ * @return object|bool
+ */
+function callback_recommended_plugin( $slug ) {
 	$args = [
 		'slug'   => $slug,
 		'fields' => [
@@ -118,7 +124,8 @@ $recommended_plugins = array_map(function ( $slug ) {
 	}
 
 	return false;
-}, $recommended_plugins_slug);
+}
+$recommended_plugins = array_map('callback_recommended_plugin', $recommended_plugins_slug);
 ?>
 
 <div class="wrap mystickyelement-wrap recommended-plugins">
@@ -138,7 +145,7 @@ $recommended_plugins = array_map(function ( $slug ) {
 				}
 
 				// Display the group heading if there is one.
-				if ( isset( $single_plugin['group'] ) && $single_plugin['group'] != $group ) {
+				if ( isset( $single_plugin['group'] ) && $single_plugin['group'] !== $group ) {
 					if ( isset( $this->groups[ $single_plugin['group'] ] ) ) {
 						$group_name = $this->groups[ $single_plugin['group'] ];
 						if ( isset( $single_plugins_group_titles[ $group_name ] ) ) {

@@ -1396,6 +1396,93 @@ class Premium_Icon_List extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
+			'random_badges_section',
+			array(
+				'label' => __( 'Random Badges', 'premium-addons-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+
+		$rbadges_repeater = new REPEATER();
+
+		$rbadges_repeater->add_control(
+			'badge_title',
+			array(
+				'label'   => __( 'Badge Text', 'premium-addons-for-elementor' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => __( 'New', 'premium-addons-for-elementor' ),
+			)
+		);
+
+		$rbadges_repeater->add_control(
+			'badge_text_color',
+			array(
+				'label'     => __( 'Text Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{CURRENT_ITEM}}.premium-bullet-list-badge span' => 'color: {{VALUE}} !important',
+				),
+			)
+		);
+
+		$rbadges_repeater->add_control(
+			'badge_background_color',
+			array(
+				'label'     => __( 'Background', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{CURRENT_ITEM}}.premium-bullet-list-badge span' => 'background-color: {{VALUE}} !important',
+				),
+			)
+		);
+
+		$rbadges_repeater->add_control(
+			'rbadge_selector',
+			array(
+				'label'       => __( 'CSS Selector', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'description' => __( 'Use this option to add the CSS selector of the parent element that will be used to search for bullet items in it. This will help you to apply random badges on other bullet list items on the page.', 'premium-addons-for-elementor' ),
+			)
+		);
+
+		$rbadges_repeater->add_control(
+			'rbadge_min',
+			array(
+				'label'       => __( 'Minimum Randomness', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::NUMBER,
+				'description' => __( 'The minimum number of times that this badge should be applied.', 'premium-addons-for-elementor' ),
+				'default'     => 3,
+				'min'         => 1,
+			)
+		);
+
+		$rbadges_repeater->add_control(
+			'rbadge_max',
+			array(
+				'label'       => __( 'Maximum Randomness', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::NUMBER,
+				'description' => __( 'The maximum number of times that this badge should be applied.', 'premium-addons-for-elementor' ),
+				'default'     => 5,
+				'min'         => 1,
+			)
+		);
+
+		$this->add_control(
+			'rbadges_repeater',
+			array(
+				'label'              => __( 'Random Badges', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::REPEATER,
+				'fields'             => $rbadges_repeater->get_controls(),
+				'render_type'        => 'template',
+				'title_field'        => '{{{ badge_title }}}',
+				'prevent_empty'      => false,
+				'frontend_available' => true,
+			)
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
 			'section_pa_docs',
 			array(
 				'label' => __( 'Helpful Documentations', 'premium-addons-for-elementor' ),

@@ -51,6 +51,13 @@ class Helper_Functions {
 	 */
 	private static $google_localize = null;
 
+    /**
+	 * SVG Shapes
+	 *
+	 * @var shapes
+	 */
+	private static $shapes = null;
+
 	/**
 	 * WP lang prefixes
 	 *
@@ -1039,12 +1046,17 @@ class Helper_Functions {
 	 */
 	public static function is_loop_exp_enabled() {
 
-		if ( defined( 'ELEMENTOR_PRO_VERSION' ) && version_compare( ELEMENTOR_PRO_VERSION, '3.8', '>=' ) ) {
-			$is_loop_enabled = self::check_elementor_experiment( 'loop' );
+		if ( defined( 'ELEMENTOR_PRO_VERSION' ) ) {
 
-			if ( $is_loop_enabled ) {
-				return true;
-			}
+            if( version_compare( ELEMENTOR_PRO_VERSION, '3.16.0', '>=' ) ) {
+                return true;
+            } else if( version_compare( ELEMENTOR_PRO_VERSION, '3.8', '>=' ) ) {
+                $is_loop_enabled = self::check_elementor_experiment( 'loop' );
+
+                if ( $is_loop_enabled ) {
+                    return true;
+                }
+            }
 		}
 
 		return false;
@@ -1074,5 +1086,195 @@ class Helper_Functions {
 
 		return $classes;
 	}
+
+	/**
+	 * Round Numbers In A Reading-friendly Format.
+	 *
+	 * @param integer $num followers number.
+	 */
+	public static function premium_format_numbers( $num ) {
+		$num    = intval( $num );
+		$result = '';
+
+		if ( $num >= 1000000000 ) {
+			$tmp    = round( ( $num / 1000000 ), 1 );
+			$result = $tmp . 'B';
+			return $result;
+		}
+
+		if ( $num >= 1000000 ) {
+			$tmp    = round( ( $num / 1000000 ), 1 );
+			$result = $tmp . 'M';
+			return $result;
+		}
+
+		if ( $num >= 1000 ) {
+			$tmp    = round( ( $num / 1000 ), 1 );
+			$result = $tmp . 'K';
+
+			return $result;
+		}
+
+		return round( $num, 1 );
+	}
+
+	/**
+	 * Get Contact Form Body
+	 *
+	 * @since 4.10.2
+	 * @access public
+	 *
+	 * @param string $preset form preset.
+	 *
+	 * @return void
+	 */
+	public static function get_cf_form_body( $preset ) {
+
+		$forms_array = array(
+
+			'preset1' => '<div class="premium-cf-full"><label class="premium-cf-label">Email</label>
+            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
+            [submit "Subscribe"]',
+
+			'preset2' => '<div class="premium-cf-full"><label class="premium-cf-label">Name</label>
+            [text* text-1 class:premium-cf-field placeholder "John Smith"]</div>
+
+            <div class="premium-cf-full"><label class="premium-cf-label">Email</label>
+            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
+
+            [submit "Send"]',
+
+			'preset3' => '<div class="premium-cf-full"><label class="premium-cf-label">Name</label>
+            [text* text-1 class:premium-cf-field placeholder "John Smith"]</div>
+
+            <div class="premium-cf-full"><label class="premium-cf-label">Email</label>
+            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
+
+            <div class="premium-cf-full"><label class="premium-cf-label">Message</label>
+            [textarea* textarea-1 class:premium-cf-field placeholder "Enter your message here..."]</div>
+
+            [submit "Send"]',
+
+			'preset4' => '<div class="premium-cf-half"><label class="premium-cf-label">Name</label>
+            [text* text-1 class:premium-cf-field placeholder "John Smith"]</div>
+
+            <div class="premium-cf-half"><label class="premium-cf-label">Email</label>
+            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
+
+            <div class="premium-cf-full"><label class="premium-cf-label">Message</label>
+            [textarea* textarea-1 class:premium-cf-field placeholder "Enter your message here..."]</div>
+
+            [submit "Send"]',
+
+			'preset5' => '<div class="premium-cf-half"><label class="premium-cf-label">First Name</label>
+            [text* text-1 class:premium-cf-field placeholder "John"]</div>
+
+            <div class="premium-cf-half"><label class="premium-cf-label">Last Name</label>
+            [text* text-2 class:premium-cf-field placeholder "Smith"]</div>
+
+            <div class="premium-cf-half"><label class="premium-cf-label">Email</label>
+            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
+
+            <div class="premium-cf-half"><label class="premium-cf-label">Phone</label>
+            [tel* tel-1 class:premium-cf-field placeholder "+13137262547"]</div>
+
+            <div class="premium-cf-full"><label class="premium-cf-label">Gender</label>
+            [select menu-1 "Male" "Female"]</div>
+
+            <div class="premium-cf-full"><label class="premium-cf-label">Message</label>
+            [textarea* textarea-1 class:premium-cf-field placeholder "Enter your message here..."]</div>
+            [submit "Send"]',
+
+			'preset6' => '<div class="premium-cf-half"><label class="premium-cf-label">First Name</label>
+            [text* text-1 class:premium-cf-field placeholder "John"]</div>
+
+            <div class="premium-cf-half"><label class="premium-cf-label">Last Name</label>
+            [text* text-2 class:premium-cf-field placeholder "Smith"]</div>
+
+            <div class="premium-cf-half"><label class="premium-cf-label">Email</label>
+            [email* email-1 class:premium-cf-field placeholder "john@smith.com"]</div>
+
+            <div class="premium-cf-half"><label class="premium-cf-label">Phone</label>
+            [tel* tel-1 class:premium-cf-field placeholder "+13137262547"]</div>
+
+			<div class="premium-cf-full"><label class="premium-cf-label">Company Size</label>
+            [radio radio-1 default:1 "1-10 employees" "11-30 employees" "30-50 employees" "Above 50 employee"]
+			</div>
+
+            <div class="premium-cf-full"><label class="premium-cf-label">Message</label>
+            [textarea* textarea-1 class:premium-cf-field placeholder "Enter your message here..."]</div>
+            [submit "Send"]',
+
+		);
+
+		return $forms_array[ $preset ]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+	}
+
+    /**
+     * Render Rating Stars
+     *
+     * @since 4.10.13
+     * @access public
+     *
+     * @param float $rating rating score.
+     * @param string $fill_color fill color.
+     * @param string $empty_color empty color.
+     * @param float $star_size star size.
+     */
+    public static function render_rating_stars( $rating, $fill_color, $empty_color, $star_size ) {
+
+        ?>
+
+        <span class="premium-fb-rev-stars">
+        <?php
+
+        foreach ( array( 1, 2, 3, 4, 5 ) as $val ) {
+            $score = round( ( $rating - $val ), 2 );
+
+            if ( $score >= -0.2 ) {
+
+                ?>
+                    <span class="premium-fb-rev-star"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="<?php echo esc_attr( $star_size ); ?>" height="<?php echo esc_attr( $star_size ); ?>" viewBox="0 0 1792 1792"><path d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z" fill="<?php echo esc_attr( $fill_color ); ?>"></path></svg></span>
+                <?php
+            } elseif ( $score > -0.8 && $score < -0.2 ) {
+                ?>
+                    <span class="premium-fb-rev-star"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="<?php echo esc_attr( $star_size ); ?>" height="<?php echo esc_attr( $star_size ); ?>" viewBox="0 0 1792 1792"><path d="M1250 957l257-250-356-52-66-10-30-60-159-322v963l59 31 318 168-60-355-12-66zm452-262l-363 354 86 500q5 33-6 51.5t-34 18.5q-17 0-40-12l-449-236-449 236q-23 12-40 12-23 0-34-18.5t-6-51.5l86-500-364-354q-32-32-23-59.5t54-34.5l502-73 225-455q20-41 49-41 28 0 49 41l225 455 502 73q45 7 54 34.5t-24 59.5z" fill="<?php echo esc_attr( $fill_color ); ?>"></path></svg></span>
+            <?php } else { ?>
+                    <span class="premium-fb-rev-star"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="<?php echo esc_attr( $star_size ); ?>" height="<?php echo esc_attr( $star_size ); ?>" viewBox="0 0 1792 1792"><path d="M1201 1004l306-297-422-62-189-382-189 382-422 62 306 297-73 421 378-199 377 199zm527-357q0 22-26 48l-363 354 86 500q1 7 1 20 0 50-41 50-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z" fill="<?php echo esc_attr( $empty_color ); ?>"></path></svg></span>
+                    <?php
+            }
+        }
+        ?>
+        </span>
+
+        <?php
+    }
+
+
+    /**
+     * Get SVG Shapes
+     *
+     * @since 4.10.13
+     * @access public
+     *
+     */
+    public static function get_svg_shapes( $shape = '' ) {
+
+        if ( null === self::$shapes ) {
+
+            self::$shapes = require PREMIUM_ADDONS_PATH . 'modules/premium-shape-divider/shapes.php';
+
+        }
+
+        $shapes = self::$shapes;
+
+        if( empty( $shape ) ) {
+            return $shapes;
+        } else {
+            return $shapes[ $shape ]['imagesmall'];
+        }
+
+    }
 
 }

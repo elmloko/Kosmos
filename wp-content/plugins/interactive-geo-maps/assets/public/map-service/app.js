@@ -1388,6 +1388,10 @@ iMapsManager.addMap = function (index) {
 				var seriesType = im.getTargetSeriesType(ev.target.dataItem.dataContext);
 				var target = '';
 
+				// bring this series to front
+				ev.target.dataItem.dataContext.zIndex = Number.MAX_VALUE;
+				ev.target.dataItem.dataContext.toFront();
+
 				if (seriesType === "MapImageSeries") {
 					target = ev.target.dataItem.dataContext.mapImages;
 					target.each(function (marker) {
@@ -2155,12 +2159,23 @@ iMapsManager.pushRegionSeries = function (id, data, groupHover) {
 	regionSeries.name = data.regionLegend && data.regionLegend.title !== "" ? data.regionLegend.title : data.title;
 	regionSeries.hiddenInLegend = data.regionLegend ? !im.bool(data.regionLegend.enabled) : true; // if it's a base series
 
-	// always hide group series from legend?
-	/*
-	if(groupHover){
-	  regionSeries.hiddenInLegend = true;
+	// override hide in legend for scenarios where there are grouped entries for example
+	if (data.regionLegend && data.regionLegend.enabled === 'onlyGroups' && groupHover) {
+		regionSeries.hiddenInLegend = false;
 	}
-	*/
+
+	if (data.regionLegend && data.regionLegend.enabled === 'onlyGroups' && !groupHover) {
+		regionSeries.hiddenInLegend = true;
+	}
+
+	if (data.regionLegend && data.regionLegend.enabled === 'ignoreGroups' && groupHover) {
+		regionSeries.hiddenInLegend = true;
+	}
+
+	if (data.regionLegend && data.regionLegend.enabled === 'ignoreGroups' && !groupHover) {
+		regionSeries.hiddenInLegend = false;
+	}
+
 
 	if (id === data.id) {
 		// add it as the baseSeries - which will contain all region base series
@@ -2441,8 +2456,14 @@ iMapsManager.pushRegionSeries = function (id, data, groupHover) {
 
 		// convert custom json position string to object
 		var regionLabelCustomCoordinates = im.isJSON(data.regionLabels.regionLabelCustomCoordinates) ? JSON.parse(data.regionLabels.regionLabelCustomCoordinates) : false;
-		regionSeries.events.on("inited", function () {
-			var regionCheck = [];
+
+		let event = 'inited';
+		if (data.map === 'custom') {
+			event = 'datavalidated';
+		}
+
+		regionSeries.events.on(event, function () {
+
 			regionSeries.mapPolygons.each(function (polygon) {
 
 				// if they are not displaying with lat/long, skip, unless we're using a custom map
@@ -2545,7 +2566,7 @@ iMapsManager.pushRoundMarkerSeries = function (id, data) {
 		markerSeriesTemplate = markerSeries.mapImages.template;
 
 		circle = markerSeriesTemplate.createChild(am4core.Circle);
-		im.setupTooltip(id, markerSeries, data, circle); // default values
+		im.setupTooltip(id, markerSeries, data, circle);
 
 		//iOS focus scroll bug fix
 		markerSeriesTemplate.focusable = false;
@@ -2570,15 +2591,15 @@ iMapsManager.pushRoundMarkerSeries = function (id, data) {
 
 		// check for custom tooltip template
 		if (typeof data.roundMarkersTooltipTemplate !== 'undefined' && data.roundMarkersTooltipTemplate.trim() !== '') {
-			circle.tooltipText = data.roundMarkersTooltipTemplate;
-			circle.tooltipHTML = data.roundMarkersTooltipTemplate;
+			markerSeriesTemplate.tooltipText = data.roundMarkersTooltipTemplate;
+			markerSeriesTemplate.tooltipHTML = data.roundMarkersTooltipTemplate;
 		} else {
-			circle.tooltipText = data.tooltip && data.tooltip.template ? data.tooltip.template : "{tooltipContent}";
-			circle.tooltipHTML = data.tooltip && data.tooltip.template ? data.tooltip.template : "{tooltipContent}";
+			markerSeriesTemplate.tooltipText = data.tooltip && data.tooltip.template ? data.tooltip.template : "{tooltipContent}";
+			markerSeriesTemplate.tooltipHTML = data.tooltip && data.tooltip.template ? data.tooltip.template : "{tooltipContent}";
 		}
 
-		circle.propertyFields.tooltipText = "tooltipTemplate";
-		circle.propertyFields.tooltipHTML = "tooltipTemplate"; // fill can only be set if heatmap is not enabled and not a range
+		markerSeriesTemplate.propertyFields.tooltipText = "tooltipTemplate";
+		markerSeriesTemplate.propertyFields.tooltipHTML = "tooltipTemplate"; // fill can only be set if heatmap is not enabled and not a range
 
 		if (data.heatMapMarkers && im.bool(data.heatMapMarkers.enabled)) {
 			im.setupHeatMap(markerSeries, id, data); // setup the fill and radius if type is range
@@ -2612,6 +2633,9 @@ iMapsManager.pushRoundMarkerSeries = function (id, data) {
 		highlightState.propertyFields.fill = "hover"; // text label below
 
 		if (data.roundMarkerLabels && im.bool(data.roundMarkerLabels.enabled)) {
+
+			// create dummy state to force all object to get this state
+			markerSeriesTemplate.states.create('hover');
 
 			var markerLabel = markerSeriesTemplate.createChild(am4core.Label);
 			var markerLabelPosition = typeof data.roundMarkerLabels.position !== "undefined" && data.roundMarkerLabels.position !== '' ? data.roundMarkerLabels.position : "bottom";
@@ -2666,6 +2690,10 @@ iMapsManager.pushRoundMarkerSeries = function (id, data) {
 			}
 
 		}
+
+		// send to front (so on overlay they are always on top of regions)
+		markerSeries.zIndex = Number.MAX_VALUE;
+		markerSeries.toFront();
 
 		// Add data
 		markerSeries.data = data.roundMarkers; // For legend color
@@ -2747,6 +2775,10 @@ iMapsManager.pushImageMarkerSeries = function (id, data) {
 		markerSeriesTemplate.propertyFields.latitude = "latitude";
 		markerSeriesTemplate.propertyFields.longitude = "longitude"; // Add data for the three cities
 
+		// send to front (so on overlay they are always on top of regions)
+		markerSeries.zIndex = Number.MAX_VALUE;
+		markerSeries.toFront();
+
 		markerSeries.data = data.imageMarkers; // Events
 
 		markerSeriesTemplate.events.on("hit", function (ev) {
@@ -2822,8 +2854,10 @@ iMapsManager.pushIconMarkerSeries = function (id, data) {
 		clickableOverlay.opacity = 0;
 		clickableOverlay.propertyFields.horizontalCenter = "horizontalCenter";
 		clickableOverlay.propertyFields.verticalCenter = "verticalCenter";
-		clickableOverlay.tooltipText = data.tooltip.template ? data.tooltip.template : "{tooltipContent}";
-		clickableOverlay.tooltipHTML = data.tooltip.template ? data.tooltip.template : "{tooltipContent}";
+
+		markerSeriesTemplate.tooltipText = data.tooltip.template ? data.tooltip.template : "{tooltipContent}";
+		markerSeriesTemplate.tooltipHTML = data.tooltip.template ? data.tooltip.template : "{tooltipContent}";
+
 		im.setupTooltip(id, markerSeries, data, clickableOverlay);
 
 		if (data.iconMarkerLabels && im.bool(data.iconMarkerLabels.enabled)) {
@@ -2872,6 +2906,11 @@ iMapsManager.pushIconMarkerSeries = function (id, data) {
 
 		markerSeriesTemplate.propertyFields.latitude = "latitude";
 		markerSeriesTemplate.propertyFields.longitude = "longitude"; // Add data
+
+
+		// send to front (so on overlay they are always on top of regions)
+		markerSeries.zIndex = Number.MAX_VALUE;
+		markerSeries.toFront();
 
 		markerSeries.data = data.iconMarkers; // Events
 
@@ -2947,6 +2986,10 @@ iMapsManager.pushLineSeries = function (id, data) {
 
 		lineSeries.data = lineData;
 
+		// bring to front
+		lineSeries.zIndex = Number.MAX_VALUE - 1;
+		lineSeries.toFront();
+
 		// enable small map
 		if (data.zoom && data.zoom.smallMap && im.bool(data.zoom.smallMap)) {
 			map.smallMap.series.push(lineSeries);
@@ -2984,8 +3027,8 @@ iMapsManager.pushLabelSeries = function (id, data) {
 	if (Array.isArray(data.labels) && data.labels.length) {
 		// Create image series
 		labelSeries = map.series.push(new am4maps.MapImageSeries());
-		labelSeries.name = data.roundMarkersLegend && data.roundMarkersLegend.title !== "" ? data.roundMarkersLegend.title : data.title;
-		labelSeries.hiddenInLegend = data.roundMarkersLegend ? !im.bool(data.roundMarkersLegend.enabled) : false;
+		labelSeries.name = data.labelsLegend && data.labelsLegend.title !== "" ? data.labelsLegend.title : data.title;
+		labelSeries.hiddenInLegend = data.labelsLegend ? !im.bool(data.labelsLegend.enabled) : false;
 
 		labelSeriesTemplate = labelSeries.mapImages.template;
 		labelSeriesTemplate.setStateOnChildren = true;
@@ -3047,8 +3090,13 @@ iMapsManager.pushLabelSeries = function (id, data) {
 
 		highlightState = label.states.create("highlight");
 		highlightState.properties.fill = data.hover;
-		highlightState.propertyFields.fill = "hover"; // Add data
+		highlightState.propertyFields.fill = "hover";
 
+		// send to front (so on overlay they are always on top of regions)
+		labelSeries.zIndex = Number.MAX_VALUE;
+		labelSeries.toFront();
+
+		// Add data
 		labelSeries.data = data.labels; // For legend color
 
 		labelSeries.fill = data.labelDefaults.fill; // Events
@@ -3456,18 +3504,28 @@ iMapsManager.zoomToRegion = function (ev, id) {
 			ev.target.series.chart.zoomToMapObject(ev.target, markerZoomLevel, true);
 		}
 	} else {
-		if (dataContext.id === "asia") {
+		if (dataContext.id === "asia" && !data.map.startsWith('continents')) {
 			ev.target.series.chart.deltaLongitudeOriginal = ev.target.series.chart.deltaLongitude;
 			ev.target.series.chart.deltaLongitude = -10;
 			ev.target.series.chart.zoomToGeoPoint({
 				latitude: 34.076842,
 				longitude: 100.693068
 			}, 1.7, true);
+		} else if (dataContext.id === "asia" && data.map.startsWith('continents')) {
+			ev.target.series.chart.zoomToGeoPoint({
+				latitude: 34.076842,
+				longitude: 100.693068
+			}, 2.2, true);
 		} else if (dataContext.id === "northAmerica" && data.map.startsWith('region/world/worldRegion')) {
 			ev.target.series.chart.zoomToGeoPoint({
 				latitude: 55.5,
 				longitude: -105.5
 			}, 3, true);
+		} else if (dataContext.id === "northAmerica" && data.map.startsWith('continents')) {
+			ev.target.series.chart.zoomToGeoPoint({
+				latitude: 55.5,
+				longitude: -105.5
+			}, 2.3, true);
 		} else if (dataContext.id === "ZA" && data.map.startsWith('world')) {
 			ev.target.series.chart.zoomToGeoPoint({
 				latitude: -28.6,
@@ -3751,7 +3809,7 @@ iMapsManager.select = function (id, elID, forceFixedTooltip, showTooltip, series
 	var im = this,
 		map = im.maps[id],
 		data = im.maps[id].data,
-		series = map.series,
+		series = map.series.slice().reverse(), // we clone and reverse so that the grouped region series are at the end, which solves a particular bug with the select() function and the tooltip
 		selected = [],
 		select,
 		group,
@@ -3893,6 +3951,8 @@ iMapsManager.select = function (id, elID, forceFixedTooltip, showTooltip, series
 
 									select.tooltipPosition = defaultTooltipPosition;
 									select.showTooltipOn = defaultTooltipShowOn;
+
+									select.selectedFromGroup = true;
 
 								} else {
 									select.isHover = true;
@@ -4525,8 +4585,9 @@ iMapsManager.getHighlighted = function (id) {
 iMapsManager.clearSelected = function (id, keepThis, skipReset) {
 	var im = this,
 		map = im.maps[id],
-		selected = map.selected || []; // to keep the state of this element
+		selected = map.selected || [];
 
+	// to keep the state of this element
 	keepThis = keepThis || false;
 	skipReset = skipReset || false;
 
@@ -4541,6 +4602,11 @@ iMapsManager.clearSelected = function (id, keepThis, skipReset) {
 				// so we added this check before hiding the tooltip
 				if (!keepThis) {
 					polygon.hideTooltip(0); // needed to hide tooltip
+				}
+
+				if (polygon.selectedFromGroup) {
+					polygon.hideTooltip(0); // needed to hide tooltip when group was selected
+					polygon.selectedFromGroup = false;
 				}
 
 				polygon.setState("default");

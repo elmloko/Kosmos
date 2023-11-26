@@ -330,9 +330,13 @@
 
                         $blogElement.append('<div class="premium-loading-feed"><div class="premium-loader"></div></div>');
 
+                        var stickyOffset = 0;
+                        if ($('.elementor-sticky').length > 0)
+                            stickyOffset = 100;
+
                         if (shouldScroll) {
                             $('html, body').animate({
-                                scrollTop: (($blogElement.offset().top) - 50)
+                                scrollTop: (($blogElement.offset().top) - 50 - stickyOffset)
                             }, 'slow');
                         }
 

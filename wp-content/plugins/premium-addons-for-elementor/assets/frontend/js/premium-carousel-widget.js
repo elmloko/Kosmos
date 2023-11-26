@@ -5,7 +5,11 @@
         var $carouselElem = $scope.find(".premium-carousel-wrapper"),
             settings = $($carouselElem).data("settings"),
             computedStyle = getComputedStyle($scope[0]),
-            widgetID = $scope.data('id');
+            widgetID = $scope.data('id'),
+            currentSlides = 0;
+
+        var $progressbar = $carouselElem.find(".premium-carousel-nav-progress-fill");
+
 
         if ($carouselElem.find(".item-wrapper").length < 1)
             return;
@@ -89,8 +93,24 @@
             customPaging: function () {
                 var customDot = $carouselElem.find(".premium-carousel-nav-dot").html();
                 return customDot;
-            }
+            },
+            carouselNavigation: settings.carouselNavigation,
+            templatesNumber: settings.templatesNumber,
         });
+
+        function runProgress() {
+            $progressbar.animate({ 'width': "+=100%" }, settings.autoplaySpeed, runProgress);
+        }
+
+        if (settings.carouselNavigation === "progressbar") {
+            var progress = (currentSlides + 1) / settings.templatesNumber;
+            $carouselElem.find(".premium-carousel-nav-progressbar-fill").css("transform", "translate3d(0px, 0px, 0px) scaleX(" + progress + ") scaleY(1)");
+        }
+
+        if (settings.carouselNavigation === "progress") {
+            runProgress();
+        }
+
 
         $scope.find(".premium-carousel-hidden").removeClass("premium-carousel-hidden");
         $carouselElem.find(".premium-carousel-nav-arrow-prev").remove();
@@ -104,6 +124,7 @@
         function resetAnimations(event) {
 
             var $slides = $carouselElem.find(".slick-slide");
+            $progressbar.stop(true).animate({ "width": 0 }, 0);
 
             if ("init" === event)
                 $slides = $slides.not(".slick-current");
@@ -122,6 +143,10 @@
 
                 $(elem).removeClass("animated " + animation).addClass("elementor-invisible");
             });
+
+            if (settings.carouselNavigation === "progress") {
+                runProgress();
+            }
         };
 
         function triggerAnimation() {
@@ -180,6 +205,15 @@
             //Fix carousel continues to work after last slide if autoplay is true and infinite is false.
             if (slick.$slides.length - 1 == currentSlide && !settings.infinite) {
                 $carouselElem.find(".premium-carousel-inner").slick('slickSetOption', 'autoplay', false, false);
+            }
+
+            if (slick.options.carouselNavigation === "fraction") {
+                $carouselElem.find("#currentSlide").text((currentSlide || 0) + 1);
+            }
+
+            if (slick.options.carouselNavigation === "progressbar") {
+                var progress = (currentSlide + 1) / slick.options.templatesNumber;
+                $carouselElem.find(".premium-carousel-nav-progressbar-fill").css("transform", "translate3d(0px, 0px, 0px) scaleX(" + progress + ") scaleY(1)");
             }
 
         });

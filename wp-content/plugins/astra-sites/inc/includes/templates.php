@@ -234,13 +234,13 @@ $suggestion_link = astra_sites_get_suggestion_link();
 		<div class="astra-sites-no-sites">
 			<div class="inner">
 				<h3><?php esc_html_e( 'Sorry No Results Found.', 'astra-sites' ); ?></h3>
-				<div class="content">
+				<div class="content" style="text-align: center">
 					<div class="description">
 						<p>
-						<?php
-						/* translators: %1$s External Link */
-						printf( esc_html__( 'Don\'t see a template you would like to import?<br><a target="_blank" href="%1$s">Make a Template Suggestion!</a>', 'astra-sites' ), esc_url( $suggestion_link ) );
-						?>
+							<?php
+								/* translators: %1$s External Link */
+								printf( esc_html__( "Don't see a template you would like to import? %s", 'astra-sites' ), nl2br( '<br><a target="_blank" href="' . esc_url( $suggestion_link ) . '">Make a Template Suggestion!</a>' ) );
+							?>
 						</p>
 						<div class="back-to-layout-button"><span class="button astra-sites-back"><?php esc_html_e( 'Back to Templates', 'astra-sites' ); ?></span></div>
 					</div>
@@ -403,13 +403,13 @@ $suggestion_link = astra_sites_get_suggestion_link();
 		<div class="astra-sites-no-sites">
 			<div class="inner">
 				<h3><?php esc_html_e( 'Sorry No Results Found.', 'astra-sites' ); ?></h3>
-				<div class="content">
+				<div class="content" style="text-align: center">
 					<div class="description">
 						<p>
-						<?php
-						/* translators: %1$s External Link */
-						printf( esc_html__( 'Don\'t see a template you would like to import?<br><a target="_blank" href="%1$s">Make a Template Suggestion!</a>', 'astra-sites' ), esc_url( $suggestion_link ) );
-						?>
+							<?php
+								/* translators: %1$s External Link */
+								printf( esc_html__( "Don't see a template you would like to import? %s", 'astra-sites' ), nl2br( '<br><a target="_blank" href="' . esc_url( $suggestion_link ) . '">Make a Template Suggestion!</a>' ) );
+							?>
 						</p>
 						<div class="back-to-layout-button"><span class="button astra-sites-back"><?php esc_html_e( 'Back to Templates', 'astra-sites' ); ?></span></div>
 					</div>

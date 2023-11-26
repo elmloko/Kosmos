@@ -18707,10 +18707,16 @@
                 });
             }
 
-            elementorFrontend.waypoint($item, function () {
+            if ($scope.hasClass('instant-lottie')) {
                 instance = new premiumLottieAnimations($item);
                 instance.init();
-            });
+            } else {
+                elementorFrontend.waypoint($item, function () {
+                    instance = new premiumLottieAnimations($item);
+                    instance.init();
+                });
+            }
+
 
         });
     };
@@ -18965,7 +18971,8 @@
                 speed = $lottie.data("lottie-speed"),
                 scroll = $lottie.data("lottie-scroll"),
                 viewPort = $lottie.data("lottie-viewport"),
-                renderer = $lottie.data("lottie-render");
+                renderer = $lottie.data("lottie-render"),
+                click = $lottie.data("lottie-click");
 
             var animItem = lottie.loadAnimation({
                 container: $lottie[0],
@@ -19010,6 +19017,17 @@
 
                     animateInstance.init();
 
+                } else if (click) {
+
+                    animItem.pause();
+
+                    var animToggle = false;
+
+                    $elem.click(function () {
+                        animToggle = !animToggle;
+                        animToggle ? animItem.play() : animItem.pause();
+
+                    });
                 }
 
                 if (trigger) {
@@ -19044,7 +19062,6 @@
 
                     });
                 }
-
 
             });
 

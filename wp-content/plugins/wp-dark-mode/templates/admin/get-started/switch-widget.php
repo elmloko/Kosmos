@@ -20,12 +20,15 @@ defined( 'ABSPATH' ) || exit();
 	<h2><?php esc_html_e( 'Display Switch Button Using The WP Dark Mode widget.', 'wp-dark-mode' ); ?></h2>
 	<p>
 		<?php
-		echo wp_kses_post( 'You can display the switch button by using the (WP Dark Mode ) WordPress widget, for your users to switch between the dark and normal mode.
+		echo wp_kses_post(
+			'You can display the switch button by using the (WP Dark Mode ) WordPress widget, for your users to switch between the dark and normal mode.
 		<br>
 		<br>
 		Dark Mode Switch Widget is available in the PRO version.
 		<br>
-		<br> For displaying the Darkmode Switch button using the WP Dark Mode widget follow the below steps:', 'wp-dark-mode' );
+		<br> For displaying the Darkmode Switch button using the WP Dark Mode widget follow the below steps:',
+			'wp-dark-mode'
+		);
 		?>
 		</p>
 	<p>

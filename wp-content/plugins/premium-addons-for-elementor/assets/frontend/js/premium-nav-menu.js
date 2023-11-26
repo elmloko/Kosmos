@@ -6,8 +6,9 @@
         // we don't need to wait for content dom load since the script is loaded in the footer.
         // $scope.find('.premium-nav-widget-container').removeClass('premium-addons-invisible');
 
-        if (!elementorFrontend.isEditMode() ) {
-            $scope.find('.premium-nav-widget-container').css({ visibility: 'visible', opacity: 1 });
+        if (!elementorFrontend.isEditMode()) {
+            // $scope.find('.premium-nav-widget-container').css({ visibility: 'visible', opacity: 1 });
+            $scope.find('.premium-nav-widget-container').css({ visibility: 'inherit', opacity: 'inherit' });
         }
 
         var settings = $scope.find('.premium-nav-widget-container').data('settings');
@@ -28,6 +29,27 @@
             disablePageScroll = $scope.hasClass('premium-disable-scroll-yes') ? true : false,
             delay = getComputedStyle($scope[0]).getPropertyValue('--pa-mega-menu-delay') || 300,
             hoverTimeout;
+
+        //Get Element On Page Option
+        $scope.find('div[data-mega-content]').each(function (index, elem) {
+            var $currentItem = $(elem),
+                targetElement = $currentItem.data('mega-content');
+
+            if ($(targetElement).length > 0) {
+
+                var $targetElement = $(targetElement);
+
+                $targetElement.attr('data-menu-id', $scope.data('id'));
+
+                $currentItem.append($targetElement.clone(true).addClass('pa-cloned-element'));
+
+            }
+
+        });
+
+        //Remove Element On Page Option If on Frontend
+        if (!elementorFrontend.isEditMode())
+            $('div[data-menu-id="' + $scope.data('id') + '"]').not('.pa-cloned-element').remove();
 
         /**
          * Save current device to use it later to determine if the device changed on resize.
@@ -89,6 +111,7 @@
         checkBreakPoint(settings);
 
         if ($scope.hasClass('premium-nav-hor')) {
+            $(window).resize();
             checkMegaContentWidth();
         }
 
@@ -373,7 +396,7 @@
 
             } else {
                 $(window).off('scroll.PaStickyNav');
-                $( '.' + stickyProps.spacerClass ).remove(); // remove spacer
+                $('.' + stickyProps.spacerClass).remove(); // remove spacer
                 $('#' + stickyProps.targetId).removeClass('premium-sticky-parent premium-sticky-active premium-sticky-parent-' + $scope.data('id')).css({ // unset style
                     top: 'unset',
                     width: 'inherit',

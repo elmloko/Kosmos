@@ -522,7 +522,7 @@ class Assets_Manager {
 				'premium-nav-menu',
 				'premium-addon-maps',
 				'premium-woo-products-pro',
-				'premium-addon-testimonials',
+				// 'premium-addon-testimonials',
 				'premium-smart-post-listing',
 				'premium-addon-pricing-table',
 				'premium-addon-image-separator',
@@ -657,11 +657,12 @@ class Assets_Manager {
 		$pa_elems = Admin_Helper::get_free_widgets_names();
 
 		// add smart post listing
-		$pa_elements[] = 'premium-smart-post-listing';
+		$pa_elems[] = 'premium-smart-post-listing';
+		$pa_elems[] = 'premium-addon-instagram-feed';
 
 		$has_free = array_intersect( $post_elems, $pa_elems ) ? true : false;
 
-		return $has_free;
+        return $has_free;
 	}
 
 	/**

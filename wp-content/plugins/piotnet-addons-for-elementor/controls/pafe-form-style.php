@@ -196,10 +196,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'label' => __( 'Background Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#f1f1f1', 
 					'selectors' => [
 						'{{WRAPPER}} .wpcf7 input:not([type="submit"])' => 'background-color: {{VALUE}}',
@@ -218,7 +217,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 					'label' => __( 'Label', 'pafe' ),
 					'name' => 'pafe_form_style_label',
 					'selector' => '{{WRAPPER}} .wpcf7 label',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1, 
+                    'global' => [
+                    	'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 					'separator' => 'before',
 					'condition' => [ 
 						'pafe_form_style' => 'yes'
@@ -231,10 +232,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'label' => __( 'Label Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#000', 
 					'selectors' => [
 						'{{WRAPPER}} .wpcf7 label' => 'color: {{VALUE}}',
@@ -286,7 +286,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 					'label' => __( 'Placeholder', 'pafe' ),
 					'name' => 'pafe_form_style_placeholder',
 					'selector' => '{{WRAPPER}} ::placeholder',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1, 
+					'global' => [
+                    	'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 					'separator' => 'before',
 					'condition' => [ 
 						'pafe_form_style' => 'yes'
@@ -299,10 +301,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'label' => __( 'Placeholder Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#7D7676', 
 					'selectors' => [
 						'{{WRAPPER}} ::placeholder' => 'color: {{VALUE}}',
@@ -320,7 +321,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 					'label' => __( 'Button', 'pafe' ),
 					'name' => 'pafe_form_style_button',
 					'selector' => '{{WRAPPER}} .wpcf7-submit',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1, 
+					'global' => [
+                    	'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ], 
 					'separator' => 'before',
 					'condition' => [ 
 						'pafe_form_style' => 'yes'
@@ -393,10 +396,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'label' => __( 'Button Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .wpcf7-submit' => 'color: {{VALUE}}',
@@ -412,10 +414,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'label' => __( 'Background Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#6EC1E4', 
 					'selectors' => [
 						'{{WRAPPER}} .wpcf7-submit' => 'background-color: {{VALUE}}',
@@ -442,10 +443,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'label' => __( 'Button Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .wpcf7 input[type="submit"]:hover' => 'color: {{VALUE}}',
@@ -461,10 +461,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'label' => __( 'Background Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#04A5E9', 
 					'selectors' => [
 						'{{WRAPPER}} .wpcf7 input[type="submit"]:hover' => 'background-color: {{VALUE}}',

@@ -262,6 +262,16 @@ body.step-import-site:not( .st-error ) .step-header a {
     opacity: 0.7;
 }
 
+body.step-import-site-done
+{
+	.step-header a {
+		opacity: 1 !important;
+		pointer-events: visible !important;
+	}
+	.step-actions{
+		display: none;
+	}
+}
 
 .row {
     display: flex;

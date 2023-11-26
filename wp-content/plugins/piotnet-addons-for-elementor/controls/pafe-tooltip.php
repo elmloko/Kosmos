@@ -157,10 +157,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'label' => __( 'Content Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} [data-tippy-root] > .tippy-box' => 'color: {{VALUE}}',
@@ -222,10 +221,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'label' => __( 'Background Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#000', 
 					'selectors' => [
 						'{{WRAPPER}} [data-tippy-root] > .tippy-box' => 'background-color: {{VALUE}}',
@@ -242,7 +240,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 				[
 					'name' => 'pafe_tooltip_label_typography',
 					'selector' => '{{WRAPPER}} [data-tippy-root] > .tippy-box',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_4,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_ACCENT,
+                    ],
 					'condition' => [ 
 						'pafe_tooltip' => 'yes', 
 						'pafe_tooltip_content_type' => 'content', 

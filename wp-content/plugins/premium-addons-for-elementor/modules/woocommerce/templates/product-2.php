@@ -136,7 +136,7 @@ $out_of_stock    = 'outofstock' === get_post_meta( $product_id, '_stock_status',
 				do_action( 'pa_woo_product_after_cta', $product_id, $settings );
 
 			if ( 'yes' === $quick_view ) {
-				echo '<div class="premium-woo-qv-btn button" data-product-id="' . esc_attr( $product_id ) . '">' . esc_html( __( 'Quick View', 'premium-addons-for-elementor' ) ) . '</div>';
+				echo '<div class="premium-woo-qv-btn button" data-product-id="' . esc_attr( $product_id ) . '">' . esc_html( apply_filters( 'premium_woo_product_quick_view', __( 'Quick View', 'premium-addons-for-elementor' ) ) ) . '</div>';
 			}
 			echo '</div>';
 

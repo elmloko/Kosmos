@@ -833,7 +833,6 @@ if ( ! class_exists( '\WPDarkMode\Module\SocialShare' ) ) {
 
 			wp_die();
 		}
-
 	}
 	// Initialize.
 	$instance_social_share = new SocialShare();

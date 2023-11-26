@@ -968,7 +968,7 @@ class Premium_Blog extends Widget_Base {
 				'type'        => Controls_Manager::SELECT,
 				'options'     => array(
 					'dots' => __( 'Dots', 'premium-addons-for-elementor' ),
-					'link' => __( 'Link', 'premium-addons-for-elementor' ),
+					'link' => __( 'Read More', 'premium-addons-for-elementor' ),
 				),
 				'default'     => 'dots',
 				'label_block' => true,

@@ -2452,7 +2452,7 @@ class Premium_Grid extends Widget_Base {
 				'label'     => __( 'Background Color', 'premium-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'#elementor-lightbox-slideshow-{{ID}}' => 'background-color: {{VALUE}};',
+					'#elementor-lightbox-slideshow-{{ID}}, #elementor-lightbox-{{ID}}' => 'background-color: {{VALUE}};',
 				),
 			)
 		);
@@ -2463,7 +2463,8 @@ class Premium_Grid extends Widget_Base {
 				'label'     => __( 'UI Color', 'premium-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'#elementor-lightbox-slideshow-{{ID}} .dialog-lightbox-close-button, #elementor-lightbox-slideshow-{{ID}} .elementor-swiper-button' => 'color: {{VALUE}};',
+					'#elementor-lightbox-slideshow-{{ID}} .dialog-lightbox-close-button, #elementor-lightbox-{{ID}} .dialog-lightbox-close-button' => 'color: {{VALUE}};',
+                    '#elementor-lightbox-slideshow-{{ID}} svg, #elementor-lightbox-{{ID}} svg' => 'fill: {{VALUE}}',
 				),
 			)
 		);
@@ -2474,7 +2475,8 @@ class Premium_Grid extends Widget_Base {
 				'label'     => __( 'UI Hover Color', 'premium-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'#elementor-lightbox-slideshow-{{ID}} .dialog-lightbox-close-button:hover, #elementor-lightbox-slideshow-{{ID}} .elementor-swiper-button:hover' => 'color: {{VALUE}};',
+					'#elementor-lightbox-slideshow-{{ID}} .dialog-lightbox-close-button:hover, #elementor-lightbox-{{ID}} .dialog-lightbox-close-button:hover' => 'color: {{VALUE}};',
+                    '#elementor-lightbox-slideshow-{{ID}} svg:hover, #elementor-lightbox-{{ID}} svg:hover' => 'fill: {{VALUE}}',
 				),
 			)
 		);
@@ -2511,7 +2513,7 @@ class Premium_Grid extends Widget_Base {
 		}
 
 		$cat_filtered = str_replace( ', ', ',', $cat_filtered );
-		$cat_filtered = preg_replace( '/[\s_&@!#%]/', '-', $cat_filtered );
+		$cat_filtered = preg_replace( '/[\s_`\'‘&@!#%]/', '-', $cat_filtered );
 		$cat_filtered = str_replace( ',', ' ', $cat_filtered );
 
 		return $cat_filtered;
@@ -2756,6 +2758,10 @@ class Premium_Grid extends Widget_Base {
 				$key = 'gallery_item_' . $index;
 
 				$image_id = apply_filters( 'wpml_object_id', $image['premium_gallery_img']['id'], 'elementor_library', true );
+
+                //Check for Image ID, but not for the default Elementor placeholder.
+                if( false === strpos( $image['premium_gallery_img']['url'], 'placeholder.png' ) && ! $image['premium_gallery_video'] && ! $image_id )
+                    continue;
 
 				$image_by_id = get_post( $image_id );
 

@@ -220,6 +220,40 @@ $wp_dark_mode->unsubscribe_tag();
 $wp_dark_mode->unsubscribe(); 
 ```
 
+## Set Campaign
+#### Which problem is being solved?
+For campaigns, we're settings campaign-vibe image inside the plugin and we are required to release a version to apply effects. So every time before and after the campaign, users are required to update their version; which is not possible. The campaign image and discounts will be shown even after the campaign ends because if user doesn't update the plugin. Which may be different from our LIVE/regular discounts/offer. This is misinformation, confliction.
+
+#### So what?
+
+Now we can set campaign images with dates, it will show specific background image between two dates or times. After or before the event date, the generic/regular image will be shown.
+
+```php
+/**
+ * Set image until
+ *
+ * @param string $image_url The image url.
+ * @param string $to End date. Default is 2 weeks from now.
+ * @param string $from Start from. Default is now.
+ * @return mixed
+ */
+
+if( function_exists( 'wppool_plugin_init' ) ) {
+    $wp_dark_mode = wppool_plugin_init('wp_dark_mode');
+
+    $image_url = '/path/to/campaign/image'
+    $to = '2023-10-24'; // Date, the campaign will end by. 2023-10-24 23:59:59. Whole day of 24 October 2023, just before 25 October starts
+    $from = '2023-10-18'; // Date, the campaign will be started from. 2023-10-18 00:00:01. Just the day started. Default: current time
+    if ( $wp_dark_mode && method_exits( $wp_dark_mode, 'set_campaign ) ) {
+        $wp_dark_mode->set_campaign( $image_url, $to, $from );
+    }
+}
+```
+
+The campaign image will be shown when current date is in between 2023-10-18 and 2023-10-24. Unless, the generic image will be shown.
+
+
+
 
 
 ## Update SDK

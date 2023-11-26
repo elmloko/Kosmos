@@ -2,9 +2,9 @@
 Contributors: wppool, wpdarkmode, azizultex, iamjafran
 Tags: dark, dark mode, night mode, dark theme, dark mode plugin, social share, Gutenberg block, toggle, social sharing, dark mode toggle
 Requires at least: 5.0
-Tested up to: 6.2
+Tested up to: 6.4
 Requires PHP: 5.6
-Stable tag: 4.2.0
+Stable tag: 4.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -195,6 +195,29 @@ Yes, You can toggle the dark mode/ light mode by keyboard shortcut `(Ctrl + Alt 
 7. Dark Mode color presets
 
 == Changelog ==
+
+= 4.2.6 – NOV 08 2023 =
+* [Fixed] Checked compatibility with WordPress 6.4
+
+= 4.2.5 – NOV 02 2023 =
+* [Fixed] Fixed Fatal Error calling set_campaign method on null
+
+= 4.2.4 – OCT 25 2023 =
+* [Fixed] Minor issues & bugs
+
+= 4.2.3 – SEP 20 2023 =
+* [Fixed] Multi-site compatibility
+* [Fixed] Dark Mode switch appears on Gutenberg Block Editor
+* [Fixed] Dark Mode color palettes on Block Editor Toolbar 
+
+= 4.2.2 – SEP 5 2023 =
+* [Fixed] Fixed exclude posts and pages
+
+= 4.2.1 – AUG 10 2023 =
+* [Improvement] Checked and improved compatibility with WordPress 6.3
+
+= 4.2.0 - July 6 2023 =
+* [Fixed] Dark Mode switch label typography style
 
 = 4.2.0 - July 6 2023 =
 * [Fixed] Dark Mode switch label typography style

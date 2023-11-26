@@ -710,7 +710,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 							'120'    => __( 'Large', 'wp-dark-mode' ),
 							'150'    => __( 'Extra Large', 'wp-dark-mode' ),
 							'200'    => __( 'Huge', 'wp-dark-mode' ),
-							'custom' => __( 'Custom', 'wp-dark-mode' ),
+							'custom' => __( 'Custom', 'wp-dark-mode' ), // phpcs:ignore
 						],
 					],
 					'custom_font_size'     => [
@@ -771,7 +771,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 				'wp_dark_mode_image_settings'      => apply_filters(
 					'wp_dark_mode_image_settings',
 					[
-						[
+						'image_settings' => [
 							'name'    => 'image_settings',
 							'default' => [ $this, 'image_settings' ],
 							'type'    => 'cb_function',
@@ -1015,7 +1015,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 						$page_ids = wp_list_pluck( $pages, 'post_title', 'ID' );
 
 						foreach ( $page_ids as $id => $title ) {
-							printf( '<option value="%1$s" %2$s>%3$s</option>', $id, in_array( $id, $exclude_pages, false ) ? 'selected' : 'not', esc_attr( $title ) );
+							printf( '<option value="%1$s" %2$s>%3$s</option>', esc_html( $id ), in_array( $id, $exclude_pages, false ) ? 'selected' : 'not', esc_attr( $title ) );
 						}
 					}
 					?>
@@ -1055,7 +1055,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 							$page_ids = wp_list_pluck( $pages, 'post_title', 'ID' );
 
 							foreach ( $page_ids as $id => $title ) {
-								printf( '<option value="%1$s" %2$s>%3$s</option>', $id, in_array( $id, $exclude_pages_except, false ) ? 'selected' : '', esc_attr( $title ) );
+								printf( '<option value="%1$s" %2$s>%3$s</option>', esc_html( $id ), in_array( $id, $exclude_pages_except, false ) ? 'selected' : '', esc_attr( $title ) );
 							}
 						}
 						?>
@@ -1090,7 +1090,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 					$page_ids = wp_list_pluck( $posts, 'post_title', 'ID' );
 
 					foreach ( $page_ids as $id => $title ) {
-						printf( '<option value="%1$s" %2$s>%3$s</option>', $id, in_array( $id, $exclude_posts, false ) ? 'selected' : 'not', esc_attr( $title ) );
+						printf( '<option value="%1$s" %2$s>%3$s</option>', esc_html( $id ), in_array( $id, $exclude_posts, false ) ? 'selected' : 'not', esc_attr( $title ) );
 					}
 				}
 				?>
@@ -1127,7 +1127,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 							$page_ids = wp_list_pluck( $posts, 'post_title', 'ID' );
 
 							foreach ( $page_ids as $id => $title ) {
-								printf( '<option value="%1$s" %2$s>%3$s</option>', $id, in_array( $id, $exclude_posts_except, false ) ? 'selected' : '', esc_attr( $title ) );
+								printf( '<option value="%1$s" %2$s>%3$s</option>', esc_html( $id ), in_array( $id, $exclude_posts_except, false ) ? 'selected' : '', esc_attr( $title ) );
 							}
 						}
 						?>
@@ -1205,14 +1205,17 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 			$exclude_categories     = wp_dark_mode_get_settings( 'wp_dark_mode_triggers', 'exclude_categories', [] );
 			$exclude_all_categories = 'on' === wp_dark_mode_get_settings( 'wp_dark_mode_triggers', 'exclude_all_categories', 'off' );
 			$specific_categories    = wp_dark_mode_get_settings( 'wp_dark_mode_triggers', 'specific_categories', [] );
-			$cats                   = wp_dark_mode_is_hello_elementora() ? get_terms( 'category', [ 'hide_empty' => false ] ) : [];
+			$cats                   = wp_dark_mode_is_hello_elementora() ? get_terms( [
+				'taxonomy' => 'category',
+				'hide_empty' => false,
+			] ) : [];
 			?>
 			<div class="exclude_wrap <?php echo $exclude_all_categories ? 'disabled' : ''; ?>">
 				<select name="wp_dark_mode_triggers[exclude_categories][]" multiple id="wp_dark_mode_triggers[exclude_categories]">
 					<?php
 					if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
 						foreach ( $cats as $cat ) {
-							printf( '<option value="%1$s" %2$s>%3$s</option>', $cat->term_id, in_array( $cat->term_id, $exclude_categories, false ) ? 'selected' : '', esc_attr( $cat->name ) );
+							printf( '<option value="%1$s" %2$s>%3$s</option>', absint( $cat->term_id ), in_array( $cat->term_id, $exclude_categories, false ) ? 'selected' : '', esc_attr( $cat->name ) );
 						}
 					}
 					?>
@@ -1268,7 +1271,10 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 			$exclude_wc_categories     = wp_dark_mode_get_settings( 'wp_dark_mode_wc', 'exclude_wc_categories', [] );
 			$exclude_all_wc_categories = 'on' === wp_dark_mode_get_settings( 'wp_dark_mode_wc', 'off' );
 			$specific_wc_categories    = wp_dark_mode_get_settings( 'wp_dark_mode_wc', 'specific_wc_categories', [] );
-			$cats                      = wp_dark_mode_is_hello_elementora() ? get_terms( 'product_cat', [ 'hide_empty' => false ] ) : [];
+			$cats                      = wp_dark_mode_is_hello_elementora() ? get_terms( [
+				'taxonomy' => 'product_cat',
+				'hide_empty' => false,
+			] ) : [];
 			?>
 			<div class="exclude_wrap exclude_wc_categories_wrap <?php echo $exclude_all_wc_categories ? 'disabled' : ''; ?>">
 				<select name="wp_dark_mode_wc[exclude_wc_categories][]" multiple id="wp_dark_mode_wc[exclude_wc_categories]">
@@ -1454,7 +1460,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 					</tr>
 					<?php
 					if ( ! empty( $light_images ) ) :
-						foreach ( $light_images as $key => $light_image ) :
+						foreach ( $light_images as $key => $light_image ) {
 							?>
 					<tr>
 						<td>
@@ -1480,7 +1486,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 							<a href="#" class="remove_row button button-link-delete"><?php esc_html_e( 'Remove', 'wp-dark-mode' ); ?></a>
 						</td>
 					</tr>
-					<?php endforeach; else : ?>
+					<?php } else : ?>
 					<tr>
 						<td>
 							<img src="">
@@ -1550,7 +1556,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 
 					<?php
 					if ( ! empty( $light_videos ) ) :
-						foreach ( $light_videos as $key => $light_image ) :
+						foreach ( $light_videos as $key => $light_image ) {
 							?>
 					<tr>
 						<td>
@@ -1577,7 +1583,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Settings' ) ) {
 							<a href="#" class="remove_row button button-link-delete"><?php esc_html_e( 'Remove', 'wp-dark-mode' ); ?></a>
 						</td>
 					</tr>
-					<?php endforeach; else : ?>
+					<?php } else : ?>
 					<tr>
 						<td>
 							<input type="url" value="" name="wp_dark_mode_video_settings[light_videos][]">

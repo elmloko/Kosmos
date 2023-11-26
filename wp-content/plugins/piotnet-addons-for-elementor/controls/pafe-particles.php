@@ -57,10 +57,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 					'label' => __( 'Particles Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
 					'default' => '#910a0a',
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'condition' => [ 
 						'pafe_particles_enable' => 'yes',  
 					]
@@ -160,10 +159,9 @@ require_once( __DIR__ . '/controls-manager.php' );
 					'label' => __( 'Linked Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
 					'default' => '#910a0a',
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'condition' => [ 
 						'pafe_particles_enable' => 'yes',  
 					]

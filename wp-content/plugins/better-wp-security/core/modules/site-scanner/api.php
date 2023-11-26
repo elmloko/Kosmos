@@ -1,12 +1,13 @@
 <?php
 
+use iThemesSecurity\Lib\Result;
 use iThemesSecurity\Site_Scanner\Factory;
 use iThemesSecurity\Site_Scanner\Scan;
 
 class ITSEC_Site_Scanner_API {
 
 	const HOST = 'https://itsec-site-scanner.ithemes.com/';
-	const ACCEPT = 'application/vnd.site-scanner.ithemes;v=1.0';
+	const ACCEPT = 'application/vnd.site-scanner.ithemes;v=1.1';
 	const VERIFY_TOKEN = 'site-scanner-verify';
 
 	/**
@@ -129,7 +130,7 @@ class ITSEC_Site_Scanner_API {
 			'mutedIssues' => wp_list_pluck( ITSEC_Site_Scanner_Util::get_muted_issues(), 'id' ),
 		];
 
-		return self::make_request( get_main_site_id(), 'api/scan', 'POST', $body, $pid );
+		return self::make_request( get_main_site_id(), 'api/scan', 'POST', [], $body, $pid );
 	}
 
 	/**
@@ -149,7 +150,7 @@ class ITSEC_Site_Scanner_API {
 			}
 		}
 
-		return self::make_request( $site_id, 'api/scan', 'POST', [
+		return self::make_request( $site_id, 'api/scan', 'POST', [], [
 			'scan' => [
 				'url' => self::clean_url( get_home_url( $site_id ) ),
 			]
@@ -159,7 +160,7 @@ class ITSEC_Site_Scanner_API {
 	/**
 	 * Registers a site with the Site Scanner API.
 	 *
-	 * This is not meant to be used by licensed iThemes Security users.
+	 * This is not meant to be used by licensed Solid Security users.
 	 *
 	 * @param int $site_id The site ID to register.
 	 *
@@ -177,7 +178,7 @@ class ITSEC_Site_Scanner_API {
 		}
 
 		$url      = self::clean_url( get_home_url( $site_id ) );
-		$response = self::make_request( $site_id, 'api/register-site', 'POST', [
+		$response = self::make_request( $site_id, 'api/register-site', 'POST', [], [
 			'url'          => $url,
 			'keyPair'      => $key_pair,
 			'verifyTarget' => get_rest_url( $site_id, 'ithemes-security/v1/site-scanner/verify-scan' ),
@@ -198,42 +199,86 @@ class ITSEC_Site_Scanner_API {
 	}
 
 	/**
+	 * Gets the list of vulnerabilities that have a firewall rule available.
+	 *
+	 * @param array $vulnerabilities
+	 *
+	 * @return Result<int[]>
+	 */
+	public static function get_available_firewall_rules( array $vulnerabilities ): Result {
+		[ 'response' => $response ] = self::make_request(
+			get_main_site_id(),
+			'available-firewall-rules',
+			'GET',
+			[
+				'ids' => array_map( function ( $id ) {
+					return str_replace( 'ps-', '', $id );
+				}, $vulnerabilities ),
+			]
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return Result::error( $response );
+		}
+
+		return Result::success( array_map( function ( $id ) {
+			return 'ps-' . $id;
+		}, $response ) );
+	}
+
+	/**
 	 * Make a request to the site scanner API.
 	 *
-	 * @param int    $site_id The site ID being operated on.
-	 * @param string $route   Route to call.
-	 * @param string $method  HTTP method to use.
-	 * @param array  $body    Data to be encoded as json.
-	 * @param array  $pid     Process ID to continue making log updates.
+	 * @param int        $site_id The site ID being operated on.
+	 * @param string     $route   Route to call.
+	 * @param string     $method  HTTP method to use.
+	 * @param array      $query   Query vars to pass.
+	 * @param array|null $body    Data to be encoded as json.
+	 * @param array|null $pid     Process ID to continue making log updates.
 	 *
 	 * @return array Array of response and cache status.
 	 */
-	private static function make_request( int $site_id, string $route, string $method, array $body, array $pid = null ) {
-		$json          = wp_json_encode( $body );
-		$headers       = [
-			'Content-Type' => 'application/json',
-			'Accept'       => self::ACCEPT,
+	private static function make_request(
+		int $site_id,
+		string $route,
+		string $method,
+		array $query = [],
+		array $body = null,
+		array $pid = null
+	) {
+		$headers = [
+			'Accept' => self::ACCEPT,
 		];
-		$authorization = self::get_authorization_header( $site_id, $json );
 
-		if ( is_wp_error( $authorization ) ) {
-			return [ 'cached' => false, 'response' => $authorization ];
-		}
+		$json = '';
 
-		if ( is_string( $authorization ) ) {
-			$headers['Authorization'] = $authorization;
+		if ( $body ) {
+			$json          = wp_json_encode( $body );
+			$headers       = [
+				'Content-Type' => 'application/json',
+				'Accept'       => self::ACCEPT,
+			];
+			$authorization = self::get_authorization_header( $site_id, $json );
+
+			if ( is_wp_error( $authorization ) ) {
+				return [ 'cached' => false, 'response' => $authorization ];
+			}
+
+			if ( is_string( $authorization ) ) {
+				$headers['Authorization'] = $authorization;
+			}
 		}
 
 		if ( $pid ) {
 			ITSEC_Log::add_process_update( $pid, compact( 'route', 'method', 'body', 'headers' ) );
 		}
 
-		$cache_key = self::build_cache_key( $site_id, $route, $method, $body );
+		$cache_key = self::build_cache_key( $site_id, $route, $method, $query, $body );
 		$cached    = true;
 
 		if ( ( $parsed = get_site_transient( $cache_key ) ) === false ) {
 			$cached   = false;
-			$response = self::call_api( $route, [], [
+			$response = self::call_api( $route, $query, [
 				'body'    => $json,
 				'method'  => $method,
 				'timeout' => 300,
@@ -290,11 +335,11 @@ class ITSEC_Site_Scanner_API {
 	 */
 	private static function generate_signature( $json ) {
 		if ( ! ITSEC_Core::is_pro() ) {
-			return new WP_Error( 'non_active_license', __( 'Not an iThemes Security Pro install.', 'better-wp-security' ) );
+			return new WP_Error( 'non_active_license', __( 'Not a Solid Security Pro install.', 'better-wp-security' ) );
 		}
 
 		if ( ! isset( $GLOBALS['ithemes_updater_path'] ) ) {
-			return new WP_Error( 'updater_not_available', __( 'Could not find the iThemes updater.', 'better-wp-security' ) );
+			return new WP_Error( 'updater_not_available', __( 'Could not find the SolidWP updater.', 'better-wp-security' ) );
 		}
 
 		require_once( $GLOBALS['ithemes_updater_path'] . '/keys.php' );
@@ -303,7 +348,7 @@ class ITSEC_Site_Scanner_API {
 		$keys = Ithemes_Updater_Keys::get( [ 'ithemes-security-pro' ] );
 
 		if ( empty( $keys['ithemes-security-pro'] ) ) {
-			return new WP_Error( 'non_active_license', __( 'iThemes Security Pro is not activated.', 'better-wp-security' ) );
+			return new WP_Error( 'non_active_license', __( 'Solid Security Pro is not activated.', 'better-wp-security' ) );
 		}
 
 		$signature = hash_hmac( 'sha1', $json, $keys['ithemes-security-pro'] );
@@ -315,7 +360,7 @@ class ITSEC_Site_Scanner_API {
 		$package_details = Ithemes_Updater_Packages::get_full_details();
 
 		if ( empty( $package_details['packages']['ithemes-security-pro/ithemes-security-pro.php']['user'] ) ) {
-			return new WP_Error( 'non_active_license', __( 'iThemes Security Pro is not activated.', 'better-wp-security' ) );
+			return new WP_Error( 'non_active_license', __( 'Solid Security Pro is not activated.', 'better-wp-security' ) );
 		}
 
 		$user = $package_details['packages']['ithemes-security-pro/ithemes-security-pro.php']['user'];
@@ -401,15 +446,18 @@ class ITSEC_Site_Scanner_API {
 	/**
 	 * Builds the cache key based on the selected route.
 	 *
-	 * @param int    $site_id
-	 * @param string $route
-	 * @param string $method
-	 * @param array  $body
+	 * @param int        $site_id
+	 * @param string     $route
+	 * @param string     $method
+	 * @param array|null $body
 	 *
 	 * @return string
 	 */
-	private static function build_cache_key( int $site_id, string $route, string $method, array $body ) {
-		return 'itsec-site-scanner-' . md5( $site_id . $route . $method . wp_json_encode( $body ) );
+	private static function build_cache_key( int $site_id, string $route, string $method, array $query, ?array $body ) {
+		$body  = $body ? wp_json_encode( $body ) : '';
+		$query = self::build_query_string( $query );
+
+		return 'itsec-site-scanner-' . md5( $site_id . $route . $method . $query . $body );
 	}
 
 	/**
@@ -443,6 +491,10 @@ class ITSEC_Site_Scanner_API {
 		if ( isset( $mapped['max-age'] ) ) {
 			$cached = set_site_transient( $cache_key, $cache, (int) $mapped['max-age'] );
 
+			if ( ! $pid ) {
+				return;
+			}
+
 			if ( $cached ) {
 				ITSEC_Log::add_process_update( $pid, [ 'action' => 'caching-response', 'mapped' => $mapped, 'cache_key' => $cache_key ] );
 			} else {
@@ -464,7 +516,7 @@ class ITSEC_Site_Scanner_API {
 		$url = self::HOST . $route;
 
 		if ( $query ) {
-			$url = add_query_arg( $query, $url );
+			$url .= '?' . self::build_query_string( $query );
 		}
 
 		$url  = apply_filters( 'itsec_site_scanner_api_request_url', $url, $route, $query, $args );
@@ -595,5 +647,59 @@ class ITSEC_Site_Scanner_API {
 		];
 
 		return in_array( $code, $codes, true );
+	}
+
+	/**
+	 * Build a query string from an array of key value pairs.
+	 *
+	 * This function can use the return value of `parse()` to build a query
+	 * string. This function does not modify the provided keys when an array is
+	 * encountered (like `http_build_query()` would).
+	 *
+	 * @param array     $params   Query string parameters.
+	 * @param int|false $encoding Set to false to not encode, PHP_QUERY_RFC3986
+	 *                            to encode using RFC3986, or PHP_QUERY_RFC1738
+	 *                            to encode using RFC1738.
+	 */
+	private static function build_query_string( array $params, $encoding = PHP_QUERY_RFC3986 ): string {
+		if ( ! $params ) {
+			return '';
+		}
+
+		if ( $encoding === false ) {
+			$encoder = function ( string $str ): string {
+				return $str;
+			};
+		} elseif ( $encoding === PHP_QUERY_RFC3986 ) {
+			$encoder = 'rawurlencode';
+		} elseif ( $encoding === PHP_QUERY_RFC1738 ) {
+			$encoder = 'urlencode';
+		} else {
+			throw new \InvalidArgumentException( 'Invalid type' );
+		}
+
+		$qs = '';
+		foreach ( $params as $k => $v ) {
+			$k = $encoder( (string) $k );
+			if ( ! is_array( $v ) ) {
+				$qs .= $k;
+				$v  = is_bool( $v ) ? (int) $v : $v;
+				if ( $v !== null ) {
+					$qs .= '=' . $encoder( (string) $v );
+				}
+				$qs .= '&';
+			} else {
+				foreach ( $v as $vv ) {
+					$qs .= $k;
+					$vv = is_bool( $vv ) ? (int) $vv : $vv;
+					if ( $vv !== null ) {
+						$qs .= '=' . $encoder( (string) $vv );
+					}
+					$qs .= '&';
+				}
+			}
+		}
+
+		return $qs ? (string) substr( $qs, 0, - 1 ) : '';
 	}
 }

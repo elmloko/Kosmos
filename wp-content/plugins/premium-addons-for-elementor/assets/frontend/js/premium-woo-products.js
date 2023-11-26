@@ -57,11 +57,11 @@
                 }
             }
 
-            if ($elem.hasClass("premium-woo-products-metro")) {
+            if ($elem.hasClass("premium-woo-products-masonry")) {
 
-                self.handleGridMetro();
+                self.handleGridMasonry();
 
-                $(window).on("resize", self.handleGridMetro);
+                $(window).on("resize", self.handleGridMasonry);
 
             }
 
@@ -71,6 +71,19 @@
                 self.handleTitlePos();
             }
 
+        };
+
+        self.getIsoTopeSettings = function () {
+            return {
+                itemSelector: "li.product",
+                percentPosition: true,
+                animationOptions: {
+                    duration: 750,
+                    easing: "linear",
+                    queue: false
+                },
+                layoutMode: "masonry",
+            }
         };
 
         self.handleTitlePos = function () {
@@ -117,69 +130,22 @@
 
             });
 
+            if ($products.find('li.product').length < carousel.slidesToShow) {
+                $elem.removeClass("premium-carousel-hidden");
+                $products.find('li.product').css('width', (100 / carousel.slidesToShow) + '%');
+                return;
+            }
+
+
             $products.slick(carousel);
 
 
 
         };
 
-        self.handleGridMetro = function () {
+        self.handleGridMasonry = function () {
 
-            var $products = $elem.find("ul.products"),
-                currentDevice = elementorFrontend.getCurrentDeviceMode(),
-                suffix = "";
-
-            //Grid Parameters
-            var gridWidth = $products.width(),
-                cellSize = Math.floor(gridWidth / 12);
-
-
-            var metroStyle = $elem.data("metro-style");
-
-            if ("tablet" === currentDevice) {
-                suffix = "_tablet";
-            } else if ("mobile" === currentDevice) {
-                suffix = "_mobile";
-            }
-
-            if ('custom' === metroStyle) {
-
-                var wPatternLength = 0,
-                    hPatternLength = 0;
-
-                var settings = $elem.data("metro");
-
-                //Get Products Width/Height Pattern
-                var wPattern = settings['wPattern' + suffix],
-                    hPattern = settings['hPattern' + suffix];
-
-                if ("" === wPattern)
-                    wPattern = "12";
-
-                if ("" === hPattern)
-                    hPattern = "12";
-
-                wPattern = wPattern.split(',');
-                hPattern = hPattern.split(',');
-
-                wPatternLength = wPatternLength + wPattern.length;
-                hPatternLength = hPatternLength + hPattern.length;
-
-                $products.find("li.product").each(function (index, product) {
-
-                    var wIndex = index % wPatternLength,
-                        hIndex = index % hPatternLength;
-
-                    var wCell = (parseInt(wPattern[wIndex])),
-                        hCell = (parseInt(hPattern[hIndex]));
-
-                    $(product).css({
-                        width: Math.floor(wCell) * cellSize,
-                        height: Math.floor(hCell) * cellSize
-                    });
-                });
-
-            }
+            var $products = $elem.find("ul.products");
 
             $products
                 .imagesLoaded(function () { })
@@ -190,12 +156,13 @@
                             percentPosition: true,
                             animationOptions: {
                                 duration: 750,
-                                easing: "linear"
+                                easing: "linear",
+                                queue: false
                             },
                             layoutMode: "masonry",
-                            masonry: {
-                                columnWidth: cellSize
-                            }
+                            // masonry: {
+                            //     columnWidth: cellSize
+                            // }
                         });
                     });
         };
@@ -547,7 +514,6 @@
                     dataType: 'json',
                     type: 'POST',
                     success: function (data) {
-
                         html = data.data.html;
 
                         //If the number of coming products is 0, then remove the button.
@@ -566,12 +532,23 @@
                         html = html.replace(html.substring(0, html.indexOf('>') + 1), '');
                         html = html.replace("</ul>", "");
 
-
                         $loadMoreBtn.find(".premium-woo-products-num").text("(" + newProductsLength + ")");
 
                         $loadMoreBtn.data("products", newProductsLength);
 
                         $currentProducts.append(html);
+
+                        if ($elem.hasClass("premium-woo-products-masonry")) {
+
+                            $currentProducts.isotope('reloadItems')
+
+                            $currentProducts.isotope({
+                                itemSelector: "li.product",
+                                percentPosition: true,
+                                layoutMode: "masonry",
+                            });
+
+                        }
 
                         // //Trigger carousel for products in the next pages.
                         if ("grid_7" === skin || "grid_11" === skin) {
@@ -579,7 +556,6 @@
                         }
 
                         page_number++;
-
 
                     },
                     error: function (err) {
@@ -648,8 +624,8 @@
                             self.handleGalleryCarousel(skin);
                         }
 
-                        if ($elem.hasClass("premium-woo-products-metro"))
-                            self.handleGridMetro();
+                        if ($elem.hasClass("premium-woo-products-masonry"))
+                            self.handleGridMasonry();
 
                     },
                     error: function (err) {

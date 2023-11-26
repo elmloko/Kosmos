@@ -57,6 +57,14 @@ class Premium_Template_Tags {
 	 */
 	protected $options;
 
+    /**
+	 * Elementor Templates List
+     *
+	 * @since 4.10.15
+	 * @var e_temps_list
+	 */
+	private static $e_temps_list = null;
+
 	/**
 	 * Class contructor
 	 */
@@ -109,12 +117,18 @@ class Premium_Template_Tags {
 			)
 		);
 
+		$is_mbinstalled = extension_loaded( 'mbstring' );
 		if ( ! empty( $all_posts ) && ! is_wp_error( $all_posts ) ) {
 			foreach ( $all_posts as $post ) {
-				$this->options[ $post->ID ] = strlen( $post->post_title ) > 30 ? substr( $post->post_title, 0, 30 ) . '...' : $post->post_title;
+
+				if ( $is_mbinstalled ) {
+					$options[ $post->ID ] = mb_strlen( $post->post_title ) > 30 ? mb_substr( $post->post_title, 0, 30 ) . '...' : $post->post_title;
+				} else {
+					$options[ $post->ID ] = strlen( $post->post_title ) > 30 ? substr( $post->post_title, 0, 30 ) . '...' : $post->post_title;
+				}
 			}
 		}
-		return $this->options;
+		return $options;
 	}
 
 	/**
@@ -143,11 +157,14 @@ class Premium_Template_Tags {
 		$post_id = '';
 
 		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) {
-				$query->the_post();
-				$post_id = get_the_ID();
+			$post_id = $query->post->ID;
 
-			}
+			// while ( $query->have_posts() ) {
+
+				// $query->the_post();
+				// $post_id = get_the_ID();
+			// }
+
 			wp_reset_postdata();
 		}
 
@@ -166,12 +183,18 @@ class Premium_Template_Tags {
 	 */
 	public function get_elementor_page_list() {
 
-		$pagelist = get_posts(
-			array(
-				'post_type' => 'elementor_library',
-				'showposts' => 999,
-			)
-		);
+        if ( null === self::$e_temps_list ) {
+
+            self::$e_temps_list = get_posts(
+                array(
+                    'post_type' => 'elementor_library',
+                    'showposts' => 999,
+                )
+            );
+
+        }
+
+		$pagelist = self::$e_temps_list;
 
 		if ( ! empty( $pagelist ) && ! is_wp_error( $pagelist ) ) {
 
@@ -214,7 +237,7 @@ class Premium_Template_Tags {
 			$id = $title;
 		}
 
-		$template_content = $frontend->get_builder_content_for_display( $id, false );
+		$template_content = $frontend->get_builder_content_for_display( $id );
 
 		return $template_content;
 
@@ -364,6 +387,7 @@ class Premium_Template_Tags {
 	 * @return array
 	 */
 	public static function get_default_posts_list( $post_type ) {
+
 		$list = get_posts(
 			array(
 				'post_type'              => $post_type,
@@ -893,7 +917,7 @@ class Premium_Template_Tags {
 			<?php if ( 'yes' === $data_meta ) { ?>
 				<span class="premium-blog-meta-separator">•</span>
 				<div class="premium-blog-post-time premium-blog-meta-data">
-					<i class="fa fa-clock-o" aria-hidden="true"></i>
+					<i class="fa fa-calendar-alt" aria-hidden="true"></i>
 					<span><?php the_time( $date_format ); ?></span>
 				</div>
 			<?php } ?>
@@ -1958,6 +1982,11 @@ class Premium_Template_Tags {
 
 			$flag = true;
 
+			if ( 'infinite' === $req_type ) {
+				$flag                   = false;
+				$display_featured_posts = false;
+			}
+
 			if ( count( $posts ) ) {
 
 				global $post;
@@ -1967,6 +1996,7 @@ class Premium_Template_Tags {
 					setup_postdata( $post ); // setup global post data.
 
 					if ( empty( $post_id ) && ( $display_featured_posts && 0 == $index ) ) {
+
 						if ( 'infinite' !== $req_type ) {
 							$this->render_featured_posts( $post ); // render the first one by default for now.
 						}

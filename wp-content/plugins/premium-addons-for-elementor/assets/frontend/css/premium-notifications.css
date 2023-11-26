@@ -38,6 +38,10 @@
   transition: all 0.3s ease-in-out;
 }
 
+.pa-rec-not-icon-wrap .premium-icon-with-no-post {
+  display: none;
+}
+
 .pa-rec-not-number {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -107,7 +111,12 @@
 }
 
 .pa-rec-posts-header .pa-rec-posts-close-icon {
-  display: inline;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .pa-rec-title-wrap {

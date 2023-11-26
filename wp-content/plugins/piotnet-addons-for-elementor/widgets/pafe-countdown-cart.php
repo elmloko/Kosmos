@@ -180,10 +180,9 @@
 				[  
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#000',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-countdown-stock__label-before' => 'color: {{VALUE}}',
@@ -196,7 +195,9 @@
 				[
 					'name' => 'label_before',
 					'selector' => '{{WRAPPER}} .pafe-countdown-stock__label-before',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+                    'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				]
 			);
 
@@ -215,10 +216,9 @@
 				[ 
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#000',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-countdown-stock__label-after' => 'color: {{VALUE}}',
@@ -231,7 +231,9 @@
 				[
 					'name' => 'label_after',
 					'selector' => '{{WRAPPER}} .pafe-countdown-stock__label-after',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				]
 			);
 
@@ -250,10 +252,9 @@
 				[  
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#000',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-countdown-stock__number' => 'color: {{VALUE}}',
@@ -266,7 +267,9 @@
 				[
 					'name' => 'number',
 					'selector' => '{{WRAPPER}} .pafe-countdown-stock__number',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				]
 			);
 
@@ -357,10 +360,9 @@
 				[ 
 					'label' => __( 'Background', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#ededed',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-countdown-progressbar' => 'background-color: {{VALUE}}',

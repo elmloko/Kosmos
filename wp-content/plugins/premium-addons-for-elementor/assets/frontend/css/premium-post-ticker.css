@@ -110,6 +110,10 @@
   font-size: 17px;
 }
 
+.premium-post-ticker__post-title a {
+  display: inline-block;
+}
+
 .premium-post-ticker__post-date {
   font-size: 12px;
   margin-left: 6px;

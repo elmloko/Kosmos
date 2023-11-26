@@ -69,7 +69,7 @@ if ( ! class_exists( 'WP_Dark_Mode_Admin' ) ) {
 			add_action( 'wppool_after_settings', [ $this, 'after_settings' ] );
 			add_action( 'wpdarkmode_social_share_footer', [ $this, 'after_settings' ] );
 
-			add_action( 'init', function() {
+			add_action( 'init', function () {
 				register_nav_menus([
 					'header' => 'Header Menu',
 				]);
@@ -433,7 +433,6 @@ if ( ! class_exists( 'WP_Dark_Mode_Admin' ) ) {
 					wp_dark_mode()->add_notice( 'info wp-dark-mode-affiliate-notice', $notice_html );
 				}
 			}
-
 		}
 
 		/**

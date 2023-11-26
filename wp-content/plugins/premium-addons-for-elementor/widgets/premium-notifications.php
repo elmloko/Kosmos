@@ -141,7 +141,6 @@ class Premium_Notifications extends Widget_Base {
 	public function get_style_depends() {
 		return array(
 			'premium-addons',
-			'dashicons',
 		);
 	}
 
@@ -219,16 +218,17 @@ class Premium_Notifications extends Widget_Base {
 		$this->add_control(
 			'icon_type',
 			array(
-				'label'   => __( 'Icon Type', 'premium-addons-for-elementor' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => 'icon',
-				'options' => array(
+				'label'              => __( 'Icon Type', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::SELECT,
+				'default'            => 'icon',
+				'options'            => array(
 					'icon'      => __( 'Icon', 'premium-addons-for-elementor' ),
 					'image'     => __( 'Image', 'premium-addons-for-elementor' ),
 					'text'      => __( 'Text', 'premium-addons-for-elementor' ),
 					'animation' => __( 'Lottie Animation', 'premium-addons-for-elementor' ),
 					'svg'       => __( 'SVG Code', 'premium-addons-for-elementor' ),
 				),
+				'frontend_available' => true,
 			)
 		);
 
@@ -511,6 +511,42 @@ class Premium_Notifications extends Widget_Base {
 				'dynamic'   => array( 'active' => true ),
 				'condition' => array(
 					'icon_type' => 'text',
+				),
+			)
+		);
+
+        $this->add_control(
+			'add_icon_with_no_posts',
+			array(
+				'label'              => __( 'Add Different Icon with no posts', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::SWITCHER,
+				'frontend_available' => true,
+			)
+		);
+
+		$this->add_control(
+			'icon_with_no_posts',
+			array(
+				'label'              => __( 'Icon', 'premium-addons-for-elementor' ),
+				'type'               => Controls_Manager::ICONS,
+				'condition'          => array(
+					'add_icon_with_no_posts' => 'yes',
+					'icon_type!'              => array( 'image' ),
+				),
+				'frontend_available' => true,
+			)
+		);
+
+		$this->add_control(
+			'image_with_no_posts',
+			array(
+				'label'       => __( 'Image', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::MEDIA,
+				'media_types' => array( 'image' ),
+				'dynamic'     => array( 'active' => true ),
+				'condition'   => array(
+					'icon_type'              => 'image',
+					'add_icon_with_no_posts' => 'yes',
 				),
 			)
 		);
@@ -2647,8 +2683,8 @@ class Premium_Notifications extends Widget_Base {
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
-					'{{WRAPPER}} .pa-rec-posts-close-icon' => 'font-size: {{SIZE}}{{UNIT}};',
-					// '{{WRAPPER}} .pa-rec-posts-close'      => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .pa-rec-posts-close-icon' => 'font-size: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+					// '{{WRAPPER}} .pa-rec-posts-close'      => '',
 				),
 			)
 		);
@@ -3426,6 +3462,77 @@ class Premium_Notifications extends Widget_Base {
 
 		$this->end_controls_section();
 
+		$this->start_controls_section(
+			'box_style_section',
+			array(
+				'label' => __( 'Box', 'premium-addons-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'box_background_color',
+			array(
+				'label'     => __( 'Background Color', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .premium-blog-post-container'  => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'box_border',
+				'selector' => '{{WRAPPER}} .premium-blog-post-container',
+			)
+		);
+
+		$this->add_control(
+			'box_border_radius',
+			array(
+				'label'      => __( 'Border Radius', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-blog-post-container' => 'border-radius: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			array(
+				'name'     => 'outer_box_shadow',
+				'selector' => '{{WRAPPER}} .premium-blog-post-container',
+			)
+		);
+
+		$this->add_responsive_control(
+			'box_padding',
+			array(
+				'label'      => __( 'Spacing', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-blog-post-outer-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'inner_box_padding',
+			array(
+				'label'      => __( 'Padding', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .premium-blog-post-container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
 	}
 
 	/**
@@ -3467,6 +3574,10 @@ class Premium_Notifications extends Widget_Base {
 
 			if ( ! empty( $settings['image']['url'] ) ) {
 				$image_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'thumbnail', 'image' );
+			}
+
+			if ( ! empty( $settings['image_with_no_posts']['url'] ) ) {
+				$image_html_with_no_post = Group_Control_Image_Size::get_attachment_image_html( $settings, 'thumbnail', 'image_with_no_posts' );
 			}
 		}
 
@@ -3511,7 +3622,7 @@ class Premium_Notifications extends Widget_Base {
 			$this->add_render_attribute(
 				'lottie_icon',
 				array(
-					'class'               => 'premium-lottie-animation',
+					'class'               => array( 'premium-lottie-animation', 'premium-notification-icon' ),
 					'data-lottie-url'     => $settings['lottie_url'],
 					'data-lottie-loop'    => $settings['lottie_loop'],
 					'data-lottie-reverse' => $settings['lottie_reverse'],
@@ -3520,7 +3631,7 @@ class Premium_Notifications extends Widget_Base {
 
 		} elseif ( 'icon' === $icon_type || 'svg' === $icon_type ) {
 
-			$this->add_render_attribute( 'icon', 'class', 'premium-drawable-icon' );
+			$this->add_render_attribute( 'icon', 'class', array( 'premium-drawable-icon', 'premium-notification-icon' ) );
 
 			if ( ( 'yes' === $settings['draw_svg'] && 'icon' === $icon_type ) || 'svg' === $icon_type ) {
 				$this->add_render_attribute( 'icon', 'class', 'premium-not-icon' );
@@ -3619,7 +3730,7 @@ class Premium_Notifications extends Widget_Base {
 						Icons_Manager::render_icon(
 							$settings['icon'],
 							array(
-								'class'       => array( 'premium-not-icon', 'premium-svg-nodraw', 'premium-drawable-icon' ),
+								'class'       => array( 'premium-not-icon', 'premium-svg-nodraw', 'premium-drawable-icon', 'premium-notification-icon' ),
 								'aria-hidden' => 'true',
 							)
 						);
@@ -3633,10 +3744,25 @@ class Premium_Notifications extends Widget_Base {
 						<?php $this->print_unescaped_setting( 'custom_svg' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</div>
 				<?php else : ?>
-					<p class="premium-not-icon-text">
+					<p class="premium-not-icon-text premium-notification-icon">
 						<?php echo wp_kses_post( $settings['text'] ); ?>
 					</p>
 
+				<?php endif; ?>
+
+				<?php if ( 'image' === $icon_type ) : ?>
+					<?php echo wp_kses_post( $image_html_with_no_post ); ?>
+
+				<?php else : ?>
+					<?php
+						Icons_Manager::render_icon(
+							$settings['icon_with_no_posts'],
+							array(
+								'class'       => array( 'premium-not-icon', 'premium-svg-nodraw', 'premium-drawable-icon', 'premium-icon-with-no-post' ),
+								'aria-hidden' => 'true',
+							)
+						);
+					?>
 				<?php endif; ?>
 
 				<?php if ( $number > 0 ) : ?>
@@ -3699,7 +3825,7 @@ class Premium_Notifications extends Widget_Base {
 				</div>
 
 				<div class="pa-rec-posts-close">
-					<i class="dashicons dashicons-no pa-rec-posts-close-icon"></i>
+					<i class="pa-rec-posts-close-icon fa fa-close"></i>
 				</div>
 			</div>
 

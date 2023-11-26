@@ -11,6 +11,9 @@ use PremiumAddons\Modules\Premium_Equal_Height\Module as Equal_Height;
 use PremiumAddons\Modules\PA_Display_Conditions\Module as Display_Conditions;
 use PremiumAddons\Modules\PremiumSectionFloatingEffects\Module as Floating_Effects;
 use PremiumAddons\Modules\Woocommerce\Module as Woocommerce;
+use PremiumAddons\Modules\PremiumGlobalTooltips\Module as GlobalTooltips;
+use PremiumAddons\Modules\PremiumShapeDivider\Module as Shape_Divider;
+use PremiumAddons\Modules\PremiumWrapperLink\Module as Wrapper_Link;
 use PremiumAddons\Includes\Assets_Manager;
 use PremiumAddons\Includes\Premium_Template_Tags;
 use ElementorPro\Plugin as PluginPro;
@@ -84,6 +87,12 @@ class Addons_Integration {
 		add_action( 'wp_ajax_check_temp_validity', array( $this, 'check_temp_validity' ) );
 
 		add_action( 'wp_ajax_update_template_title', array( $this, 'update_template_title' ) );
+
+		add_action( 'wp_ajax_get_pinterest_token', array( $this, 'get_pinterest_token' ) );
+		add_action( 'wp_ajax_get_pinterest_boards', array( $this, 'get_pinterest_boards' ) );
+		add_action( 'wp_ajax_insert_cf_form', array( $this, 'insert_cf_form' ) );
+
+		add_action( 'wp_ajax_get_tiktok_token', array( $this, 'get_tiktok_token' ) );
 
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'enqueue_editor_scripts' ) );
 
@@ -326,6 +335,8 @@ class Addons_Integration {
 			self::$modules['premium-smart-post-listing'],
 			self::$modules['premium-post-ticker'],
 			self::$modules['premium-notifications'],
+			self::$modules['premium-tcloud'],
+			self::$modules['premium-pinterest-feed'],
 		);
 
 		$localize_settings = in_array( true, $modules, true );
@@ -349,6 +360,30 @@ class Addons_Integration {
 				'papro_widgets'   => Admin_Helper::get_pro_elements(),
 			)
 		);
+
+		$pinterest_enabled = isset( self::$modules['premium-pinterest-feed'] ) ? self::$modules['premium-pinterest-feed'] : 1;
+		$tiktok_enabled    = isset( self::$modules['premium-tiktok-feed'] ) ? self::$modules['premium-tiktok-feed'] : 1;
+
+		$cf_enabled = isset( self::$modules['premium-contactform'] ) ? self::$modules['premium-contactform'] : 1;
+
+		if ( $cf_enabled || $pinterest_enabled || $tiktok_enabled ) {
+
+			$data = array(
+				'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) ),
+				'nonce'   => wp_create_nonce( 'pa-editor' ),
+			);
+
+			wp_enqueue_script(
+				'pa-editor-handler',
+				PREMIUM_ADDONS_URL . 'assets/editor/js/editor-handler.js',
+				array( 'elementor-editor' ),
+				PREMIUM_ADDONS_VERSION,
+				true
+			);
+
+			wp_localize_script( 'pa-editor-handler', 'paEditorSettings', $data );
+
+		}
 
 	}
 
@@ -420,6 +455,13 @@ class Addons_Integration {
 		);
 
 		wp_register_style(
+			'pa-flipster',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/flipster' . $suffix . '.css',
+			false,
+			PREMIUM_ADDONS_VERSION
+		);
+
+		wp_register_style(
 			'pa-prettyphoto',
 			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/prettyphoto' . $is_rtl . $suffix . '.css',
 			array(),
@@ -438,6 +480,30 @@ class Addons_Integration {
 		wp_register_style(
 			'pa-world-clock',
 			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-world-clock' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'tooltipster',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/tooltipster.min.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+		wp_register_style(
+			'pa-gTooltips',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-global-tooltips' . $suffix . '.css',
+			array(),
+			PREMIUM_ADDONS_VERSION,
+			'all'
+		);
+
+        wp_register_style(
+			'pa-shape-divider',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-shape-divider' . $suffix . '.css',
 			array(),
 			PREMIUM_ADDONS_VERSION,
 			'all'
@@ -564,9 +630,19 @@ class Addons_Integration {
 			$this->register_old_scripts( $dir, $suffix );
 		}
 
+		wp_register_script( 'tiktok-embed', 'https://www.tiktok.com/embed.js', array(), false, true );
+
 		wp_register_script(
 			'prettyPhoto-js',
 			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/prettyPhoto' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'tooltipster-bundle',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/tooltipster' . $suffix . '.js',
 			array( 'jquery' ),
 			PREMIUM_ADDONS_VERSION,
 			true
@@ -716,6 +792,13 @@ class Addons_Integration {
 		);
 
 		wp_register_script(
+			'pa-flipster',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/flipster' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION
+		);
+
+		wp_register_script(
 			'pa-anime',
 			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/anime' . $suffix . '.js',
 			array( 'jquery' ),
@@ -729,6 +812,31 @@ class Addons_Integration {
 			array( 'jquery' ),
 			PREMIUM_ADDONS_VERSION,
 			true
+		);
+
+		wp_register_script(
+			'pa-gTooltips',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-global-tooltips' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-shape-divider',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-shape-divider' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_localize_script(
+			'pa-gTooltips',
+			'PremiumSettings',
+			array(
+				'ajaxurl' => esc_url( admin_url( 'admin-ajax.php' ) ),
+				'nonce'   => wp_create_nonce( 'pa-blog-widget-nonce' ),
+			)
 		);
 
 		wp_localize_script(
@@ -802,6 +910,22 @@ class Addons_Integration {
 		wp_register_script(
 			'pa-luxon',
 			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/luxon' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'mousewheel-js',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/jquery-mousewheel' . $suffix . '.js',
+			array( 'jquery' ),
+			PREMIUM_ADDONS_VERSION,
+			true
+		);
+
+		wp_register_script(
+			'pa-wrapper-link',
+			PREMIUM_ADDONS_URL . 'assets/frontend/' . $dir . '/premium-wrapper-link' . $suffix . '.js',
 			array( 'jquery' ),
 			PREMIUM_ADDONS_VERSION,
 			true
@@ -1016,6 +1140,236 @@ class Addons_Integration {
 	}
 
 	/**
+	 * Get Pinterest account token for Pinterest Feed widget
+	 *
+	 * @since 4.10.2
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function get_pinterest_token() {
+
+		check_ajax_referer( 'pa-editor', 'security' );
+
+		$api_url = 'https://appfb.premiumaddons.com/wp-json/fbapp/v2/pinterest';
+
+		$response = wp_remote_get(
+			$api_url,
+			array(
+				'timeout'   => 60,
+				'sslverify' => false,
+			)
+		);
+
+		$body = wp_remote_retrieve_body( $response );
+		$body = json_decode( $body, true );
+
+		// $transient_name = 'pa_pinterest_token_' . $body;
+
+		// $expire_time = 29 * DAY_IN_SECONDS;
+
+		// set_transient( $transient_name, true, $expire_time );
+
+		wp_send_json_success( $body );
+
+	}
+
+	/**
+	 * Get Pinterest account token for Pinterest Feed widget
+	 *
+	 * @since 4.10.2
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function get_pinterest_boards() {
+
+		check_ajax_referer( 'pa-blog-widget-nonce', 'nonce' );
+
+		if ( ! isset( $_GET['token'] ) ) {
+			wp_send_json_error();
+		}
+
+		$token = sanitize_text_field( wp_unslash( $_GET['token'] ) );
+
+		$transient_name = 'pa_pinterest_boards_' . substr( $token, 0, 15 );
+
+		$body = get_transient( $transient_name );
+
+		if ( false === $body ) {
+
+			$api_url = 'https://api.pinterest.com/v5/boards?page_size=60';
+
+			$response = wp_remote_get(
+				$api_url,
+				array(
+					'headers' => array(
+						'Authorization' => 'Bearer ' . $token,
+					),
+				)
+			);
+
+			$body = wp_remote_retrieve_body( $response );
+			$body = json_decode( $body, true );
+
+			set_transient( $transient_name, $body, 30 * MINUTE_IN_SECONDS );
+
+		}
+
+		$boards = array();
+
+		foreach ( $body['items'] as $index => $board ) {
+			$boards[ $board['id'] ] = $board['name'];
+		}
+
+		wp_send_json_success( wp_json_encode( $boards ) );
+
+	}
+
+	/**
+	 * Get Pinterest account token for Pinterest Feed widget
+	 *
+	 * @since 4.10.2
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function get_tiktok_token() {
+
+		check_ajax_referer( 'pa-editor', 'security' );
+
+		$api_url = 'https://appfb.premiumaddons.com/wp-json/fbapp/v2/tiktok';
+
+		$response = wp_remote_get(
+			$api_url,
+			array(
+				'timeout'   => 60,
+				'sslverify' => false,
+			)
+		);
+
+		$body = wp_remote_retrieve_body( $response );
+		$body = json_decode( $body, true );
+
+		// $transient_name = 'pa_tiktok_token_' . $body;
+
+		// $expire_time = 29 * DAY_IN_SECONDS;
+
+		// set_transient( $transient_name, true, $expire_time );
+
+		wp_send_json_success( $body );
+
+	}
+
+	/**
+	 * Insert Contact Form 7 Form
+	 *
+	 * @since 4.10.2
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function insert_cf_form() {
+
+		check_ajax_referer( 'pa-editor', 'security' );
+
+		if ( ! isset( $_GET['preset'] ) ) {
+			wp_send_json_error();
+		}
+
+		$preset = sanitize_text_field( wp_unslash( $_GET['preset'] ) );
+
+		$current_user = wp_get_current_user();
+
+		$props = array(
+			'form'                => Helper_Functions::get_cf_form_body( $preset ),
+			'mail'                => array(
+				'active'             => 1,
+				'subject'            => '[_site_title] "[your-subject]"',
+				'sender'             => '[_site_title]',
+				'recipient'          => '[_site_admin_email]',
+				'body'               => 'From: [your-name] [your-email]' . PHP_EOL .
+						'Subject: [your-subject]' . PHP_EOL . PHP_EOL .
+						'Message Body:' . PHP_EOL . '[your-message]' . PHP_EOL . PHP_EOL .
+						'--' . PHP_EOL .
+						'This e-mail was sent from a contact form on [_site_title] ([_site_url])',
+				'additional_headers' => 'Reply-To: [your-email]',
+				'attachments'        => '',
+				'use_html'           => '',
+				'exclude_blank'      => '',
+			),
+			'mail_2'              => array(
+				'active'             => '',
+				'subject'            => '[_site_title] "[your-subject]"',
+				'sender'             => '[_site_title]',
+				'recipient'          => '[your-email]',
+				'body'               => 'Message Body:' . PHP_EOL . '[your-message]' . PHP_EOL . PHP_EOL .
+						'--' . PHP_EOL .
+						'This e-mail was sent from a contact form on [_site_title] ([_site_url])',
+				'additional_headers' => 'Reply-To: [_site_admin_email]',
+				'attachments'        => '',
+				'use_html'           => '',
+				'exclude_blank'      => '',
+			),
+			'messages'            => array(
+				'mail_sent_ok'             => 'Thank you for your message. It has been sent.',
+				'mail_sent_ng'             => 'There was an error trying to send your message. Please try again later.',
+				'validation_error'         => 'One or more fields have an error. Please check and try again.',
+				'spam'                     => 'There was an error trying to send your message. Please try again later.',
+				'accept_terms'             => 'You must accept the terms and conditions before sending your message.',
+				'invalid_required'         => 'Please fill out this field.',
+				'invalid_too_long'         => 'This field has a too long input.',
+				'invalid_too_short'        => 'This field has a too short input.',
+				'upload_failed'            => 'There was an unknown error uploading the file.',
+				'upload_file_type_invalid' => 'You are not allowed to upload files of this type.',
+				'upload_file_too_large'    => 'The uploaded file is too large.',
+				'upload_failed_php_error'  => 'There was an error uploading the file.',
+				'invalid_date'             => 'Please enter a date in YYYY-MM-DD format.',
+				'date_too_early'           => 'This field has a too early date.',
+				'date_too_late'            => 'This field has a too late date.',
+				'invalid_number'           => 'Please enter a number.',
+				'number_too_small'         => 'This field has a too small number.',
+				'number_too_large'         => 'This field has a too large number.',
+				'quiz_answer_not_correct'  => 'The answer to the quiz is incorrect.',
+				'invalid_email'            => 'Please enter an email address.',
+				'invalid_url'              => 'Please enter a URL.',
+				'invalid_tel'              => 'Please enter a telephone number.',
+			),
+			'additional_settings' => '',
+		);
+
+		$post_content = implode( "\n", wpcf7_array_flatten( $props ) );
+
+		$args = array(
+			'post_status'  => 'publish',
+			'post_type'    => 'wpcf7_contact_form',
+			'post_content' => $post_content,
+			'post_author'  => $current_user->ID,
+			'post_title'   => sprintf(
+				__( 'Form | %s', 'premium-addons-for-elementor' ),
+				date( 'Y-m-d H:i' )
+			),
+		);
+
+		$post_id = wp_insert_post( $args );
+
+		foreach ( $props as $prop => $value ) {
+			update_post_meta(
+				$post_id,
+				'_' . $prop,
+				wpcf7_normalize_newline_deep( $value )
+			);
+		}
+
+		$form_id = wpcf7_generate_contact_form_hash( $post_id );
+
+		add_post_meta( $post_id, '_hash', $form_id, true );
+
+		wp_send_json_success( substr( $form_id, 0, 7 ) );
+
+	}
+
+	/**
 	 * Load Cross Domain Copy Paste JS Files.
 	 *
 	 * @since 3.21.1
@@ -1069,13 +1423,13 @@ class Addons_Integration {
 		$template = isset( $_GET['templateID'] ) ? sanitize_text_field( wp_unslash( $_GET['templateID'] ) ) : '';
 
 		if ( empty( $template ) ) {
-			wp_send_json_error( '' );
+			wp_send_json_error( 'Empty Template ID' );
 		}
 
 		$template_content = $this->template_instance->get_template_content( $template );
 
 		if ( empty( $template_content ) || ! isset( $template_content ) ) {
-			wp_send_json_error( '' );
+			wp_send_json_error( 'Empty Content' );
 		}
 
 		$data = array(
@@ -1120,6 +1474,18 @@ class Addons_Integration {
 			require_once PREMIUM_ADDONS_PATH . 'widgets/dep/pa-weather-handler.php';
 		}
 
+		if ( in_array( $class, array( 'PremiumAddons\Widgets\Premium_Pinterest_Feed', 'PremiumAddons\Widgets\Premium_Tiktok_Feed' ), true ) ) {
+			require_once PREMIUM_ADDONS_PATH . 'includes/pa-display-conditions/mobile-detector.php';
+
+			if ( 'PremiumAddons\Widgets\Premium_Pinterest_Feed' == $class ) {
+				require_once PREMIUM_ADDONS_PATH . 'widgets/dep/pa-pins-handler.php';
+			}
+
+			if ( 'PremiumAddons\Widgets\Premium_Tiktok_Feed' == $class ) {
+				require_once PREMIUM_ADDONS_PATH . 'widgets/dep/pa-tiktok-handler.php';
+			}
+		}
+
 		if ( class_exists( $class, false ) ) {
 
 			$widgets_manager->register( new $class() );
@@ -1151,6 +1517,8 @@ class Addons_Integration {
 			self::$modules['premium-post-ticker'],
 			self::$modules['premium-tcloud'],
 			self::$modules['premium-notifications'],
+			self::$modules['premium-pinterest-feed'],
+			self::$modules['premium-contactform'],
 		);
 
 		$blog_modules = array(
@@ -1164,12 +1532,11 @@ class Addons_Integration {
 
 		$load_blog_controls = in_array( true, $blog_modules, true );
 
+		$control_manager = \Elementor\Plugin::instance();
+
 		if ( $load_controls ) {
 
-			$control_manager = \Elementor\Plugin::instance();
-
-			// TODO: NEEDS TO BE DYNAMIC.
-			if ( self::$modules['premium-equal-height'] ) {
+			if ( self::$modules['premium-equal-height'] || self::$modules['premium-pinterest-feed'] ) {
 
 				require_once PREMIUM_ADDONS_PATH . 'includes/controls/premium-select.php';
 				$premium_select = __NAMESPACE__ . '\Controls\Premium_Select';
@@ -1204,6 +1571,14 @@ class Addons_Integration {
 			}
 		}
 
+		if ( self::$modules['premium-contactform'] || self::$modules['premium-shape-divider'] ) {
+
+			require_once PREMIUM_ADDONS_PATH . 'includes/controls/pa-image-choose.php';
+			$premium_image_choose = __NAMESPACE__ . '\Controls\Premium_Image_Choose';
+			$control_manager->controls_manager->register( new $premium_image_choose() );
+
+		}
+
 	}
 
 	/**
@@ -1231,6 +1606,17 @@ class Addons_Integration {
 			Woocommerce::get_instance();
 		}
 
+		if ( self::$modules['premium-global-tooltips'] ) {
+			GlobalTooltips::get_instance();
+		}
+
+        if ( self::$modules['premium-shape-divider'] ) {
+			Shape_Divider::get_instance();
+		}
+
+		if ( self::$modules['premium-wrapper-link'] ) {
+			Wrapper_Link::get_instance();
+		}
 	}
 
 	/**

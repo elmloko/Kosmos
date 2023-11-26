@@ -1,5 +1,4 @@
 (function ($) {
-
     $(window).on('elementor/frontend/init', function () {
 
         var ModuleHandler = elementorModules.frontend.handlers.Base;
@@ -581,6 +580,11 @@
             bindEvents: function () {
                 this.getGlobalSettings();
                 this.run();
+
+                var self = this;
+                $(document).on('elementor/popup/show', function () {
+                    self.run();
+                });
             },
 
             getGlobalSettings: function () {
@@ -1255,8 +1259,9 @@
 
             var $carouselElem = $scope.find(".premium-carousel-wrapper"),
                 settings = $($carouselElem).data("settings"),
-                computedStyle = getComputedStyle($scope[0]);
-
+                computedStyle = getComputedStyle($scope[0]),
+                currentSlides = 0;
+            var $progressbar = $carouselElem.find(".premium-carousel-nav-progress-fill");
             if ($carouselElem.find(".item-wrapper").length < 1)
                 return;
 
@@ -1339,8 +1344,23 @@
                 customPaging: function () {
                     var customDot = $carouselElem.find(".premium-carousel-nav-dot").html();
                     return customDot;
-                }
+                },
+                carouselNavigation: settings.carouselNavigation,
+                templatesNumber: settings.templatesNumber,
             });
+
+            function runProgress() {
+                $progressbar.animate({ 'width': "+=100%" }, settings.autoplaySpeed, runProgress);
+            }
+
+            if (settings.carouselNavigation === "progressbar") {
+                var progress = (currentSlides + 1) / settings.templatesNumber;
+                $carouselElem.find(".premium-carousel-nav-progressbar-fill").css("transform", "translate3d(0px, 0px, 0px) scaleX(" + progress + ") scaleY(1)");
+            }
+
+            if (settings.carouselNavigation === "progress") {
+                runProgress();
+            }
 
             $scope.find(".premium-carousel-hidden").removeClass("premium-carousel-hidden");
             $carouselElem.find(".premium-carousel-nav-arrow-prev").remove();
@@ -1354,6 +1374,7 @@
             function resetAnimations(event) {
 
                 var $slides = $carouselElem.find(".slick-slide");
+                $progressbar.stop(true).animate({ "width": 0 }, 0);
 
                 if ("init" === event)
                     $slides = $slides.not(".slick-current");
@@ -1372,6 +1393,10 @@
 
                     $(elem).removeClass("animated " + animation).addClass("elementor-invisible");
                 });
+
+                if (settings.carouselNavigation === "progress") {
+                    runProgress();
+                }
             };
 
             function triggerAnimation() {
@@ -1430,6 +1455,15 @@
                 //Fix carousel continues to work after last slide if autoplay is true and infinite is false.
                 if (slick.$slides.length - 1 == currentSlide && !settings.infinite) {
                     $carouselElem.find(".premium-carousel-inner").slick('slickSetOption', 'autoplay', false, false);
+                }
+
+                if (slick.options.carouselNavigation === "fraction") {
+                    $carouselElem.find("#currentSlide").text((currentSlide || 0) + 1);
+                }
+
+                if (slick.options.carouselNavigation === "progressbar") {
+                    var progress = (currentSlide + 1) / slick.options.templatesNumber;
+                    $carouselElem.find(".premium-carousel-nav-progressbar-fill").css("transform", "translate3d(0px, 0px, 0px) scaleX(" + progress + ") scaleY(1)");
                 }
 
             });
@@ -1937,9 +1971,13 @@
 
                         $blogElement.append('<div class="premium-loading-feed"><div class="premium-loader"></div></div>');
 
+                        var stickyOffset = 0;
+                        if ($('.elementor-sticky').length > 0)
+                            stickyOffset = 100;
+
                         if (shouldScroll) {
                             $('html, body').animate({
-                                scrollTop: (($blogElement.offset().top) - 50)
+                                scrollTop: (($blogElement.offset().top) - 50 - stickyOffset)
                             }, 'slow');
                         }
 
@@ -2088,16 +2126,58 @@
         /****** Premium Contact Form 7 Handler ******/
         var PremiumContactFormHandler = function ($scope, $) {
 
-            var $contactForm = $scope.find(".premium-cf7-container");
-            var $input = $contactForm.find(
-                'input[type="text"], input[type="email"], textarea, input[type="password"], input[type="date"], input[type="number"], input[type="tel"], input[type="file"], input[type="url"]'
-            );
+            var $contactForm = $scope.find(".premium-cf7-container"),
+                $input = $contactForm.find(
+                    'input[type="text"], input[type="email"], textarea, input[type="password"], input[type="date"], input[type="number"], input[type="tel"], input[type="file"], input[type="url"]'
+                );
 
             $input.wrap("<span class='wpcf7-span'>");
+
+            $contactForm.find('.wpcf7-submit').closest('p').addClass('premium-cf-submit');
 
             $input.on("focus blur", function () {
                 $(this).closest(".wpcf7-span").toggleClass("is-focused");
             });
+
+            if ($scope.hasClass('premium-cf-anim-label') || $scope.hasClass('premium-cf-anim-css-filters') || $scope.hasClass('premium-cf-anim-label-pos-back')) {
+                $contactForm.find('p').each(function (index, elem) {
+
+                    if ($(elem).find('input[type!="radio"], textarea').length > 0) {
+                        $(elem).find('label').addClass('cf7-text-input-label');
+
+                        $(elem).find('input, textarea').on("focus", function () {
+                            $(elem).addClass('input-focused');
+                        });
+
+                        $(elem).find('input, textarea').on("blur", function () {
+                            if ('' == $(this).val())
+                                $(elem).removeClass('input-focused');
+                        });
+                    }
+
+                })
+            }
+
+            if ($scope.hasClass('premium-cf-anim-label-letter')) {
+
+                $contactForm.find('p').each(function (index, elem) {
+
+                    $(elem).find('input, textarea').on("focus", function () {
+                        var letterSpacing = parseFloat($(elem).find('label').css('letter-spacing').replace('px', ''));
+
+                        $(elem).find('label').css('letter-spacing', (letterSpacing + 3) + 'px');
+                    });
+
+                    $(elem).find('input, textarea').on("blur", function () {
+                        var letterSpacing = parseFloat($(elem).find('label').css('letter-spacing').replace('px', ''));
+
+                        $(elem).find('label').css('letter-spacing', (letterSpacing - 3) + 'px');
+                    });
+
+                });
+
+            }
+
         };
 
         /****** Premium Team Members Handler ******/
@@ -2280,31 +2360,118 @@
         };
 
         /****** Premium Bullet List Handler ******/
-        var PremiumBulletListHandler = function ($scope, $) {
+        var PremiumBulletListHandler = ModuleHandler.extend({
 
-            var $listItems = $scope.find(".premium-bullet-list-box"),
-                items = $listItems.find(".premium-bullet-list-content");
+            getDefaultSettings: function () {
 
-            items.each(function (index, item) {
-
-                if ($listItems.data("list-animation") && " " != $listItems.data("list-animation")) {
-                    elementorFrontend.waypoint($(item), function () {
-
-                        var element = $(item),
-                            delay = element.data('delay');
-
-                        setTimeout(function () {
-                            element.next('.premium-bullet-list-divider , .premium-bullet-list-divider-inline').css("opacity", "1");
-                            element.next('.premium-bullet-list-divider-inline , .premium-bullet-list-divider').addClass("animated " + $listItems.data("list-animation"));
-
-                            element.css("opacity", "1").addClass("animated " + $listItems.data("list-animation"));
-                        }, delay);
-
-                    });
+                return {
+                    selectors: {
+                        listItems: '.premium-bullet-list-box',
+                        items: '.premium-bullet-list-content',
+                    }
                 }
 
-            });
-        };
+            },
+
+            getDefaultElements: function () {
+
+                var selectors = this.getSettings('selectors'),
+                    elements = {
+                        $listItems: this.$element.find(selectors.listItems),
+                        $items: this.$element.find(selectors.items)
+                    };
+
+                return elements;
+            },
+
+            bindEvents: function () {
+                this.run();
+
+                this.addRandomBadges();
+
+                var self = this;
+                if (!this.$element.is(':visible') && this.$element.closest('.premium-mega-nav-item').length > 0)
+                    this.$element.closest('.premium-mega-nav-item').find('.premium-menu-link').on('click', function () {
+                        self.addRandomBadges();
+                    });
+
+            },
+
+            run: function () {
+
+                var $listItems = this.elements.$listItems,
+                    $items = this.elements.$items;
+
+                $items.each(function (index, item) {
+
+                    if ($listItems.data("list-animation") && " " != $listItems.data("list-animation")) {
+                        elementorFrontend.waypoint($(item), function () {
+
+                            var element = $(item),
+                                delay = element.data('delay');
+
+                            setTimeout(function () {
+                                element.next('.premium-bullet-list-divider , .premium-bullet-list-divider-inline').css("opacity", "1");
+                                element.next('.premium-bullet-list-divider-inline , .premium-bullet-list-divider').addClass("animated " + $listItems.data("list-animation"));
+
+                                element.css("opacity", "1").addClass("animated " + $listItems.data("list-animation"));
+                            }, delay);
+
+                        });
+                    }
+
+                });
+
+            },
+
+            addRandomBadges: function () {
+                var settings = this.getElementSettings();
+
+                if (settings.rbadges_repeater.length < 1)
+                    return;
+
+                var $currentList = $('.elementor-element-' + this.$element.data('id'));
+
+                if (!$currentList.is(':visible') || this.$element.hasClass('randomb-applied'))
+                    return;
+
+                var randomBadges = settings.rbadges_repeater;
+
+                randomBadges.forEach(function (badge, index) {
+
+                    if ('' != badge.rbadge_selector) {
+
+                        var notBadgedItems = $(badge.rbadge_selector).find('.premium-bullet-list-text').filter(':not(:has(+ .premium-bullet-list-badge))');
+
+                        var badgeText = '<div class="premium-bullet-list-badge elementor-repeater-item-' + badge._id + '"><span>' + badge.badge_title + '</span></div>';
+
+                        var numOfApplies = Math.floor(Math.random() * (badge.rbadge_max - badge.rbadge_min + 1)) + badge.rbadge_min;
+
+                        // Get a random number of elements from the list.
+                        for (var i = 0; i < numOfApplies; i++) {
+
+                            // notBadgedItems = $(badge.rbadge_selector).find('.premium-bullet-list-text').filter(':not(:has(+ .premium-bullet-list-badge))');
+
+                            var randomIndex = Math.floor(Math.random() * notBadgedItems.length),
+                                wasBadgedBefore = $(notBadgedItems[randomIndex]).siblings('.premium-bullet-list-badge').length > 0;
+
+
+                            if (!wasBadgedBefore) {
+                                $(notBadgedItems[randomIndex]).after(badgeText);
+                            }
+
+
+                        }
+
+                    }
+                })
+
+                this.$element.addClass('randomb-applied');
+            }
+
+
+
+        });
 
         /****** Premium Grow Effect Handler ******/
         var PremiumButtonHandler = function ($scope, $) {
@@ -2887,7 +3054,7 @@
                                 'AM': '<svg id="Weather_Icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#333;}</style></defs><g id="Clear_Sky"><circle class="cls-1" cx="12" cy="12" r="5.5"/><path class="cls-1" d="m21.76,12.74h-1.95c-.98,0-.98-1.47,0-1.47h1.95c.98,0,.98,1.47,0,1.47Z"/><path class="cls-1" d="m19.39,5.62l-1.38,1.38c-.29.29-.75.29-1.04,0-.29-.29-.29-.75,0-1.04l1.38-1.38c.29-.28.75-.28,1.04,0,.28.29.28.75,0,1.04Z"/><path class="cls-1" d="m12.74,2.24v1.95c0,.4-.33.73-.73.73s-.74-.33-.74-.73v-1.95c0-.41.33-.74.74-.74s.73.33.73.74Z"/><path class="cls-1" d="m5.96,7.03l-1.38-1.38c-.32-.31-.29-.75,0-1.04s.72-.31,1.03,0l1.38,1.38c.69.69-.34,1.73-1.03,1.04Z"/><path class="cls-1" d="m4.19,12.74h-1.95c-.98,0-.98-1.47,0-1.47h1.95c.98,0,.98,1.47,0,1.47Z"/><path class="cls-1" d="m7.02,18.04l-1.38,1.38c-.31.31-.75.29-1.04,0s-.31-.72,0-1.03l1.38-1.38c.32-.31.75-.29,1.04,0,.29.28.31.72,0,1.03Z"/><path class="cls-1" d="m12.74,19.82v1.95c0,.98-1.47.98-1.47,0v-1.95c0-.98,1.47-.98,1.47,0Z"/><path class="cls-1" d="m19.43,19.4c-.29.28-.73.31-1.04,0l-1.38-1.39c-.31-.31-.29-.75,0-1.03.28-.29.72-.31,1.03,0l1.39,1.38c.31.31.28.75,0,1.04Z"/></g></svg>',
                                 'PM': '<svg id="Weather_Icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><defs><style>.cls-1{fill:#333;}</style></defs><path id="Moon" class="cls-1" d="m21.93,17.23c-1.89,3.24-5.4,5.27-9.26,5.27-5.89,0-10.67-4.7-10.67-10.51S6.37,1.87,11.95,1.5c.4-.02.67.41.46.76-.83,1.42-1.28,3.04-1.28,4.73,0,5.25,4.33,9.51,9.68,9.51.22,0,.44,0,.65-.02.4-.03.67.4.47.75Z"/></svg>'
                             },
-                                currentIcon = (6 <= time.hoursNotPadded <= 17) ? meridiemIcons['AM'] : meridiemIcons['PM'];
+                                currentIcon = (6 <= time.hoursNotPadded && time.hoursNotPadded <= 17) ? meridiemIcons['AM'] : meridiemIcons['PM'];
 
                             $scope.find('.premium-world-clock__meridiem').html(currentIcon);
                         }
@@ -3081,6 +3248,14 @@
 
                     typeTitle($nextTyping);
                 });
+            }
+
+            if ($postsWrapper.find('.premium-post-ticker__post-wrapper').length <= 6) {
+
+                $postsWrapper.find('.premium-post-ticker__post-wrapper').map(function (index, post) {
+                    $postsWrapper.append($(post).clone());
+                })
+
             }
 
             $postsWrapper.slick(getSlickSettings());
@@ -3375,6 +3550,819 @@
             }
         };
 
+        var PremiumTiktokHandler = function ($scope, $) {
+
+            var widgetID = $scope.data('id'),
+                $outerWrapper = $scope.find('.premium-tiktok-feed__outer-wrapper'),
+                settings = $outerWrapper.data('pa-tiktok-settings');
+
+            if (!settings) {
+                return;
+            }
+
+            var $videosWrapper = $scope.find('.premium-tiktok-feed__videos-wrapper');
+
+            if ("masonry" === settings.layout && !settings.carousel) {
+                $videosWrapper.imagesLoaded(function () {
+                    $videosWrapper.isotope(getIsoTopeSettings());
+                });
+            }
+
+            if (settings.loadMore && !settings.carousel) {
+
+                window['paLoadMoreBookmark' + widgetID] = $outerWrapper.data('pa-load-bookmark');
+                window['paHiddenPins' + widgetID] = $scope.find('.premium-tiktok-feed__video-outer-wrapper.premium-display-none').length;
+
+                $scope.find('.premium-tiktok-feed__load-more-btn').on('click.paLoadMoreVids', function (e) {
+
+                    var bookmark = window['paLoadMoreBookmark' + widgetID],
+                        count = settings.loadMoreCount;
+
+                    for (var i = 0; i < count; i++) {
+                        // $scope.find('.premium-tiktok-feed__video-outer-wrapper').eq( bookmark + i ).show().addClass('premium-pin-shown');
+                        $scope.find('.premium-tiktok-feed__video-outer-wrapper').eq(bookmark + i).show(0, function () {
+                            var _this = this;
+                            setTimeout(function () {
+                                $(_this).removeClass('premium-display-none'); // fix: share menu not fully displayed.
+                            }, 400);
+                        });
+                    }
+
+                    window['paLoadMoreBookmark' + widgetID] = bookmark + count;
+                    window['paHiddenPins' + widgetID] -= count;
+
+                    if (0 >= window['paHiddenPins' + widgetID]) {
+                        $scope.find('.premium-tiktok-feed__load-more-btn').remove();
+                    }
+                });
+            }
+
+            if (settings.carousel) {
+
+                var carouselSettings = $outerWrapper.data('pa-carousel');
+
+                $videosWrapper.addClass('premium-addons__v-hidden').slick(getSlickSettings(carouselSettings));
+
+                $videosWrapper.removeClass('premium-addons__v-hidden');
+            }
+
+            // share links
+            $scope.find('.premium-copy-link').on('click.paTiktokCopyLink', function () {
+                $scope.find('.premium-tiktok-share-menu').css('visibility', 'hidden')
+
+                var txt = $(this).data('pa-link');
+                navigator.clipboard.writeText(txt);
+            });
+
+            $scope.find('.premium-tiktok-share-item:not(.premium-copy-link)').on('click.paTiktokShare', function () {
+
+                var link = $(this).data('pa-link');
+                window.open(link, 'popup', 'width=600,height=600');
+            });
+
+            if ('lightbox' === settings.onClick) {
+                initFeedPopupEvents($scope);
+            } else if ('play' === settings.onClick) {
+
+                if ($scope.hasClass('premium-tiktok-feed__vid-layout-2')) {
+                    $scope.find('.premium-tiktok-feed__vid-meta-wrapper').on('click', function () {
+                        $(this).next().trigger('click');
+                    });
+                }
+
+                $scope.find('.premium-tiktok-feed__video-media').on('click', function () {
+                    var $video = $(this).find('video');
+
+                    $(this).find('.premium-tiktok-feed__play-icon').toggleClass('premium-addons__v-hidden');
+
+                    if (!$video.hasClass('video-playing')) {
+                        $video.get(0).play();
+                    } else {
+                        $video.get(0).pause();
+                    }
+
+                    $video.toggleClass('video-playing');
+
+                });
+            }
+
+            if (settings.playOnHover) {
+
+                $scope.find('.premium-tiktok-feed__video-media').hover(function () {
+
+                    $scope.find('.premium-tiktok-feed__play-icon').removeClass('premium-addons__v-hidden');
+                    $scope.find('video').get(0).pause();
+
+                    $(this).find('.premium-tiktok-feed__play-icon').addClass('premium-addons__v-hidden');
+                    $(this).find('video').get(0).play();
+
+                }, function () {
+                    $(this).find('.premium-tiktok-feed__play-icon').removeClass('premium-addons__v-hidden');
+                    $(this).find('video').get(0).pause();
+                })
+            }
+
+
+            function closeModal() {
+                $('.premium-tiktok-feed-modal-iframe-modal').css('display', 'none');
+
+                $(".premium-tiktok-feed-modal-iframe-modal #pa-tiktok-vid-control-iframe").attr({
+                    'src': ''
+                });
+            }
+
+            function initFeedPopupEvents($scope) {
+
+                var isBanner = $scope.hasClass('premium-tiktok-feed__vid-layout-2');
+
+                if (isBanner) {
+                    $scope.find('.premium-tiktok-feed__vid-meta-wrapper').on('click.paTriggerModal', function () {
+                        $scope.find('.premium-tiktok-feed__video-media').trigger('click');
+                    });
+                }
+
+                $scope.find('.premium-tiktok-feed__video-media').on('click.paTiktokModal', function () {
+                    var embedLink = $(this).data('pa-tiktok-embed'),
+                        $modalContainer = $('.premium-tiktok-feed-modal-iframe-modal'),
+                        paIframe = $modalContainer.find("#pa-tiktok-vid-control-iframe");
+
+                    $modalContainer.css('display', 'flex');
+                    paIframe.css("z-index", "-1");
+
+                    paIframe.attr("src", 'https://www.tiktok.com/embed/v2/' + embedLink);
+                    paIframe.show();
+                    paIframe.css("z-index", "1");
+                });
+
+                // close model events.
+                $('.eicon-close').on('click.paClosePopup', closeModal);
+
+                $(document).on('click.paClosePopup', '.premium-tiktok-feed-modal-iframe-modal', function (e) {
+                    if ($(e.target).closest(".premium-tiktok-feed__video-content").length < 1) {
+                        closeModal();
+                    }
+                });
+            }
+
+            function getSlickSettings(settings) {
+
+                var prevArrow = settings.arrows ? '<a type="button" data-role="none" class="carousel-arrow carousel-prev" aria-label="Previous" role="button" style=""><i class="fas fa-angle-left" aria-hidden="true"></i></a>' : '',
+                    nextArrow = settings.arrows ? '<a type="button" data-role="none" class="carousel-arrow carousel-next" aria-label="Next" role="button" style=""><i class="fas fa-angle-right" aria-hidden="true"></i></a>' : '';
+
+                return {
+                    infinite: true,
+                    draggable: true,
+                    rows: 0,
+                    slidesToShow: settings.slidesToShow,
+                    slidesToScroll: settings.slidesToScroll || 1,
+                    responsive: [
+                        {
+                            breakpoint: 1025,
+                            settings: {
+                                slidesToShow: settings.slidesToShowTab,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: settings.slidesToShowMobile,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ],
+                    autoplay: settings.autoPlay,
+                    speed: settings.speed || 300,
+                    autoplaySpeed: settings.autoplaySpeed || 5000,
+                    fade: settings.fade,
+                    centerMode: settings.centerMode,
+                    centerPadding: settings.centerPadding + "px",
+                    nextArrow: nextArrow,
+                    prevArrow: prevArrow,
+                    dots: settings.dots,
+                    customPaging: function () {
+                        return '<i class="fas fa-circle"></i>';
+                    }
+                };
+            };
+
+            function getIsoTopeSettings() {
+
+                return {
+                    itemSelector: ".premium-tiktok-feed__video-outer-wrapper",
+                    percentPosition: true,
+                    animationOptions: {
+                        duration: 750,
+                        easing: "linear",
+                        queue: false
+                    }
+                }
+            };
+        };
+
+        var PremiumPinterestHandler = function ($scope, $) {
+
+            var $outerWrapper = $scope.find('.premium-pinterest-feed__outer-wrapper'),
+                settings = $outerWrapper.data('pa-pinterest-settings');
+
+            if (!settings) {
+                return;
+            }
+
+            var isBoardQuery = 'boards/' === settings.query,
+                loadBoardPins = isBoardQuery && 'pins' === settings.onClick,
+                $pinsWrapper = $scope.find('.premium-pinterest-feed__pins-wrapper'),
+                $boardWrapper = $scope.find('.premium-pinterest-feed__board-wrapper');
+
+            if (loadBoardPins) {
+
+                $boardWrapper.on('click.paLoadPins', function () {
+
+                    var id = $(this).data('board-id');
+                    $boardWrapper.hide();
+
+                    $('#premium-board-content-' + id).show();
+
+                    if ("masonry" === settings.layout) {
+                        setTimeout(function () {
+                            $('#premium-board-content-' + id + ' .premium-pinterest-feed__pins-wrapper').isotope(getIsoTopeSettings());
+                        }, 100);
+                    }
+                });
+
+                $scope.find('.premium-pinterest-feed__board-trigger').on('click.paHidePins', function () {
+                    $boardWrapper.show();
+                    $scope.find('.premium-pinterest-feed__content-wrapper').hide();
+                });
+            }
+
+            if (!isBoardQuery) {
+
+                if ("masonry" === settings.layout && !settings.carousel) {
+
+                    $pinsWrapper.imagesLoaded(function () {
+                        $pinsWrapper.isotope(getIsoTopeSettings());
+                    });
+                }
+
+                if (settings.loadMore && !settings.carousel) {
+
+                    window.paLoadMoreBookmark = $outerWrapper.data('pa-load-bookmark');
+                    window.paHiddenPins = $scope.find('.premium-pinterest-feed__pin-outer-wrapper.premium-display-none').length;
+
+                    $scope.find('.premium-pinterest-feed__load-more-btn').on('click.paLoadMorePins', function (e) {
+
+                        var bookmark = window.paLoadMoreBookmark,
+                            count = settings.loadMoreCount;
+
+                        for (var i = 0; i < count; i++) {
+                            $scope.find('.premium-pinterest-feed__pin-outer-wrapper').eq(bookmark + i).show().addClass('premium-pin-shown');
+                        }
+
+                        window.paLoadMoreBookmark = bookmark + count;
+                        window.paHiddenPins -= count;
+
+                        if (0 >= window.paHiddenPins) {
+                            $scope.find('.premium-pinterest-feed__load-more-btn').remove();
+                        }
+                    });
+                }
+
+                if (settings.carousel) {
+
+                    var carouselSettings = $outerWrapper.data('pa-carousel');
+                    $pinsWrapper.addClass('premium-addons__v-hidden').slick(getSlickSettings(carouselSettings));
+
+                    $pinsWrapper.removeClass('premium-addons__v-hidden');
+                }
+            }
+
+            if ('layout-2' === settings.pinLayout) {
+                $scope.find('.premium-pinterest-feed__pin-meta-wrapper').on('click.paPinTrigger', function (e) {
+
+                    if (e.target === this) {
+                        $(this).siblings('.premium-pinterest-feed__overlay')[0].click();
+                    }
+                });
+            }
+
+            // copy to clipbaord
+            $scope.find('.premium-copy-link').on('click.paCopyLink', function () {
+                $scope.find('.premium-pinterest-share-menu').css('visibility', 'hidden')
+
+                var txt = $(this).data('pa-link');
+                navigator.clipboard.writeText(txt);
+            });
+
+            $scope.find('.premium-pinterest-share-item:not(.premium-copy-link)').on('click.paShare', function () {
+
+                var link = $(this).data('pa-link');
+                window.open(link, 'popup', 'width=600,height=600');
+            });
+
+            function getSlickSettings(settings) {
+
+                var prevArrow = settings.arrows ? '<a type="button" data-role="none" class="carousel-arrow carousel-prev" aria-label="Previous" role="button" style=""><i class="fas fa-angle-left" aria-hidden="true"></i></a>' : '',
+                    nextArrow = settings.arrows ? '<a type="button" data-role="none" class="carousel-arrow carousel-next" aria-label="Next" role="button" style=""><i class="fas fa-angle-right" aria-hidden="true"></i></a>' : '';
+
+                return {
+                    infinite: true,
+                    draggable: true,
+                    rows: 0,
+                    slidesToShow: settings.slidesToShow,
+                    slidesToScroll: settings.slidesToScroll || 1,
+                    responsive: [
+                        {
+                            breakpoint: 1025,
+                            settings: {
+                                slidesToShow: settings.slidesToShowTab,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: settings.slidesToShowMobile,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ],
+                    autoplay: settings.autoPlay,
+                    speed: settings.speed || 300,
+                    autoplaySpeed: settings.autoplaySpeed || 5000,
+                    fade: settings.fade,
+                    centerMode: settings.centerMode,
+                    centerPadding: settings.centerPadding + "px",
+                    nextArrow: nextArrow,
+                    prevArrow: prevArrow,
+                    dots: settings.dots,
+                    customPaging: function () {
+                        return '<i class="fas fa-circle"></i>';
+                    }
+                };
+            };
+
+            function getIsoTopeSettings() {
+
+                return {
+                    itemSelector: ".premium-pinterest-feed__pin-outer-wrapper",
+                    percentPosition: true,
+                    animationOptions: {
+                        duration: 750,
+                        easing: "linear",
+                        queue: false
+                    }
+                }
+            };
+        };
+
+        var PremiumAdvCarouselHandler = function ($scope, $) {
+
+            var $outerContainer = $scope.find('.premium-adv-carousel__container'),
+                settings = $outerContainer.data('settings'),
+                $carouselContainer = $scope.find('.premium-adv-carousel__inner-container');
+
+            if (!settings) {
+                return;
+            }
+
+            var animationType = settings.type;
+
+            if ('infinite' === animationType) {
+
+                var $mediaItemsContainer = $outerContainer.find('.premium-adv-carousel__items'),
+                    direction = settings.dir,
+                    scrollDir = settings.reverse,
+                    duration = settings.speed * 1000 + 'ms',
+                    animeName = 'pa-scroll-' + $scope.data('id'),
+                    horAlignWidth = 10,
+                    verAlignWidth = 10,
+                    light_box = settings.light_box,
+                    lightbox_type = settings.lightbox_type;
+
+                elementorFrontend.waypoint($scope, function () {
+
+                    var $mediaItem = $scope.find('.premium-adv-carousel__item'),
+                        transformOffset = 'horizontal' === direction ? $carouselContainer.innerWidth() : $carouselContainer.innerHeight(),
+                        start = 'transform: translateX(' + 0 + 'px)',
+                        end = 'transform: translateX(-50%)',
+                        containerHeight = $mediaItemsContainer.outerHeight();
+
+                    if ('horizontal' === direction) {
+
+                        $mediaItem.each(function () {
+                            horAlignWidth += $(this).outerWidth(true);
+                        });
+
+                        $mediaItemsContainer.css({
+                            'height': containerHeight,
+                            'position': 'relative'
+                        });
+
+                        $mediaItemsContainer.css({ 'width': horAlignWidth });
+                        $mediaItemsContainer.find('.premium-adv-carousel__item-outer-wrapper').css('position', 'absolute');
+
+                        if ('normal' === scrollDir) {
+                            $mediaItemsContainer.find('.premium-adv-carousel__item-outer-wrapper').css('right', 0);
+                        } else {
+                            $mediaItemsContainer.css('left', '-' + horAlignWidth / $mediaItem.length + 'px');
+                        }
+
+                        var slidesSpacing = getComputedStyle($scope[0]).getPropertyValue('--pa-wheel-spacing') || 0,
+                            factor = 'normal' === scrollDir ? -1 : 1;
+
+                        gsap.set($scope.find('.premium-adv-carousel__item-outer-wrapper'), {
+                            x: function (i) { return i * factor * (horAlignWidth / $mediaItem.length + parseFloat(slidesSpacing)) }
+                        });
+
+                        var fullWidth = (horAlignWidth + ($mediaItem.length * parseFloat(slidesSpacing)));
+
+                        var animation = gsap.to($scope.find('.premium-adv-carousel__item-outer-wrapper'), {
+                            duration: 30,
+                            ease: "none",
+                            x: ('normal' === scrollDir ? '-=' : '+=') + fullWidth,
+                            modifiers: {
+                                x: gsap.utils.unitize(function (x) {
+
+                                    var remainder = parseFloat(x) % fullWidth,
+                                        clampedValue = Math.max(remainder, -fullWidth);
+
+                                    return 'normal' === scrollDir ? clampedValue : remainder
+
+                                })
+                            },
+                            repeat: -1
+                        });
+
+                        //Pause on hover
+                        if (settings.pauseOnHover) {
+                            $scope.hover(function () {
+                                animation.pause();
+                            }, function () {
+                                animation.play();
+                            })
+                        }
+
+
+                    } else {
+
+                        start = 'transform: translateY(' + transformOffset + 'px)';
+                        end = 'transform: translateY(-101%)';
+
+                        $mediaItem.each(function () {
+                            verAlignWidth += $(this).outerHeight(true);
+                        });
+
+                        $mediaItemsContainer.css({ 'height': verAlignWidth });
+
+                        var keyFrames = document.createElement("style");
+
+                        keyFrames.innerHTML = '@keyframes ' + animeName + ' { 0%{ ' + start + '} 100% {' + end + '} }';
+
+                        document.head.appendChild(keyFrames);
+
+                        $mediaItemsContainer.css('animation', animeName + ' ' + duration + ' linear 0s infinite ' + scrollDir + ' none');
+
+                    }
+                }, {
+                    offset: "100%",
+                    triggerOnce: true
+                });
+
+                $carouselContainer.css('visibility', 'inherit');
+
+                if (light_box) {
+                    if ("default" === lightbox_type)
+                        $scope.find(".premium-adv-carousel__inner-container a[data-rel^='prettyPhoto']").prettyPhoto(getPrettyPhotoSettings());
+                }
+
+                // We need to set the animation on reaching viewpoint.
+                if (settings.pauseOnHover) {
+                    setInfiniteAnimeState();
+                }
+
+                if (settings.scroll) {
+
+                    setInfiniteAnimeState();
+
+                    if (settings.dir === 'horizontal') {
+
+                        $outerContainer.find('.premium-adv-carousel__inner-container').mousewheel(function (e, delta) {
+                            this.scrollLeft -= (delta * 30);
+                            e.preventDefault();
+                        });
+                    }
+                } else {
+                    $outerContainer.find('.premium-adv-carousel__inner-container').css({ 'overflow': 'hidden' });
+                }
+
+            } else {
+
+                // flipster animations.
+                var $flipContainer = $scope.find('.premium-adv-carousel__items'),
+                    $flipItem = $scope.find('.premium-adv-carousel__item-outer-wrapper'),
+                    $buttonPrev = $scope.find('.premium-adv-carousel__prev-icon').html(),
+                    $buttonNext = $scope.find('.premium-adv-carousel__next-icon').html(),
+                    isSmallDevice = ['mobile', 'mobile_extra', 'tablet', 'tablet_extra'].includes(elementorFrontend.getCurrentDeviceMode());
+
+                $scope.find('.premium-adv-carousel__icons-holder').remove();
+
+                $carouselContainer.flipster({
+                    itemContainer: $flipContainer,
+                    itemSelector: $flipItem,
+                    style: settings.type,
+                    fadeIn: 0,
+                    start: settings.start,
+                    loop: settings.loop,
+                    autoplay: settings.autoPlay,
+                    scrollwheel: settings.scroll,
+                    pauseOnHover: settings.pauseOnHover,
+                    click: settings.loop ? false : settings.click,
+                    keyboard: settings.keyboard,
+                    touch: settings.touch,
+                    spacing: settings.spacing,
+                    buttons: settings.buttons ? 'custom' : false,
+                    buttonPrev: $buttonPrev,
+                    buttonNext: $buttonNext,
+                    onItemSwitch: function () {
+                        resetVideos();
+                    }
+                }).css('visibility', 'inherit');
+
+                if (settings.keyboard && !isSmallDevice) {
+                    //Fix: keyboard nav won't start unless the elements is focused.
+                    elementorFrontend.waypoint($carouselContainer, function () {
+                        $.fn.focusWithoutScrolling = function () {
+                            var x = window.scrollX, y = window.scrollY;
+                            this.focus();
+                            window.scrollTo(x, y);
+                        };
+
+                        $carouselContainer.focusWithoutScrolling();
+                    });
+                }
+
+                // Fix: item click event when loop option is enabled navigates to the wrong slide.
+                if (settings.loop && settings.click) {
+                    $scope.find('.premium-adv-carousel__item-outer-wrapper').on('click.paFlipClick', function () {
+                        var itemIndex = $(this).index();
+                        $carouselContainer.flipster('jump', itemIndex);
+                    });
+                }
+            }
+
+            // play video.
+            if ("yes" !== settings.light_box || undefined == settings.light_box) {
+                $scope.find('.premium-adv-carousel__item .premium-adv-carousel__video-wrap').each(function (index, item) {
+
+                    var type = $(item).data("type");
+
+                    $(item).closest(".premium-adv-carousel__item").on("click.paPlayVid" + index, function () {
+
+                        var _this = $(this);
+
+                        resetVideos();
+
+                        _this.find(".premium-adv-carousel__media-wrap").css("background", "#000");
+
+                        _this.find(".premium-adv-carousel__video-icon, .premium-adv-carousel__vid-overlay").css("visibility", "hidden");
+
+                        if ("hosted" !== type) {
+                            var $iframeWrap = _this.find(".premium-adv-carousel__iframe-wrap"),
+                                src = $iframeWrap.data("src");
+
+                            src = src.replace("&mute", "&autoplay=1&mute");
+
+                            var $iframe = $("<iframe/>");
+
+                            $iframe.attr({ "src": src, "frameborder": "0", "allowfullscreen": "1", "allow": "autoplay;encrypted-media;" });
+
+                            $iframeWrap.html($iframe);
+
+                            $iframe.css("visibility", "visible");
+                        } else {
+                            var $video = $(item).find("video");
+                            $video.attr('pa-playing', 'true').get(0).play();
+                            $video.css("visibility", "visible");
+                        }
+                    });
+                });
+            }
+
+            function setInfiniteAnimeState() {
+                $outerContainer.on('mouseenter.paMediaWheel', function () {
+
+                    $mediaItemsContainer.css('animation-play-state', 'paused');
+                }).on('mouseleave.paMediaWheel', function () {
+                    $mediaItemsContainer.css('animation-play-state', 'running');
+                });
+            }
+
+            function resetVideos() {
+
+                $scope.find('iframe').attr('src', ''); // reset youtube/vimeo videos
+                // reset self hosted videos.
+                $video = $scope.find("video[pa-playing='true']").each(function () {
+                    var media = $(this).get(0);
+                    media.pause();
+                    media.currentTime = 0;
+                });
+
+                $scope.find(".premium-adv-carousel__video-icon, .premium-adv-carousel__vid-overlay").css("visibility", "visible");
+                $scope.find(".premium-adv-carousel__media-wrap").css("background", "unset");
+            }
+
+            function getPrettyPhotoSettings() {
+
+                return {
+                    theme: settings.theme,
+                    hook: "data-rel",
+                    opacity: 0.7,
+                    show_title: false,
+                    deeplinking: false,
+                    overlay_gallery: settings.overlay,
+                    custom_markup: "",
+                    default_width: 900,
+                    default_height: 506,
+                    social_tools: ""
+                }
+            }
+
+        };
+
+        var PremiumTestimonialsHandler = ModuleHandler.extend({
+
+            getDefaultSettings: function () {
+
+                return {
+                    slick: {
+                        infinite: true,
+                        rows: 0,
+                        prevArrow: '<a type="button" data-role="none" class="carousel-arrow carousel-prev" aria-label="Next" role="button" style=""><i class="fas fa-angle-left" aria-hidden="true"></i></a>',
+                        nextArrow: '<a type="button" data-role="none" class="carousel-arrow carousel-next" aria-label="Next" role="button" style=""><i class="fas fa-angle-right" aria-hidden="true"></i></a>',
+                        draggable: true,
+                        pauseOnHover: true,
+                    },
+                    selectors: {
+                        multipleTestimonials: '.multiple-testimonials',
+                        testimonials: '.premium-testimonial-container',
+                        testimonialCarousel: '.premium-testimonial-container.slick-active',
+                        testimonialImg: '.premium-testimonial-img-wrapper img',
+
+                    }
+                }
+            },
+
+            getDefaultElements: function () {
+
+                var selectors = this.getSettings('selectors');
+
+                return {
+                    $multipleTestimonials: this.$element.find(selectors.multipleTestimonials),
+                    $testimonials: this.$element.find(selectors.testimonials),
+                    $testimonialImg: this.$element.find(selectors.testimonialImg),
+                }
+
+            },
+            bindEvents: function () {
+                this.run();
+            },
+            getSlickSettings: function () {
+
+                var settings = this.getElementSettings(),
+                    rtl = this.elements.$multipleTestimonials.data("rtl"),
+                    colsNumber = 'skin4' !== settings.skin ? parseInt(100 / settings.testimonials_per_row.substr(0, settings.testimonials_per_row.indexOf('%'))) : 1,
+                    colsTablet = 'skin4' !== settings.skin ? parseInt(100 / settings.testimonials_per_row_tablet.substr(0, settings.testimonials_per_row_tablet.indexOf('%'))) : 1,
+                    colsMobile = 'skin4' !== settings.skin ? parseInt(100 / settings.testimonials_per_row_mobile.substr(0, settings.testimonials_per_row_mobile.indexOf('%'))) : 1;
+
+                return Object.assign(this.getSettings('slick'), {
+
+                    slide: '.premium-testimonial-container',
+                    slidesToShow: colsNumber,
+                    slidesToScroll: colsNumber,
+                    responsive: [{
+                        breakpoint: 1025,
+                        settings: {
+                            slidesToShow: colsTablet,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: colsMobile,
+                            slidesToScroll: 1
+                        }
+                    }
+                    ],
+                    autoplay: settings.carousel_play,
+                    autoplaySpeed: settings.speed || 5000,
+                    rtl: rtl ? true : false,
+                    speed: 500,
+                    arrows: 'skin4' !== settings.skin ? true : false,
+                    fade: 'skin4' === settings.skin ? true : false
+
+                });
+
+
+            },
+
+            runEqualHeight: function () {
+
+                var $testimonials = this.elements.$testimonials;
+
+                var heights = new Array();
+
+                $testimonials.each(function (index, testimonial) {
+
+                    var height = $(testimonial).outerHeight();
+
+                    heights.push(height);
+
+                });
+
+                var maxHeight = Math.max.apply(null, heights);
+                $testimonials.find('.premium-testimonial-content-wrapper').css("height", maxHeight + "px");
+
+            },
+
+            run: function () {
+
+                var $multipleTestimonials = this.elements.$multipleTestimonials;
+
+                if (!$multipleTestimonials.length) return;
+
+                if (this.$element.hasClass("premium-testimonial__equal-yes")) {
+                    this.runEqualHeight();
+                }
+
+                var settings = this.getElementSettings(),
+                    skin = settings.skin,
+                    carousel = 'skin4' !== skin ? settings.carousel : true;
+
+                if (carousel) {
+
+                    // var $testimonials = this.elements.$testimonials;
+
+                    // if ('skin1' === skin) {
+                    //     var imgPosition = settings.img_position;
+
+                    //     if ('absolute' === imgPosition) {
+                    //         $testimonials.css('margin-top', '80px')
+                    //     }
+                    // } else if ('skin4' === skin) {
+                    //     $testimonials.css('margin-bottom', '20px');
+                    // }
+
+                    var slickSettings = this.getSlickSettings();
+
+                    if ('skin4' === skin)
+                        slickSettings.infinite = false;
+
+                    $multipleTestimonials.slick(slickSettings);
+
+                    if ('skin4' === skin) {
+
+                        var $skinCarousel = this.$element.find('.premium-testimonial__carousel');
+
+                        $skinCarousel.slick({
+                            slidesToScroll: 1,
+                            slidesToShow: 3,
+                            arrows: false,
+                            centerMode: true,
+                            centerPadding: 0,
+                            infinite: false,
+                            speed: 500,
+                            autoplay: settings.carousel_play,
+                            autoplaySpeed: settings.speed || 5000,
+                        });
+
+                        $multipleTestimonials.slick('slickGoTo', 1);
+                        $skinCarousel.slick('slickGoTo', 1);
+
+                        this.$element.find('.premium-testimonial__carousel-img').on('click', function () {
+
+                            var slideIndex = $(this).data("index");
+
+                            $multipleTestimonials.slick('slickGoTo', slideIndex);
+                            $skinCarousel.slick('slickGoTo', slideIndex);
+                        });
+
+                        this.$element.hover(function () {
+                            $skinCarousel.slick('slickPause');
+                            $multipleTestimonials.slick('slickPause');
+                        }, function () {
+                            $skinCarousel.slick('slickPlay');
+                            $multipleTestimonials.slick('slickPlay');
+                        });
+                    }
+
+                }
+
+            }
+
+        });
+
         var functionalHandlers = {
             'premium-addon-dual-header.default': PremiumMaskHandler,
             'premium-addon-video-box.default': PremiumVideoBoxWidgetHandler,
@@ -3386,12 +4374,14 @@
             'premium-addon-modal-box.default': PremiumModalBoxHandler,
             'premium-image-scroll.default': PremiumImageScrollHandler,
             'premium-contact-form.default': PremiumContactFormHandler,
-            'premium-icon-list.default': PremiumBulletListHandler,
             'premium-addon-button.default': PremiumButtonHandler,
             'premium-addon-image-button.default': PremiumButtonHandler,
             'premium-world-clock.default': PremiumWorldClockHandler,
             'premium-post-ticker.default': PremiumPostTickerHandler,
             'premium-weather.default': PremiumWeatherHandler,
+            'premium-pinterest-feed.default': PremiumPinterestHandler,
+            'premium-tiktok-feed.default': PremiumTiktokHandler,
+            'premium-media-wheel.default': PremiumAdvCarouselHandler,
         };
 
         var classHandlers = {
@@ -3400,7 +4390,9 @@
             'premium-img-gallery': PremiumGridWidgetHandler,
             'premium-addon-banner': PremiumBannerHandler,
             'premium-svg-drawer': PremiumSVGDrawerHandler,
-            'premium-tcloud': PremiumTermsCloud
+            'premium-tcloud': PremiumTermsCloud,
+            'premium-icon-list': PremiumBulletListHandler,
+            'premium-addon-testimonials': PremiumTestimonialsHandler,
         };
 
         $.each(functionalHandlers, function (elemName, func) {

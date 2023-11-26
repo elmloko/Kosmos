@@ -163,3 +163,58 @@
 [dir="rtl"] .premium-carousel-inner .slick-slide {
   float: right;
 }
+
+.premium-carousel-nav-fraction {
+  text-align: center;
+  position: relative;
+}
+
+.premium-carousel-nav-progressbar {
+  width: 100%;
+  height: 20px;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  text-align: center;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  z-index: 10;
+}
+
+.premium-carousel-nav-progressbar .premium-carousel-nav-progressbar-fill {
+  background: #6ec1e4;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transform-origin: left top;
+  -ms-transform-origin: left top;
+  transform-origin: left top;
+}
+
+.premium-carousel-nav-progress {
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.premium-carousel-nav-progress .premium-carousel-nav-progress-fill {
+  width: 0%;
+  height: 100%;
+  font-size: 12px;
+  background: #6ec1e4;
+  text-align: center;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  position: absolute;
+  overflow: hidden;
+  line-height: 20px;
+  -webkit-transition: width 0s ease-in-out !important;
+  transition: width 0s ease-in-out !important;
+}

@@ -143,7 +143,8 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 			$posts     = ( isset( $demo_data['astra-post-data-mapping'][ $post_type ] ) ) ? $demo_data['astra-post-data-mapping'][ $post_type ] : array();
 			if ( ! empty( $posts ) ) {
 				foreach ( $posts as $key => $post ) {
-					$page = get_page_by_title( $post['post_title'], OBJECT, $post_type );
+					$page = Astra_Site_Options_Import::instance()->get_page_by_title( $post['post_title'], $post_type );
+					
 					if ( is_object( $page ) ) {
 						if ( defined( 'WP_CLI' ) ) {
 							WP_CLI::line( 'Setting Location Rules for ' . $post['post_title'] );
@@ -157,7 +158,8 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 			$posts     = ( isset( $demo_data['astra-post-data-mapping'][ $post_type ] ) ) ? $demo_data['astra-post-data-mapping'][ $post_type ] : array();
 			if ( ! empty( $posts ) ) {
 				foreach ( $posts as $key => $post ) {
-					$page = get_page_by_title( $post['post_title'], OBJECT, $post_type );
+					$page = Astra_Site_Options_Import::instance()->get_page_by_title( $post['post_title'], $post_type );
+
 					if ( is_object( $page ) ) {
 						if ( defined( 'WP_CLI' ) ) {
 							WP_CLI::line( 'Setting Location Rules for ' . $post['post_title'] );

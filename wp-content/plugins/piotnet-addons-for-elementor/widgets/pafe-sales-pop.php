@@ -301,7 +301,9 @@
 				[
 					'name' => 'sales_pop_time_typography',
 					'selector' => '{{WRAPPER}} .pafe-sales-pop-item__time',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				]
 			); 
 			$this->add_control(
@@ -309,10 +311,9 @@
 				[ 
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR, 
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#000',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-sales-pop-item__time' => 'color: {{VALUE}}',
@@ -333,7 +334,9 @@
 				[
 					'name' => 'sales_pop_title_typography',
 					'selector' => '{{WRAPPER}} .pafe-sales-pop-item__title',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				]
 			); 
 			$this->add_control(
@@ -341,10 +344,9 @@
 				[ 
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR, 
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#000',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-sales-pop-item__title' => 'color: {{VALUE}}',
@@ -365,7 +367,9 @@
 				[
 					'name' => 'sales_pop_description_typography',
 					'selector' => '{{WRAPPER}} .pafe-sales-pop-item__description',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				]
 			); 
 			$this->add_control(
@@ -373,10 +377,9 @@
 				[ 
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR, 
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#000',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-sales-pop-item__description' => 'color: {{VALUE}}',
@@ -397,10 +400,9 @@
 				[ 
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR, 
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#55586c',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-sales-pop__close' => 'color: {{VALUE}}',

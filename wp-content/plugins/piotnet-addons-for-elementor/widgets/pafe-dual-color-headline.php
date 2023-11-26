@@ -156,7 +156,9 @@ $this->start_controls_tabs(
 					[
 						'name' => 'headline_before_typography',
 						'selector' => '{{WRAPPER}} .pafe_dual_color_content_section_before',
-						'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+						'global' => [
+                            'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                        ],
 					]
 				);
 
@@ -267,7 +269,9 @@ $this->start_controls_tabs(
 					[
 						'name' => 'headline_after_typography',
 						'selector' => '{{WRAPPER}} .pafe_dual_color_content_section_after',
-						'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+						'global' => [
+                            'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                        ],
 					]
 				);
 
@@ -276,7 +280,6 @@ $this->start_controls_tabs(
 					[
 						'label' => __( 'Color', 'pafe' ),
 						'type' => \Elementor\Controls_Manager::COLOR,
-						'default' => '#000', 
 						'default' => '#000', 
 						'selectors' => [
 							'{{WRAPPER}} .pafe_dual_color_content_section_after' => 'color: {{VALUE}}',

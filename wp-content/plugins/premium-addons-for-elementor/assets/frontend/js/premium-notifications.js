@@ -9,6 +9,7 @@
 
                 return {
                     selectors: {
+                        user: '.fa-user',
                         outerWrap: '.pa-recent-notification',
                         iconWrap: '.pa-rec-not-icon-wrap',
                         postsContainer: '.pa-rec-posts-container',
@@ -64,6 +65,26 @@
 
             },
 
+            addIconForNoPosts: function () {
+
+                var settings = this.getElementSettings(),
+                    iconWithNoPosts = settings.add_icon_with_no_posts,
+                    iconType = settings.icon_type,
+                    $iconWrap = this.elements.$iconWrap;
+
+                if ('yes' === iconWithNoPosts) {
+
+                    if (iconType === 'image') {
+                        $($iconWrap[0].children[1]).css('display', 'block');
+                        $($iconWrap[0].children[0]).css('display', 'none');
+                    } else {
+                        $('.premium-notification-icon').css('display', 'none');
+                        $('.premium-icon-with-no-post').css('display', 'block');
+                    }
+
+                }
+            },
+
             run: function () {
 
                 var $iconWrap = this.elements.$iconWrap,
@@ -76,11 +97,16 @@
                     widgetID = this.$element.data('id'),
                     computedStyle = getComputedStyle(this.$element[0]);
 
-
                 var boxWidth = computedStyle.getPropertyValue('--pa-recent-posts-width'),
                     direction = settings.posts_box_position,
                     cookies = settings.cookies;
 
+                if ('yes' === settings.add_icon_with_no_posts && $number.length === 0) {
+
+                    $($iconWrap[0].children[1]).css('display', 'none');
+
+                    this.addIconForNoPosts();
+                }
 
                 this.hideAnimationElements();
 
@@ -94,6 +120,8 @@
                 $iconWrap.on('click', function () {
 
                     if (isHidden) {
+
+                        _this.addIconForNoPosts();
 
                         if ('yes' === cookies) {
 

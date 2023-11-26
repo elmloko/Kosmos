@@ -101,6 +101,7 @@
   .premium-facebook-feed-wrapper a.carousel-arrow,
   .premium-instafeed-container a.carousel-arrow,
   .premium-persons-container a.carousel-arrow,
+  .premium-testimonial-box a.carousel-arrow,
   .premium-tcloud-container a.carousel-arrow,
   .premium-woocommerce a.carousel-arrow,
   .elementor-widget-premium-weather.premium-hours-vertical a.carousel-arrow {
@@ -139,6 +140,7 @@
   .premium-facebook-feed-wrapper a.carousel-arrow,
   .premium-instafeed-container a.carousel-arrow,
   .premium-persons-container a.carousel-arrow,
+  .premium-testimonial-box a.carousel-arrow,
   .premium-tcloud-container a.carousel-arrow,
   .premium-woocommerce a.carousel-arrow,
   .elementor-widget-premium-weather.premium-hours-vertical a.carousel-arrow {
@@ -146,6 +148,7 @@
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    text-decoration: none;
   }
 
   a.carousel-arrow.carousel-next {

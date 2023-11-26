@@ -2079,6 +2079,18 @@
     content: "\e95a";
 }
 
+.pa-dash-premium-tiktok-feed:before {
+    content: "\e95c";
+}
+
+.pa-dash-premium-pinterest-feed:before {
+    content: "\e95b";
+}
+
+.pa-dash-premium-media-wheel:before {
+    content: "\e95d";
+}
+
 @-webkit-keyframes spin {
     0% {
         -webkit-transform: rotateZ(-180deg) rotateY(180deg);

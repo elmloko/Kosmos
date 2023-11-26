@@ -78,7 +78,8 @@ jQuery(window).on("elementor/frontend/init", function () {
                             popup.close();
                         });
 
-                        premiumMapPopups[currentSlide].open(map, map.markers[currentSlide]);
+                        if (premiumMapPopups[currentSlide])
+                            premiumMapPopups[currentSlide].open(map, map.markers[currentSlide]);
 
                     });
 

@@ -195,10 +195,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Box Around Color 1', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#ccc',
 				'selectors' => [
 					'{{WRAPPER}} .pafe-switch-content__button-slider' => 'background-color: {{VALUE}}',
@@ -211,10 +210,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Box Around Color 2', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#2196F3',
 				'selectors' => [
 					'{{WRAPPER}} input:checked + .pafe-switch-content__button-slider' => 'background-color: {{VALUE}}',
@@ -227,10 +225,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Switch Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#fff',
 				'selectors' => [
 					'{{WRAPPER}} .pafe-switch-content__button-slider:before' => 'background-color: {{VALUE}}',
@@ -387,7 +384,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'name' => 'label_typography',
 				'selector' => '{{WRAPPER}} .pafe-switch-content-primary-label',
-				'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                ],
 			]
 		);
 
@@ -396,10 +395,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#000', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-switch-content-primary-label' => 'color: {{VALUE}}',
@@ -421,7 +419,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'name' => 'label_secondary_typography',
 				'selector' => '{{WRAPPER}} .pafe-switch-content-secondary-label',
-				'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                ],
 			]
 		);
  
@@ -430,10 +430,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#000', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-switch-content-secondary-label' => 'color: {{VALUE}}',
@@ -471,7 +470,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_typography',
 				'selector' => '{{WRAPPER}} .pafe-switch_content-primary-content-wysiwyg',
-				'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_3,
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_TEXT,
+                ],
 			]
 		);
 
@@ -480,10 +481,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#000', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-switch_content-primary-content-wysiwyg' => 'color: {{VALUE}}',
@@ -505,7 +505,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'name' => 'content_secondary_typography',
 				'selector' => '{{WRAPPER}} .pafe-switch_content-secondary-content-wysiwyg',
-				'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_3,
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_TEXT,
+                ],
 			]
 		);
  
@@ -514,10 +516,9 @@ class PAFE_Switch_Content extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#000', 
 				'selectors' => [
 					'{{WRAPPER}} .pafe-switch_content-secondary-content-wysiwyg' => 'color: {{VALUE}}',

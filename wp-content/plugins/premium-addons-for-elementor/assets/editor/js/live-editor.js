@@ -68,7 +68,7 @@
                     paIframe.attr("src", res.data.url);
                     paIframe.attr("data-premium-temp-id", res.data.id);
 
-                    if ( 'loop' === tempType ) {
+                    if ('loop' === tempType) {
                         paIframe.attr("data-premium-temp-type", tempType);
                     }
 
@@ -94,8 +94,8 @@
                             settingsToChange[tempSelectorId] = '';
                             settingsToChange[liveTempId] = $('#premium-live-temp-title').val();
 
-                            if ( ['loop', 'grid'].includes(tempType) ) {
-                                settingsToChange[ 'pa_' + tempType + '_live_temp_id'] = res.data.id;
+                            if (['loop', 'grid'].includes(tempType)) {
+                                settingsToChange['pa_' + tempType + '_live_temp_id'] = res.data.id;
                             }
 
                             $(".premium-live-temp-title").removeClass("control-hidden");
@@ -166,9 +166,9 @@
     function getTemplateType(e) {
         var classes = e.model.attributes.button_type;
 
-        if ( classes.includes('loop-temp') ) {
+        if (classes.includes('loop-temp')) {
             return 'loop';
-        } else if ( classes.includes('grid-temp') ) {
+        } else if (classes.includes('grid-temp')) {
             return 'grid';
         }
         // return classes.includes('loop-temp') ? 'loop' : '';
@@ -237,7 +237,9 @@
                 }
             });
 
-        }, 1000);
+            $('.premium-cf-form-id input').attr('disabled', 'true');
+
+        }, 500);
     }
 
     elementor.channels.editor.on('section:activated', checkLiveTemplateControl);

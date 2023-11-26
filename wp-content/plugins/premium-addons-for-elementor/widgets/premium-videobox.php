@@ -1977,7 +1977,7 @@ class Premium_Videobox extends Widget_Base {
 		$this->start_controls_section(
 			'premium_video_box_text_style',
 			array(
-				'label'      => __( 'Video Text', 'premium-addons-for-elementor' ),
+				'label'      => __( 'Video Description', 'premium-addons-for-elementor' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'conditions' =>
 					array(
@@ -2405,7 +2405,6 @@ class Premium_Videobox extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			array(
-				'label'    => __( 'Text Shadow', 'premium-addons-for-elementor' ),
 				'name'     => 'premium_video_title_text_shadow',
 				'selector' => '{{WRAPPER}} .premium-youtube-vid-title',
 			)
@@ -2663,7 +2662,7 @@ class Premium_Videobox extends Widget_Base {
 
 			$related = $settings['premium_video_box_suggested_videos'];
 
-			$options  = 'youtube' === $video_type ? '&rel=' : '?rel';
+			$options  = 'youtube' === $video_type ? '&rel=' : '?rel=';
 			$options .= 'yes' === $related ? '1' : '0';
 			$options .= 'youtube' === $video_type ? '&mute=' : '&muted=';
 			$options .= 'yes' === $mute ? '1' : '0';

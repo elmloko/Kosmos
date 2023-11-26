@@ -931,7 +931,7 @@ class Premium_Maps extends Widget_Base {
 					'default' => Global_Colors::COLOR_SECONDARY,
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .premium-maps-info-desc' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .premium-maps-info-desc, {{WRAPPER}} .premium-maps-info-desc a' => 'color: {{VALUE}};',
 				),
 			)
 		);

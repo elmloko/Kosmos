@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit();
 ?>
-<div class="wp-dark-mode-switcher wp-dark-mode-ignore  style-10  <?php echo ! empty( $args['class'] ) ? esc_attr( $args['class'] ) : ''; ?> <?php echo 'yes' == $args['floating'] ? 'floating ' . esc_attr( $args['position'] ) : ''; ?>">
+<div class="wp-dark-mode-switcher wp-dark-mode-ignore  style-10  <?php echo ! empty( $args['class'] ) ? esc_attr( $args['class'] ) : ''; ?> <?php echo 'yes' === $args['floating'] ? 'floating ' . esc_attr( $args['position'] ) : ''; ?>">
 
 	<?php
 	if ( ! empty( $args['cta_text'] ) ) {

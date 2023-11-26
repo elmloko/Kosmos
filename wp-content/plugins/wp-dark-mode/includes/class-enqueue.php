@@ -304,10 +304,8 @@ if ( ! class_exists( 'WP_Dark_Mode_Enqueue' ) ) {
 				wp_enqueue_script( 'divi-custom-script2', WP_DARK_MODE_ASSETS . '/support/Divi/custom.min.js', [ 'jquery' ], WP_DARK_MODE_VERSION, true );
 			}
 		}
-
 	}
 
 	// Initialize the class instance only once.
 	WP_Dark_Mode_Enqueue::instance();
 }
-

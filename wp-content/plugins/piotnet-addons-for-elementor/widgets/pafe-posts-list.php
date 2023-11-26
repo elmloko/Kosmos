@@ -211,10 +211,9 @@
 				[
 					'label' => __( 'Background', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(), 
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-posts-list' => 'background-color: {{VALUE}}',       
@@ -470,10 +469,9 @@
 				[ 
 					'label' => __( 'Background', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					], 
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-posts-list__filter-item' => 'background-color: {{VALUE}}',
@@ -485,10 +483,9 @@
 				[ 
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#0095EB',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-posts-list__filter-item' => 'color: {{VALUE}}',
@@ -508,10 +505,9 @@
 				[ 
 					'label' => __( 'Background', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					], 
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#0095EB',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-posts-list__filter-item:hover' => 'background-color: {{VALUE}}',
@@ -524,10 +520,9 @@
 				[ 
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1, 
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-posts-list__filter-item:hover' => 'color: {{VALUE}}',
@@ -576,7 +571,9 @@
 				[
 					'name' => 'filter_typography',
 					'selector' => '{{WRAPPER}} .pafe-posts-list__filter-item',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				] 
 			); 
 			$this->add_responsive_control(
@@ -624,7 +621,9 @@
 				[
 					'name' => 'title_widget_typography',
 					'selector' => '{{WRAPPER}} .pafe-posts-list__filter-title',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				] 
 			); 
 			$this->add_control(
@@ -632,10 +631,9 @@
 				[
 					'label' => __( 'Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#42527B', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-posts-list__filter-title' => 'color: {{VALUE}}',
@@ -680,7 +678,9 @@
 				[
 					'name' => 'title_typography',
 					'selector' => '{{WRAPPER}} .pafe-card-right__title',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				] 
 			); 
 			$this->add_control(
@@ -688,10 +688,9 @@
 				[
 					'label' => __( 'Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#1b326e', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-card-right__title' => 'color: {{VALUE}}',
@@ -703,10 +702,9 @@
 				[
 					'label' => __( 'Hover', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#0095EB', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-card-right__title:hover' => 'color: {{VALUE}}',
@@ -727,10 +725,9 @@
 				[ 
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => 'rgba(35,76,109,0.56)',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-card-right__description' => 'color: {{VALUE}}',
@@ -742,7 +739,9 @@
 				[
 					'name' => 'text_typography',
 					'selector' => '{{WRAPPER}} .pafe-card-right__description',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				] 
 			); 
 			$this->add_responsive_control(
@@ -781,7 +780,9 @@
 				[
 					'name' => 'author_typography',
 					'selector' => '{{WRAPPER}} .pafe-card-right__info,.pafe-card-left__info',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				]
 			); 
 			$this->add_control(
@@ -789,10 +790,9 @@
 				[ 
 					'label' => __( 'Color', 'pafe' ), 
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => 'rgba(35,76,109,0.56)',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-card-right__info' => 'color: {{VALUE}}',
@@ -858,10 +858,9 @@
 				[
 					'label' => __( 'Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-card-left__title' => 'color: {{VALUE}}',
@@ -875,10 +874,9 @@
 				[
 					'label' => __( 'Hover', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#0095EB', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-card-left__title:hover' => 'color: {{VALUE}}',
@@ -890,7 +888,9 @@
 				[
 					'name' => 'title_featured_typography',
 					'selector' => '{{WRAPPER}} .pafe-card-left__title',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ],
 				]
 			);
 			$this->add_control(
@@ -911,10 +911,9 @@
 				[
 					'label' => __( 'Background Ovelay', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(), 
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-card-left__content' => 'background-color: {{VALUE}}',       
@@ -1064,10 +1063,9 @@
 				[
 					'label' => __( 'Content Background', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(), 
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'separator' => 'before',
 					'default' => '#00e8cc',  
 					'selectors' => [

@@ -131,6 +131,7 @@ class Module {
 							'woo_last_purchase' => __( 'Last Purchase In Cart', 'premium-addons-for-elementor' ),
 							'woo_total_price'   => __( 'Amount In Cart', 'premium-addons-for-elementor' ),
 							'woo_cart_products' => __( 'Products In Cart', 'premium-addons-for-elementor' ),
+							'woo_purchase_products' => __( 'Purchased Products', 'premium-addons-for-elementor' ),
 						),
 					),
 				)
@@ -148,20 +149,6 @@ class Module {
 				'render_type'        => 'template',
 				'prefix_class'       => 'pa-display-conditions-',
 				'frontend_available' => true,
-			)
-		);
-
-		$sm_link = Helper_Functions::get_campaign_link( 'https://premiumaddons.com/docs/elementor-editor-not-loading-with-display-conditions/', 'editor-page', 'wp-editor', 'get-support' );
-
-		$element->add_control(
-			'pa_display_sm_notice',
-			array(
-				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => '<a href="' . esc_url( $sm_link ) . '" target="_blank">' . __( 'IMPORTANT: Check this article first!', 'premium-addons-for-elementor' ) . '</a>',
-				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
-				'condition'       => array(
-					'pa_display_conditions_switcher' => 'yes',
-				),
 			)
 		);
 
@@ -224,6 +211,7 @@ class Module {
 				'woo_product_cat',
 				'woo_last_purchase',
 				'woo_total_price',
+				'woo_purchase_products',
 				'woo_cart_products',
 				'acf_choice',
 				'acf_text',
@@ -304,7 +292,7 @@ class Module {
 		$values = $repeater->get_controls();
 
 		if ( $should_apply ) {
-			$values = array_values( $values );
+			// $values = array_values( $values );
 		}
 
 		$element->add_control(
@@ -351,6 +339,9 @@ class Module {
 		$docs = array(
 			'https://premiumaddons.com/docs/elementor-display-conditions-tutorial/' => __( 'Getting started »', 'premium-addons-for-elementor' ),
 			'https://premiumaddons.com/docs/elementor-editor-not-loading-with-display-conditions/' => __( 'Fix editor not loading with Display Conditions enabled »', 'premium-addons-for-elementor' ),
+            'https://premiumaddons.com/docs/how-to-show-hide-element-based-on-browser-elementor-display-conditions/' => __( 'Show/Hide Element Based on Browser »', 'premium-addons-for-elementor' ),
+            'https://premiumaddons.com/docs/how-to-show-hide-element-on-specific-time-range-elementor-display-conditions/' => __( 'Show/Hide Element Based on Time Range »', 'premium-addons-for-elementor' ),
+            'https://premiumaddons.com/docs/how-to-show-hide-element-with-location-elementor-display-conditions/' => __( 'Show/Hide Element Based on Location »', 'premium-addons-for-elementor' ),
 		);
 
 		$doc_index = 1;

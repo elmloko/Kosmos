@@ -1,5 +1,5 @@
 /* hide addons link */
-.igmap_page_interactive-geo-maps-account a[href*="edit.php?post_type=igmap&page=interactive-geo-maps-addons"], 
+.igmap_page_interactive-geo-maps-account a[href*="edit.php?post_type=igmap&page=interactive-geo-maps-addons"],
 #menu-posts-igmap a[href*="edit.php?post_type=igmap&page=interactive-geo-maps-addons"],
 #menu-posts-igmap.menu-icon-igmap .fs-trial {
 	display:none;
@@ -7,10 +7,10 @@
 
 
 /* show addons link */
-.igm-pro.igmap_page_interactive-geo-maps-account a[href*="edit.php?post_type=igmap&page=interactive-geo-maps-addons"], 
+.igm-pro.igmap_page_interactive-geo-maps-account a[href*="edit.php?post_type=igmap&page=interactive-geo-maps-addons"],
 .igm-pro #menu-posts-igmap a[href*="edit.php?post_type=igmap&page=interactive-geo-maps-addons"] {
 	display:block;
-} 
+}
 
 /* Info Box */
 .map_information_box {
@@ -18,14 +18,14 @@
 	margin-bottom:10px;
 }
 
-.map_information_box .map_information_title { 
-	border-bottom:1px solid #CCC; background:#FFF; 
+.map_information_box .map_information_title {
+	border-bottom:1px solid #CCC; background:#FFF;
 }
 .map_information_box > div {
 	padding:8px;
 }
 
-.geocoding-hide { 
+.geocoding-hide {
 	display:none;
 }
 
@@ -343,4 +343,11 @@ ul#igm_pro_feature_list li ul {
 	font-size: 2em;
 	font-weight: bold;
 	margin:30px;
+}
+
+.mergeOrderFields .csf-fieldset input {
+	display: none;
+}
+.mergeOrderFields .csf-fieldset .csf-title {
+	width: 100%;
 }

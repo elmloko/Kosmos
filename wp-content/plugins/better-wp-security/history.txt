@@ -1008,3 +1008,39 @@
 8.1.6 - 2023-04-20 - Timothy Jacobs, Lisa Canini, Jared Hill
 	Bug Fix: Fallback to the homepage when Enforce SSL encounters a non-safelisted redirect destination.
 	Bug Fix: IP Detection on sites behind Load Balancers that appended their IP address to X-Forwarded-For and did not provide a Real IP header.
+8.1.7 - 2023-07-18 - Timothy Jacobs, Lisa Canini, Jared Hill
+	Important: Enforce encryption for Two-Factor secrets.
+	Tweak: Add Stellar and Solid banners.
+	Bug Fix: Don't require "Write to Files" to be enabled to use the "Rotate Encryption Key" tool.
+8.1.8 - 2023-08-31 - Timothy Jacobs, Lisa Canini, Jared Hill
+	News: iThemes Security is becoming Solid Security soon. Learn More: https://go.solidwp.com/security-free-notice-ithemes-becoming-solidwp
+9.0.0 - 2023-10-17 - Timothy Jacobs, Lisa Canini, Jared Hill, John Hooks
+	New: iThemes Security is now Solid Security! Learn More: https://go.solidwp.com/security-welcome-to-solidwp
+	Important: Solid Security now requires WordPress 6.2 or later.
+	New: The Firewall screen brings together the Firewall functionality Solid Security provides into one easy to use screen. More Firewall features are coming soon!
+	New: The Vulnerabilities screen identifies what vulnerable software you have on your site and guides you through next steps.
+	New: Identify risks in your site's security with the the expanded Site Scan functionality.
+	New: The User Security screen keeps you appraised of the security practices your site's users are following. Easily apply actions to multiple users in one-click like resetting passwords or logging out active sessions.
+	Enhancement: The dashboard and settings screens have been redesigned to make it easier to find what you're looking for.
+	Enhancement: The Security Summary dashboard card gives you a snapshot of the most important security issues affecting your site.
+	Enhancement: Add support for loading Solid Security via an MU-Plugin for improved performance when blocking attackers.
+	Tweak: Remove the IP Tracker Online link from the logs page.
+	Bug Fix: PHP 8.2 compatibility.
+	Bug Fix: Resolved PHP warnings when unexpected data is encountered during software updates.
+9.0.1 - 2023-10-31 - Timothy Jacobs, Lisa Canini, Jared Hill, John Hooks
+	Security: Don't disclose the login URL when using Hide Backend on a site with comments enabled and comment registration required. Thanks to Naveen Muthusamy for disclosing this issue.
+	Hardening: Check for the promote_user capability when using Privilege Escalation in addition to edit_user.
+	Tweak: Remove the iThemes Security is now Solid Security banner from admin-facing email notifications.
+	Bug Fix: Prevent the User Security page from crashing when "Show Avatars" is disabled in the WordPress discussion settings.
+	Bug Fix: Fix some filters on the User Security page not working as expected.
+	Bug Fix: Fix spacing on the Two-Factor form when backup methods are enabled.
+	Bug Fix: Fix fatal error when there is an error retrieving Patchstack license information.
+	Bug Fix: Styling issues on WordPress 6.4.
+9.0.2 - 2023-11-01 - Timothy Jacobs, Lisa Canini, Jared Hill, John Hooks
+	Bug Fix: Adding missing dist files to SVN
+9.0.3 - 2023-11-02 - Timothy Jacobs, Lisa Canini, Jared Hill, John Hooks
+	Bug Fix: Remove an extra folder containing duplicate plugin files
+9.1.0 - 2023-11-15 - Timothy Jacobs, Lisa Canini, Jared Hill
+	New: Add support for creating custom firewall rules.
+	Enhancement: Add support for configuring firewall settings from the Firewall page.
+	Bug Fix: The firewall page would appear empty when geolocation could not retrieve a country code.

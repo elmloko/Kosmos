@@ -217,10 +217,9 @@
 				[
 					'label' => __( 'Background', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(), 
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => 'rgba(242,242,242,0.29)',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-image-accordion__item::after' => 'background-color: {{VALUE}}',       
@@ -366,10 +365,9 @@
 				[
 					'label' => __( 'Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-image-accordion__item-content__title-inner' => 'color: {{VALUE}}',
@@ -381,7 +379,9 @@
 				[
 					'name' => 'title_typography',
 					'selector' => '{{WRAPPER}} .pafe-image-accordion__item-content__title-inner',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                    ],
 				]
 			);
 			
@@ -420,10 +420,9 @@
 				[
 					'label' => __( 'Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(),
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-image-accordion__item-content__text' => 'color: {{VALUE}}',
@@ -436,7 +435,9 @@
 				[
 					'name' => 'content_typography',
 					'selector' => '{{WRAPPER}} .pafe-image-accordion__item-content__text',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                    ],
 				]
 			);
 			$this->add_responsive_control(
@@ -485,10 +486,9 @@
 				[
 					'label' => __( 'Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(), 
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-image-accordion__item-content__link' => 'color: {{VALUE}}',       
@@ -500,10 +500,9 @@
 				[
 					'label' => __( 'Background', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(), 
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#3CCD94',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-image-accordion__item-content__link' => 'background-color: {{VALUE}}',       
@@ -522,10 +521,9 @@
 				[
 					'label' => __( 'Color', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(), 
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#fff', 
 					'selectors' => [
 						'{{WRAPPER}} .pafe-image-accordion__item-content__link:hover' => 'color: {{VALUE}}',       
@@ -537,10 +535,9 @@
 				[
 					'label' => __( 'Background', 'pafe' ),
 					'type' => \Elementor\Controls_Manager::COLOR,
-					'scheme' => [
-						'type' => \Elementor\Core\Schemes\Color::get_type(), 
-						'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-					],
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                    ],
 					'default' => '#3CCD94',  
 					'selectors' => [
 						'{{WRAPPER}} .pafe-image-accordion__item-content__link:hover' => 'background-color: {{VALUE}}',       
@@ -554,7 +551,9 @@
 				[
 					'name' => 'readmore_typography',
 					'selector' => '{{WRAPPER}} .pafe-image-accordion__item-content__link',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_2,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_SECONDARY,
+                    ],
 				]
 			);
 			$this->add_responsive_control(

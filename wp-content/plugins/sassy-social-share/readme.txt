@@ -1,18 +1,18 @@
 === Social Sharing Plugin - Sassy Social Share ===
 Contributors: Heateor, kamirkhan, mohammadfarhankhan, the_champ
 Donate link: https://www.heateor.com/donate/?action=Sassy+Social+Share
-Tags: social share, social sharing, social media share, share facebook, facebook social share, wordpress social share, share buttons, social share buttons, facebook like, twitter tweet, whatsapp share, line share, gab share, gab social share, gab, parler share, parler social share, gettr, gettr share, gettr social share, mewe share, mewe social share, mewe, mastodon share, mastodon social share, mastodon, rutube share, rutube social share, rutube, google news, google news share, google news icon, RSS, RSS Feed
+Tags: social share, social sharing, social media share, share facebook, facebook social share, wordpress social share, share buttons, social share buttons, facebook like, twitter tweet, whatsapp share, line share, gab share, gab social share, gab, parler share, parler social share, gettr, gettr share, gettr social share, mewe share, mewe social share, mewe, mastodon share, mastodon social share, mastodon, rutube share, rutube social share, rutube, google news, google news share, google news icon, RSS, RSS Feed, x, x share, yelp, google translate, Google maps, tiktok, Teams, flickr, threads, Gab, Gab share
 Requires at least: 2.5.0
-Tested up to: 6.2.2
-Stable tag: 3.3.52
+Tested up to: 6.4
+Stable tag: 3.3.56
 License: GPLv2 or later
 
-Slickest, Simplest and Optimized Share buttons. Facebook, Twitter, Reddit, Pinterest, Whatsapp, Parler, Gab, Gettr and over 100 more.
+Slickest, Simplest and Optimized Share buttons. Facebook, X (Twitter), Reddit, Pinterest, Whatsapp, Gab, Gettr and over 100 more.
 
 == Description ==
 **Try it out live => <a href="https://tastewp.com/new/?pre-installed-plugin-slug=sassy-social-share">Click here</a>**
 
-Sassy Social Share allows your website visitors to share your content over Facebook, Twitter, Google, Linkedin, Whatsapp, Tumblr, Pinterest, Reddit, Parler, Gab, Gettr and over 110 more social sharing and bookmarking services.
+Sassy Social Share allows your website visitors to share your content over Facebook, Twitter, Google, Linkedin, Whatsapp, Tumblr, Pinterest, Reddit, Gab, Gettr and over 110 more social sharing and bookmarking services.
 
 This is the Simplest and Slickest Social Share plugin with optimized and great looking vector icons.
 
@@ -27,7 +27,7 @@ This is the Simplest and Slickest Social Share plugin with optimized and great l
 * Compatible with myCRED (append myCRED referral ID at the end of the url being shared)
 * Around **100 Social Sharing/Bookmarking** services
 * Social Media follow icons (Redirect website visitors to your Social Media pages)
-* Share counts are supported for Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte
+* Share counts are supported for X (Twitter), Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte
 * FREE **Icon Customization** options
 * Options to specify sharing icon shape - Square, Round and Rectangular
 * Options to specify sharing icon size - minimum 16 pixels, no upper limit
@@ -125,6 +125,36 @@ Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 4. **Universal Sharing Popup**: Universal Sharing popup having all the supported sharing and bookmarking services
 
 == Changelog ==
+= 3.3.56 [15 November 2023] =
+* [Bugfix] Fixed the alignment of email logo in the Email share icon
+* [Improvement] Improved PrintFriendly share icon in AMP
+
+= 3.3.55 [6 November 2023] =
+* [Bugfix] Linkedin share stopped working because of the changes in the Linkedin API
+* [Bugfix] Outlook logo was misaligned in the Outlook share icon
+* [Bugfix] Youtube icon in the Follow Icons widget was redirecting to the URL saved for the Facebook
+* [Improvement] Updated the official Facebook SDK being used throughout the plugin to the latest version 18.0
+* [Improvement] Minor improvements
+
+= 3.3.54 [26 September 2023] =
+* [Improvement] Improved PrintFriendly icon in the admin area
+* [Improvement] Improved Outlook icon in the admin area
+* [Improvement] Removed rel="nofollow" from the follow icons
+* [Improvement] Improved Vkontakte share icon in the mobile devices
+* [Improvement] Social media follow links now have "aria-label" attribute making these accessible for screen-readers
+
+= 3.3.53 [19 August 2023] =
+* [New] Added Microsoft Teams share icon in the social share networks
+* [New] Added X share icon in the social share networks
+* [New] Added Google Translate share icon in the social share networks
+* [New] Added Google Maps icon in the follow icons widget and shortcode
+* [New] Added Yelp icon in the follow icons widget and shortcode
+* [New] Added X icon in the follow icons widget and shortcode
+* [New] Added TikTok icon in the follow icons widget and shortcode
+* [New] Added Threads icon in the follow icons widget and shortcode
+* [Bugfix] Flickr icon was showing the logo of Behance in the follow icons shortcode
+* [Bugfix] "Apply icon color and background color from Theme Selection section" option in the Sassy Social Share - Follow Icons widget was not working in some cases
+
 = 3.3.52 [22 June 2023] =
 * [Bugfix] Mastodon share button was triggering blank popup when clicked from the More popup and Mastodon was not present in the share  bar apart from the More icon  
 * [Improvement] Social share links now have "aria-label" attribute making these accessible for screen-readers
@@ -1293,7 +1323,37 @@ Yes, we can help you with it. Just drop an email at support[at]heateor[dot]com
 * [Improvement] Admin UI improvements
 
 = 3.3.52 [22 June 2023] =
-* [Bugfix] Mastodon share button was triggering blank popup when clicked from the More popup and Mastodon was not present in the share  bar apart from the More icon  
+* [Bugfix] Mastodon share button was triggering blank popup when clicked from the More popup and Mastodon was not present in the share  bar apart from the More icon
 * [Improvement] Social share links now have "aria-label" attribute making these accessible for screen-readers
 * [Improvement] Updated the official Facebook SDK being used throughout the plugin to the latest version 17.0
 * [Improvement] Minor improvements
+
+= 3.3.53 [19 August 2023] =
+* [New] Added Microsoft Teams share icon in the social share networks
+* [New] Added X share icon in the social share networks
+* [New] Added Google Translate share icon in the social share networks
+* [New] Added Google Maps icon in the follow icons widget and shortcode
+* [New] Added Yelp icon in the follow icons widget and shortcode
+* [New] Added X icon in the follow icons widget and shortcode
+* [New] Added TikTok icon in the follow icons widget and shortcode
+* [New] Added Threads icon in the follow icons widget and shortcode
+* [Bugfix] Flickr icon was showing the logo of Behance in the follow icons shortcode
+* [Bugfix] "Apply icon color and background color from Theme Selection section" option in the Sassy Social Share - Follow Icons widget was not working in some cases
+
+= 3.3.54 [26 September 2023] =
+* [Improvement] Improved PrintFriendly icon in the admin area
+* [Improvement] Improved Outlook icon in the admin area
+* [Improvement] Removed rel="nofollow" from the follow icons
+* [Improvement] Improved Vkontakte share icon in the mobile devices
+* [Improvement] Social media follow links now have "aria-label" attribute making these accessible for screen-readers
+
+= 3.3.55 [6 November 2023] =
+* [Bugfix] Linkedin share stopped working because of the changes in the Linkedin API
+* [Bugfix] Outlook logo was misaligned in the Outlook share icon
+* [Bugfix] Youtube icon in the Follow Icons widget was redirecting to the URL saved for the Facebook
+* [Improvement] Updated the official Facebook SDK being used throughout the plugin to the latest version 18.0
+* [Improvement] Minor improvements
+
+= 3.3.56 [15 November 2023] =
+* [Bugfix] Fixed the alignment of email logo in the Email share icon
+* [Improvement] Improved PrintFriendly share icon in AMP

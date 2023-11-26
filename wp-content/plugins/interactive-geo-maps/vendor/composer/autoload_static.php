@@ -102,6 +102,7 @@ class ComposerStaticInit311c703192b21114d68af63dacd37d52
         'Saltus\\WP\\Framework\\Infrastructure\\Plugin\\Registerable' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Plugin/Registerable.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Service\\Actionable' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/Actionable.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Service\\App' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/App.php',
+        'Saltus\\WP\\Framework\\Infrastructure\\Service\\Assembly' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/Assembly.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Service\\Conditional' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/Conditional.php',
         'Saltus\\WP\\Framework\\Infrastructure\\Service\\Service' => __DIR__ . '/..' . '/saltus/framework/src/Infrastructure/Service/Service.php',
         'Saltus\\WP\\Framework\\Modeler' => __DIR__ . '/..' . '/saltus/framework/src/Modeler.php',

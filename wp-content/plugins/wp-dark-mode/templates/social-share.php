@@ -24,27 +24,38 @@ $total_shares = array_sum( array_column( $counters, 'count' ) );
 $channels = false;
 
 if ( $social_share && $social_share->channels ) {
-	$channels = array_map( function ( $channel ) use ( $counters, $social_share ) {
-		$mother_channel = array_filter($social_share->all_channels, function ( $item ) use ( $channel ) {
-			return $item['id'] === $channel['id'];
-		});
+	$channels = array_map(
+		function ( $channel ) use ( $counters, $social_share ) { // phpcs:ignore Universal.FunctionDeclarations.NoLongClosures.ExceedsMaximum
+			$mother_channel = array_filter(
+				$social_share->all_channels,
+				function ( $item ) use ( $channel ) {
+					return $item['id'] === $channel['id'];
+				}
+			);
 
-		$svg = array_values( $mother_channel )[0]['svg'];
+			$svg = array_values( $mother_channel )[0]['svg'];
 
-		$channel['svg'] = ! empty( $svg ) ? $svg : '';
+			$channel['svg'] = ! empty( $svg ) ? $svg : '';
 
-		$count = array_values( array_filter( $counters, function ( $counter ) use ( $channel ) {
-			return $counter['channel'] === $channel['id'];
-		} ) );
+			$count = array_values(
+				array_filter(
+					$counters,
+					function ( $counter ) use ( $channel ) {
+						return $counter['channel'] === $channel['id'];
+					}
+				)
+			);
 
-		if ( 'both' === $social_share->button_label || 'share_count' === $social_share->button_label ) {
-			$count = isset( $count[0]['count'] ) && $count[0]['count'] > 0 ? $count[0]['count'] : 0;
+			if ( 'both' === $social_share->button_label || 'share_count' === $social_share->button_label ) {
+				$count = isset( $count[0]['count'] ) && $count[0]['count'] > 0 ? $count[0]['count'] : 0;
 
-			$channel['count'] = apply_filters( 'wpdm_social_share_count', $count );
-		}
+				$channel['count'] = apply_filters( 'wpdm_social_share_count', $count );
+			}
 
-		return $channel;
-	}, $social_share->channels);
+			return $channel;
+		},
+		$social_share->channels
+	);
 }
 
 /**
@@ -154,7 +165,7 @@ do_action( 'before_wpdm_social_share' );
 
 		<!-- more channel toggler button -->
 		<?php if ( count( $social_share->channels ) > $social_share->channel_visibility ) : ?>              
-			<div class="wpdm-social-share-button wp-dark-mode-ignore _channel _icon-light _<?php echo esc_html( isset( $social_share->button_shape ) && ! empty( $social_share->button_shape ) ? $social_share->button_shape : 'rounded'); ?>" data-channel="more">
+			<div class="wpdm-social-share-button wp-dark-mode-ignore _channel _icon-light _<?php echo esc_html( isset( $social_share->button_shape ) && ! empty( $social_share->button_shape ) ? $social_share->button_shape : 'rounded' ); ?>" data-channel="more">
 				<span class="_channel-icon wp-dark-mode-ignore">
 					<span> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"> <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" /> </svg></span>
 				</span>
@@ -198,7 +209,7 @@ do_action( 'before_wpdm_social_share' );
 						<!-- Share Icons  -->
 						<?php
 						if ( $channels && count( $channels ) > 0 ) :
-							foreach ( $channels as $channel ) :
+							foreach ( $channels as $channel ) {
 								?>
 
 								<div class="wpdm-social-share-button wp-dark-mode-ignore _channel _icon-<?php echo esc_html( $channel['id'] ); ?> _rounded 
@@ -218,7 +229,7 @@ do_action( 'before_wpdm_social_share' );
 									<div class="_channel-overlay"></div>
 								</div>
 								<?php
-							endforeach;
+							}
 						endif;
 						?>
 

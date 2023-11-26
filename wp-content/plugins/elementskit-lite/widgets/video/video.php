@@ -439,6 +439,7 @@ class ElementsKit_Widget_Video extends Widget_Base {
 				'label_off' => esc_html__('No', 'elementskit-lite'),
 				'condition' => [
 					'ekit_video_player_current' => 'yes',
+					'ekit_video_popup_video_type' => 'self',
 				],
 			]
 		);

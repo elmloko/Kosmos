@@ -153,7 +153,9 @@ class PAFE_Progress_Bar extends \Elementor\Widget_Base {
 			[
 				'name' => 'progressbar_label_typography',
 				'selector' => '{{WRAPPER}} .pafe-progressbar__label',
-				'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
 			]
 		);
 		
@@ -197,10 +199,9 @@ class PAFE_Progress_Bar extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Background color', 'pafe' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => \Elementor\Core\Schemes\Color::get_type(),
-					'value' => \Elementor\Core\Schemes\Color::COLOR_1,
-				],
+				'global' => [
+                    'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Colors::COLOR_PRIMARY,
+                ],
 				'default' => '#FFFFFF',
 				'selectors' => [
 					'{{WRAPPER}} .pafe-progressbar-circle-trail' => 'background-color: {{VALUE}}',

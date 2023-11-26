@@ -105,8 +105,48 @@
 	}
 }
 
+.import-done-congrats{
+	display: flex;
+    align-items: center;
+	span{
+		margin-left: 17px;
+	}
+}
+
+.import-done-section {
+	margin-top: 60px;
+	.tweet-import-success{
+		.tweet-text {
+			background: #FFFFFF;
+			border: 1px solid rgba(34, 101, 235, 0.1);
+			border-radius: 4px;
+			padding: 14px 21px 14px 21px;
+		}
+		.twitter-btn-wrap {
+			display: flex;
+			align-items: center;
+			gap: 7px;
+			right: 30px;
+			position: absolute;
+			margin-top: 8px;
+			text-decoration: none;
+		}
+	}
+
+	.import-done-text{
+		margin-top: 60px;
+		.import-done-counter{
+			text-align: left;
+		}
+		.import-done-button{
+			margin-top: 25px
+		}
+	}
+}
+
 .ist-import-done-inner,
-.import-done-counter {
+.import-done-counter,
+.import-done-section {
 	display: none;
 }
 .import-done {
@@ -115,7 +155,8 @@
 		display: none;
 	}
 	.import-done-counter,
-	.ist-import-done-inner {
+	.ist-import-done-inner,
+	.import-done-section {
 		display: block;
 	}
 }

@@ -688,7 +688,7 @@ class Premium_Countdown extends Widget_Base {
 		$this->add_responsive_control(
 			'premium_countdown_digit_bg_size',
 			array(
-				'label'     => __( 'Background Size', 'premium-addons-for-elementor' ),
+				'label'     => __( 'Width', 'premium-addons-for-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
 					'px' => array(
@@ -696,8 +696,10 @@ class Premium_Countdown extends Widget_Base {
 						'max' => 1000,
 					),
 				),
+				'condition'=> [
+					'premium_countdown_flip'=> 'yes'
+				],
 				'selectors' => array(
-					'{{WRAPPER}} .countdown .countdown-section .countdown-amount' => 'padding: {{SIZE}}px;',
 					'{{WRAPPER}} .premium-countdown-figure' => 'width: {{SIZE}}px;',
 				),
 
@@ -748,6 +750,18 @@ class Premium_Countdown extends Widget_Base {
 				),
 				'condition' => array(
 					'digit_adv_radius' => 'yes',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'digits_padding',
+			array(
+				'label'      => __( 'Padding', 'premium-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .countdown .countdown-section .countdown-amount' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -852,9 +866,9 @@ class Premium_Countdown extends Widget_Base {
 				'selectors'  => array(
 					'{{WRAPPER}} .countdown-section .countdown-period, {{WRAPPER}} .premium-countdown-label' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
 				),
-				'condition'  => array(
-					'premium_countdown_style' => 'd-u-s',
-				),
+				// 'condition'  => array(
+				// 	'premium_countdown_style' => 'd-u-s',
+				// ),
 			)
 		);
 

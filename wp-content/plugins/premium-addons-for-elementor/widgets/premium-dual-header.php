@@ -594,6 +594,34 @@ class Premium_Dual_Header extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'noise_first',
+			array(
+				'label'        => __( 'First Heading Noise Effect', 'premium-addons-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'prefix_class' => 'premium-title-first-noise-',
+				'render_type'  => 'template',
+				'condition'    => array(
+					'mask_switcher!'                      => 'yes',
+					'premium_dual_header_first_back_clip' => 'color',
+				),
+			)
+		);
+
+		$this->add_control(
+			'noise_second',
+			array(
+				'label'        => __( 'Second Heading Noise Effect', 'premium-addons-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'prefix_class' => 'premium-title-second-noise-',
+				'render_type'  => 'template',
+				'condition'    => array(
+					'mask_switcher!'                       => 'yes',
+					'premium_dual_header_second_back_clip' => 'color',
+				),
+			)
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -822,6 +850,45 @@ class Premium_Dual_Header extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'first_noise_heading',
+			array(
+				'label'     => __( 'Glitch Effect', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'condition' => array(
+					'noise_first' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'noise_first_color',
+			array(
+				'label'     => __( 'Color #1', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'noise_first' => 'yes',
+				),
+				'selectors' => array(
+					'{{WRAPPER}}.premium-title-first-noise-yes .premium-dual-header-first-span::before' => 'text-shadow: 1px 0 {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'noise_second_color',
+			array(
+				'label'     => __( 'Color #2', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'noise_first' => 'yes',
+				),
+				'selectors' => array(
+					'{{WRAPPER}}.premium-title-first-noise-yes .premium-dual-header-first-span::after' => 'text-shadow: -1px 0 {{VALUE}};',
+				),
+			)
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1019,6 +1086,45 @@ class Premium_Dual_Header extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'second_noise_heading',
+			array(
+				'label'     => __( 'Glitch Effect', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::HEADING,
+				'condition' => array(
+					'noise_second' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'noise_third_color',
+			array(
+				'label'     => __( 'Color #1', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'noise_second' => 'yes',
+				),
+				'selectors' => array(
+					'{{WRAPPER}}.premium-title-second-noise-yes .premium-dual-header-second-header::before' => 'text-shadow: 1px 0 {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'noise_fourth_color',
+			array(
+				'label'     => __( 'Color #2', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'noise_second' => 'yes',
+				),
+				'selectors' => array(
+					'{{WRAPPER}}.premium-title-second-noise-yes .premium-dual-header-second-header::after' => 'text-shadow: -1px 0 {{VALUE}};',
+				),
+			)
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -1157,10 +1263,14 @@ class Premium_Dual_Header extends Widget_Base {
 
 		$second_grad = 'yes' === $settings['premium_dual_header_second_animated'] ? ' gradient' : '';
 
-		$full_title = '<' . $first_title_tag . ' class="premium-dual-header-first-header ' . $first_clip . $first_stroke . $first_grad . '"><span class="premium-dual-header-first-span">' . $first_title_text . '</span>';
+		$first_noise = 'yes' === $settings['noise_first'] ? 'data-text="' . $first_title_text . '"' : '';
+
+		$second_noise = 'yes' === $settings['noise_second'] ? 'data-text="' . $second_title_text . '"' : '';
+
+		$full_title = '<' . $first_title_tag . ' class="premium-dual-header-first-header ' . $first_clip . $first_stroke . $first_grad . '"><span class="premium-dual-header-first-span" ' . $first_noise . ' >' . $first_title_text . '</span>';
 
 		if ( ! empty( $second_title_text ) ) {
-			$full_title .= '<span class="premium-dual-header-second-header ' . $second_clip . $second_stroke . $second_grad . '">' . $second_title_text . '</span>';
+			$full_title .= '<span class="premium-dual-header-second-header ' . $second_clip . $second_stroke . $second_grad . '" ' . $second_noise . ' >' . $second_title_text . '</span>';
 		}
 
 		$full_title .= '</' . $first_title_tag . '> ';
@@ -1244,11 +1354,12 @@ class Premium_Dual_Header extends Widget_Base {
 				secondStroke = "stroke";
 
 			var firstGrad = 'yes' === settings.premium_dual_header_first_animated  ? ' gradient' : '',
-
 				secondGrad = 'yes' === settings.premium_dual_header_second_animated ? ' gradient' : '';
 
 				view.addRenderAttribute('first_title', 'class', ['premium-dual-header-first-header', firstClip, firstGrad, firstStroke ] );
 				view.addRenderAttribute('second_title', 'class', ['premium-dual-header-second-header', secondClip, secondGrad, secondStroke ] );
+
+				view.addRenderAttribute('second_title', 'data-text', 'yes' === settings.noise_second ? secondText : '' );
 
 			var link = '';
 			if( 'yes' === settings.premium_dual_header_link_switcher ) {
@@ -1280,7 +1391,7 @@ class Premium_Dual_Header extends Widget_Base {
 			<a href="{{ link }}">
 		<# } #>
 		<{{{firstTag}}} {{{ view.getRenderAttributeString('first_title') }}}>
-			<span class="premium-dual-header-first-span">{{{ firstText }}}</span>
+			<span class="premium-dual-header-first-span" data-text="{{ firstText }}">{{{ firstText }}}</span>
 			<# if ( '' != secondText ) { #>
 				<span {{{ view.getRenderAttributeString('second_title') }}}>{{{ secondText }}}</span>
 			<# } #>

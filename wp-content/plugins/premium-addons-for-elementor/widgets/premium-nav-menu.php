@@ -315,6 +315,7 @@ class Premium_Nav_Menu extends Widget_Base {
 				'options'   => array(
 					'link'           => __( 'Link', 'premium-addons-for-elementor' ),
 					'custom_content' => __( 'Elementor Template', 'premium-addons-for-elementor' ),
+					'element'        => __( 'Element On Page', 'premium-addons-for-elementor' ),
 				),
 				'default'   => 'link',
 				'condition' => array(
@@ -376,6 +377,18 @@ class Premium_Nav_Menu extends Widget_Base {
 							'value'    => 'link',
 						),
 					),
+				),
+			)
+		);
+
+		$repeater->add_control(
+			'element_selector',
+			array(
+				'label'     => __( 'Element CSS Selector', 'premium-addons-for-elementor' ),
+				'type'      => Controls_Manager::TEXT,
+				'condition' => array(
+					'item_type'         => 'submenu',
+					'menu_content_type' => 'element',
 				),
 			)
 		);
@@ -465,7 +478,7 @@ class Premium_Nav_Menu extends Widget_Base {
 				'description' => __( 'This option centers the mega content to the center of the widget container. <b> Only works when Full Width Dropdown option is disabled </b>', 'premium-addons-for-elementor' ),
 				'condition'   => array(
 					'item_type'         => 'submenu',
-					'menu_content_type' => 'custom_content',
+					'menu_content_type' => array( 'custom_content', 'element' ),
 				),
 			)
 		);
@@ -731,6 +744,16 @@ class Premium_Nav_Menu extends Widget_Base {
 			'display_options_section',
 			array(
 				'label' => __( 'Display Options', 'premium-addons-for-elementor' ),
+			)
+		);
+
+		$this->add_control(
+			'load_hidden',
+			array(
+				'label'       => __( 'Hide Menu Until Content Loaded', 'premium-addons-for-elementor' ),
+				'type'        => Controls_Manager::SWITCHER,
+				'description' => __( 'This option hides the menu by default until all the content inside it is loaded.', 'premium-addons-for-elementor' ),
+				'default'     => 'yes',
 			)
 		);
 
@@ -3217,7 +3240,7 @@ class Premium_Nav_Menu extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'pa_nav_item_drop_icon_color',
 			array(
 				'label'     => __( 'Dropdown Icon Color', 'premium-addons-for-elementor' ),
@@ -3316,7 +3339,7 @@ class Premium_Nav_Menu extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'pa_nav_item_drop_icon_hover',
 			array(
 				'label'     => __( 'Dropdown Icon Color', 'premium-addons-for-elementor' ),
@@ -3434,7 +3457,7 @@ class Premium_Nav_Menu extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'pa_nav_item_drop_icon_active',
 			array(
 				'label'     => __( 'Dropdown Icon Color', 'premium-addons-for-elementor' ),
@@ -3828,7 +3851,7 @@ class Premium_Nav_Menu extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'pa_sub_item_drop_icon_color',
 			array(
 				'label'     => __( 'Dropdown Icon Color', 'premium-addons-for-elementor' ),
@@ -3927,7 +3950,7 @@ class Premium_Nav_Menu extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'pa_sub_item_drop_icon_hover',
 			array(
 				'label'     => __( 'Dropdown Icon Color', 'premium-addons-for-elementor' ),
@@ -4036,7 +4059,7 @@ class Premium_Nav_Menu extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'pa_sub_item_drop_icon_active',
 			array(
 				'label'     => __( 'Dropdown Icon Color', 'premium-addons-for-elementor' ),
@@ -4474,7 +4497,6 @@ class Premium_Nav_Menu extends Widget_Base {
 		}
 
 		$is_edit_mode = \Elementor\Plugin::$instance->editor->is_edit_mode();
-		$hidden_style = $is_edit_mode ? '' : 'visibility:hidden; opacity:0;';
 
 		$this->add_render_attribute(
 			'wrapper',
@@ -4484,9 +4506,14 @@ class Premium_Nav_Menu extends Widget_Base {
 					'premium-nav-widget-container',
 					'premium-nav-pointer-' . $settings['pointer'],
 				),
-				'style'         => $hidden_style,
 			)
 		);
+
+		if ( 'yes' === $settings['load_hidden'] ) {
+			$hidden_style = $is_edit_mode ? '' : 'visibility:hidden; opacity:0;';
+
+			$this->add_render_attribute( 'wrapper', 'style', $hidden_style );
+		}
 
 		if ( $stretch_dropdown ) {
 			$this->add_render_attribute( 'wrapper', 'class', 'premium-stretch-dropdown' );
@@ -4782,10 +4809,19 @@ class Premium_Nav_Menu extends Widget_Base {
 						$this->add_render_attribute( 'menu-content-item-' . $item['_id'], 'class', 'premium-mega-content-centered' );
 					}
 
+					if ( 'element' === $item['menu_content_type'] ) {
+						$this->add_render_attribute( 'menu-content-item-' . $item['_id'], 'data-mega-content', $item['element_selector'] );
+					}
+
 					$html_output .= '<div ' . $this->get_render_attribute_string( 'menu-content-item-' . $item['_id'] ) . '>';
 
-					$temp_id      = empty( $item['submenu_item'] ) ? $item['live_temp_content'] : $item['submenu_item'];
-					$html_output .= $this->getTemplateInstance()->get_template_content( $temp_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					if ( 'custom_content' === $item['menu_content_type'] ) {
+
+						$temp_id      = empty( $item['submenu_item'] ) ? $item['live_temp_content'] : $item['submenu_item'];
+						$html_output .= $this->getTemplateInstance()->get_template_content( $temp_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+					}
+
 					$html_output .= '</div>';
 
 				}
@@ -4811,7 +4847,7 @@ class Premium_Nav_Menu extends Widget_Base {
 				}
 
 				if ( $next_item_exists ) {
-					if ( 'submenu' === $menu_items[ $index + 1 ]['item_type'] && 'custom_content' === $menu_items[ $index + 1 ]['menu_content_type'] ) {
+					if ( 'submenu' === $menu_items[ $index + 1 ]['item_type'] && 'link' !== $menu_items[ $index + 1 ]['menu_content_type'] ) {
 						$this->add_render_attribute( 'menu-item-' . $index, 'class', 'premium-mega-nav-item' );
 					}
 				}

@@ -24,7 +24,7 @@ function igmaps_model() {
 	$action_content_editor = isset( $options['actionContent_editor'] ) ? $options['actionContent_editor'] : 'textarea';
 	$description_editor    = isset( $options['description_editor'] ) ? $options['description_editor'] : 'text';
 	$ttemplate_editor      = isset( $options['tooltip_template_editor'] ) ? $options['tooltip_template_editor'] : 'text';
-	$capability            = isset( $options['capability'] ) ? $options['capability'] : 'page';
+	$capability            = ! empty( $options['capability'] ) ? $options['capability'] : 'page';
 
 	$after_map = '';
 	if ( isset( $_GET['post'] ) && ! is_array( $_GET['post'] ) ) {

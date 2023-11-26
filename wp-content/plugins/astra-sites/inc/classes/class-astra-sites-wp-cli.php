@@ -189,6 +189,11 @@ if ( class_exists( 'WP_CLI_Command' ) && ! class_exists( 'Astra_Sites_WP_CLI' ) 
 			}
 
 			/**
+			 * Check File System permissions.
+			 */
+			$filesystem_permission = Astra_Sites::get_instance()->filesystem_permission();
+
+			/**
 			 * Install & Activate Required Plugins.
 			 */
 			if ( isset( $demo_data['required-plugins'] ) ) {
@@ -425,6 +430,7 @@ if ( class_exists( 'WP_CLI_Command' ) && ! class_exists( 'Astra_Sites_WP_CLI' ) 
 			$demo_data = $this->get_site_data( $id );
 
 			WP_CLI::line( __( 'Importing customizer settings..', 'astra-sites' ) );
+
 			Astra_Sites_Importer::get_instance()->import_customizer_settings( $demo_data['astra-site-customizer-data'] );
 		}
 

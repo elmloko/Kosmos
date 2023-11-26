@@ -1046,7 +1046,7 @@ class Premium_Button extends Widget_Base {
 			)
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'button_width',
 			array(
 				'label'      => __( 'Width', 'premium-addons-for-elementor' ),

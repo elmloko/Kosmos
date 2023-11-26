@@ -271,5 +271,25 @@
             </fields>
         </widget>
 
+        <widget name="premium-pinterest-feed">
+            <fields>
+                <field name="Pinterest Feed: Pin Read More Text" editor_type="LINE">pin_desc_postfix_txt</field>
+                <field name="Pinterest Feed: Board Read More Text" editor_type="LINE">board_desc_postfix_txt</field>
+                <field name="Pinterest Feed: Load More Text" editor_type="LINE">more_btn_txt</field>
+            </fields>
+        </widget>
+        <widget name="premium-tiktok-feed">
+            <fields>
+                <field name="TikTok Feed: Description Postfix:" editor_type="LINE">vid_desc_postfix_txt</field>
+            </fields>
+        </widget>
+        <widget name="premium-media-wheel">
+            <fields-in-item items_of="media_wheel_repeater">
+                <field name="Item: Title" editor_type="LINE">media_title</field>
+                <field name="Item: Description" editor_type="LINE">media_desc</field>
+                <field name="Item: Link" editor_type="LINK">media_wheel_custom_link>url</field>
+            </fields-in-item>
+        </widget>
+
     </elementor-widgets>
 </wpml-config>

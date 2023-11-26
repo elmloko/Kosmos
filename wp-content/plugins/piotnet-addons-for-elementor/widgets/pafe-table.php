@@ -456,7 +456,9 @@ class PAFE_Table extends \Elementor\Widget_Base {
 				[
 					'name' => 'pafe_table_head_typography',
 					'selector' => '{{WRAPPER}} .pafe-table-head-text',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ]
 				]
 			);
 
@@ -532,7 +534,9 @@ class PAFE_Table extends \Elementor\Widget_Base {
 				[
 					'name' => 'pafe_table_body_first_cell_typography',
 					'selector' => '{{WRAPPER}} .pafe-table-body-first-text',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ]
 				]
 			);
 
@@ -642,7 +646,9 @@ class PAFE_Table extends \Elementor\Widget_Base {
 				[
 					'name' => 'pafe_table_body_cell_typography',
 					'selector' => '{{WRAPPER}} .pafe-table-body-text',
-					'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+					'global' => [
+                        'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                    ]
 				]
 			);
 
@@ -762,7 +768,9 @@ class PAFE_Table extends \Elementor\Widget_Base {
 						[
 							'name' => 'pafe_table_body_row_odd_typography',
 							'selector' => '{{WRAPPER}} .pafe-table-body tr:nth-of-type(odd)',
-							'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+							'global' => [
+                                'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                            ]
 						]
 					);
 
@@ -867,7 +875,9 @@ class PAFE_Table extends \Elementor\Widget_Base {
 						[
 							'name' => 'pafe_table_body_row_even_typography',
 							'selector' => '{{WRAPPER}} .pafe-table-body tr:nth-of-type(even)',
-							'scheme' => \Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
+							'global' => [
+                                'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+                            ]
 						]
 					);
 

@@ -17,8 +17,17 @@ const SiteGrid = ( { sites } ) => {
 
 	if ( Object.keys( sitesData ).length ) {
 		for ( const siteId in sitesData ) {
-			const gridItem = getGridItem( sitesData[ siteId ] );
-
+			const site = sitesData[ siteId ];
+			if (
+				site.related_ecommerce_template !== undefined &&
+				site.related_ecommerce_template !== '' &&
+				site.ecommerce_parent_template !== undefined &&
+				site.ecommerce_parent_template !== ''
+			) {
+				// If ecommerce_parent_template is not empty, skip adding the site to allSites.
+				continue;
+			}
+			const gridItem = getGridItem( site );
 			allSites.push( gridItem );
 		}
 	}
@@ -82,6 +91,7 @@ const SiteGrid = ( { sites } ) => {
 					type: 'set',
 					currentIndex: currentIndex + 1,
 					selectedTemplateName: item.title,
+					selectedTemplateID: item.id,
 					selectedTemplateType: item[ 'astra-sites-type' ],
 				} );
 				await getDemo( item.id, storedState );

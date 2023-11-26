@@ -130,6 +130,21 @@ const SiteSearch = ( { setSiteData } ) => {
 							if ( response.ids.length ) {
 								for ( const id of response.ids ) {
 									if ( allFilteredSites[ id ] ) {
+										const selectedTemplate =
+											allFilteredSites[ id ];
+										if (
+											selectedTemplate.related_ecommerce_template !==
+												undefined &&
+											selectedTemplate.related_ecommerce_template !==
+												'' &&
+											selectedTemplate.ecommerce_parent_template !==
+												undefined &&
+											selectedTemplate.ecommerce_parent_template !==
+												''
+										) {
+											// If ecommerce_parent_template is not empty, skip adding the site to allSites.
+											continue;
+										}
 										results[ id ] = allFilteredSites[ id ];
 									}
 								}

@@ -38,7 +38,7 @@ const sseImport = {
 					percentage += 5;
 					dispatch( {
 						type: 'set',
-						importPercent: percentage,
+						importPercent: percentage >= 90 ? 90 : percentage,
 					} );
 				}
 			}

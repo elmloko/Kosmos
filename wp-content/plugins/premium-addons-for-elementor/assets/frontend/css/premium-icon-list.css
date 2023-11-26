@@ -84,13 +84,13 @@
   width: 30px !important;
   height: 30px !important;
   position: relative;
-  z-index: 500;
+  z-index: 3;
 }
 
 .premium-bullet-list-content .premium-bullet-list-wrapper i,
 .premium-bullet-list-content .premium-bullet-list-wrapper .premium-bullet-list-icon-text {
   position: relative;
-  z-index: 500;
+  z-index: 3;
 }
 
 .premium-bullet-list-content .premium-bullet-list-link {

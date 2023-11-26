@@ -2411,6 +2411,14 @@ class ElementsKit_Widget_Pricing extends Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Header', 'elementskit-lite' ),
 					'type' 			=> Controls_Manager::SLIDER,
+					'size_units' => [ 'px'],
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 4,
+							'step' => 1,
+						],
+					],
 					'condition'		=> [
 						'ekit_pricing_order_enable'	=> 'yes',
 					]
@@ -2422,6 +2430,14 @@ class ElementsKit_Widget_Pricing extends Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Price Tag', 'elementskit-lite' ),
 					'type' 			=> Controls_Manager::SLIDER,
+					'size_units' => [ 'px'],
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 4,
+							'step' => 1,
+						],
+					],
 					'condition'		=> [
 						'ekit_pricing_order_enable'	=> 'yes',
 					]
@@ -2433,6 +2449,14 @@ class ElementsKit_Widget_Pricing extends Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Features', 'elementskit-lite' ),
 					'type' 			=> Controls_Manager::SLIDER,
+					'size_units' => [ 'px'],
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 4,
+							'step' => 1,
+						],
+					],
 					'condition'		=> [
 						'ekit_pricing_order_enable'	=> 'yes',
 					]
@@ -2444,6 +2468,14 @@ class ElementsKit_Widget_Pricing extends Widget_Base {
 				[
 					'label' 		=> esc_html__( 'Button', 'elementskit-lite' ),
 					'type' 			=> Controls_Manager::SLIDER,
+					'size_units' => [ 'px'],
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 4,
+							'step' => 1,
+						],
+					],
 					'condition'		=> [
 						'ekit_pricing_order_enable'	=> 'yes',
 					]
